@@ -1,0 +1,23 @@
+{
+  "name": "partyanimals-designer",
+  "version": "0.0.1",
+  "description": "Designer tool for partyanimals",
+  "main": "index.html",
+  "window": {
+   "toolbar": true,
+   "width": 800,
+   "height": 600,
+   "frame": true,
+   "icon": "icon.png"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lessc less/bootstrap.less styles/main.css"
+  },
+  "keywords": [
+    "partyanimals",
+    "webkit"
+  ],
+  "author": "juliusthepious",
+  "license": "ISC"
+}
