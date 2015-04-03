@@ -4,9 +4,16 @@
         <h1>Party Animals Fun Finder</h1>
         <div class="btn btn-default" ng-click="onNew()">New</div>
         <div>Load...</div>
+        <div>
+          <ul class="list list-unstyled">
+            <li ng-repeat="file in savedFiles">
+              <a class="btn btn-default" ng-click="onLoad(file)">{{file}}</a>
+            </li>
+          </ul>
+        </div>
       </div>
       <div ng-switch-when="Game">
-        <h1>Starting Now</h1>
+        <h1>{{gameName}}</h1>
       </div>
   </div>
 
