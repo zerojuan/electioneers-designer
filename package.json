@@ -2,13 +2,14 @@
   "name": "partyanimals-designer",
   "version": "0.0.1",
   "description": "Designer tool for partyanimals",
+  "repository": "https://github.com/zerojuan/partyanimals-designer",
   "main": "index.html",
   "window": {
-   "toolbar": true,
-   "width": 800,
-   "height": 600,
-   "frame": true,
-   "icon": "icon.png"
+    "toolbar": true,
+    "width": 1000,
+    "height": 600,
+    "frame": true,
+    "icon": "icon.png"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,5 +20,8 @@
     "webkit"
   ],
   "author": "juliusthepious",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "underscore": "^1.8.3"
+  }
 }
