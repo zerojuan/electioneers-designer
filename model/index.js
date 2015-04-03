@@ -42,6 +42,10 @@ exports.init = function(){
       });
     }
 
+    if(!fs.existsSync(defaultDir+'/saves')){
+      fs.mkdirSync(defaultDir+'/saves');
+    }    
+
     fs.open(defaultDir+'/kapitans.json', 'r+', function(err){
       var kapitans;
       if(err){

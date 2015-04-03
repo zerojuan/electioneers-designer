@@ -1,4 +1,13 @@
 <div>
-  <h1>{{message}}</h1>
-  <p>This is another message for you</p>
+  <div ng-switch="page">
+      <div ng-switch-when="Start">
+        <h1>Party Animals Fun Finder</h1>
+        <div class="btn btn-default" ng-click="onNew()">New</div>
+        <div>Load...</div>
+      </div>
+      <div ng-switch-when="Game">
+        <h1>Starting Now</h1>
+      </div>
+  </div>
+
 </div>

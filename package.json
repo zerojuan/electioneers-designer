@@ -22,6 +22,7 @@
   "author": "juliusthepious",
   "license": "ISC",
   "dependencies": {
+    "moniker": "^0.1.2",
     "underscore": "^1.8.3"
   }
 }
