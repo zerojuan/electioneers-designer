@@ -5,7 +5,7 @@
   "repository": "https://github.com/zerojuan/partyanimals-designer",
   "main": "index.html",
   "window": {
-    "toolbar": true,
+    "toolbar": false,
     "width": 1000,
     "height": 600,
     "frame": true,
