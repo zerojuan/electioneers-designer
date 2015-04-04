@@ -12,11 +12,13 @@ angular.module('paDesignerApp')
 
     $scope.onNew = function(){
       gotoPage('Game');
-      $scope.gameName = LoaderService.CreateNewSave();
+      $scope.game = {
+        name: LoaderService.CreateNewSave()
+      };
     };
 
-    $scope.onLoad = function(name){
+    $scope.onLoad = function(game){
       gotoPage('Game');
-      $scope.gameName = name;
+      $scope.game = game;
     };
   });

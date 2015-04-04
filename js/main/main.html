@@ -13,9 +13,11 @@
               <h3 class="panel-title">Load</h3>
             </div>
             <div class="panel-body">
-              <ul class="list list-unstyled list-group">
+              <span ng-hide="savedFiles.length > 0" class="text-muted">Saved funyuns will appear here</span>
+              <ul class="list list-unstyled list-group" ng-show="savedFiles.length > 0">
                 <li ng-repeat="file in savedFiles" class="list-group-item">
-                  <a class="btn btn-default" ng-click="onLoad(file)">{{file}}</a>
+                  <a class="btn btn-default" ng-click="onLoad(file)">{{file.name}}</a>
+                  <span class="pull-right text-muted">{{file.lastModified | date : 'medium'}}</span>
                 </li>
               </ul>
             </div>

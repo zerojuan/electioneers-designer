@@ -56,9 +56,17 @@ var GetSavedFiles = function(){
   var defaultDir = settings.getWorkingDirectory();
 
   var dirs = fs.readdirSync(defaultDir+'/saves');
-  return _.filter(dirs, function(dir){
-      return fs.statSync(defaultDir+'/saves/'+dir).isDirectory();
+  var ret = [];
+  _.forEach(dirs, function(dir){
+    var stat = fs.statSync(defaultDir+'/saves/'+dir);
+    if(stat.isDirectory()){
+      ret.push({
+        name: dir,
+        lastModified: stat.mtime
+      });
+    }
   });
+  return ret;
 };
 
 exports.DistrictsFromFile = DistrictsFromFile;
