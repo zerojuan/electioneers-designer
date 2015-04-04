@@ -8,6 +8,11 @@ angular.module('paDesignerApp')
       return loader.CreateNewSave();
     };
 
+    this.DeleteSave = function(file){
+      loader.DeleteSave(file);
+      return loader.GetSavedFiles();
+    };
+
     this.RenameSaveFile = function(oldFile, newFile){
 
     };

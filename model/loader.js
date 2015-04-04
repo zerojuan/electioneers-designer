@@ -1,6 +1,6 @@
 'use strict';
 
-var fs = require('fs');
+var fs = require('fs-extra');
 var _ = require('underscore');
 var Moniker = require('moniker');
 var names = Moniker.generator([Moniker.adjective, Moniker.noun]);
@@ -52,6 +52,12 @@ var CreateNewSave = function(){
   return name;
 };
 
+var DeleteSave = function(path){
+  var defaultDir = settings.getWorkingDirectory() + '/saves/'+path;
+
+  fs.removeSync(defaultDir);
+};
+
 var GetSavedFiles = function(){
   var defaultDir = settings.getWorkingDirectory();
 
@@ -91,3 +97,5 @@ exports.CreateNewSave = CreateNewSave;
 exports.GetSavedFiles = GetSavedFiles;
 
 exports.GetGameData = GetGameData;
+
+exports.DeleteSave = DeleteSave;

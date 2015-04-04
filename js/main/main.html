@@ -14,7 +14,11 @@
               <ul class="list list-unstyled list-group" ng-show="savedFiles.length > 0">
                 <li ng-repeat="file in savedFiles" class="list-group-item">
                   <a class="btn btn-default" ng-click="onLoad(file)">{{file.name}}</a>
-                  <span class="pull-right text-muted">{{file.lastModified | date : 'medium'}}</span>
+
+                  <div class="pull-right">
+                    <p class="text-muted">{{file.lastModified | date : 'medium'}}</p>
+                    <p class="pull-right"><a href="#" ng-click="onDelete(file)">[Delete]</a></p>
+                  </div>
                 </li>
               </ul>
             </div>

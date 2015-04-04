@@ -2,11 +2,16 @@
   <div class="navbar">
     <h1><span class="btn btn-primary" ng-click="goBack()"><i class="glyphicon glyphicon-menu-left"></i></span>&nbsp; {{game.name}}</h1>
   </div>
-  <div>
-    <ul class="list list-unstyled">
-      <li ng-repeat="district in gameData.districts">
-        {{district.name}}: {{district.population}}
-      </li>
-    </ul>
+  <div class="container">
+    <div>
+      <h2>Designer</h2>
+    </div>
+    <div>
+      <ul class="list list-unstyled">
+        <li ng-repeat="district in gameData.districts">
+          {{district.name}}: {{district.population}}
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

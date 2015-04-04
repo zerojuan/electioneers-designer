@@ -8,6 +8,13 @@ angular.module('paDesignerApp')
 
     $scope.savedFiles = LoaderService.GetSavedFiles();
 
+    $scope.$watch('nav.page', function(){
+      console.log('Nav Page Changed: ' + $scope.nav.page);
+      if($scope.nav.page === 'Start'){
+          $scope.savedFiles = LoaderService.GetSavedFiles();
+      }
+    });
+
     var gotoPage = function(page){
       $scope.nav.page = page;
     };
@@ -20,8 +27,12 @@ angular.module('paDesignerApp')
       };
     };
 
-    $scope.onLoad = function(game){      
+    $scope.onLoad = function(game){
       gotoPage('Game');
       $scope.game = game;
+    };
+
+    $scope.onDelete = function(game){
+      $scope.savedFiles = LoaderService.DeleteSave(game.name);
     };
   });
