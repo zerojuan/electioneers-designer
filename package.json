@@ -13,7 +13,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "lessc less/bootstrap.less styles/main.css"
+    "start": "watch 'lessc less/bootstrap.less styles/main.css' less/"
   },
   "keywords": [
     "partyanimals",
@@ -24,5 +24,8 @@
   "dependencies": {
     "moniker": "^0.1.2",
     "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "watch": "^0.15.0"
   }
 }
