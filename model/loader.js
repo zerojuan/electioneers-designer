@@ -69,6 +69,19 @@ var GetSavedFiles = function(){
   return ret;
 };
 
+var GetGameData = function(path){
+  var defaultDir = settings.getWorkingDirectory() + '/saves/' + path;
+
+  //open kapitans
+  var kapitans = JSON.parse(fs.readFileSync(defaultDir+'/kapitans.json', {encoding: 'utf8'}));
+  var districts = JSON.parse(fs.readFileSync(defaultDir+'/districts.json', {encoding: 'utf8'}));
+
+  return {
+    kapitans: kapitans.data,
+    districts: districts.data
+  };
+};
+
 exports.DistrictsFromFile = DistrictsFromFile;
 
 exports.KapitansFromFile = KapitansFromFile;
@@ -76,3 +89,5 @@ exports.KapitansFromFile = KapitansFromFile;
 exports.CreateNewSave = CreateNewSave;
 
 exports.GetSavedFiles = GetSavedFiles;
+
+exports.GetGameData = GetGameData;

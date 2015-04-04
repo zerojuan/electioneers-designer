@@ -15,4 +15,9 @@ angular.module('paDesignerApp')
     this.GetSavedFiles = function(){
       return loader.GetSavedFiles();
     };
+
+    this.GetGameData = function(name){
+      console.log('What is loader: ', loader);
+      return loader.GetGameData(name);
+    };
   });
