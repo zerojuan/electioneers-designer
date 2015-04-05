@@ -1,18 +1,27 @@
 <div>
-  <div class="navbar">
+  <div class="navbar navbar-fixed-top">
     <h1><span class="btn btn-primary" ng-click="goBack()"><i class="glyphicon glyphicon-menu-left"></i></span>&nbsp; {{game.name}}</h1>
   </div>
   <div class="container">
     <div>
-      <h2>Designer</h2>
+      <h2 style="margin-top: 50px;">Designer</h2>
     </div>
     <div>
       <tabset>
         <tab heading="Districts">
           <div class="panel panel-default" style="display: flex;">
-            <div class="col-xs-6" style="height: 400px; margin-top: 10px;">
+            <div class="col-xs-6" style="min-height: 400px; margin-top: 10px;">
               <district-in-design ng-repeat="district in gameData.districts" class="pull-left" district="district" on-select="onSelectDistrict">
               </district-in-design>
+            </div>
+            <div class="col-xs-6" style="min-height:400px; margin-top:10px">
+              <div ng-hide="selected.district">
+                <span class="text-muted">Select a district</span>
+              </div>
+              <div ng-show="selected.district">
+                <district-edit district="selected.district" districts="gameData.districts" kapitans="gameData.kapitans">
+                </district-edit>
+              </div>
             </div>
           </div>
         </tab>

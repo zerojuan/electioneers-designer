@@ -2,13 +2,18 @@
 
 angular.module('paDesignerApp')
   .controller('GameCtrl', function(GameService, $scope){
-
+    $scope.selected = {};
 
     $scope.$watch('game', function(){
       if($scope.game){
         var gameData = GameService.GetGameData($scope.game.name);
         angular.forEach(gameData.districts, function(d){
           d.selected = false;
+          //find kapitan
+          var kap = _.find(gameData.kapitans, function(k){
+            return k.id === d.kapitanId;
+          });
+          d.kap = kap;
         });
         $scope.gameData = gameData;
       }
@@ -19,7 +24,12 @@ angular.module('paDesignerApp')
       angular.forEach($scope.gameData.districts, function(d){
         console.log(d.id + ' vs ' + district.id);
         if(district.id === d.id){
-          d.selected = !d.selected;                    
+          d.selected = !d.selected;
+          if(d.selected){
+            $scope.selected.district = d;
+          }else{
+            $scope.selected.district = null;
+          }
         }else{
           d.selected = false;
         }
