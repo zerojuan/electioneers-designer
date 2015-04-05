@@ -7,11 +7,29 @@
       <h2>Designer</h2>
     </div>
     <div>
-      <ul class="list list-unstyled">
-        <li ng-repeat="district in gameData.districts">
-          {{district.name}}: {{district.population}}
-        </li>
-      </ul>
+      <tabset>
+        <tab heading="Districts">
+          <div class="panel panel-default" style="display: flex;">
+            <div class="col-xs-6" style="height: 400px; margin-top: 10px;">
+              <district-in-design ng-repeat="district in gameData.districts" class="pull-left" district="district" on-select="onSelectDistrict">
+              </district-in-design>
+            </div>
+          </div>
+        </tab>
+        <tab heading="Kapitans">
+          <div class="panel panel-default">
+            <ul class="list list-unstyled">
+              <li ng-repeat="kapitan in gameData.kapitans">
+                {{kapitan.name}}
+              </li>
+            </ul>
+          </div>
+        </tab>
+        <tab heading="Formulas">
+          Edit formulas here
+        </tab>
+      </tabset>
+
     </div>
   </div>
 </div>
