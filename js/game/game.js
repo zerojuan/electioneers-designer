@@ -14,6 +14,7 @@ angular.module('paDesignerApp')
             return k.id === d.kapitanId;
           });
           d.kap = kap;
+          d.neighbors = [];
         });
         $scope.gameData = gameData;
       }

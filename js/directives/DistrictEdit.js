@@ -23,6 +23,34 @@ angular.module('paDesignerApp')
        scope.onSaveView = function(){
          scope.mode = 'View';
        };
+
+       scope.removeCurrentDistrict = function(value){
+         if(!scope.district){
+           return false;
+         }
+         var val = _.find(scope.district.neighbors, function(d){
+           return (value.id === d.id);
+         });
+         console.log('Found?', val);
+         if(val){
+           return false;
+         }
+
+         return value.id !== scope.district.id;
+       };
+
+       scope.addNeighbor = function(d){
+         if(!d){
+           return false;
+         }
+         scope.district.neighbors.push(d);
+       };
+
+       scope.removeNeighbor = function(d){
+         scope.district.neighbors = _.reject(scope.district.neighbors, function(n){
+           return n.id === d.id;
+         });
+       };
      }
    };
   });
