@@ -11,7 +11,7 @@
         <tab heading="Districts">
           <div class="panel panel-default" style="display: flex;">
             <div class="col-xs-6" style="min-height: 400px; margin-top: 10px;">
-              <district-in-design ng-repeat="district in gameData.districts" class="pull-left" district="district" on-select="onSelectDistrict">
+              <district-in-design ng-repeat="district in gameData.districts" selected-district="selected.district" class="pull-left" district="district" on-select="onSelectDistrict">
               </district-in-design>
             </div>
             <div class="col-xs-6" style="min-height:400px; margin-top:10px">

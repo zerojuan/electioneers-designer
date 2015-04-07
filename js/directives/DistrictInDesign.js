@@ -8,12 +8,24 @@ angular.module('paDesignerApp')
      transclude: true,
      scope: {
        district: '=',
-       select: '=onSelect'
+       select: '=onSelect',
+       selectedDistrict: '='
      },
      link: function (scope) {
        scope.onSelect = function(){
          console.log('On Select: ');
          scope.select(scope.district);
+       };
+
+       scope.isNeighbor = function(){
+         if(!scope.selectedDistrict){
+           return;
+         }
+         var n = _.find(scope.selectedDistrict.neighbors, function(n){
+          return n.id === scope.district.id;
+          });
+
+        return n;
        };
      }
    };
