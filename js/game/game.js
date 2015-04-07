@@ -48,6 +48,10 @@ angular.module('paDesignerApp')
       });
     };
 
+    $scope.onSave = function(){
+      //save game data to the file in this folder
+    };
+
 
     $scope.goBack = function(){
       $scope.nav.page = 'Start';
