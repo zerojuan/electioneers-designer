@@ -43,13 +43,13 @@ angular.module('paDesignerApp')
          if(!d){
            return false;
          }
-         scope.district.neighbors.push(d);
+         scope.district.addNeighbor(d);
+         d.addNeighbor(scope.district);
        };
 
        scope.removeNeighbor = function(d){
-         scope.district.neighbors = _.reject(scope.district.neighbors, function(n){
-           return n.id === d.id;
-         });
+         scope.district.removeNeighbor(d);
+         d.removeNeighbor(scope.district);
        };
      }
    };

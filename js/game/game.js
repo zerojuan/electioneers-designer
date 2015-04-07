@@ -15,6 +15,17 @@ angular.module('paDesignerApp')
           });
           d.kap = kap;
           d.neighbors = [];
+          d.addNeighbor = function(n){
+            d.neighbors.push({
+              id: n.id,
+              name: n.name
+            });
+          };
+          d.removeNeighbor = function(n){
+            d.neighbors = _.reject(d.neighbors, function(dn){
+              return dn.id === n.id;
+            });
+          };
         });
         $scope.gameData = gameData;
       }
