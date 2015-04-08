@@ -88,6 +88,33 @@ var GetGameData = function(path){
   };
 };
 
+var SaveGameData = function(path, data){
+  var defaultDir = settings.getWorkingDirectory() + '/saves/' + path;
+  console.log('Trying to save the file yo', path, data);
+  //save kapitans
+  var kapitans = {
+    name: 'Kapitans',
+    data: _.map(data.kapitans, function(k){
+      var kap = new Kapitan();
+      return kap.toJson(k);
+    })
+  };
+  fs.writeFileSync(defaultDir+'/kapitans.json', JSON.stringify(kapitans, null, '\t'));
+
+  //save districts
+  var districts = {
+    name: 'Districts',
+    data: _.map(data.districts, function(d){
+      var dist = new District();
+      d.kapitanId = d.kap.id;
+      return dist.toJson(d);
+    })
+  };
+  fs.writeFileSync(defaultDir+'/districts.json', JSON.stringify(districts, null, '\t'));
+
+  return;
+};
+
 exports.DistrictsFromFile = DistrictsFromFile;
 
 exports.KapitansFromFile = KapitansFromFile;
@@ -99,3 +126,5 @@ exports.GetSavedFiles = GetSavedFiles;
 exports.GetGameData = GetGameData;
 
 exports.DeleteSave = DeleteSave;
+
+exports.SaveGameData = SaveGameData;

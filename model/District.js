@@ -9,14 +9,20 @@ var District = function(id, name, population, kapitanId){
   this.name = name;
   this.population = population;
   this.kapitanId = kapitanId;
+  this.neighbors = [];
 
-  this.toJson = function(){
+  this.toJson = function(obj){
+    if(obj){
+      that = obj;
+    }
+
     return {
-      id: id,
-      name: name,
-      population: population,
-      kapitanId: kapitanId
-    };
+        id: that.id,
+        name: that.name,
+        population: that.population,
+        kapitanId: that.kapitanId,
+        neighbors: that.neighbors
+      };    
   };
 };
 

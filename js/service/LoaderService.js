@@ -25,4 +25,8 @@ angular.module('paDesignerApp')
       console.log('What is loader: ', loader);
       return loader.GetGameData(name);
     };
+
+    this.SaveGameData = function(path, gameData){
+      return loader.SaveGameData(path, gameData);
+    };
   });

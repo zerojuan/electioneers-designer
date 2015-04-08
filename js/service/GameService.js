@@ -7,4 +7,8 @@ angular.module('paDesignerApp')
       gameData = LoaderService.GetGameData(game);
       return gameData;
     };
+
+    this.SaveGameData = function(path, game){
+      LoaderService.SaveGameData(path, game);
+    };
   });

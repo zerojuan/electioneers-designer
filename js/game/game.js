@@ -7,6 +7,7 @@ angular.module('paDesignerApp')
     $scope.$watch('game', function(){
       if($scope.game){
         var gameData = GameService.GetGameData($scope.game.name);
+        console.log('This is the game data loaded: ', gameData);
         angular.forEach(gameData.districts, function(d){
           d.selected = false;
           //find kapitan
@@ -14,7 +15,10 @@ angular.module('paDesignerApp')
             return k.id === d.kapitanId;
           });
           d.kap = kap;
-          d.neighbors = [];
+          if(!d.neighbors){
+            d.neighbors = [];
+          }
+
           d.addNeighbor = function(n){
             d.neighbors.push({
               id: n.id,
@@ -50,6 +54,7 @@ angular.module('paDesignerApp')
 
     $scope.onSave = function(){
       //save game data to the file in this folder
+      GameService.SaveGameData($scope.game.name, $scope.gameData);
     };
 
 
