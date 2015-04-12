@@ -1,36 +1,23 @@
 'use strict';
 
 angular.module('paDesignerApp')
-  .controller('GameCtrl', function(GameService, $scope){
+  .controller('GameCtrl', function(DistrictsModel, GameService, $scope){
     $scope.selected = {};
 
     $scope.$watch('game', function(){
       if($scope.game){
         var gameData = GameService.GetGameData($scope.game.name);
-        console.log('This is the game data loaded: ', gameData);
-        angular.forEach(gameData.districts, function(d){
-          d.selected = false;
-          //find kapitan
-          var kap = _.find(gameData.kapitans, function(k){
-            return k.id === d.kapitanId;
-          });
-          d.kap = kap;
+        gameData.districts = _.map(gameData.districts, function(d){
           if(!d.neighbors){
             d.neighbors = [];
           }
 
-          d.addNeighbor = function(n){
-            d.neighbors.push({
-              id: n.id,
-              name: n.name
-            });
-          };
-          d.removeNeighbor = function(n){
-            d.neighbors = _.reject(d.neighbors, function(dn){
-              return dn.id === n.id;
-            });
-          };
+          d = new DistrictsModel.District(d);
+          d.setKap(gameData.kapitans);
+
+          return new DistrictsModel.District(d);
         });
+
         $scope.gameData = gameData;
       }
     });
@@ -50,6 +37,11 @@ angular.module('paDesignerApp')
           d.selected = false;
         }
       });
+    };
+
+    $scope.onNewDistrict = function(){
+      var d = DistrictsModel.CreateDistrict($scope.gameData.kapitans);
+      $scope.gameData.districts.push(d);
     };
 
     $scope.onSave = function(){

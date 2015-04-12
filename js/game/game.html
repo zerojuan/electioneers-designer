@@ -20,6 +20,7 @@
             <div class="col-xs-6" style="min-height: 400px; margin-top: 10px;">
               <district-in-design ng-repeat="district in gameData.districts" selected-district="selected.district" class="pull-left" district="district" on-select="onSelectDistrict">
               </district-in-design>
+              <div class="btn pull-left district in-design" ng-click="onNewDistrict()">Add District</div>
             </div>
             <div class="col-xs-6" style="min-height:400px; margin-top:10px">
               <div ng-hide="selected.district">

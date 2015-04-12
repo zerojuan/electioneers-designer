@@ -3,6 +3,7 @@
 angular.module('paDesignerApp')
   .service('GameService', function(LoaderService){
     var gameData;
+
     this.GetGameData = function(game){
       gameData = LoaderService.GetGameData(game);
       return gameData;
@@ -10,5 +11,16 @@ angular.module('paDesignerApp')
 
     this.SaveGameData = function(path, game){
       LoaderService.SaveGameData(path, game);
+    };
+
+    this.CreateDistrict = function(){
+      return {
+        name: 'New District',
+        id: Date.now(),
+        population: 10,
+        kapitanId: gameData.kapitans[0].id,
+        kapitan: gameData.kapitans[0],
+        neighbors: []
+      };
     };
   });
