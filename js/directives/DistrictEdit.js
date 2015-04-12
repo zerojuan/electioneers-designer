@@ -59,6 +59,18 @@ angular.module('paDesignerApp')
           });
           district.removeNeighbor(scope.district);
         };
+
+        scope.showNeighborName = function(d){
+          var district = _.find(scope.districts, function(d1){
+            return d1.id === d.id;
+          });
+          if(district){
+            return district.name;
+          }else{
+            return d.name;
+          }
+
+        };
       }
    };
   });

@@ -1,6 +1,22 @@
 'use strict';
 
 angular.module('paDesignerApp')
+  .filter('realDistrictName', function(){
+    return function(d, districts){
+      console.log('Showing district name');
+      console.log(d);
+      console.log(districts);
+      var district = _.find(districts, function(d1){        
+        return d1.id === d;
+      });
+      if(district){
+        console.log('Found the district');
+      }
+      return district.name;
+    };
+  });
+
+angular.module('paDesignerApp')
   .service('DistrictsModel', function(){
     var District = function(atts){
       var self = this;

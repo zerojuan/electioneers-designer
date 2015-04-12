@@ -52,7 +52,7 @@
                 Neighbors
               </label>
               <div class="col-lg-10">
-                <p ng-repeat="neighbor in district.neighbors" class="neighbor-edit">{{neighbor.name}} <a href="#" ng-click="removeNeighbor(neighbor)"><i class="glyphicon glyphicon-remove"></i></a></p>
+                <p ng-repeat="neighbor in district.neighbors" class="neighbor-edit">{{neighbor.id | realDistrictName : districts}} <a href="#" ng-click="removeNeighbor(neighbor)"><i class="glyphicon glyphicon-remove"></i></a></p>
                 <select class="form-control" id="inputNeighbors" ng-model="selectedDistrict" ng-change="addNeighbor(selectedDistrict)" ng-options="d.name for d in districts | filter : removeCurrentDistrict">
                 </select>
               </div>
