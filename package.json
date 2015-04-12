@@ -13,6 +13,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lessc": "watch 'lessc less/bootstrap.less styles/main.css' less/",
     "start": "watch 'lessc less/bootstrap.less styles/main.css' less/"
   },
   "keywords": [
