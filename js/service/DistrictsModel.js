@@ -43,7 +43,7 @@ angular.module('paDesignerApp')
       CreateDistrict: function(kapitans){
         return new District({
           name: 'New District',
-          id: Date.now(),
+          id: ''+Date.now(),
           population: 10,
           kapitanId: kapitans[0].id,
           kap: kapitans[0],

@@ -44,6 +44,18 @@ angular.module('paDesignerApp')
       $scope.gameData.districts.push(d);
     };
 
+    $scope.onDeleteDistrict = function(district){
+      $scope.gameData.districts = _.reject($scope.gameData.districts, function(d){
+        return d.id === district.id;
+      });
+      //delete from neighbor hoods
+      _.forEach($scope.gameData.districts, function(d){
+        d.neighbors = _.reject(d.neighbors, function(n){
+          return n.id === district.id;
+        });
+      });
+    };
+
     $scope.onSave = function(){
       //save game data to the file in this folder
       GameService.SaveGameData($scope.game.name, $scope.gameData);

@@ -17,7 +17,7 @@ angular.element(document).ready(function(){
 		if ( event.which === 192 ) { //Tilde
 	    event.preventDefault();
 			win.showDevTools();
-	  }else if(event.which === 116){ //F5
+	  }else if(event.shiftKey && event.which === 67){ //F5
 			win.reload();
 		}
 	});

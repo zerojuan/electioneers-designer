@@ -6,6 +6,7 @@
           <a href="#" ng-click="onEditView()">[Edit]</a>
         </span>
         <span ng-switch-when="Edit">
+          <a href="#" ng-click="onDeleteClicked()">[Delete]</a>&nbsp;
           <a href="#" ng-click="onSaveView()">[Save]</a>
         </span>
       </span>
@@ -14,7 +15,14 @@
   <div class="panel-body">
     <div ng-switch="mode">
       <div ng-switch-when="View">
-        {{district.name}}
+        <div class="col-xs-2">Name</div><div class="col-xs-10">{{district.name}}</div>
+        <div class="col-xs-2">Population</div><div class="col-xs-10">{{district.population}}</div>
+        <div class="col-xs-2">Kapitan</div><div class="col-xs-10">{{district.kap.name}}</div>
+        <div class="col-xs-2">Neighbors</div><div class="col-xs-10">
+          <p ng-repeat="d in district.neighbors">
+            {{d.name}}
+          </p>
+        </div>
       </div>
       <div ng-switch-when="Edit">
         <form class="form-horizontal">
