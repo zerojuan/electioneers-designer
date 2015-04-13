@@ -56,6 +56,21 @@ angular.module('paDesignerApp')
       });
     };
 
+    $scope.onKapitanSelected = function(kapitan){
+      _.forEach($scope.gameData.kapitans, function(k){
+        if(kapitan.id === k.id){
+          k.selected = !k.selected;
+          if(k.selected){
+            $scope.selected.kapitan = k;
+          }else{
+            $scope.selected.kapitan = null;
+          }
+        }else{
+          k.selected = false;
+        }
+      });
+    };
+
     $scope.onSave = function(){
       //save game data to the file in this folder
       GameService.SaveGameData($scope.game.name, $scope.gameData);

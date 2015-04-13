@@ -1,0 +1,40 @@
+.district{
+  background: @gray-dark;
+  padding: 5px;
+  cursor: pointer;
+  &.btn-danger{
+    background: @btn-danger-bg;
+  }
+  &.in-design{
+    color: @panel-warning-text;
+    width: 100px;
+    height: 100px;
+    margin-left: 5px;
+    margin-bottom: 5px;    
+
+    &.selected{
+      border: 2px @brand-warning solid;
+    }
+
+    &.is-neighbor{
+      border: 1px red dashed;
+    }
+  }
+}
+
+.kapitan{
+  background: @gray-dark;
+  padding: 5px;
+  cursor: pointer;
+  &.in-design{
+    color: @panel-warning-text;
+    width: 200px;
+    height: 60px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+
+    &.selected{
+      border: 2px @brand-warning solid;
+    }
+  }
+}

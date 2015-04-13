@@ -16,7 +16,7 @@
     <div>
       <tabset>
         <tab heading="Districts">
-          <div class="panel panel-default" style="display: flex;">
+          <div class="panel panel-default">
             <div class="col-xs-6" style="min-height: 400px; margin-top: 10px;">
               <district-in-design ng-repeat="district in gameData.districts" selected-district="selected.district" class="pull-left" district="district" on-select="onSelectDistrict">
               </district-in-design>
@@ -35,11 +35,19 @@
         </tab>
         <tab heading="Kapitans">
           <div class="panel panel-default">
-            <ul class="list list-unstyled">
-              <li ng-repeat="kapitan in gameData.kapitans">
-                {{kapitan.name}}
-              </li>
-            </ul>
+            <div class="col-xs-6" style="min-height: 400px; margin-top: 10px;">
+              <kapitan-in-design ng-repeat="kapitan in gameData.kapitans" on-select="onKapitanSelected" class="pull-left" kapitan="kapitan">
+              </kapitan-in-design>
+            </div>
+            <div class="col-xs-6" style="min-height: 400px; margin-top: 10px;">
+              <div ng-hide="selected.kapitan">
+                <span class="text-muted">Select a kapitan</span>
+              </div>
+              <div ng-show="selected.kapitan">
+                <kapitan-edit kapitan="selected.kapitan" on-delete="onDeleteKapitan" kapitans="gameData.kapitans">
+                </kapitan-edit>
+              </div>
+            </div>
           </div>
         </tab>
         <tab heading="Formulas">
