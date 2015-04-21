@@ -7,10 +7,23 @@ angular.module('paDesignerApp')
       restrict: 'E',
       transclude: true,
       scope: {
-        kapitan: '='
+        kapitan: '=',
+        onDelete: '='
       },
       link: function (scope) {
+        scope.mode = 'Edit';
+        
+        scope.onEditView = function(){
+          scope.mode = 'Edit';
+        };
 
+        scope.onSaveView = function(){
+          scope.mode = 'View';
+        };
+
+        scope.onDeleteClicked = function(){
+          scope.onDelete(scope.kapitan);
+        };
       }
     };
 

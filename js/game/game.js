@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('paDesignerApp')
-  .controller('GameCtrl', function(DistrictsModel, GameService, $scope){
+  .controller('GameCtrl', function(DistrictsModel, KapitansModel, GameService, $scope){
     $scope.selected = {};
 
     $scope.$watch('game', function(){
@@ -44,6 +44,11 @@ angular.module('paDesignerApp')
       $scope.gameData.districts.push(d);
     };
 
+    $scope.onNewKapitan = function(){
+      var k = KapitansModel.CreateKapitan();
+      $scope.gameData.kapitans.push(k);
+    };
+
     $scope.onDeleteDistrict = function(district){
       $scope.gameData.districts = _.reject($scope.gameData.districts, function(d){
         return d.id === district.id;
@@ -53,6 +58,20 @@ angular.module('paDesignerApp')
         d.neighbors = _.reject(d.neighbors, function(n){
           return n.id === district.id;
         });
+      });
+    };
+
+    $scope.onDeleteKapitan = function(kapitan){
+      $scope.gameData.kapitans = _.reject($scope.gameData.kapitans, function(k){
+        return k.id === kapitan.id;
+      });
+
+      //delete from districts kapitans
+      _.forEach($scope.gameData.districts, function(d){
+        if(d.kapitanId === kapitan.id){
+          d.kapitanId = null;
+          d.kap = null;
+        }
       });
     };
 

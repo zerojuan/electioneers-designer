@@ -17,11 +17,10 @@ angular.element(document).ready(function(){
 		if ( event.which === 192 ) { //Tilde
 	    event.preventDefault();
 			win.showDevTools();
-	  }else if(event.shiftKey && event.which === 67){ //F5
+	  }else if(event.which === 67){ //C
 			win.reload();
 		}
 	});
-
 
 	angular.bootstrap(document, ['paDesignerApp']);
 });
