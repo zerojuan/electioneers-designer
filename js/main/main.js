@@ -32,6 +32,11 @@ angular.module('paDesignerApp')
       $scope.game = game;
     };
 
+    $scope.onGoToProper = function(gameData){
+      gotoPage('GameProper');
+      $scope.gameData = gameData;
+    };
+
     $scope.onDelete = function(game){
       $scope.savedFiles = LoaderService.DeleteSave(game.name);
     };

@@ -95,6 +95,10 @@ angular.module('paDesignerApp')
       GameService.SaveGameData($scope.game.name, $scope.gameData);
     };
 
+    $scope.onPlay = function(){
+      $scope.onGoToProper($scope.gameData);
+    };
+
 
     $scope.goBack = function(){
       $scope.nav.page = 'Start';
