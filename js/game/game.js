@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('paDesignerApp')
-  .controller('GameCtrl', function(DistrictsModel, KapitansModel, GameService, $scope){
+  .controller('GameCtrl', function(DistrictsModel, KapitansModel, GameService, LoaderService, $scope){
     $scope.selected = {};
 
     $scope.$watch('game', function(){
@@ -97,6 +97,7 @@ angular.module('paDesignerApp')
 
     $scope.onPlay = function(){
       $scope.onGoToProper($scope.gameData);
+      LoaderService.GeneratePopulation();
     };
 
 

@@ -1,9 +1,20 @@
 'use strict';
 
 var loader = require('./model/loader.js');
+var population = require('./model/Population.js');
 
 angular.module('paDesignerApp')
   .service('LoaderService', function(){
+
+    this.GeneratePopulation = function(){
+      population.generatePopulation();
+    };
+
+    this.GetVoter = function(){
+      var person = population.getPerson(50);      
+      return person;
+    };
+
     this.CreateNewSave = function(){
       return loader.CreateNewSave();
     };

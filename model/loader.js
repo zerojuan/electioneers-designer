@@ -14,7 +14,7 @@ var loadData = function(path){
 
 var saveData = function(path, data){
   fs.writeFileSync(path, JSON.stringify(data, null, '\t'));
-}
+};
 
 var DistrictsFromFile = function(filePath){
   var data = loadData(filePath);
@@ -37,7 +37,7 @@ var KapitansFromFile = function(filePath){
 var CreateNewSave = function(){
   var defaultDir = settings.getWorkingDirectory();
   var name = names.choose();
-  console.log('Name: ' + name);
+
   while(fs.existsSync(defaultDir+'/saves/'+name)){
     name = names.choose();
   }
@@ -90,7 +90,7 @@ var GetGameData = function(path){
 
 var SaveGameData = function(path, data){
   var defaultDir = settings.getWorkingDirectory() + '/saves/' + path;
-  console.log('Trying to save the file yo', path, data);
+  
   //save kapitans
   var kapitans = {
     name: 'Kapitans',
