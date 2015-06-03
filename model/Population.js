@@ -1,13 +1,14 @@
 'use strict';
 var PouchDB = require('pouchdb');
 
-var db = new PouchDB(__dirname+'/db', { db: require('level-js') });
-db.info().then(function (result) {
-  console.log(result);
-}).catch(function (err) {
-  console.error(err);
-});
+
+function connect(){
+  var db = new PouchDB(__dirname+'/db', { db: require('level-js') });
+  return db;
+}
+
 exports.generatePopulation = function(){
+  var db = connect();
   var population = [];
   var i = 0;
   var size = 10000;
@@ -36,5 +37,6 @@ exports.generatePopulation = function(){
 };
 
 exports.getPerson = function(id){
+  var db = connect();
   return db.get(id+'');
 };
