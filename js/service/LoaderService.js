@@ -11,7 +11,8 @@ angular.module('paDesignerApp')
     };
 
     this.GetVoter = function(){
-      var person = population.getPerson(50);      
+      console.log('Getting voter...');
+      var person = population.getPerson(50);
       return person;
     };
 

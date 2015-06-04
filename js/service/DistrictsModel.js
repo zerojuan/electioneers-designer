@@ -6,7 +6,7 @@ angular.module('paDesignerApp')
       console.log('Showing district name');
       console.log(d);
       console.log(districts);
-      var district = _.find(districts, function(d1){        
+      var district = _.find(districts, function(d1){
         return d1.id === d;
       });
       if(district){
@@ -44,11 +44,9 @@ angular.module('paDesignerApp')
       };
 
       self.setKap = function(kaps){
-        console.log('What is my kapitan id: ', self.kapitanId);
         var kap = _.find(kaps, function(k){
           return k.id === self.kapitanId;
-        });
-        console.log('Found Kap: ', kap);
+        });        
         self.kap = kap;
       };
 
