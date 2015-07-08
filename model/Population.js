@@ -1,23 +1,32 @@
 'use strict';
 var PouchDB = require('pouchdb');
-var Voter = require('./Voter.js');
+var Family = require('./Family.js');
 
 
-function connect(){
-  var db = new PouchDB('db2', { db: require('level-js') });
+function connect(dbName, callback){
+  var db = new PouchDB(dbName, { db: require('level-js') });
   db.info().then(function(result){
-    console.log('info:',result);
+    if(callback){
+      callback(result);
+    }
   });
   return db;
 }
+//TODO: Generate generations based on families
 
-exports.generatePopulation = function(){
-  var db = connect();
+exports.hasPopulation = function(dbName, done){
+  connect(dbName, function(result){
+    console.log('info:',result);
+  });
+};
+
+exports.generatePopulation = function(done){
+  var db = connect('db2');
   var population = [];
   var i = 0;
   var size = 1000;
   for(i = 0; i < size; i++){
-    var voter = new Voter();
+    var voter = new Family();
     voter.name = i+'abcdefghijklmnop'+i;
     voter.gender = 'M';
     voter._id = i+'';
@@ -41,6 +50,6 @@ exports.generatePopulation = function(){
 
 exports.getPerson = function(id){
   console.log('Getting person...');
-  var db = connect();
+  var db = connect('db2');
   return db.get(id+'');
 };

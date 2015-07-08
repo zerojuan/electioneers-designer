@@ -10,6 +10,16 @@ angular.module('paDesignerApp')
       population.generatePopulation();
     };
 
+    this.HasPopulation = function(){
+      population.hasPopulation('db2', function(){
+
+      });
+
+      population.hasPopulation('db3', function(){
+        
+      });
+    }
+
     this.GetVoter = function(){
       console.log('Getting voter...');
       var person = population.getPerson(50);

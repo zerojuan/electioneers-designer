@@ -97,7 +97,8 @@ angular.module('paDesignerApp')
 
     $scope.onPlay = function(){
       $scope.onGoToProper($scope.gameData);
-      LoaderService.GeneratePopulation();
+      // LoaderService.GeneratePopulation();
+      LoaderService.HasPopulation();
     };
 
 

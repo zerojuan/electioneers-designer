@@ -1,6 +1,6 @@
 'use strict';
 
-function Voter(){  
+function Family(){
   this.name = 'Someone';
   this.income = 100;
   this.concern = ['religion'];
@@ -9,4 +9,4 @@ function Voter(){
 
 
 
-module.exports = Voter;
+module.exports = Family;
