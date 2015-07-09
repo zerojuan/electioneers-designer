@@ -25,11 +25,18 @@ angular.module('paDesignerApp')
       return deferred.promise;
     };
 
+    this.GetFamilies = function(dbName, startKey){
+      var family = population.getFamilies(dbName, startKey);
+      return family;
+    };
+
     this.GetVoter = function(){
       var person = population.getPerson(50);
       console.log('This is the person: ', person);
       return person;
     };
+
+    this.Get
 
     this.CreateNewSave = function(){
       return loader.CreateNewSave();

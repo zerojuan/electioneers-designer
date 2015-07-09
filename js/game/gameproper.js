@@ -8,13 +8,23 @@ angular.module('paDesignerApp')
       name: 'Idiot'
     };
     var p = LoaderService.GetVoter();
-    console.log('P ', p);
     p.then(function(data){
-      console.log('Returned data: ', data);
+      console.log('Load Voter...', data);
       $scope.test = 'another test';
       $scope.voter = data;
+      var voters = LoaderService.GetFamilies('db2');
+      voters.then(function(data){
+        console.log('Returned data: ', data.rows[0]);
+        //load
+        $scope.voters = data.rows;
+        $scope.$apply();
+      }).catch(function(err){
+        console.log('Error: ', err);
+      });
       $scope.$apply();
     }).catch(function(err){
       console.log('Error: ', err);
     });
+
+
   });

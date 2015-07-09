@@ -63,3 +63,15 @@ exports.getPerson = function(id){
   });
   return person;
 };
+
+exports.getFamilies = function(dbName, start){
+  var db = connect(dbName);
+  var person = db.allDocs({
+    include_docs: true,
+    limit: 50
+  });
+  person.then(function(){
+    db.close();
+  });
+  return person;
+};
