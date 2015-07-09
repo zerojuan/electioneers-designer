@@ -2,6 +2,37 @@
 var PouchDB = require('pouchdb');
 var Family = require('./Family.js');
 
+var Surnames = [
+  'Santos',
+  'Reyes',
+  'Cruz',
+  'Bautista',
+  'Ocampo',
+  'Garcia',
+  'Mendoza',
+  'Torres',
+  'Tomas',
+  'Andrada',
+  'Castillo',
+  'Flores',
+  'Villanueva',
+  'Ramos',
+  'Castro',
+  'Rivera',
+  'Aquino',
+  'Navarro',
+  'Salazar',
+  'Mercado',
+  'de la Cruz',
+  'de los Reyes',
+  'del Rosario',
+  'de los Santos',
+  'de Guzman',
+  'de Castro',
+  'de la Rosa',
+  'de Asis',
+  'de Rosales'
+];
 
 function connect(dbName, callback){
   console.log('Trying to connect...', dbName);
@@ -34,7 +65,8 @@ exports.generatePopulation = function(done){
   var size = 1000;
   for(i = 0; i < size; i++){
     var voter = new Family();
-    voter.name = i+'abcdefghijklmnop'+i;
+    voter.name = 'Person '+i;
+    voter.surname = Surnames[Math.floor((Math.random() * Surnames.length - 1))];
     voter.gender = 'M';
     voter._id = i+'';
     population.push(voter);

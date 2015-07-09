@@ -1,9 +1,9 @@
 <div>
-  <h1>This is the data {{voter.name}}</h1>
+  <h1>This is the data {{voter.name + ' ' + voter.doc.surname}}</h1>
   <p>{{test}}</p>
   <ul>
     <li ng-repeat="voter in voters">
-      {{voter.doc.name}}
+      {{voter.doc.name + ' ' + voter.doc.surname}}
     </li>
   </ul>
   <!-- <div>

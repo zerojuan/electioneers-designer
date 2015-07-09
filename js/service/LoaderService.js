@@ -36,8 +36,6 @@ angular.module('paDesignerApp')
       return person;
     };
 
-    this.Get
-
     this.CreateNewSave = function(){
       return loader.CreateNewSave();
     };

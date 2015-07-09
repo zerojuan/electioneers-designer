@@ -103,8 +103,9 @@ angular.module('paDesignerApp')
           console.log('No need to generate population');
         }else{
           console.log('Generate Population');
-          LoaderService.GeneratePopulation();
         }
+
+        LoaderService.GeneratePopulation();
       });
     };
 
