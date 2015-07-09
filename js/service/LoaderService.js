@@ -4,25 +4,30 @@ var loader = require('./model/loader.js');
 var population = require('./model/Population.js');
 
 angular.module('paDesignerApp')
-  .service('LoaderService', function(){
+  .service('LoaderService', function($q){
 
     this.GeneratePopulation = function(){
       population.generatePopulation();
     };
 
-    this.HasPopulation = function(){
-      population.hasPopulation('db2', function(){
-
+    this.HasPopulation = function(dbName){
+      var deferred = $q.defer();
+      population.hasPopulation(dbName, function(result){
+        if(result.doc_count > 0){
+          //has population
+          deferred.resolve(true);
+        }else{
+          //has no population
+          deferred.resolve(false);
+        }
       });
 
-      population.hasPopulation('db3', function(){
-        
-      });
-    }
+      return deferred.promise;
+    };
 
     this.GetVoter = function(){
-      console.log('Getting voter...');
       var person = population.getPerson(50);
+      console.log('This is the person: ', person);
       return person;
     };
 

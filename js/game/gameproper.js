@@ -7,7 +7,9 @@ angular.module('paDesignerApp')
     $scope.voter = {
       name: 'Idiot'
     };
-    LoaderService.GetVoter().then(function(data){
+    var p = LoaderService.GetVoter();
+    console.log('P ', p);
+    p.then(function(data){
       console.log('Returned data: ', data);
       $scope.test = 'another test';
       $scope.voter = data;

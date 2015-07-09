@@ -4,11 +4,17 @@ var Family = require('./Family.js');
 
 
 function connect(dbName, callback){
+  console.log('Trying to connect...', dbName);
   var db = new PouchDB(dbName, { db: require('level-js') });
   db.info().then(function(result){
+    console.log('Connect success');
     if(callback){
       callback(result);
     }
+  })
+  .catch(function(err){
+    console.log('Error connecting...');
+    console.log(err);
   });
   return db;
 }
@@ -17,6 +23,7 @@ function connect(dbName, callback){
 exports.hasPopulation = function(dbName, done){
   connect(dbName, function(result){
     console.log('info:',result);
+    done(result);
   });
 };
 
@@ -32,8 +39,9 @@ exports.generatePopulation = function(done){
     voter._id = i+'';
     population.push(voter);
   }
-  console.log('Here');
+
   for(i = 0; i < size; i++){
+    //maybe do an async here
     db.put(population[i])
       .then(function(){
 
@@ -43,13 +51,15 @@ exports.generatePopulation = function(done){
         if(err.message === 'Document update conflict'){
           return;
         }
-        console.log('Error...', err);
       });
   }
 };
 
 exports.getPerson = function(id){
-  console.log('Getting person...');
   var db = connect('db2');
-  return db.get(id+'');
+  var person = db.get(id+'');
+  person.then(function(){
+    db.close(); //always close the db once done
+  });
+  return person;
 };

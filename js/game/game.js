@@ -97,8 +97,15 @@ angular.module('paDesignerApp')
 
     $scope.onPlay = function(){
       $scope.onGoToProper($scope.gameData);
-      // LoaderService.GeneratePopulation();
-      LoaderService.HasPopulation();
+      //TODO: Use game data name for generating population
+      LoaderService.HasPopulation('db2').then(function(val){
+        if(val){
+          console.log('No need to generate population');
+        }else{
+          console.log('Generate Population');
+          LoaderService.GeneratePopulation();
+        }
+      });
     };
 
 
