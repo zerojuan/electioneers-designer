@@ -105,7 +105,9 @@ angular.module('paDesignerApp')
           console.log('Generate Population');
         }
 
-        LoaderService.GeneratePopulation();
+        LoaderService.GeneratePopulation(function(){
+
+        });
       });
     };
 

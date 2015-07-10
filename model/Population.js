@@ -5,6 +5,7 @@ var Dictionary = require('./Dictionary.js');
 
 var Surnames = Dictionary.Surnames;
 var MaleNames = Dictionary.MaleNames;
+console.log('Male:',MaleNames);
 
 function connect(dbName, callback){
   console.log('Trying to connect...', dbName);
@@ -17,7 +18,7 @@ function connect(dbName, callback){
   })
   .catch(function(err){
     console.log('Error connecting...');
-    console.log(err);
+    console.log(err, err.stack);
   });
   return db;
 }
@@ -31,32 +32,37 @@ exports.hasPopulation = function(dbName, done){
 };
 
 exports.generatePopulation = function(done){
-  var db = connect('db2');
-  var population = [];
-  var i = 0;
-  var size = 1000;
-  for(i = 0; i < size; i++){
-    var voter = new Family();
-    voter.name = MaleNames[Math.floor((Math.random()*MaleNames.length -1))];
-    voter.surname = Surnames[Math.floor((Math.random() * Surnames.length - 1))];
-    voter.gender = 'M';
-    voter._id = i+'';
-    population.push(voter);
-  }
+  var db = connect('db2', function(){
+    var population = [];
+    var i = 0;
+    var size = 1000;
+    for(i = 0; i < size; i++){
+      var voter = new Family();
+      voter.name = MaleNames[Math.floor((Math.random()*MaleNames.length -1))];
+      voter.surname = Surnames[Math.floor((Math.random() * Surnames.length - 1))];
+      voter.gender = 'M';
+      voter._id = i+'';
+      population.push(voter);
+    }
+    console.log('heeeere');
 
-  for(i = 0; i < size; i++){
-    //maybe do an async here
-    db.put(population[i])
-      .then(function(){
+    for(i = 0; i < size; i++){
+      //maybe do an async here
+      console.log('here');
+      db.put(population[i])
+        .then(function(){
 
-      })
-      .catch(function(err){
+        })
+        .catch(function(err){
 
-        if(err.message === 'Document update conflict'){
-          return;
-        }
-      });
-  }
+          if(err.message === 'Document update conflict'){
+            return;
+          }
+        });
+    }
+    done();
+  });
+
 };
 
 exports.getPerson = function(id){

@@ -6,8 +6,9 @@ var population = require('./model/Population.js');
 angular.module('paDesignerApp')
   .service('LoaderService', function($q){
 
-    this.GeneratePopulation = function(){
-      population.generatePopulation();
+    this.GeneratePopulation = function(done){
+      console.log('Trying to generate');
+      population.generatePopulation(done);
     };
 
     this.HasPopulation = function(dbName){

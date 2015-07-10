@@ -1,7 +1,7 @@
 'use strict';
 
 
-exports.Surname = [
+exports.Surnames = [
   'Santos',
   'Reyes',
   'Cruz',
