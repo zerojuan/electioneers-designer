@@ -1,7 +1,6 @@
 <div>
-  <h1>This is the data {{voter.name + ' ' + voter.surname}}</h1>
-  <p>{{test}}</p>
-  <ul>
+  <h1>Voter: {{voter.name + ' ' + voter.surname}}</h1>
+  <ul class="list-unstyled">
     <li ng-repeat="voter in voters">
       {{voter.doc.name + ' ' + voter.doc.surname}}
     </li>

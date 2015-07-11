@@ -5,7 +5,6 @@ var Dictionary = require('./Dictionary.js');
 
 var Surnames = Dictionary.Surnames;
 var MaleNames = Dictionary.MaleNames;
-console.log('Male:',MaleNames);
 
 function connect(dbName, callback){
   console.log('Trying to connect...', dbName);
