@@ -4,6 +4,10 @@ angular.module('paDesignerApp')
   .controller('GameCtrl', function(DistrictsModel, KapitansModel, GameService, LoaderService, $scope){
     $scope.selected = {};
 
+    $scope.generator = {
+      currentGeneration: 0
+    };
+
     $scope.$watch('game', function(){
       if($scope.game){
         var gameData = GameService.GetGameData($scope.game.name);
@@ -111,6 +115,9 @@ angular.module('paDesignerApp')
       });
     };
 
+    $scope.onGenerate = function(){
+      $scope.generator.currentGeneration++;
+    }
 
     $scope.goBack = function(){
       $scope.nav.page = 'Start';
