@@ -46,7 +46,7 @@ angular.module('paDesignerApp')
       self.setKap = function(kaps){
         var kap = _.find(kaps, function(k){
           return k.id === self.kapitanId;
-        });        
+        });
         self.kap = kap;
       };
 
@@ -58,7 +58,7 @@ angular.module('paDesignerApp')
         return new District({
           name: 'New District',
           id: ''+Date.now(),
-          population: 10,
+          gdp: 10,
           kapitanId: kapitans[0].id,
           kap: kapitans[0],
           neighbors: []

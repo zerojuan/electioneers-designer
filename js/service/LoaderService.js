@@ -11,6 +11,11 @@ angular.module('paDesignerApp')
       population.generatePopulation(done);
     };
 
+    this.DeletePopulation = function(dbName, done){
+      console.log('Deleting a database');
+      population.deletePopulation(dbName, done);
+    };
+
     this.HasPopulation = function(dbName){
       var deferred = $q.defer();
       population.hasPopulation(dbName, function(result){

@@ -3,11 +3,11 @@
 var fs = require('fs');
 var _ = require('underscore');
 
-var District = function(id, name, population, kapitanId){
+var District = function(id, name, gdp, kapitanId){
   var that = this;
   this.id = id;
   this.name = name;
-  this.population = population;
+  this.gdp = gdp;
   this.kapitanId = kapitanId;
   this.neighbors = [];
 
@@ -19,10 +19,10 @@ var District = function(id, name, population, kapitanId){
     return {
         id: that.id,
         name: that.name,
-        population: that.population,
+        gdp: that.gdp,
         kapitanId: that.kapitanId,
         neighbors: that.neighbors
-      };    
+      };
   };
 };
 
