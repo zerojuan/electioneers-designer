@@ -21,6 +21,18 @@ function connect(dbName, callback){
   });
   return db;
 }
+
+
+exports.deleteDB = function(dbName, done){
+    var db = connect(dbName);
+    db.destroy().then(function(){
+      console.log('Deleted db: ', dbName);
+      done();
+    }).catch(function(error){
+      console.log(error);
+    });
+}
+
 //TODO: Generate generations based on families
 
 exports.hasPopulation = function(dbName, done){
@@ -53,7 +65,6 @@ exports.generatePopulation = function(done){
 
         })
         .catch(function(err){
-
           if(err.message === 'Document update conflict'){
             return;
           }
