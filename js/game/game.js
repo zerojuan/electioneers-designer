@@ -5,7 +5,8 @@ angular.module('paDesignerApp')
     $scope.selected = {};
 
     $scope.generator = {
-      currentGeneration: 0
+      currentGeneration: 0,
+      state: 'default'
     };
 
     $scope.$watch('game', function(){
@@ -116,7 +117,31 @@ angular.module('paDesignerApp')
     };
 
     $scope.onGenerate = function(){
-      $scope.generator.currentGeneration++;
+      if($scope.generator.state === 'generating'){
+        return;
+      }
+      $scope.generator.state = 'generating';
+
+      var population = [];
+
+
+      function generate(){
+        $scope.generator.currentGeneration++;
+        if($scope.generator.currentGeneration >= 100){
+          $scope.generator.currentGeneration = 100;
+          clearInterval(intervalId);
+        }
+        //create a population
+        //introduce families to the pool
+        //intermarry
+        //age families (1 generation is 5 years)
+        //kill off family members (old, random sickness)
+        //add kids to of-age families (based on income and age)
+        $scope.$apply();
+      }
+
+      generate();
+      var intervalId = setInterval(generate, 100);
     }
 
     $scope.goBack = function(){
