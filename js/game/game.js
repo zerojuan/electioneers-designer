@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('paDesignerApp')
-  .controller('GameCtrl', function(DistrictsModel, KapitansModel, GameService, LoaderService, $scope){
+  .controller('GameCtrl', function(DistrictsModel, KapitansModel, GameService, LoaderService, PopulationGenerator, $scope){
     $scope.selected = {};
 
     $scope.generator = {
@@ -131,12 +131,7 @@ angular.module('paDesignerApp')
           $scope.generator.currentGeneration = 100;
           clearInterval(intervalId);
         }
-        //create a population
-        //introduce families to the pool
-        //intermarry
-        //age families (1 generation is 5 years)
-        //kill off family members (old, random sickness)
-        //add kids to of-age families (based on income and age)
+        PopulationGenerator.updatePopulation(population);
         $scope.$apply();
       }
 
