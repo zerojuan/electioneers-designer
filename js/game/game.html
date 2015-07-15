@@ -57,6 +57,11 @@
         <tab heading="Population">
           <a class="btn btn-danger" ng-click="onGenerate()">Generate</a>
           <span>Generation: {{generator.currentGeneration}}</span>
+          <ul>
+            <li ng-repeat="family in generator.population">
+              {{family.familyName}}, ${{family.income}}, Kids: {{family.kids}}
+            </li>
+          </ul>
         </tab>
       </tabset>
 

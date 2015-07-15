@@ -6,7 +6,8 @@ angular.module('paDesignerApp')
 
     $scope.generator = {
       currentGeneration: 0,
-      state: 'default'
+      state: 'default',
+      population: []
     };
 
     $scope.$watch('game', function(){
@@ -122,16 +123,13 @@ angular.module('paDesignerApp')
       }
       $scope.generator.state = 'generating';
 
-      var population = [];
-
-
       function generate(){
         $scope.generator.currentGeneration++;
         if($scope.generator.currentGeneration >= 100){
           $scope.generator.currentGeneration = 100;
           clearInterval(intervalId);
         }
-        PopulationGenerator.updatePopulation(population);
+        PopulationGenerator.updatePopulation($scope.generator.population);
         $scope.$apply();
       }
 
