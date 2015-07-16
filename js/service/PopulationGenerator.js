@@ -54,21 +54,36 @@ angular.module('paDesignerApp')
       'Ilia'
     ];
 
+    function guid() {
+      function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+      }
+      return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
+    }
+
     function pickRandom(arr){
       return arr[Math.floor(Math.random() * arr.length)];
     }
 
     function Family(familyName, income){
+      this._id = guid();
       this.familyName = familyName;
       this.income = income;
       this.age = 25;
       this.kids = 0;
+      this.parent = {
+        father: null,
+        mother: null
+      };
       this.fatherName = pickRandom(MaleNames);
     }
 
     function introduceFamilies(population){
       //Pick 5 surnames
-      for(var i =0 ; i < 5; i++){
+      for(var i =0 ; i < Math.floor(Math.random()*5); i++){
         var familyName = pickRandom(Surnames);
         population.push(new Family(familyName, Math.floor(Math.random() * 100 + 100)));
       }
