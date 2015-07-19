@@ -131,6 +131,12 @@ angular.module('paDesignerApp')
         }
         PopulationGenerator.updatePopulation($scope.generator.population);
         //calculate total voter population
+        $scope.generator.totalPopulation = _.reduce($scope.generator.population, function(total, family){
+          return total + family.voters + family.kids;
+        }, 0)
+        $scope.generator.voterPopulation = _.reduce($scope.generator.population, function(total, family){
+          return total + family.voters;
+        }, 0);
         $scope.$apply();
       }
 

@@ -59,7 +59,7 @@
           <span>Generation: {{generator.currentGeneration}}</span>
           <div class="container">
             <div class="col-md-6">
-              <h3>Families</h3>
+              <h3>Families ({{generator.population.length}})</h3>
               <ul class="list-unstyled">
                 <li ng-repeat="family in generator.population">
                   {{family.fatherName}} {{family.familyName}}, ${{family.income}}, Voters: {{family.voters}}, Kids: {{family.kids}}
@@ -67,7 +67,7 @@
               </ul>
             </div>
             <div class="col-md-6">
-              <h3>Total Population: <span>{{generator.population.length}}</span></h3>
+              <h3>Voter Population: <span>{{generator.voterPopulation}}</span> out of <span>{{generator.totalPopulation}}</span></h3>              
             </div>
           </div>
 

@@ -96,7 +96,8 @@ angular.module('paDesignerApp')
 
     function introduceFamilies(population){
       //Pick 5 surnames
-      for(var i =0 ; i < Math.floor(Math.random()*5); i++){
+      var immigrationCeiling = Math.floor(Math.random() * 20);
+      for(var i =0 ; i < immigrationCeiling; i++){
         var familyName = pickRandom(Surnames);
         population.push(new Family(familyName, Math.floor(Math.random() * 100 + 100)));
       }
@@ -125,20 +126,28 @@ angular.module('paDesignerApp')
     function intermarry(population){
       //generate a new family
       //pick a random population
-      var fathers = pickRandom(population);
-      var mothers = pickRandom(population);
-      if(!fathers && !mothers){
-        console.log('No marriage');
-        return;
-      }
-      var family = new Family(fathers.familyName, Math.floor(Math.random() * 100 + 100));
-      family.parent.father = fathers._id;
-      family.parent.mother = mothers._id;
-      //remove family member from both families
-      mothers.voters--;
-      fathers.voters--;
-      population.push(family);
+      var marriageCeiling = Math.floor(Math.random() * 20);
+      for(var i = 0; i < marriageCeiling; i++){
+        var fathers = pickRandom(population);
+        var mothers = pickRandom(population);
 
+        if(!fathers && !mothers){
+          console.log('No marriage');
+          continue;
+        }
+
+        if(fathers.voters < 2 || mothers.voters < 2){
+          continue;
+        }
+
+        var family = new Family(fathers.familyName, Math.floor(Math.random() * 100 + 100));
+        family.parent.father = fathers._id;
+        family.parent.mother = mothers._id;
+        //remove family member from both families
+        mothers.voters--;
+        fathers.voters--;
+        population.push(family);
+      }
     }
 
     function childBirth(population){
