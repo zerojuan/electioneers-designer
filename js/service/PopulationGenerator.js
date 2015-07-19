@@ -68,6 +68,18 @@ angular.module('paDesignerApp')
       return arr[Math.floor(Math.random() * arr.length)];
     }
 
+    function pickValidFamily(population){
+      var family;
+      do{
+        //pick a family that has adults
+        //prevent incest?
+        family = pickRandom(population);
+        console.log('Family: ', family);
+      }while(family.voters < 2);
+
+      return family;
+    }
+
     function Family(familyName, income){
       this._id = guid();
       this.familyName = familyName;
@@ -75,7 +87,6 @@ angular.module('paDesignerApp')
       this.age = 0;
       this.kids = 0;
       this.voters = 2;
-      this.children = 0;
       this.parent = {
         father: null,
         mother: null
@@ -113,14 +124,27 @@ angular.module('paDesignerApp')
 
     function intermarry(population){
       //generate a new family
+      //pick a random population
+      var fathers = pickRandom(population);
+      var mothers = pickRandom(population);
+      if(!fathers && !mothers){
+        console.log('No marriage');
+        return;
+      }
+      var family = new Family(fathers.familyName, Math.floor(Math.random() * 100 + 100));
+      family.parent.father = fathers._id;
+      family.parent.mother = mothers._id;
       //remove family member from both families
+      mothers.voters--;
+      fathers.voters--;
+      population.push(family);
+
     }
 
     function childBirth(population){
       //add kids based on age and income level
       _.forEach(population, function(family){
         if(family.age > 5 && family.age < 30){
-          family.children++;
           family.kids++;
         }
       });

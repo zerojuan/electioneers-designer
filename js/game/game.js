@@ -130,6 +130,7 @@ angular.module('paDesignerApp')
           clearInterval(intervalId);
         }
         PopulationGenerator.updatePopulation($scope.generator.population);
+        //calculate total voter population
         $scope.$apply();
       }
 
