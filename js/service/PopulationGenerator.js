@@ -72,8 +72,10 @@ angular.module('paDesignerApp')
       this._id = guid();
       this.familyName = familyName;
       this.income = income;
-      this.age = 25;
+      this.age = 0;
       this.kids = 0;
+      this.voters = 2;
+      this.children = 0;
       this.parent = {
         father: null,
         mother: null
@@ -95,6 +97,12 @@ angular.module('paDesignerApp')
         family.age += 5;
         //change wealth
         family.income += Math.floor(Math.random() * 20 - 10);
+        //if age > 45
+        if(family.age > 20 && family.kids > 0){
+          //one less kids
+          family.kids--;
+          family.voters++;
+        }
       });
     }
 
@@ -111,7 +119,8 @@ angular.module('paDesignerApp')
     function childBirth(population){
       //add kids based on age and income level
       _.forEach(population, function(family){
-        if(family.age > 30 && family.age < 50){
+        if(family.age > 5 && family.age < 30){
+          family.children++;
           family.kids++;
         }
       });
