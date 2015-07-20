@@ -124,10 +124,10 @@ angular.module('paDesignerApp')
     }
 
     function intermarry(population){
-      //generate a new family
-      //pick a random population
+
       var marriageCeiling = Math.floor(Math.random() * 20);
       for(var i = 0; i < marriageCeiling; i++){
+        //pick a random population
         var fathers = pickRandom(population);
         var mothers = pickRandom(population);
 
@@ -137,9 +137,11 @@ angular.module('paDesignerApp')
         }
 
         if(fathers.voters < 2 || mothers.voters < 2){
+          //possible adultery?
           continue;
         }
 
+        //generate a new family
         var family = new Family(fathers.familyName, Math.floor(Math.random() * 100 + 100));
         family.parent.father = fathers._id;
         family.parent.mother = mothers._id;
