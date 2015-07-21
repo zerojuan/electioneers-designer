@@ -61,13 +61,19 @@
             <div class="col-md-6">
               <h3>Families ({{generator.population.length}})</h3>
               <ul class="list-unstyled">
-                <li ng-repeat="family in generator.population">
+                <li ng-repeat="family in generator.population" ng-click="selectFamily(family)">
                   {{family.fatherName}} {{family.familyName}}, ${{family.income}}, Voters: {{family.voters}}, Kids: {{family.kids}}
+                  <b ng-show="family.parent.father"><i class="glyphicon glyphicon-ok"></i></b>
                 </li>
               </ul>
             </div>
             <div class="col-md-6">
-              <h3>Voter Population: <span>{{generator.voterPopulation}}</span> out of <span>{{generator.totalPopulation}}</span></h3>              
+              <h3>Voter Population: <span>{{generator.voterPopulation}}</span> out of <span>{{generator.totalPopulation}}</span></h3>
+              <ul>
+                <li>{{generator.selected.fatherName}} {{generator.selected.familyName}}</li>
+                <li>Mother: {{generator.selected.mother.fatherName}} {{generator.selected.mother.familyName}}</li>
+                <li>Father: {{generator.selected.father.fatherName}} {{generator.selected.father.familyName}}</li>
+              </ul>
             </div>
           </div>
 

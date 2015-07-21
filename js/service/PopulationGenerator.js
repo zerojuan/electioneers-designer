@@ -141,6 +141,10 @@ angular.module('paDesignerApp')
           continue;
         }
 
+        if(fathers._id === mothers._id){
+          continue;
+        }
+
         //generate a new family
         var family = new Family(fathers.familyName, Math.floor(Math.random() * 100 + 100));
         family.parent.father = fathers._id;

@@ -7,7 +7,8 @@ angular.module('paDesignerApp')
     $scope.generator = {
       currentGeneration: 0,
       state: 'default',
-      population: []
+      population: [],
+      selected: null
     };
 
     $scope.$watch('game', function(){
@@ -142,6 +143,19 @@ angular.module('paDesignerApp')
 
       generate();
       var intervalId = setInterval(generate, 100);
+    }
+
+    $scope.selectFamily = function(family){
+      $scope.generator.selected = family;
+      //populate mother
+      family.mother = _.find($scope.generator.population, function(f){
+        return f._id === family.parent.mother;
+      });
+
+      family.father = _.find($scope.generator.population, function(f){
+        return f._id === family.parent.father;
+      });
+      console.log("Family: ", family);
     }
 
     $scope.goBack = function(){
