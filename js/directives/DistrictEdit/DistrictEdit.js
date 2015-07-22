@@ -3,7 +3,7 @@
 angular.module('paDesignerApp')
   .directive('districtEdit', function(){
     return {
-     templateUrl: 'js/directives/districtedit.html',
+     templateUrl: 'js/directives/DistrictEdit/districtedit.html',
      restrict: 'E',
      transclude: true,
      scope: {

@@ -3,7 +3,7 @@
 angular.module('paDesignerApp')
   .directive('kapitanEdit', function(){
     return {
-      templateUrl: 'js/directives/kapitanedit.html',
+      templateUrl: 'js/directives/KapitanEdit/kapitanedit.html',
       restrict: 'E',
       transclude: true,
       scope: {
@@ -12,7 +12,7 @@ angular.module('paDesignerApp')
       },
       link: function (scope) {
         scope.mode = 'Edit';
-        
+
         scope.onEditView = function(){
           scope.mode = 'Edit';
         };

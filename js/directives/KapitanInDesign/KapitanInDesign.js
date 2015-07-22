@@ -3,7 +3,7 @@
 angular.module('paDesignerApp')
   .directive('kapitanInDesign', function(){
     return {
-      templateUrl: 'js/directives/kapitanindesign.html',
+      templateUrl: 'js/directives/KapitanInDesign/kapitanindesign.html',
       restrict: 'E',
       transclude: true,
       scope: {
