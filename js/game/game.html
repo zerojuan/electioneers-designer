@@ -60,12 +60,9 @@
           <div class="container">
             <div class="col-md-6">
               <h3>Families ({{generator.population.length}})</h3>
-              <ul class="list-unstyled">
-                <li ng-repeat="family in generator.population" ng-click="selectFamily(family)">
-                  {{family.fatherName}} {{family.familyName}}, ${{family.income}}, Voters: {{family.voters}}, Kids: {{family.kids}}
-                  <b ng-show="family.parent.father"><i class="glyphicon glyphicon-ok"></i></b>
-                </li>
-              </ul>
+              <population-graph population="generator.population" selected="generator.selected">
+              </population-graph>
+              
             </div>
             <div class="col-md-6">
               <h3>Voter Population: <span>{{generator.voterPopulation}}</span> out of <span>{{generator.totalPopulation}}</span></h3>
