@@ -1,10 +1,24 @@
 <div id="graph">
   <!-- <svg>
   </svg> -->
-  <ul class="list-unstyled">
-    <li ng-repeat="family in population" ng-click="selectFamily(family)">
-      {{family.fatherName}} {{family.familyName}}, ${{family.income}}, Voters: {{family.voters}}, Kids: {{family.kids}}
-      <b ng-show="family.parent.father"><i class="glyphicon glyphicon-ok"></i></b>
-    </li>
-  </ul>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Wealth</th>
+        <th>Voters</th>
+        <th>Kids</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="family in population" ng-click="selectFamily(family)">
+        <td>{{$index+1}}</td>
+        <td>{{family.familyName}}, {{family.fatherName}}</td>
+        <td>${{family.income}}</td>
+        <td>{{family.voters}}</td>
+        <td>{{family.kids}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
