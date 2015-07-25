@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="family in population" ng-click="onClick(family)">
+      <tr ng-repeat="family in population" ng-click="onClick(family)" ng-class="{'success': family.parent.father!=null }">
         <td>{{$index+1}}</td>
         <td>{{family.familyName}}, {{family.fatherName}}</td>
         <td>${{family.income}}</td>

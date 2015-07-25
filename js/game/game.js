@@ -145,8 +145,9 @@ angular.module('paDesignerApp')
       var intervalId = setInterval(generate, 2);
     }
 
-    $scope.selectFamily = function(family){
-      $scope.generator.selected = family;
+    $scope.$watch('generator.selected', function(){
+      console.log('Generator selected...');
+      var family = $scope.generator.selected;
       //populate mother
       family.mother = _.find($scope.generator.population, function(f){
         return f._id === family.parent.mother;
@@ -155,8 +156,7 @@ angular.module('paDesignerApp')
       family.father = _.find($scope.generator.population, function(f){
         return f._id === family.parent.father;
       });
-      console.log("Family: ", family);
-    }
+    });
 
     $scope.goBack = function(){
       $scope.nav.page = 'Start';
