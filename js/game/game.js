@@ -123,11 +123,11 @@ angular.module('paDesignerApp')
         return;
       }
       $scope.generator.state = 'generating';
-
+      var generations = 50;
       function generate(){
         $scope.generator.currentGeneration++;
-        if($scope.generator.currentGeneration >= 100){
-          $scope.generator.currentGeneration = 100;
+        if($scope.generator.currentGeneration >= generations){
+          $scope.generator.currentGeneration = generations;
           clearInterval(intervalId);
         }
         PopulationGenerator.updatePopulation($scope.generator.population);
@@ -142,7 +142,7 @@ angular.module('paDesignerApp')
       }
 
       generate();
-      var intervalId = setInterval(generate, 100);
+      var intervalId = setInterval(generate, 2);
     }
 
     $scope.selectFamily = function(family){

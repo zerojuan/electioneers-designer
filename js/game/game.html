@@ -56,10 +56,9 @@
         </tab>
         <tab heading="Population">
           <div class="row">
-            <div class="col-md-2"><a class="btn btn-danger" ng-click="onGenerate()">Generate</a></div>
-            <div class="col-md-2"><span>Generation: {{generator.currentGeneration}}</span></div>
+            <div class="col-md-2"><a class="btn btn-danger" ng-click="onGenerate()">Generate {{generator.currentGeneration}}</a></div>
             <div class="col-md-2"><span>Families ({{generator.population.length}})</></div>
-            <div class="col-md-2"><span>Voting Population: <span>{{generator.voterPopulation}}</span> out of <span>{{generator.totalPopulation}}</span></span></div>
+            <div class="col-md-4"><span>Voting Population: <span>{{generator.voterPopulation}}</span> out of <span>{{generator.totalPopulation}}</span></span></div>
 
           </div>
           <div class="row">
@@ -69,7 +68,7 @@
               </population-graph>
 
             </div>
-            <div class="col-md-5">
+            <div class="col-md-5" affix data-offset-top="60">
               <ul>
                 <li>{{generator.selected.fatherName}} {{generator.selected.familyName}}</li>
                 <li>Mother: {{generator.selected.mother.fatherName}} {{generator.selected.mother.familyName}}</li>

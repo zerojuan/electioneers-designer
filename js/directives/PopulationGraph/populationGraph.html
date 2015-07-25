@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="family in population" ng-click="selectFamily(family)">
+      <tr ng-repeat="family in population" ng-click="onClick(family)">
         <td>{{$index+1}}</td>
         <td>{{family.familyName}}, {{family.fatherName}}</td>
         <td>${{family.income}}</td>

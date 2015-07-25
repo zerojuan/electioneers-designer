@@ -10,7 +10,9 @@ angular.module('paDesignerApp')
         selected: '='
       },
       link: function(scope){
-        
+        scope.onClick = function(family){
+          scope.selected = family;
+        }
       }
     }
   });
