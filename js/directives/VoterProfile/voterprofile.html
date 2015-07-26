@@ -1,0 +1,87 @@
+<div>
+  <div class="row">
+    <div class="col-xs-8">
+      {{voter.fatherName}} {{voter.familyName}}
+    </div>
+    <div class="col-xs-4">
+      <span ng-hide="voter.father">Immigrant</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2">
+      District:
+    </div>
+    <div class="col-xs-10">
+      Somewhere
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2">
+      Children:
+    </div>
+    <div class="col-xs-10">
+      Show list of children here
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2">
+      Family:
+    </div>
+    <div class="col-xs-10">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Father</th>
+            <th>Mother</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              {{voter.father.fatherName}} {{voter.father.familyName}}
+            </td>
+            <td>
+              {{voter.mother.fatherName}} {{voter.mother.familyName}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Siblings</th>
+            <th>Siblings</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              {{voter.father.fatherName}} {{voter.father.familyName}}
+            </td>
+            <td>
+              {{voter.mother.fatherName}} {{voter.mother.familyName}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Cousins</th>
+            <th>Cousins</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              {{voter.father.fatherName}} {{voter.father.familyName}}
+            </td>
+            <td>
+              {{voter.mother.fatherName}} {{voter.mother.familyName}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
