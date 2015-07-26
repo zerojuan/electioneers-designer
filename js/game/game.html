@@ -68,12 +68,8 @@
               </population-graph>
 
             </div>
-            <div class="col-md-5" affix data-offset-top="60">
-              <ul>
-                <li>{{generator.selected.fatherName}} {{generator.selected.familyName}}</li>
-                <li>Father from {{generator.selected.father.fatherName}} {{generator.selected.father.familyName}}</li>
-                <li>Mother from {{generator.selected.mother.fatherName}} {{generator.selected.mother.familyName}}</li>
-              </ul>
+            <div class="col-md-5" affix data-offset-top="60" ng-show="generator.selected">
+              <voter-profile voter="generator.selected"></voter-profile>              
             </div>
           </div>
 

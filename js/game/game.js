@@ -146,7 +146,6 @@ angular.module('paDesignerApp')
     }
 
     $scope.$watch('generator.selected', function(){
-      console.log('Generator selected...');
       var family = $scope.generator.selected;
       //populate mother
       family.mother = _.find($scope.generator.population, function(f){
@@ -156,6 +155,27 @@ angular.module('paDesignerApp')
       family.father = _.find($scope.generator.population, function(f){
         return f._id === family.parent.father;
       });
+
+      if(family.children.males.length){
+        family.sons = [];
+        _.forEach(family.children.males, function(_id){
+          var child = _.find($scope.generator.population, function(f){
+            return f._id === _id;
+          });
+          family.sons.push(child);
+        });
+      }
+
+      if(family.children.females.length){
+        family.daughters = [];
+        _.forEach(family.children.females, function(_id){
+          var child = _.find($scope.generator.population, function(f){
+            return f._id === _id;
+          });
+          family.daughters.push(child);
+        });
+      }
+
     });
 
     $scope.goBack = function(){

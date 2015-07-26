@@ -91,12 +91,16 @@ angular.module('paDesignerApp')
         father: null,
         mother: null
       };
+      this.children = {
+        males: [],
+        females: []
+      };
       this.fatherName = pickRandom(MaleNames);
     }
 
     function introduceFamilies(population){
       //Pick 5 surnames
-      var immigrationCeiling = Math.floor(Math.random() * 20);
+      var immigrationCeiling = Math.floor(Math.random() * 5);
       for(var i =0 ; i < immigrationCeiling; i++){
         var familyName = pickRandom(Surnames);
         population.push(new Family(familyName, Math.floor(Math.random() * 100 + 100)));
@@ -136,7 +140,7 @@ angular.module('paDesignerApp')
           continue;
         }
 
-        if(fathers.voters < 2 || mothers.voters < 2){
+        if(fathers.voters <= 2 || mothers.voters <= 2){
           //possible adultery?
           continue;
         }
@@ -151,7 +155,9 @@ angular.module('paDesignerApp')
         family.parent.mother = mothers._id;
         //remove family member from both families
         mothers.voters--;
+        mothers.children.females.push(family._id);
         fathers.voters--;
+        fathers.children.males.push(family._id);
         population.push(family);
       }
     }
