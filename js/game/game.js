@@ -145,20 +145,15 @@ angular.module('paDesignerApp')
       var intervalId = setInterval(generate, 2);
     }
 
-    $scope.$watch('generator.selected', function(){
-      var family = $scope.generator.selected;
-      //populate mother
-      family.mother = _.find($scope.generator.population, function(f){
-        return f._id === family.parent.mother;
-      });
-
-      family.father = _.find($scope.generator.population, function(f){
-        return f._id === family.parent.father;
-      });
-
+    //loads children of a family (like lazyloading)
+    var loadChildren = function(family, exception){
+      //load children
       if(family.children.males.length){
         family.sons = [];
         _.forEach(family.children.males, function(_id){
+          if(exception && _id === exception._id){
+            return;
+          }
           var child = _.find($scope.generator.population, function(f){
             return f._id === _id;
           });
@@ -169,13 +164,52 @@ angular.module('paDesignerApp')
       if(family.children.females.length){
         family.daughters = [];
         _.forEach(family.children.females, function(_id){
+          if(exception && _id === exception._id){
+            return;
+          }
           var child = _.find($scope.generator.population, function(f){
             return f._id === _id;
           });
           family.daughters.push(child);
         });
       }
+    }
 
+    var loadParents = function(family){
+      //populate mother
+      family.mother = _.find($scope.generator.population, function(f){
+        return f._id === family.parent.mother;
+      });
+
+      family.father = _.find($scope.generator.population, function(f){
+        return f._id === family.parent.father;
+      });
+    }
+
+    var loadCousins = function(family){
+      var cousins = [];
+      //TODO: how to access cousins
+    }
+
+
+    $scope.$watch('generator.selected', function(){
+      var family = $scope.generator.selected;
+
+      if(!family){
+        return;
+      }
+      
+      loadParents(family);
+      loadChildren(family);
+
+      //load siblings
+      if(family.father){
+        loadChildren(family.father, family);
+      }
+
+      if(family.mother){
+        loadChildren(family.mother, family);
+      }
     });
 
     $scope.goBack = function(){

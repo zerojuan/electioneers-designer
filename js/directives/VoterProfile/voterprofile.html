@@ -1,7 +1,7 @@
 <div>
   <div class="row">
     <div class="col-xs-8">
-      {{voter.fatherName}} {{voter.familyName}}
+      <h3>{{voter.fatherName}} {{voter.familyName}} Family</h3>
     </div>
     <div class="col-xs-4">
       <span ng-hide="voter.father">Immigrant</span>
@@ -11,8 +11,14 @@
     <div class="col-xs-2">
       District:
     </div>
-    <div class="col-xs-10">
-      Somewhere
+    <div class="col-xs-4">
+      Sta. Fe
+    </div>
+    <div class="col-xs-2">
+      Wealth:
+    </div>
+    <div class="col-xs-4">
+      ${{voter.income}}
     </div>
   </div>
   <div class="row">
@@ -21,27 +27,28 @@
     </div>
     <div class="col-xs-10">
       <ul class="list list-unstyled">
-        <li ng-show="voter.sons">Sons:</li>
+        <li ng-show="voter.sons"><b>Sons:</b></li>
         <li ng-repeat="child in voter.sons">
           {{child.fatherName}} {{child.familyName}}
         </li>
-        <li ng-show="voter.daughters">Daughters:</li>
+        <li ng-show="voter.daughters"><b>Daughters:</b></li>
         <li ng-repeat="child in voter.daughters">
           married to {{child.fatherName}} {{child.familyName}}
         </li>
+        <li ng-show="voter.voters > 2">{{voter.voters - 2}} unmarried</li>
       </ul>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-2">
-      Family:
+      Kinship:
     </div>
     <div class="col-xs-10">
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Father</th>
-            <th>Mother</th>
+            <th>Father Side</th>
+            <th>Mother Side</th>
           </tr>
         </thead>
         <tbody>
@@ -65,15 +72,29 @@
         <tbody>
           <tr>
             <td>
-              {{voter.father.fatherName}} {{voter.father.familyName}}
+              <ul class="list list-unstyled">
+                <li ng-repeat="child in voter.father.sons">
+                  {{child.fatherName}} {{child.familyName}}
+                </li>
+                <li ng-repeat="child in voter.father.daughters">
+                  Mrs. {{child.fatherName}} {{child.familyName}}
+                </li>
+              </ul>
             </td>
             <td>
-              {{voter.mother.fatherName}} {{voter.mother.familyName}}
+              <ul class="list list-unstyled">
+                <li ng-repeat="child in voter.mother.sons">
+                  {{child.fatherName}} {{child.familyName}}
+                </li>
+                <li ng-repeat="child in voter.mother.daughters">
+                  Mrs. {{child.fatherName}} {{child.familyName}}
+                </li>
+              </ul>
             </td>
           </tr>
         </tbody>
       </table>
-      <table class="table table-striped">
+      <!-- <table class="table table-striped">
         <thead>
           <tr>
             <th>Cousins</th>
@@ -90,7 +111,7 @@
             </td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
     </div>
   </div>
 </div>
