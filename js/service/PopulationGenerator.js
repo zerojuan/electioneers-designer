@@ -87,6 +87,7 @@ angular.module('paDesignerApp')
       this.age = 0;
       this.kids = 0;
       this.voters = 2;
+      this.generation = 0;
       this.parent = {
         father: null,
         mother: null
@@ -153,6 +154,7 @@ angular.module('paDesignerApp')
         var family = new Family(fathers.familyName, Math.floor(Math.random() * 100 + 100));
         family.parent.father = fathers._id;
         family.parent.mother = mothers._id;
+        family.generation = fathers.generation + 1;
         //remove family member from both families
         mothers.voters--;
         mothers.children.females.push(family._id);

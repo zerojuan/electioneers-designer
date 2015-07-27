@@ -189,7 +189,7 @@ angular.module('paDesignerApp')
     var loadCousins = function(family){
       var cousins = [];
       //TODO: how to access cousins
-    }
+    }    
 
 
     $scope.$watch('generator.selected', function(){
@@ -198,7 +198,7 @@ angular.module('paDesignerApp')
       if(!family){
         return;
       }
-      
+
       loadParents(family);
       loadChildren(family);
 
