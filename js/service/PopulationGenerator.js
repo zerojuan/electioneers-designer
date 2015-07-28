@@ -120,6 +120,7 @@ angular.module('paDesignerApp')
           //one less kids
           family.kids--;
           family.voters++;
+          family.children.total++;
         }
       });
     }
@@ -170,7 +171,6 @@ angular.module('paDesignerApp')
       _.forEach(population, function(family){
         if(family.age > 5 && family.age < 30){
           family.kids++;
-          family.children.total++;
         }
       });
     }
