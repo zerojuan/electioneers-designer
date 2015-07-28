@@ -65,9 +65,13 @@
               <ul class="list list-unstyled">
                 <li ng-repeat="child in voter.father.sons">
                   {{child.fatherName}} {{child.familyName}}
+                  <a ng-click="child.showChildren = !child.showChildren">+{{child.children.total}}</a>
+                  <children-list ng-show="child.showChildren" voter="child"></children-list>
                 </li>
                 <li ng-repeat="child in voter.father.daughters">
                   Mrs. {{child.fatherName}} {{child.familyName}}
+                  <a ng-click="child.showChildren = !child.showChildren">+{{child.children.total}}</a>
+                  <children-list ng-show="child.showChildren" voter="child"></children-list>
                 </li>
               </ul>
             </td>
@@ -75,9 +79,13 @@
               <ul class="list list-unstyled">
                 <li ng-repeat="child in voter.mother.sons">
                   {{child.fatherName}} {{child.familyName}}
+                  <a ng-click="child.showChildren = !child.showChildren">+{{child.children.total}}</a>
+                  <children-list ng-show="child.showChildren" voter="child"></children-list>
                 </li>
                 <li ng-repeat="child in voter.mother.daughters">
                   Mrs. {{child.fatherName}} {{child.familyName}}
+                  <a ng-click="child.showChildren = !child.showChildren">+{{child.children.total}}</a>
+                  <children-list ng-show="child.showChildren" voter="child"></children-list>
                 </li>
               </ul>
             </td>

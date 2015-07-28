@@ -94,7 +94,8 @@ angular.module('paDesignerApp')
       };
       this.children = {
         males: [],
-        females: []
+        females: [],
+        total: 0
       };
       this.fatherName = pickRandom(MaleNames);
     }
@@ -169,6 +170,7 @@ angular.module('paDesignerApp')
       _.forEach(population, function(family){
         if(family.age > 5 && family.age < 30){
           family.kids++;
+          family.children.total++;
         }
       });
     }
