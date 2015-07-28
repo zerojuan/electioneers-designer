@@ -26,17 +26,7 @@
       Children:
     </div>
     <div class="col-xs-10">
-      <ul class="list list-unstyled">
-        <li ng-show="voter.sons"><b>Sons:</b></li>
-        <li ng-repeat="child in voter.sons">
-          {{child.fatherName}} {{child.familyName}}
-        </li>
-        <li ng-show="voter.daughters"><b>Daughters:</b></li>
-        <li ng-repeat="child in voter.daughters">
-          married to {{child.fatherName}} {{child.familyName}}
-        </li>
-        <li ng-show="voter.voters > 2">{{voter.voters - 2}} unmarried</li>
-      </ul>
+      <children-list voter="voter"></children-list>
     </div>
   </div>
   <div class="row">

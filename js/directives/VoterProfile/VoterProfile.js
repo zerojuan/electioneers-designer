@@ -15,3 +15,19 @@ angular.module('paDesignerApp')
       }
     }
   });
+
+angular.module('paDesignerApp')
+  .directive('childrenList', function(){
+    return {
+      templateUrl: 'js/directives/VoterProfile/childrenlist.html',
+      restrict: 'E',
+      scope: {
+        voter: '='
+      },
+      link: function(scope){
+        scope.onClick = function(family){
+          scope.selected = family;
+        };
+      }
+    }
+  })

@@ -186,10 +186,37 @@ angular.module('paDesignerApp')
       });
     }
 
+    var loadSiblings = function(family){
+      //load siblings
+      if(family.father){
+        loadChildren(family.father, family);
+        _.forEach(family.father.sons, function(son){
+          loadChildren(son);
+        });
+        _.forEach(family.father.daughters, function(daughter){
+          loadChildren(daughter);
+        });
+      }
+
+      if(family.mother){
+        loadChildren(family.mother, family);
+        _.forEach(family.mother.sons, function(son){
+          loadChildren(son);
+        });
+        _.forEach(family.mother.daughters, function(daughter){
+          loadChildren(daughter);
+        });
+      }
+    }
+
     var loadCousins = function(family){
       var cousins = [];
       //TODO: how to access cousins
-    }    
+      if(family.father){
+        //load each
+
+      }
+    }
 
 
     $scope.$watch('generator.selected', function(){
@@ -201,15 +228,8 @@ angular.module('paDesignerApp')
 
       loadParents(family);
       loadChildren(family);
+      loadSiblings(family);
 
-      //load siblings
-      if(family.father){
-        loadChildren(family.father, family);
-      }
-
-      if(family.mother){
-        loadChildren(family.mother, family);
-      }
     });
 
     $scope.goBack = function(){
