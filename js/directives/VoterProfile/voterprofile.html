@@ -33,7 +33,7 @@
     <div class="col-xs-2">
       Kinship:
     </div>
-    <div class="col-xs-10">
+    <div class="col-xs-10 kinship">
       <table class="table table-striped">
         <thead>
           <tr>
@@ -62,7 +62,7 @@
         <tbody>
           <tr>
             <td>
-              <ul class="list list-unstyled">
+              <ul class="list list-unstyled parents">
                 <li ng-repeat="child in voter.father.sons">
                   {{child.fatherName}} {{child.familyName}}
                   <a ng-click="child.showChildren = !child.showChildren">+{{child.children.total}}</a>
@@ -76,7 +76,7 @@
               </ul>
             </td>
             <td>
-              <ul class="list list-unstyled">
+              <ul class="list list-unstyled parents">
                 <li ng-repeat="child in voter.mother.sons">
                   {{child.fatherName}} {{child.familyName}}
                   <a ng-click="child.showChildren = !child.showChildren">+{{child.children.total}}</a>
