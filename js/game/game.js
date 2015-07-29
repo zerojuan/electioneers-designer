@@ -213,8 +213,9 @@ angular.module('paDesignerApp')
       var cousins = [];
       //TODO: how to access cousins
       if(family.father){
-        //load each
-
+        //load his father and mother
+          //get his siblings
+            //get his siblings children
       }
     }
 

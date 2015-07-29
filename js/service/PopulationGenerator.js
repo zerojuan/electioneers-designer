@@ -131,7 +131,7 @@ angular.module('paDesignerApp')
     }
 
     function intermarry(population){
-
+      //TODO: Marry against a new immigrant? 1 local + 1 immigrant? Males get no kinship on mother side, Females get no kinship on father side
       var marriageCeiling = Math.floor(Math.random() * 20);
       for(var i = 0; i < marriageCeiling; i++){
         //pick a random population
@@ -156,6 +156,8 @@ angular.module('paDesignerApp')
         var family = new Family(fathers.familyName, Math.floor(Math.random() * 100 + 100));
         family.parent.father = fathers._id;
         family.parent.mother = mothers._id;
+        //TODO: select random location based on parents and income
+        //TODO: Append middle name?
         family.generation = fathers.generation + 1;
         //remove family member from both families
         mothers.voters--;
