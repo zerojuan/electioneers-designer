@@ -130,7 +130,7 @@ angular.module('paDesignerApp')
           $scope.generator.currentGeneration = generations;
           clearInterval(intervalId);
         }
-        PopulationGenerator.updatePopulation($scope.generator.population);
+        PopulationGenerator.updatePopulation($scope.generator.population, $scope.gameData.districts);
         //calculate total voter population
         $scope.generator.totalPopulation = _.reduce($scope.generator.population, function(total, family){
           return total + family.voters + family.kids;

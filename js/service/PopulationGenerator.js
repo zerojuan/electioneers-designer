@@ -80,6 +80,10 @@ angular.module('paDesignerApp')
       return family;
     }
 
+    function pickRandomDistrict(districts){
+      return pickRandom(districts);
+    }
+
     function Family(familyName, income){
       this._id = guid();
       this.familyName = familyName;
@@ -88,6 +92,7 @@ angular.module('paDesignerApp')
       this.kids = 0;
       this.voters = 2;
       this.generation = 0;
+      this.district = null;
       this.parent = {
         father: null,
         mother: null
@@ -100,16 +105,19 @@ angular.module('paDesignerApp')
       this.fatherName = pickRandom(MaleNames);
     }
 
-    function introduceFamilies(population){
+    function introduceFamilies(population, districts){
       //Pick 5 surnames
       var immigrationCeiling = Math.floor(Math.random() * 5);
       for(var i =0 ; i < immigrationCeiling; i++){
         var familyName = pickRandom(Surnames);
-        population.push(new Family(familyName, Math.floor(Math.random() * 100 + 100)));
+        var family = new Family(familyName, Math.floor(Math.random() * 100 + 100));
+        //pick random district
+        family.district = pickRandomDistrict(districts);
+        population.push(family);
       }
     }
 
-    function incrementAge(population){
+    function incrementAge(population, districts){
       _.forEach(population, function(family){
         //increase age
         family.age += 5;
@@ -125,12 +133,12 @@ angular.module('paDesignerApp')
       });
     }
 
-    function deaths(population){
+    function deaths(population, districts){
       //mark a family member as deceased
       //divide wealth equally to children
     }
 
-    function intermarry(population){
+    function intermarry(population, districts){
       //TODO: Marry against a new immigrant? 1 local + 1 immigrant? Males get no kinship on mother side, Females get no kinship on father side
       var marriageCeiling = Math.floor(Math.random() * 20);
       for(var i = 0; i < marriageCeiling; i++){
@@ -156,6 +164,7 @@ angular.module('paDesignerApp')
         var family = new Family(fathers.familyName, Math.floor(Math.random() * 100 + 100));
         family.parent.father = fathers._id;
         family.parent.mother = mothers._id;
+        family.district = pickRandomDistrict(districts);
         //TODO: select random location based on parents and income
         //TODO: Append middle name?
         family.generation = fathers.generation + 1;
@@ -168,7 +177,7 @@ angular.module('paDesignerApp')
       }
     }
 
-    function childBirth(population){
+    function childBirth(population, districts){
       //add kids based on age and income level
       _.forEach(population, function(family){
         if(family.age > 5 && family.age < 30){
@@ -181,17 +190,17 @@ angular.module('paDesignerApp')
 
     }
 
-    this.updatePopulation = function(population){
+    this.updatePopulation = function(population, districts){
       //introduce families to the pool
-      introduceFamilies(population);
+      introduceFamilies(population, districts);
       //age families (1 generation is 5 years)
-      incrementAge(population);
+      incrementAge(population, districts);
       //create new families from existing ones
-      intermarry(population);
+      intermarry(population, districts);
       //kill off family members (old, random sickness)
-      deaths(population);
+      deaths(population, districts);
       //add kids to of-age families (based on income and age)
-      childBirth(population);
+      childBirth(population, districts);
     };
 
   });
