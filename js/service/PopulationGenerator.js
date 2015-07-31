@@ -144,33 +144,43 @@ angular.module('paDesignerApp')
       for(var i = 0; i < marriageCeiling; i++){
         //pick a random population
         var fathers = pickRandom(population);
-        var mothers = pickRandom(population);
+        var mothers;
 
-        if(!fathers && !mothers){
-          console.log('No marriage');
-          continue;
+        //50% chance of marrying from out of town
+        if(Math.random() * 100 > 50){
+            mothers = pickRandom(population);
         }
 
-        if(fathers.voters <= 2 || mothers.voters <= 2){
+        //having 2 voters means it's the husband and wife left
+        if(!fathers || fathers.voters <= 2){
+          console.log('No marriage');
           //possible adultery?
           continue;
         }
 
-        if(fathers._id === mothers._id){
-          continue;
+        if(mothers){
+          if(mothers.voters <= 2){
+            continue;
+          }
+          if(fathers._id === mothers._id){
+            //prevent incest
+            continue;
+          }
         }
 
         //generate a new family
         var family = new Family(fathers.familyName, Math.floor(Math.random() * 100 + 100));
         family.parent.father = fathers._id;
-        family.parent.mother = mothers._id;
+        family.parent.mother = mothers ? mothers._id : null;
         family.district = pickRandomDistrict(districts);
         //TODO: select random location based on parents and income
         //TODO: Append middle name?
         family.generation = fathers.generation + 1;
         //remove family member from both families
-        mothers.voters--;
-        mothers.children.females.push(family._id);
+        if(mothers){
+          mothers.voters--;
+          mothers.children.females.push(family._id);
+        }
         fathers.voters--;
         fathers.children.males.push(family._id);
         population.push(family);
