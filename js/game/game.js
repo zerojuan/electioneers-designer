@@ -99,10 +99,12 @@ angular.module('paDesignerApp')
 
     $scope.onSave = function(){
       //save game data to the file in this folder
+      $scope.gameData.population = $scope.generator.population;
       GameService.SaveGameData($scope.game.name, $scope.gameData);
     };
 
     $scope.onPlay = function(){
+      $scope.gameData.population = $scope.generator.population;
       $scope.onGoToProper($scope.gameData);
       //TODO: Use game data name for generating population
       LoaderService.HasPopulation('db2').then(function(val){

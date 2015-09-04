@@ -7,6 +7,7 @@ angular.module('paDesignerApp')
     $scope.voter = {
       name: 'Idiot'
     };
+    //console.log('You have access to game data people!')
     var p = LoaderService.GetVoter();
     p.then(function(data){
       console.log('Load Voter...', data);
