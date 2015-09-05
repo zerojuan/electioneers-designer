@@ -11,7 +11,6 @@ angular.module('paDesignerApp')
     var p = LoaderService.GetVoter();
     p.then(function(data){
       console.log('Load Voter...', data);
-      $scope.test = 'another test';
       $scope.voter = data;
       var voters = LoaderService.GetFamilies('db2');
       voters.then(function(data){
