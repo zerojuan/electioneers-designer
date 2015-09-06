@@ -1,11 +1,5 @@
 <div>
-  <h1>Voter: {{voter.name + ' ' + voter.surname}}</h1>
-  <ul class="list-unstyled">
-    <li ng-repeat="voter in voters">
-      {{voter.doc.name + ' ' + voter.doc.surname}}
-    </li>
-  </ul>
-  <div ng-repeat="voter in gameData.population">
-    {{voter.familyName}}
-  </div>
+  <geographic-view districts="gameData.districts" population="gameData.population">
+
+  </geographic-view>
 </div>
