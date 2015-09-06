@@ -1,19 +1,11 @@
 <div>
-  {{gameData.population}}
   <h1>Voter: {{voter.name + ' ' + voter.surname}}</h1>
   <ul class="list-unstyled">
     <li ng-repeat="voter in voters">
       {{voter.doc.name + ' ' + voter.doc.surname}}
     </li>
   </ul>
-  <!-- <div>
-    <div ng-repeat="district in gameData.districts">
-      {{district.name}}
-    </div>
+  <div ng-repeat="voter in gameData.population">
+    {{voter.familyName}}
   </div>
-  <div>
-    <div ng-repeat="kapitan in gameData.kapitans">
-      {{kapitan.name}}
-    </div>
-  </div> -->
 </div>
