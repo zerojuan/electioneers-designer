@@ -10,8 +10,17 @@ angular.module('paDesignerApp')
         population: '=',
         districts: '='
       },
-      link: function(scope) {
-        
+      link: function(scope,elm) {
+        var svg = d3.select(elm[0])
+            .select('svg');
+
+        var renderGeomap = function(){
+          //TODO: add rendering here
+        };
+
+        svg.append('g');
+
+        renderGeomap();
       }
     };
   });
