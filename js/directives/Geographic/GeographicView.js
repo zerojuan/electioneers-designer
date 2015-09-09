@@ -55,7 +55,7 @@ angular.module('paDesignerApp')
             .enter().append('line')
               .attr('class', 'link')
               .style('stroke-width', function(d){
-                return 1;
+                return d.value;
               });
 
           var node = svg.selectAll('.node')
