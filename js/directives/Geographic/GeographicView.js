@@ -18,7 +18,8 @@ angular.module('paDesignerApp')
 
         var force = d3.layout.force()
           .charge(-120)
-          .linkDistance(30)
+          .gravity(0.02)
+          .linkDistance(200)
           .size([width, height]);
 
         var renderGeomap = function(){
@@ -60,10 +61,23 @@ angular.module('paDesignerApp')
 
           var node = svg.selectAll('.node')
               .data(nodes)
-            .enter().append('circle')
-              .attr('class', 'node')
-              .attr('r', 5)
+            .enter().append('g')
+              .attr('transform', function(d){
+                return 'translate('+d.x+','+d.y+')';
+              })
               .call(force.drag);
+
+            node.append('circle')
+              .attr('class', 'node')
+              .attr('cx', 0)
+              .attr('cy', 0)
+              .attr('r', 30);
+            node.append('text')
+              .attr('class', 'districtLabel')
+              .style('fill', 'red')
+              .text(function(d){
+                return d.name;
+              });
 
           force.on('tick', function(){
             link.attr('x1', function(d) { return d.source.x; })
@@ -71,8 +85,9 @@ angular.module('paDesignerApp')
                 .attr('x2', function(d) { return d.target.x; })
                 .attr('y2', function(d) { return d.target.y; });
 
-            node.attr('cx', function(d) { return d.x; })
-                .attr('cy', function(d) { return d.y; });
+            node.attr('transform', function(d){
+              return 'translate('+d.x+','+d.y+')';
+            });
           });
         };
 
