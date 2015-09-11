@@ -40,7 +40,7 @@ angular.module('paDesignerApp')
               var link = {
                 source: i,
                 target: nid,
-                value: 1
+                value: 3
               };
               links.push(link);
             });
