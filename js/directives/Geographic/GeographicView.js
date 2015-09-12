@@ -13,6 +13,7 @@ angular.module('paDesignerApp')
       link: function(scope,elm) {
         var svg = d3.select(elm[0])
             .select('svg');
+        var svgGroup = svg.append('g');
         var width = 960,
             height = 500;
 
@@ -21,6 +22,14 @@ angular.module('paDesignerApp')
           .gravity(0.02)
           .linkDistance(200)
           .size([width, height]);
+
+        var zoom = function(){
+          svgGroup.attr('transform', 'translate('+d3.event.translate+')scale('+d3.event.scale+')');
+        };
+
+        var zoomListener = d3.behavior.zoom().scaleExtent([0.1, 3]).on('zoom', zoom);
+
+        svg.call(zoomListener);
 
         var renderGeomap = function(){
           var nodes,
@@ -51,7 +60,7 @@ angular.module('paDesignerApp')
             .links(links)
             .start();
 
-          var link = svg.selectAll('.link')
+          var link = svgGroup.selectAll('.link')
               .data(links)
             .enter().append('line')
               .attr('class', 'link')
@@ -59,7 +68,7 @@ angular.module('paDesignerApp')
                 return d.value;
               });
 
-          var node = svg.selectAll('.node')
+          var node = svgGroup.selectAll('.node')
               .data(nodes)
             .enter().append('g')
               .attr('transform', function(d){
