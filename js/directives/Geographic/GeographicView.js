@@ -31,6 +31,35 @@ angular.module('paDesignerApp')
 
         svg.call(zoomListener);
 
+        var draggedNode = null;
+        var dragStarted = false;
+
+        var initDrag = function(d, nodeDom){
+
+          dragStarted = false;
+        };
+
+        var dragListener = d3.behavior.drag()
+          .on('dragstart', function(d){
+            console.log('What is d?', d);
+            draggedNode = d;
+            dragStarted = true;
+            d3.event.sourceEvent.stopPropagation();
+          })
+          .on('drag', function(d){
+            if(dragStarted){
+              initDrag(d, this);
+            }
+
+            d.x += d3.event.dx;
+            d.y += d3.event.dy;
+            var node = d3.select(this);
+            node.attr('transform', 'translate('+d.x+','+d.y+')');
+          })
+          .on('dragend', function(d){
+            console.log('Dragging ended');
+          });
+
         var renderGeomap = function(){
           var nodes,
               links = [];
@@ -74,7 +103,7 @@ angular.module('paDesignerApp')
               .attr('transform', function(d){
                 return 'translate('+d.x+','+d.y+')';
               })
-              .call(force.drag);
+              .call(dragListener);
 
             node.append('circle')
               .attr('class', 'node')
@@ -94,9 +123,9 @@ angular.module('paDesignerApp')
                 .attr('x2', function(d) { return d.target.x; })
                 .attr('y2', function(d) { return d.target.y; });
 
-            node.attr('transform', function(d){
-              return 'translate('+d.x+','+d.y+')';
-            });
+            // node.attr('transform', function(d){
+            //   return 'translate('+d.x+','+d.y+')';
+            // });
           });
         };
 
