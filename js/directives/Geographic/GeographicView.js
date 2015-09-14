@@ -69,6 +69,8 @@ angular.module('paDesignerApp')
 
           //create links
           _.forEach(nodes, function(node, i){
+            node.x = 0;
+            node.y = 0;
             var neighbors = node.neighbors;
             console.log(neighbors);
             _.forEach(neighbors, function(neighbor){
@@ -84,11 +86,6 @@ angular.module('paDesignerApp')
             });
           });
 
-          force
-            .nodes(nodes)
-            .links(links)
-            .start();
-
           var link = svgGroup.selectAll('.link')
               .data(links)
             .enter().append('line')
@@ -101,7 +98,7 @@ angular.module('paDesignerApp')
               .data(nodes)
             .enter().append('g')
               .attr('transform', function(d){
-                return 'translate('+d.x+','+d.y+')';
+                return 'translate('+0+','+0+')';
               })
               .call(dragListener);
 
@@ -116,17 +113,6 @@ angular.module('paDesignerApp')
               .text(function(d){
                 return d.name;
               });
-
-          force.on('tick', function(){
-            link.attr('x1', function(d) { return d.source.x; })
-                .attr('y1', function(d) { return d.source.y; })
-                .attr('x2', function(d) { return d.target.x; })
-                .attr('y2', function(d) { return d.target.y; });
-
-            // node.attr('transform', function(d){
-            //   return 'translate('+d.x+','+d.y+')';
-            // });
-          });
         };
 
         scope.$watch('districts', function(){
