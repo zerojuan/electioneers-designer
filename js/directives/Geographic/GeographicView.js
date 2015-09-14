@@ -55,6 +55,17 @@ angular.module('paDesignerApp')
             d.y += d3.event.dy;
             var node = d3.select(this);
             node.attr('transform', 'translate('+d.x+','+d.y+')');
+            // link.attr('x1', function(d) { return d.source.x; })
+            //     .attr('y1', function(d) { return d.source.y; })
+            //     .attr('x2', function(d) { return d.target.x; })
+            //     .attr('y2', function(d) { return d.target.y; });
+            var lines = d3.selectAll('.link');
+              console.log('This is lines', lines);
+                lines.attr('x1', function(d) {
+                  console.log('d?', d);return d.source.x; })
+                .attr('y1', function(d) { return d.source.y; })
+                .attr('x2', function(d) { return d.target.x; })
+                .attr('y2', function(d) { return d.target.y; });
           })
           .on('dragend', function(d){
             console.log('Dragging ended');
@@ -74,11 +85,13 @@ angular.module('paDesignerApp')
             var neighbors = node.neighbors;
             console.log(neighbors);
             _.forEach(neighbors, function(neighbor){
-              var nid = _.findIndex(nodes, function(n){
-                return n.id === neighbor.id;
+              var nid = _.find(nodes, function(n){
+                if(n.id === neighbor.id){
+                  return n;
+                }
               });
               var link = {
-                source: i,
+                source: node,
                 target: nid,
                 value: 3
               };
