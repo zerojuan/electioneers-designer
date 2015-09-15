@@ -54,6 +54,7 @@ angular.module('paDesignerApp')
             d.x += d3.event.dx;
             d.y += d3.event.dy;
             var node = d3.select(this);
+            node.classed('dragged', true);
             node.attr('transform', 'translate('+d.x+','+d.y+')');
             // link.attr('x1', function(d) { return d.source.x; })
             //     .attr('y1', function(d) { return d.source.y; })
@@ -69,6 +70,8 @@ angular.module('paDesignerApp')
           })
           .on('dragend', function(d){
             console.log('Dragging ended');
+            var node = d3.select(this);
+            node.classed('dragged', false);
           });
 
         var renderGeomap = function(){
