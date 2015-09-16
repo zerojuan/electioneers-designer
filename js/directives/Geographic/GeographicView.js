@@ -41,9 +41,11 @@ angular.module('paDesignerApp')
 
         var dragListener = d3.behavior.drag()
           .on('dragstart', function(d){
-            console.log('What is d?', d);
+            console.log('Drag Started', d);
             draggedNode = d;
             dragStarted = true;
+            scope.selectedDistrict = d;
+            scope.$apply();
             d3.event.sourceEvent.stopPropagation();
           })
           .on('drag', function(d){
@@ -56,18 +58,15 @@ angular.module('paDesignerApp')
             var node = d3.select(this);
             node.select('circle').classed('dragged', true);
             node.attr('transform', 'translate('+d.x+','+d.y+')');
-            // link.attr('x1', function(d) { return d.source.x; })
-            //     .attr('y1', function(d) { return d.source.y; })
-            //     .attr('x2', function(d) { return d.target.x; })
-            //     .attr('y2', function(d) { return d.target.y; });
+
             var lines = d3.selectAll('.link');
-              console.log('This is lines', lines);
                 lines.attr('x1', function(d) {return d.source.x; })
-                .attr('y1', function(d) { return d.source.y; })
-                .attr('x2', function(d) { return d.target.x; })
-                .attr('y2', function(d) { return d.target.y; });
+                  .attr('y1', function(d) { return d.source.y; })
+                  .attr('x2', function(d) { return d.target.x; })
+                  .attr('y2', function(d) { return d.target.y; });
           })
           .on('dragend', function(d){
+            console.log('Drag Ended')
             var node = d3.select(this).select('circle');
             node.classed('dragged', false);
           });
