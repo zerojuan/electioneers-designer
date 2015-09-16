@@ -8,7 +8,8 @@ angular.module('paDesignerApp')
       transclude: true,
       scope: {
         population: '=',
-        districts: '='
+        districts: '=',
+        selectedDistrict: '='
       },
       link: function(scope,elm) {
         var svg = d3.select(elm[0])
