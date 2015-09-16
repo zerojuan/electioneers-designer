@@ -62,14 +62,12 @@ angular.module('paDesignerApp')
             //     .attr('y2', function(d) { return d.target.y; });
             var lines = d3.selectAll('.link');
               console.log('This is lines', lines);
-                lines.attr('x1', function(d) {
-                  console.log('d?', d);return d.source.x; })
+                lines.attr('x1', function(d) {return d.source.x; })
                 .attr('y1', function(d) { return d.source.y; })
                 .attr('x2', function(d) { return d.target.x; })
                 .attr('y2', function(d) { return d.target.y; });
           })
           .on('dragend', function(d){
-            console.log('Dragging ended');
             var node = d3.select(this).select('circle');
             node.classed('dragged', false);
           });
