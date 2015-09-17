@@ -17,6 +17,7 @@ angular.module('paDesignerApp')
         var svgGroup = svg.append('g');
 
         var zoom = function(){
+          console.log('Trying to transform///');
           svgGroup.attr('transform', 'translate('+d3.event.translate+')scale('+d3.event.scale+')');
         };
 
@@ -31,6 +32,25 @@ angular.module('paDesignerApp')
 
           dragStarted = false;
         };
+
+        var centerNode = function(source) {
+
+          var element = $(elm[0]);
+          console.log(element.width(), element.height());
+          var viewerWidth = 1000;//element.width();
+          var viewerHeight = 900;//element.height();
+          var scale = zoomListener.scale();
+          var x =0;
+          var y =0;
+          x = x * scale + viewerWidth / 2;
+          y = y * scale + viewerHeight / 2;
+          console.log(scale);
+          svgGroup.transition()
+              .duration(500)
+              .attr('transform', 'translate(' + x + ',' + y + ')scale(' + scale + ')');
+          zoomListener.scale(scale);
+          zoomListener.translate([x, y]);
+        }
 
         var dragListener = d3.behavior.drag()
           .on('dragstart', function(d){
@@ -123,6 +143,8 @@ angular.module('paDesignerApp')
               .text(function(d){
                 return d.name;
               });
+
+            centerNode(node[0]);
         };
 
         scope.$watch('districts', function(){
