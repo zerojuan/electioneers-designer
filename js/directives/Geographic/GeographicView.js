@@ -36,12 +36,12 @@ angular.module('paDesignerApp')
         var centerNode = function(source) {
 
           var element = $(elm[0]);
-          console.log(element.width(), element.height());
+          console.log('Source: ', source);
           var viewerWidth = 1000;//element.width();
           var viewerHeight = 900;//element.height();
           var scale = zoomListener.scale();
-          var x =0;
-          var y =0;
+          var x = source ? -source.x : 0;
+          var y = source ? -source.y : 0;
           x = x * scale + viewerWidth / 2;
           y = y * scale + viewerHeight / 2;
           console.log(scale);
@@ -51,6 +51,11 @@ angular.module('paDesignerApp')
           zoomListener.scale(scale);
           zoomListener.translate([x, y]);
         }
+
+        var click = function(d){
+          if (d3.event.defaultPrevented) return; // click suppressed
+          centerNode(d);
+        };
 
         var dragListener = d3.behavior.drag()
           .on('dragstart', function(d){
@@ -130,6 +135,7 @@ angular.module('paDesignerApp')
               .attr('transform', function(d){
                 return 'translate('+d.x+','+d.y+')';
               })
+              .on('click', click)
               .call(dragListener);
 
             node.append('circle')
@@ -144,7 +150,7 @@ angular.module('paDesignerApp')
                 return d.name;
               });
 
-            centerNode(node[0]);
+            centerNode();
         };
 
         scope.$watch('districts', function(){
