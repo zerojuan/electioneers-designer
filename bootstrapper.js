@@ -14,11 +14,15 @@ angular.element(document).ready(function(){
 	model.init();
 
 	angular.element(document).on('keyup', function(event){
+		console.log('Key pressed: ', event.which);
 		if ( event.which === 192 ) { //Tilde
 	    event.preventDefault();
 			win.showDevTools();
 	  }else if(event.which === 67){ //C
 			win.reload();
+		}else if(event.which === 9){ //Tab
+			console.log('Toggling fullscreen?');
+			win.toggleFullscreen();
 		}
 	});
 
