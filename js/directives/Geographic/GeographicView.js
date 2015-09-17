@@ -15,14 +15,6 @@ angular.module('paDesignerApp')
         var svg = d3.select(elm[0])
             .select('svg');
         var svgGroup = svg.append('g');
-        var width = 960,
-            height = 500;
-
-        var force = d3.layout.force()
-          .charge(-120)
-          .gravity(0.02)
-          .linkDistance(200)
-          .size([width, height]);
 
         var zoom = function(){
           svgGroup.attr('transform', 'translate('+d3.event.translate+')scale('+d3.event.scale+')');
@@ -81,8 +73,8 @@ angular.module('paDesignerApp')
 
           //create links
           _.forEach(nodes, function(node, i){
-            node.x = 0;
-            node.y = 0;
+            node.x = 300 * Math.sin(i);
+            node.y = 300 * Math.cos(i);
             var neighbors = node.neighbors;
             console.log(neighbors);
             _.forEach(neighbors, function(neighbor){
@@ -106,13 +98,17 @@ angular.module('paDesignerApp')
               .attr('class', 'link')
               .style('stroke-width', function(d){
                 return d.value;
-              });
+              })
+              .attr('x1', function(d) {return d.source.x; })
+              .attr('y1', function(d) { return d.source.y; })
+              .attr('x2', function(d) { return d.target.x; })
+              .attr('y2', function(d) { return d.target.y; });
 
           var node = svgGroup.selectAll('.node')
               .data(nodes)
             .enter().append('g')
               .attr('transform', function(d){
-                return 'translate('+0+','+0+')';
+                return 'translate('+d.x+','+d.y+')';
               })
               .call(dragListener);
 
