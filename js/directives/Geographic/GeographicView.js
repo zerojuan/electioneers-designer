@@ -37,8 +37,8 @@ angular.module('paDesignerApp')
 
           var element = $(elm[0]);
           console.log('Source: ', source);
-          var viewerWidth = 1000;//element.width();
-          var viewerHeight = 900;//element.height();
+          var viewerWidth = $(document).width();//element.width();
+          var viewerHeight = $(document).height();//900;//element.height();
           var scale = zoomListener.scale();
           var x = source ? -source.x : 0;
           var y = source ? -source.y : 0;
@@ -54,6 +54,8 @@ angular.module('paDesignerApp')
 
         var click = function(d){
           if (d3.event.defaultPrevented) return; // click suppressed
+          scope.selectedDistrict = d;
+          scope.$apply();
           centerNode(d);
         };
 
@@ -62,8 +64,6 @@ angular.module('paDesignerApp')
             console.log('Drag Started', d);
             draggedNode = d;
             dragStarted = true;
-            scope.selectedDistrict = d;
-            scope.$apply();
             d3.event.sourceEvent.stopPropagation();
           })
           .on('drag', function(d){
