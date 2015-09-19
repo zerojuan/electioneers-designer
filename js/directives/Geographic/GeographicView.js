@@ -17,13 +17,12 @@ angular.module('paDesignerApp')
         var svgGroup = svg.append('g');
 
         var zoom = function(){
-          console.log('Trying to transform///');
           svgGroup.attr('transform', 'translate('+d3.event.translate+')scale('+d3.event.scale+')');
         };
 
         var zoomListener = d3.behavior.zoom().scaleExtent([0.1, 3]).on('zoom', zoom);
 
-        svg.call(zoomListener);
+        svg.call(zoomListener).on("dblclick.zoom", null);
 
         var draggedNode = null;
         var dragStarted = false;
@@ -34,17 +33,17 @@ angular.module('paDesignerApp')
         };
 
         var centerNode = function(source) {
-
-          var element = $(elm[0]);
-          console.log('Source: ', source);
-          var viewerWidth = $(document).width();//element.width();
-          var viewerHeight = $(document).height();//900;//element.height();
-          var scale = zoomListener.scale();
+          console.log('Centering to Source: ', source);
+          var viewerWidth = $(document).width();
+          var viewerHeight = $(document).height();
+          var scale = 1.5;
           var x = source ? -source.x : 0;
           var y = source ? -source.y : 0;
+
+          //Zoom to center
           x = x * scale + viewerWidth / 2;
           y = y * scale + viewerHeight / 2;
-          console.log(scale);
+          console.log('This is the scale',scale);
           svgGroup.transition()
               .duration(500)
               .attr('transform', 'translate(' + x + ',' + y + ')scale(' + scale + ')');
@@ -53,9 +52,11 @@ angular.module('paDesignerApp')
         }
 
         var click = function(d){
+          console.log('Centering...');
           if (d3.event.defaultPrevented) return; // click suppressed
           scope.selectedDistrict = d;
           scope.$apply();
+
           centerNode(d);
         };
 
@@ -75,7 +76,7 @@ angular.module('paDesignerApp')
             d.y += d3.event.dy;
             var node = d3.select(this);
             node.select('circle').classed('dragged', true);
-            node.attr('transform', 'translate('+d.x+','+d.y+')');
+            // node.attr('transform', 'translate('+d.x+','+d.y+')');
 
             var lines = d3.selectAll('.link');
                 lines.attr('x1', function(d) {return d.source.x; })
@@ -135,7 +136,7 @@ angular.module('paDesignerApp')
               .attr('transform', function(d){
                 return 'translate('+d.x+','+d.y+')';
               })
-              .on('click', click)
+              .on('dblclick', click)
               .call(dragListener);
 
             node.append('circle')
