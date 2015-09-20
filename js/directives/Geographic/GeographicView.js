@@ -22,13 +22,12 @@ angular.module('paDesignerApp')
 
         var zoomListener = d3.behavior.zoom().scaleExtent([0.1, 3]).on('zoom', zoom);
 
-        svg.call(zoomListener).on("dblclick.zoom", null);
+        svg.call(zoomListener).on('dblclick.zoom', null);
 
         var draggedNode = null;
         var dragStarted = false;
 
-        var initDrag = function(d, nodeDom){
-
+        var initDrag = function(){
           dragStarted = false;
         };
 
@@ -49,11 +48,14 @@ angular.module('paDesignerApp')
               .attr('transform', 'translate(' + x + ',' + y + ')scale(' + scale + ')');
           zoomListener.scale(scale);
           zoomListener.translate([x, y]);
-        }
+        };
 
         var click = function(d){
           console.log('Centering...');
-          if (d3.event.defaultPrevented) return; // click suppressed
+          if (d3.event.defaultPrevented) {
+            return; // click suppressed
+          }
+
           scope.selectedDistrict = d;
           scope.$apply();
 
@@ -85,7 +87,7 @@ angular.module('paDesignerApp')
                   .attr('y2', function(d) { return d.target.y; });
           })
           .on('dragend', function(d){
-            console.log('Drag Ended')
+            console.log('Drag End: ', d);
             var node = d3.select(this).select('circle');
             node.classed('dragged', false);
           });
@@ -118,7 +120,7 @@ angular.module('paDesignerApp')
             });
           });
 
-          var link = svgGroup.selectAll('.link')
+          svgGroup.selectAll('.link')
               .data(links)
             .enter().append('line')
               .attr('class', 'link')
@@ -151,12 +153,12 @@ angular.module('paDesignerApp')
                 return d.name;
               });
 
-            centerNode();
+          centerNode();
         };
 
         scope.$watch('districts', function(){
           renderGeomap();
-        })
+        });
       }
     };
   });
