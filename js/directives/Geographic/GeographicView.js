@@ -35,7 +35,7 @@ angular.module('paDesignerApp')
           console.log('Centering to Source: ', source);
           var viewerWidth = $(document).width();
           var viewerHeight = $(document).height();
-          var scale = 1.5;
+          var scale = source ? 1.5 : zoomListener.scale();
           var x = source ? -source.x : 0;
           var y = source ? -source.y : 0;
 
@@ -50,16 +50,18 @@ angular.module('paDesignerApp')
           zoomListener.translate([x, y]);
         };
 
-        var click = function(d){
+        var doubleClick = function(d){
           console.log('Centering...');
           if (d3.event.defaultPrevented) {
             return; // click suppressed
           }
 
+          centerNode(d);
+        };
+
+        var click = function(d){
           scope.selectedDistrict = d;
           scope.$apply();
-
-          centerNode(d);
         };
 
         var dragListener = d3.behavior.drag()
@@ -78,7 +80,7 @@ angular.module('paDesignerApp')
             d.y += d3.event.dy;
             var node = d3.select(this);
             node.select('circle').classed('dragged', true);
-            // node.attr('transform', 'translate('+d.x+','+d.y+')');
+            node.attr('transform', 'translate('+d.x+','+d.y+')');
 
             var lines = d3.selectAll('.link');
                 lines.attr('x1', function(d) {return d.source.x; })
@@ -138,7 +140,8 @@ angular.module('paDesignerApp')
               .attr('transform', function(d){
                 return 'translate('+d.x+','+d.y+')';
               })
-              .on('dblclick', click)
+              .on('dblclick', doubleClick)
+              .on('click', click)
               .call(dragListener);
 
             node.append('circle')
