@@ -81,16 +81,18 @@ var GetGameData = function(path){
   //open kapitans
   var kapitans = JSON.parse(fs.readFileSync(defaultDir+'/kapitans.json', {encoding: 'utf8'}));
   var districts = JSON.parse(fs.readFileSync(defaultDir+'/districts.json', {encoding: 'utf8'}));
+  var population = JSON.parse(fs.readFileSync(defaultDir+'/population.json', {encoding: 'utf8'}));
 
   return {
     kapitans: kapitans.data,
-    districts: districts.data
+    districts: districts.data,
+    population: population.data
   };
 };
 
 var SaveGameData = function(path, data){
   var defaultDir = settings.getWorkingDirectory() + '/saves/' + path;
-  
+
   //save kapitans
   var kapitans = {
     name: 'Kapitans',
@@ -111,6 +113,13 @@ var SaveGameData = function(path, data){
     })
   };
   fs.writeFileSync(defaultDir+'/districts.json', JSON.stringify(districts, null, '\t'));
+
+  //save population
+  var population = {
+    name: 'Population',
+    data: data.population
+  };
+  fs.writeFileSync(defaultDir+'/population.json', JSON.stringify(population, null, '\t'));
 
   return;
 };

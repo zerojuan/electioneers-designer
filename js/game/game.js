@@ -26,6 +26,7 @@ angular.module('paDesignerApp')
         });
 
         $scope.gameData = gameData;
+        $scope.generator.population = gameData.population;
       }
     });
 
