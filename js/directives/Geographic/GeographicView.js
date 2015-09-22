@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('paDesignerApp')
-  .directive('geographicView', function() {
+  .directive('geographicView', function(PopulationDB) {
     return {
       templateUrl: 'js/directives/Geographic/geographicview.html',
       restrict: 'E',
@@ -161,6 +161,15 @@ angular.module('paDesignerApp')
 
         scope.$watch('districts', function(){
           renderGeomap();
+        });
+
+        scope.$watch('selectedDistrict', function(){
+          if(scope.selectedDistrict){
+            //find how many people are in this district
+            var inDistrict = PopulationDB.getAllInDistrict(scope.population, scope.selectedDistrict.id);
+            console.log(inDistrict);
+            scope.selectedDistrict.size = inDistrict.length;
+          }
         });
       }
     };
