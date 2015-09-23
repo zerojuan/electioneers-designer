@@ -10,5 +10,14 @@ angular.module('paDesignerApp')
       });
 
       return result;
+    };
+
+    this.countPopulationInDistrict = function(population, districtId){
+      return _.reduce(population, function(total, family){
+        if(family.district.id === districtId){
+          return total += family.voters + family.kids;
+        }
+        return total;
+      }, 0);
     }
   });

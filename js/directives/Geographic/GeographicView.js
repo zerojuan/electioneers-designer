@@ -98,11 +98,14 @@ angular.module('paDesignerApp')
           var nodes,
               links = [];
 
-          console.log(scope.districts);
           nodes = scope.districts;
+
 
           //create links
           _.forEach(nodes, function(node, i){
+            //count population size
+            node.populationCount = PopulationDB.countPopulationInDistrict(scope.population, node.id);
+
             node.x = 300 * Math.sin(i);
             node.y = 300 * Math.cos(i);
             var neighbors = node.neighbors;
@@ -148,7 +151,9 @@ angular.module('paDesignerApp')
               .attr('class', 'node')
               .attr('cx', 0)
               .attr('cy', 0)
-              .attr('r', 30);
+              .attr('r', function(d){
+                return d.populationCount * 0.3;
+              });
             node.append('text')
               .attr('class', 'districtLabel')
               .style('fill', 'red')
@@ -169,6 +174,7 @@ angular.module('paDesignerApp')
             var inDistrict = PopulationDB.getAllInDistrict(scope.population, scope.selectedDistrict.id);
             console.log(inDistrict);
             scope.selectedDistrict.size = inDistrict.length;
+            scope.selectedDistrict.families = inDistrict;
           }
         });
       }
