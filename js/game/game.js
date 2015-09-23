@@ -121,6 +121,10 @@ angular.module('paDesignerApp')
       });
     };
 
+    $scope.onClear = function(){
+      $scope.generator.population = [];
+    };
+
     $scope.onGenerate = function(){
       if($scope.generator.state === 'generating'){
         return;
@@ -137,7 +141,7 @@ angular.module('paDesignerApp')
         //calculate total voter population
         $scope.generator.totalPopulation = _.reduce($scope.generator.population, function(total, family){
           return total + family.voters + family.kids;
-        }, 0)
+        }, 0);
         $scope.generator.voterPopulation = _.reduce($scope.generator.population, function(total, family){
           return total + family.voters;
         }, 0);
@@ -146,7 +150,7 @@ angular.module('paDesignerApp')
 
       generate();
       var intervalId = setInterval(generate, 2);
-    }
+    };
 
     //loads children of a family (like lazyloading)
     var loadChildren = function(family, exception){
@@ -176,7 +180,7 @@ angular.module('paDesignerApp')
           family.daughters.push(child);
         });
       }
-    }
+    };
 
     var loadParents = function(family){
       //populate mother
@@ -187,7 +191,7 @@ angular.module('paDesignerApp')
       family.father = _.find($scope.generator.population, function(f){
         return f._id === family.parent.father;
       });
-    }
+    };
 
     var loadSiblings = function(family){
       //load siblings
@@ -210,7 +214,7 @@ angular.module('paDesignerApp')
           loadChildren(daughter);
         });
       }
-    }
+    };
 
     var loadCousins = function(family){
       var cousins = [];
@@ -220,7 +224,7 @@ angular.module('paDesignerApp')
           //get his siblings
             //get his siblings children
       }
-    }
+    };
 
 
     $scope.$watch('generator.selected', function(){

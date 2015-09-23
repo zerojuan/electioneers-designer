@@ -56,7 +56,10 @@
         </tab>
         <tab heading="Population">
           <div class="row">
-            <div class="col-md-2"><a class="btn btn-danger" ng-click="onGenerate()">Generate {{generator.currentGeneration}}</a></div>
+            <div class="col-md-2">
+              <a class="btn btn-danger" ng-click="onGenerate()">Generate {{generator.currentGeneration}}</a>
+              <a class="btn btn-danger" ng-click="onClear()">Clear</a>
+            </div>
             <div class="col-md-2"><span>Families ({{generator.population.length}})</></div>
             <div class="col-md-4"><span>Voting Population: <span>{{generator.voterPopulation}}</span> out of <span>{{generator.totalPopulation}}</span></span></div>
 
