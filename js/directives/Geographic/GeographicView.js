@@ -79,7 +79,7 @@ angular.module('paDesignerApp')
             d.x += d3.event.dx;
             d.y += d3.event.dy;
             var node = d3.select(this);
-            node.select('circle').classed('dragged', true);
+            node.select('.node').classed('dragged', true);
             node.attr('transform', 'translate('+d.x+','+d.y+')');
 
             var lines = d3.selectAll('.link');
@@ -90,9 +90,46 @@ angular.module('paDesignerApp')
           })
           .on('dragend', function(d){
             console.log('Drag End: ', d);
-            var node = d3.select(this).select('circle');
+            var node = d3.select(this).select('.node');
             node.classed('dragged', false);
           });
+
+        var renderFamilies = function(show, district){
+          if(!district){
+            return;
+          }
+          var id = district.id;
+
+          var arr = show ? district.families : [];
+
+          var families= svgGroup.select('#district'+id+' g')
+            .selectAll('.family')
+            .data(arr);
+
+          families
+            .enter()
+            .append('circle')
+              .attr('class', 'family')
+              .attr('cx', 0)
+              .attr('cy', 0)
+              .transition()
+              .attr('cx', function(){
+                return Math.random() * 50;
+              })
+              .attr('cy', function(){
+                return Math.random() * 50;
+              })
+              .attr('r', function(d){
+                return d.voters;
+              });
+
+          families
+            .exit()
+            .transition()
+            .attr('cx', 0)
+            .attr('cy', 0)
+            .remove();
+        }
 
         var renderGeomap = function(){
           var nodes,
@@ -140,6 +177,9 @@ angular.module('paDesignerApp')
           var node = svgGroup.selectAll('.node')
               .data(nodes)
             .enter().append('g')
+              .attr('id', function(d){
+                return 'district'+d.id;
+              })
               .attr('transform', function(d){
                 return 'translate('+d.x+','+d.y+')';
               })
@@ -157,9 +197,11 @@ angular.module('paDesignerApp')
             node.append('text')
               .attr('class', 'districtLabel')
               .style('fill', 'red')
+              .attr('text-anchor', 'middle')
               .text(function(d){
                 return d.name;
               });
+            node.append('g');
 
           centerNode();
         };
@@ -168,13 +210,17 @@ angular.module('paDesignerApp')
           renderGeomap();
         });
 
-        scope.$watch('selectedDistrict', function(){
+        scope.$watch('selectedDistrict', function(newVal, oldVal){
           if(scope.selectedDistrict){
             //find how many people are in this district
+
             var inDistrict = PopulationDB.getAllInDistrict(scope.population, scope.selectedDistrict.id);
             console.log(inDistrict);
             scope.selectedDistrict.size = inDistrict.length;
             scope.selectedDistrict.families = inDistrict;
+
+            renderFamilies(false, oldVal);
+            renderFamilies(true, newVal);
           }
         });
       }
