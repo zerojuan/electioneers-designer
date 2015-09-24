@@ -113,11 +113,11 @@ angular.module('paDesignerApp')
               .attr('cx', 0)
               .attr('cy', 0)
               .transition()
-              .attr('cx', function(){
-                return Math.random() * 50;
+              .attr('cx', function(d, i){
+                return 100 * Math.sin(i);
               })
-              .attr('cy', function(){
-                return Math.random() * 50;
+              .attr('cy', function(d, i){
+                return 100 * Math.cos(i);
               })
               .attr('r', function(d){
                 return d.voters;
