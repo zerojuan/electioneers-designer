@@ -106,6 +106,7 @@ angular.module('paDesignerApp')
             .selectAll('.family')
             .data(arr);
 
+          var radius = district.populationCount * 0.3;
           families
             .enter()
             .append('circle')
@@ -114,10 +115,10 @@ angular.module('paDesignerApp')
               .attr('cy', 0)
               .transition()
               .attr('cx', function(d, i){
-                return 100 * Math.sin(i) + Math.random() * 10;
+                return (radius+(d.voters * 5)) * Math.sin(i);
               })
               .attr('cy', function(d, i){
-                return 100 * Math.cos(i) + Math.random() * 10;
+                return (radius+(d.voters * 5)) * Math.cos(i);
               })
               .attr('r', function(d){
                 return d.voters;
@@ -129,7 +130,7 @@ angular.module('paDesignerApp')
             .attr('cx', 0)
             .attr('cy', 0)
             .remove();
-        }
+        };
 
         var renderGeomap = function(){
           var nodes,
