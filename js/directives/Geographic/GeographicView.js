@@ -124,6 +124,13 @@ angular.module('paDesignerApp')
                 return d.voters;
               });
 
+          families.on('mouseover', function(d){
+              d3.select(this).classed('hover', true);
+            })
+            .on('mouseout', function(d){
+              d3.select(this).classed('hover', false)
+            });
+
           families
             .exit()
             .transition()
