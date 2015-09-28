@@ -48,6 +48,7 @@ var CreateNewSave = function(){
 
   saveData(folderName+'/districts.json', loadData(defaultDir+'/districts.json'));
   saveData(folderName+'/kapitans.json', loadData(defaultDir+'/kapitans.json'));
+  saveData(folderName+'/population.json', loadData(defaultDir+'/population.json'));
 
   return name;
 };

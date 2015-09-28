@@ -28,7 +28,15 @@ var createDistricts = function(){
   ];
 
   return districts;
-});
+};
+
+var createPopulation = function(){
+  //TODO: should generate a default population
+  var population = [
+  ];
+
+  return population;
+};
 
 exports.init = function(){
     var defaultDir = settings.getWorkingDirectory();
@@ -85,4 +93,23 @@ exports.init = function(){
       }
     });
 
+    fs.open(defaultDir+'/population.json', 'r+', function(err){
+      var population;
+      if(err){
+          console.log('Cannot find population file...');
+          population = {
+            name: 'Population',
+            data: createPopulation()
+          };
+          fs.writeFile(defaultDir+'/population.json', JSON.stringify(population, null, '\t'), function(err){
+            if(err){
+              console.log('Unable to write population.json');
+            }
+          });
+      }else{
+        //load data
+        population = loader.DistrictsFromFile(defaultDir+'/population.json');
+        console.log('Loaded population: ' + population.length);
+      }
+    });
 };
