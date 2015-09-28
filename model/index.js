@@ -28,7 +28,7 @@ var createDistricts = function(){
   ];
 
   return districts;
-};
+});
 
 exports.init = function(){
     var defaultDir = settings.getWorkingDirectory();
