@@ -1,3 +1,7 @@
-#Party Animals Designer Tool
+# Electioneers Designer Tool
+(A fork from Party Animals)
 
-To make "finding" the fun easier
+
+* Create election scenarios
+* Conduct experiments
+* Tool driven game development
