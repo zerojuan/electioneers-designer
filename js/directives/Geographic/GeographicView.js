@@ -9,7 +9,8 @@ angular.module('paDesignerApp')
       scope: {
         population: '=',
         districts: '=',
-        selectedDistrict: '='
+        selectedDistrict: '=',
+        selectedFamily: '='
       },
       link: function(scope,elm) {
         var svg = d3.select(elm[0])
@@ -114,6 +115,7 @@ angular.module('paDesignerApp')
             .selectAll('.family')
             .data(arr);
 
+          //set radius according to size of district
           var radius = district.populationCount * 0.3;
           families
             .enter()
@@ -123,6 +125,7 @@ angular.module('paDesignerApp')
               .attr('cy', 0)
               .transition()
               .attr('cx', function(d, i){
+                //set distance from center relative to number of voters
                 return (radius+(d.voters * 5)) * Math.sin(i);
               })
               .attr('cy', function(d, i){
@@ -143,7 +146,8 @@ angular.module('paDesignerApp')
             .on('click', function(d){
               console.log('Clicked on family...', d);
               //TODO: select a family
-
+              scope.selectedFamily = d;
+              scope.$apply();
             });
 
           families
@@ -244,6 +248,12 @@ angular.module('paDesignerApp')
 
             renderFamilies(false, oldVal);
             renderFamilies(true, newVal);
+          }
+        });
+
+        scope.$watch('selectedFamily', function(){
+          if(scope.selectedFamily){
+            console.log('Selected Family is this: ', scope.selectedFamily);
           }
         });
       }
