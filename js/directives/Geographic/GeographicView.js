@@ -27,10 +27,6 @@ angular.module('paDesignerApp')
         var draggedNode = null;
         var dragStarted = false;
 
-        var initDrag = function(){
-          dragStarted = false;
-        };
-
         var centerNode = function(source) {
           console.log('Centering to Source: ', source);
           var viewerWidth = $(document).width();
@@ -64,6 +60,11 @@ angular.module('paDesignerApp')
           scope.$apply();
         };
 
+        var initDrag = function(){
+          dragStarted = false;
+          //TODO: notify world that it initialized dragging
+        };
+
         var dragListener = d3.behavior.drag()
           .on('dragstart', function(d){
             console.log('Drag Started', d);
@@ -76,12 +77,14 @@ angular.module('paDesignerApp')
               initDrag(d, this);
             }
 
+            //update node being dragged
             d.x += d3.event.dx;
             d.y += d3.event.dy;
             var node = d3.select(this);
             node.select('.node').classed('dragged', true);
             node.attr('transform', 'translate('+d.x+','+d.y+')');
 
+            //update lines
             var lines = d3.selectAll('.link');
                 lines.attr('x1', function(d) {return d.source.x; })
                   .attr('y1', function(d) { return d.source.y; })
@@ -94,6 +97,11 @@ angular.module('paDesignerApp')
             node.classed('dragged', false);
           });
 
+        /**
+        * Show/hide families around a district
+        * show: boolean, false to hide families
+        * district: District to apply to
+        */
         var renderFamilies = function(show, district){
           if(!district){
             return;
@@ -125,10 +133,17 @@ angular.module('paDesignerApp')
               });
 
           families.on('mouseover', function(d){
+              //TODO: show family tooltip
               d3.select(this).classed('hover', true);
             })
             .on('mouseout', function(d){
+              //TODO: hide family tooltip
               d3.select(this).classed('hover', false)
+            })
+            .on('click', function(d){
+              console.log('Clicked on family...', d);
+              //TODO: select a family
+
             });
 
           families
