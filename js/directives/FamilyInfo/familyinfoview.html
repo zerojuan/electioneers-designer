@@ -1,7 +1,20 @@
-<div class="familyInfo">
+<div class="familyInfo col-xs-3"  ng-show="selectedFamily">
   <h3>{{selectedFamily.fatherName}} {{selectedFamily.familyName}}</h3>
-  <div class="container">
-    <p>This is the content</p>
+  <div class="row">
+    <div class="col-xs-12">
+      <a href="#" ng-click="onGiveToken()" class="btn btn-sm btn-primary">Gift</a>
+      <a href="#" ng-click="onGiveToken()" class="btn btn-sm btn-primary">Promise</a>
+      <a href="#" ng-click="onGiveToken()" class="btn btn-sm btn-primary">Promote</a>
+      <a href="#" ng-click="onGiveToken()" class="btn btn-sm btn-danger">Berate</a>
+      <a href="#" ng-click="onGiveToken()" class="btn btn-sm btn-danger">Demote</a>
+      <a href="#" ng-click="onGiveToken()" class="btn btn-sm btn-danger">Threaten</a>
+    </div>
+    <div class="col-xs-12">
+      <hr/>
+      <p>After this turn, {{selectedFamily.fatherName}} will like you.</p>
+      <p>10 other voters will like you.</p>
+    </div>
   </div>
+
 
 </div>
