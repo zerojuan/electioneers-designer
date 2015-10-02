@@ -2,12 +2,12 @@
   <h3>{{selectedFamily.fatherName}} {{selectedFamily.familyName}}</h3>
   <div class="row">
     <div class="col-xs-12">
-      <a href="#" ng-click="onGiveToken()" class="btn btn-sm btn-primary">Gift</a>
-      <a href="#" ng-click="onGiveToken()" class="btn btn-sm btn-primary">Promise</a>
-      <a href="#" ng-click="onGiveToken()" class="btn btn-sm btn-primary">Promote</a>
-      <a href="#" ng-click="onGiveToken()" class="btn btn-sm btn-danger">Berate</a>
-      <a href="#" ng-click="onGiveToken()" class="btn btn-sm btn-danger">Demote</a>
-      <a href="#" ng-click="onGiveToken()" class="btn btn-sm btn-danger">Threaten</a>
+      <a href="#" ng-click="onActionToggle('gift')" class="btn btn-sm btn-primary">Gift</a>
+      <a href="#" ng-click="onActionToggle('promise')" class="btn btn-sm btn-primary">Promise</a>
+      <a href="#" ng-click="onActionToggle('promote')" class="btn btn-sm btn-primary">Promote</a>
+      <a href="#" ng-click="onActionToggle('berate')" class="btn btn-sm btn-danger">Berate</a>
+      <a href="#" ng-click="onActionToggle('demote')" class="btn btn-sm btn-danger">Demote</a>
+      <a href="#" ng-click="onActionToggle('threaten')" class="btn btn-sm btn-danger">Threaten</a>
     </div>
     <div class="col-xs-12">
       <hr/>

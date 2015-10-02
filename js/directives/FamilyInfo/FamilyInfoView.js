@@ -11,6 +11,10 @@ angular.module('paDesignerApp')
       },
       link: function(scope, elm, attr){
 
+
+        scope.onActionToggle = function(type){
+          console.log('Toggle me...', type);
+        }
       }
     };
   });
