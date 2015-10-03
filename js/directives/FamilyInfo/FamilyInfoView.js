@@ -13,7 +13,7 @@ angular.module('paDesignerApp')
 
 
         scope.onActionToggle = function(type){
-          console.log('Toggle me...', type);
+          
         }
       }
     };
