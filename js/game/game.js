@@ -11,6 +11,8 @@ angular.module('paDesignerApp')
       selected: null
     };
 
+    console.log('Testing', 'Testing');
+
     $scope.$watch('game', function(){
       if($scope.game){
         var gameData = GameService.GetGameData($scope.game.name);
