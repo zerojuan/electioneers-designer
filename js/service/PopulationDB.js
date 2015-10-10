@@ -62,4 +62,31 @@ angular.module('paDesignerApp')
         return f._id === family.parent.father;
       });
     };
+
+    /**
+     * Mutates family. Attaches children to father.sons, father.daughters, mother.sons, mother.daughters
+     */
+     this.loadSiblings = function(family, population){
+       //load siblings
+       if(family.father){
+         this.loadChildren(family.father, population, family);
+         _.forEach(family.father.sons, function(son){
+           this.loadChildren(son, population);
+         });
+         _.forEach(family.father.daughters, function(daughter){
+           this.loadChildren(daughter, population);
+         });
+       }
+
+       if(family.mother){
+         this.loadChildren(family.mother, population, family);
+         _.forEach(family.mother.sons, function(son){
+           this.loadChildren(son, population);
+         });
+         _.forEach(family.mother.daughters, function(daughter){
+           this.loadChildren(daughter, population);
+         });
+       }
+     };
+
   });

@@ -161,26 +161,7 @@ angular.module('paDesignerApp')
     };
 
     var loadSiblings = function(family){
-      //load siblings
-      if(family.father){
-        loadChildren(family.father, family);
-        _.forEach(family.father.sons, function(son){
-          loadChildren(son);
-        });
-        _.forEach(family.father.daughters, function(daughter){
-          loadChildren(daughter);
-        });
-      }
-
-      if(family.mother){
-        loadChildren(family.mother, family);
-        _.forEach(family.mother.sons, function(son){
-          loadChildren(son);
-        });
-        _.forEach(family.mother.daughters, function(daughter){
-          loadChildren(daughter);
-        });
-      }
+      PopulationDB.loadSiblings(family, $scope.generator.population);
     };
 
     var loadCousins = function(family){
