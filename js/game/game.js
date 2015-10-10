@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('paDesignerApp')
-  .controller('GameCtrl', function(DistrictsModel, KapitansModel, GameService, LoaderService, PopulationGenerator, $scope){
+  .controller('GameCtrl', function(DistrictsModel, KapitansModel, GameService, LoaderService, PopulationGenerator, PopulationDB, $scope){
     $scope.selected = {};
 
     $scope.generator = {
@@ -10,8 +10,6 @@ angular.module('paDesignerApp')
       population: [],
       selected: null
     };
-
-    console.log('Testing', 'Testing');
 
     $scope.$watch('game', function(){
       if($scope.game){
@@ -33,7 +31,6 @@ angular.module('paDesignerApp')
     });
 
     $scope.onSelectDistrict = function(district){
-      console.log('Hey clicked me :' + district.name);
       angular.forEach($scope.gameData.districts, function(d){
         console.log(d.id + ' vs ' + district.id);
         if(district.id === d.id){
@@ -156,32 +153,7 @@ angular.module('paDesignerApp')
 
     //loads children of a family (like lazyloading)
     var loadChildren = function(family, exception){
-      //load children
-      if(family.children.males.length){
-        family.sons = [];
-        _.forEach(family.children.males, function(_id){
-          if(exception && _id === exception._id){
-            return;
-          }
-          var child = _.find($scope.generator.population, function(f){
-            return f._id === _id;
-          });
-          family.sons.push(child);
-        });
-      }
-
-      if(family.children.females.length){
-        family.daughters = [];
-        _.forEach(family.children.females, function(_id){
-          if(exception && _id === exception._id){
-            return;
-          }
-          var child = _.find($scope.generator.population, function(f){
-            return f._id === _id;
-          });
-          family.daughters.push(child);
-        });
-      }
+      PopulationDB.loadChildren(family, $scope.generator.population, exception);
     };
 
     var loadParents = function(family){
