@@ -157,14 +157,7 @@ angular.module('paDesignerApp')
     };
 
     var loadParents = function(family){
-      //populate mother
-      family.mother = _.find($scope.generator.population, function(f){
-        return f._id === family.parent.mother;
-      });
-
-      family.father = _.find($scope.generator.population, function(f){
-        return f._id === family.parent.father;
-      });
+      PopulationDB.loadParents(family, $scope.generator.population);
     };
 
     var loadSiblings = function(family){
