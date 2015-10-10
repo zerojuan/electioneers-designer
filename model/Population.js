@@ -55,11 +55,9 @@ exports.generatePopulation = function(done){
       voter._id = i+'';
       population.push(voter);
     }
-    console.log('heeeere');
 
     for(i = 0; i < size; i++){
       //maybe do an async here
-      console.log('here');
       db.put(population[i])
         .then(function(){
 

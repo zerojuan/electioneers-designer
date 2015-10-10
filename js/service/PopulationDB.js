@@ -21,6 +21,10 @@ angular.module('paDesignerApp')
       }, 0);
     };
 
+    this.getRandomFamily = function(population){
+      return _.sample(population);
+    };
+
     this.lookupChildren = function(children, population, exception){
       return _.filter(children, function(_id){
           // don't load if this is the exception

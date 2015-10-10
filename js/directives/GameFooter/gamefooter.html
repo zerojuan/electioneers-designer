@@ -1,11 +1,13 @@
 <div class="footer">
   <div class="col-xs-9">
-    {{selectedDistrict.name}}
+    <span>{{selectedDistrict.name}} {{selectedDistrict.size}}</span>
+
     <!-- put game controls here -->
-    {{selectedDistrict.size}}
+    <span>Day: {{day}}</span>
   </div>
   <div class="col-xs-3 controls">
-    <a href="#" class="btn btn-sm btn-primary">Next</a>
+    {{currentCandidate.name}} {{currentCandidate.lastName}}
+    <a href="#" class="btn btn-sm btn-primary" ng-click="onNext()">Next</a>
   </div>
 
 </div>

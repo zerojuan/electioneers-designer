@@ -7,7 +7,10 @@ angular.module('paDesignerApp')
       restrict: 'E',
       transclude: true,
       scope: {
-        selectedDistrict: '='
+        selectedDistrict: '=',
+        currentCandidate: '=',
+        onNext: '=',
+        day: '='
       },
       link: function(scope,elm) {
 

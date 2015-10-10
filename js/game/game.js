@@ -106,18 +106,18 @@ angular.module('paDesignerApp')
     $scope.onPlay = function(){
       $scope.gameData.population = $scope.generator.population;
       $scope.onGoToProper($scope.gameData);
-      //TODO: Use game data name for generating population
-      LoaderService.HasPopulation('db2').then(function(val){
-        if(val){
-          console.log('No need to generate population');
-        }else{
-          console.log('Generate Population');
-        }
-
-        LoaderService.GeneratePopulation(function(){
-
-        });
-      });
+      // //TODO: Use game data name for generating population
+      // LoaderService.HasPopulation('db2').then(function(val){
+      //   if(val){
+      //     console.log('No need to generate population');
+      //   }else{
+      //     console.log('Generate Population');
+      //   }
+      //
+      //   LoaderService.GeneratePopulation(function(){
+      //
+      //   });
+      // });
     };
 
     $scope.onClear = function(){
