@@ -2,7 +2,8 @@
   <h3>{{selectedFamily.fatherName}} {{selectedFamily.familyName}}</h3>
   <div class="row">
     <div class="col-xs-12">
-      <a href="#" ng-click="onActionToggle('gift')" class="btn btn-sm btn-primary">Gift</a>
+      <a href="#" ng-click="onActionToggle('gift')" class="btn btn-sm btn-primary"
+        ng-model="selectedFamily.moves[candidate.family._id].gift" uib-btn-checkbox>Gift</a>
       <a href="#" ng-click="onActionToggle('promise')" class="btn btn-sm btn-primary">Promise</a>
       <a href="#" ng-click="onActionToggle('promote')" class="btn btn-sm btn-primary">Promote</a>
       <a href="#" ng-click="onActionToggle('berate')" class="btn btn-sm btn-danger">Berate</a>
@@ -11,6 +12,7 @@
     </div>
     <div class="col-xs-12">
       <hr/>
+      {{selectedFamily.moves[candidate.family._id].gift}}
       <p>After this turn, {{selectedFamily.fatherName}} will like you.</p>
       <p>10 other voters will like you.</p>
     </div>

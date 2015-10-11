@@ -20,7 +20,7 @@ angular.module('paDesignerApp')
       var candidate = {
         name: family.fatherName,
         lastName: family.familyName,
-        data: family,
+        family: family,
         councilors: [],
         selectedFamily: null,
         selectedDistrict: null
