@@ -21,7 +21,9 @@ angular.module('paDesignerApp')
         name: family.fatherName,
         lastName: family.familyName,
         data: family,
-        councilors: []
+        councilors: [],
+        selectedFamily: null,
+        selectedDistrict: null
       };
 
       candidates.push(candidate);

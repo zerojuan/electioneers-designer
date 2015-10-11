@@ -1,9 +1,9 @@
 <div class="gameProper">
-  <geographic-view districts="gameData.districts" population="gameData.population" selected-family="gameData.selectedFamily" selected-district="gameData.selectedDistrict">
+  <geographic-view districts="gameData.districts" population="gameData.population" selected-family="currentCandidate.selectedFamily" selected-district="currentCandidate.selectedDistrict">
   </geographic-view>
-  <family-info-view selected-family="gameData.selectedFamily">
+  <family-info-view selected-family="currentCandidate.selectedFamily">
   </family-info-view>
-  <game-footer selected-district="gameData.selectedDistrict" current-candidate="currentCandidate" on-next="onNextTurn" day="day">
+  <game-footer selected-district="currentCandidate.selectedDistrict" current-candidate="currentCandidate" on-next="onNextTurn" day="day">
 
   </game-footer>
 </div>
