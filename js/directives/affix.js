@@ -1,5 +1,8 @@
 'use strict';
 
+/**
+* Directive to make this element non-scrollable
+*/
 angular.module('paDesignerApp')
   .directive('affix', function(){
     return {
