@@ -1,22 +1,36 @@
 <div class="familyInfo col-xs-3"  ng-show="selectedFamily">
-  <h3>{{selectedFamily.fatherName}} {{selectedFamily.familyName}}</h3>
   <div class="row">
-    <div class="col-xs-12">
-      <a href="#" ng-click="onActionToggle('gift')" class="btn btn-sm btn-primary"
-        ng-model="selectedFamily.moves[candidate.family._id].gift" uib-btn-checkbox>Gift</a>
-      <a href="#" ng-click="onActionToggle('promise')" class="btn btn-sm btn-primary">Promise</a>
-      <a href="#" ng-click="onActionToggle('promote')" class="btn btn-sm btn-primary">Promote</a>
-      <a href="#" ng-click="onActionToggle('berate')" class="btn btn-sm btn-danger">Berate</a>
-      <a href="#" ng-click="onActionToggle('demote')" class="btn btn-sm btn-danger">Demote</a>
-      <a href="#" ng-click="onActionToggle('threaten')" class="btn btn-sm btn-danger">Threaten</a>
-    </div>
-    <div class="col-xs-12">
-      <hr/>
-      {{selectedFamily.moves[candidate.family._id].gift}}
-      <p>After this turn, {{selectedFamily.fatherName}} will like you.</p>
-      <p>10 other voters will like you.</p>
-    </div>
+      <h3>{{selectedFamily.fatherName}} {{selectedFamily.familyName}}<a class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-minus"></i></a></h3>
   </div>
-
-
+  <div class="row">
+      <div class="pulse col-xs-12">Leaning left</div>
+      <hr/>
+      <div class="actions">
+          <div class="controls">
+              <h4>
+              Actions <a class="btn btn-sm btn-primary" ng-click="addAction()">+</a>
+              </h4>
+          </div>
+              <ul class="list list-unstyled">
+                <li ng-repeat="action in selectedFamily.moves[candidate.family._id]">
+                  {{action.name}} <a class="btn btn-xs btn-danger" ng-click="removeAction(action)"><i class="glyphicon glyphicon-remove"></i></a>
+                </li>
+              </ul>
+      </div>
+      <hr/>
+      <div class="effects">
+          <h4>Effects</h4>
+          <ul class="list list-unstyled">
+              <li>
+                  Gets money from cops
+              </li>
+              <li>
+                  Cousin is a councilor
+              </li>
+              <li>
+                  Gifted 500
+              </li>
+          </ul>
+      </div>
+  </div>
 </div>

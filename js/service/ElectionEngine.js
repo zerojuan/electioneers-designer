@@ -12,14 +12,7 @@ angular.module('paDesignerApp')
       if(!family.moves){
         family.moves = {};
       }
-      family.moves[candidate.family._id] = {
-        'gift': false,
-        'promise': false,
-        'promote': false,
-        'berate': false,
-        'demote': false,
-        'threaten': false
-      };
+      family.moves[candidate.family._id] = [];
 
       console.log('Family added moves', candidate);
     };

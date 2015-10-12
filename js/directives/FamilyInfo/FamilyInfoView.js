@@ -12,6 +12,18 @@ angular.module('paDesignerApp')
       },
       link: function(scope, elm, attr){
 
+        scope.addAction = function(){
+          //TODO: should be a real dropdown here
+          scope.selectedFamily.moves[scope.candidate.family._id].push({
+            name: 'Gift'
+          });
+        };
+
+        scope.removeAction = function(action){
+          _.remove(scope.selectedFamily.moves[scope.candidate.family._id], function(a){
+            return a === action;
+          });
+        };
 
         scope.onActionToggle = function(type){
           console.log('Toggling action...', type);
