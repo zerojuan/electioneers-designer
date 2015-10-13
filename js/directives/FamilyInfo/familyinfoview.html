@@ -12,7 +12,7 @@
               </h4>
           </div>
               <ul class="list list-unstyled">
-                <li ng-repeat="action in selectedFamily.moves[candidate.family._id]">
+                <li ng-repeat="action in selectedFamily.actions[candidate.family._id]">
                   {{action.name}} <a class="btn btn-xs btn-danger" ng-click="removeAction(action)"><i class="glyphicon glyphicon-remove"></i></a>
                 </li>
               </ul>

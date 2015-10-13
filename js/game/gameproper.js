@@ -31,6 +31,9 @@ angular.module('paDesignerApp')
 
     //-----------------------------------------------------------
 
+    //Setup Population to be aware of these candidates
+    ElectionEngine.initializePopulation($scope.gameData.population, $scope.gameData.candidates);
+
     var setCandidate = function(){
       $scope.currentCandidate = candidates[currentCandidateIndex];
     };

@@ -3,6 +3,17 @@
 angular.module('paDesignerApp')
   .service('ElectionEngine', function(){
 
+    this.initializePopulation = function(population, candidates){
+      var that = this;
+
+      _.forEach(population, function(family){
+        _.forEach(candidates, function(candidate){
+          that.attachOpinion(family, candidate);
+          that.attachActions(family, candidate);
+        });
+      });
+    };
+
     this.UpdatePopulation = function(population){
       console.log('Updating population...', population);
     };
@@ -30,6 +41,18 @@ angular.module('paDesignerApp')
 
       if(!family.opinion[candidate.family._id]){
         family.opinion[candidate.family._id] = 1;
+      }
+
+      return family;
+    };
+
+    this.attachActions = function(family, candidate){
+      if(!family.actions){
+        family.actions = [];
+      }
+
+      if(!family.actions[candidate.family._id]){
+        family.actions[candidate.family._id] = [];
       }
 
       return family;

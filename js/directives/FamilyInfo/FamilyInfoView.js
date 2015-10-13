@@ -14,24 +14,20 @@ angular.module('paDesignerApp')
 
         scope.addAction = function(){
           //TODO: should be a real dropdown here
-          scope.selectedFamily.moves[scope.candidate.family._id].push({
+          scope.selectedFamily.actions[scope.candidate.family._id].push({
             name: 'Gift'
           });
         };
 
         scope.removeAction = function(action){
-          _.remove(scope.selectedFamily.moves[scope.candidate.family._id], function(a){
+          _.remove(scope.selectedFamily.actions[scope.candidate.family._id], function(a){
             return a === action;
           });
         };
 
-        scope.onActionToggle = function(type){
-          console.log('Toggling action...', type);
-          scope.selectedFamily.moves[scope.candidate.family._id][type] = true;
-        }
-
         scope.$watch('selectedFamily', function(){
           if(scope.selectedFamily){
+            //Move list should be contextual, depending on the current status of the
             ElectionEngine.attachMoveList(scope.selectedFamily, scope.candidate);
           }
         });
