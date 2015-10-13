@@ -14,8 +14,25 @@ angular.module('paDesignerApp')
       });
     };
 
-    this.UpdatePopulation = function(population){
+    this.UpdatePopulation = function(population, candidates){
       console.log('Updating population...', population);
+      _.forEach(population, function(family){
+        _.forEach(candidates, function(candidate){
+          //look up each action
+          //TODO: Make a more robust implementation of updating
+          _.forEach(family.actions[candidate.family._id], function(action){
+            family.opinion[candidate.family._id] += 30;
+          });
+
+          //add it to effect
+
+
+          //aggregate effect
+
+          //update relatives and special rivalries
+        });
+
+      });
     };
 
     this.attachMoveList = function(family, candidate){

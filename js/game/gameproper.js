@@ -46,7 +46,7 @@ angular.module('paDesignerApp')
         //a new day has dawned
 
         //apply changes to all voters
-        ElectionEngine.UpdatePopulation($scope.gameData.population);
+        ElectionEngine.UpdatePopulation($scope.gameData.population, $scope.gameData.candidates);
 
         $scope.day++;
 
