@@ -2,7 +2,6 @@
 
 angular.module('paDesignerApp')
   .service('PopulationGenerator', function(){
-    var gameData;
 
     var Surnames = [
       'Santos',
