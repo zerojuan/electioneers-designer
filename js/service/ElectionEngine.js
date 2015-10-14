@@ -30,8 +30,9 @@ angular.module('paDesignerApp')
           //aggregate effect
 
           //update relatives and special rivalries
-        });
 
+          family.actions[candidate.family._id] = [];
+        });
       });
     };
 
