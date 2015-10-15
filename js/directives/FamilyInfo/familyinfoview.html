@@ -8,7 +8,18 @@
       <div class="actions">
           <div class="controls">
               <h4>
-              Actions <a class="btn btn-sm btn-primary" ng-click="addAction()">+</a>
+              Actions
+              <div class="btn-group" uib-dropdown>
+                <button type="button" class="btn btn-danger" uib-dropdown-toggle>
+                  <span class="caret"></span>
+                  <span class="sr-only">Split button!</span>
+                </button>
+                <ul class="uib-dropdown-menu" role="menu" aria-labelledby="split-button">
+                  <li ng-repeat="action in selectedFamily.moves[candidate.family._id]" role="menuitem">
+                    <a href="#" ng-click="addAction(action)">{{action.name}}</a>
+                  </li>
+                </ul>
+              </div>
               </h4>
           </div>
               <ul class="list list-unstyled">

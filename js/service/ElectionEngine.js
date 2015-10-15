@@ -43,7 +43,17 @@ angular.module('paDesignerApp')
       }
 
       if(!family.moves[candidate.family._id] || (family.moves[candidate.family._id].length < 0)){
-        family.moves[candidate.family._id] = [];
+        family.moves[candidate.family._id] = [
+          {
+            name: 'Gift'
+          },
+          {
+            name: 'Hire'
+          },
+          {
+            name: 'Intimidate'
+          }
+        ];
       }
 
       return family;
