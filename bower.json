@@ -1,10 +1,10 @@
 {
-  "name": "partyanimals-designer",
+  "name": "electioneers-designer",
   "version": "0.0.1",
   "authors": [
     "Julius Cebreros <me@juliuscebreros.com>"
   ],
-  "description": "Designer tool for partyanimals",
+  "description": "Designer tool for Electioneers",
   "license": "MIT",
   "private": true,
   "ignore": [
