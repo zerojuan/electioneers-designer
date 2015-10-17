@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('paDesignerApp')
-  .directive('geographicView', function(PopulationDB) {
+  .directive('geographicView', function(PopulationDB, GeographyHelper) {
     return {
       templateUrl: 'js/directives/Geographic/geographicview.html',
       restrict: 'E',
@@ -98,6 +98,16 @@ angular.module('paDesignerApp')
             node.classed('dragged', false);
           });
 
+        var renderConnectedFamilies = function(show, family){
+          if(!family){
+            return;
+          }
+
+          PopulationDB.loadChildren(family, scope.population);
+          PopulationDB.loadParents(family, scope.population);
+          console.log('Family:', family);
+        };
+
         /**
         * Show/hide families around a district
         * show: boolean, false to hide families
@@ -141,24 +151,13 @@ angular.module('paDesignerApp')
               //TODO: show family tooltip
               var el = d3.select(this);
               el.classed('hover', true);
-              console.log('Has text?',el.select('text')[0][0]);
-              if(!el.select('text')[0][0]){
-                el.append('text')
-                  .attr('class', 'districtLabel')
-                  .style('fill', 'red')
-                  .attr('text-anchor', 'middle')
-                  .text(function(d){
-                    console.log(d);
-                    return d.fatherName;
-                  });
-              }
-
+              GeographyHelper.showFamilyName(el);
             })
             .on('mouseout', function(d){
               //TODO: hide family tooltip
               var el = d3.select(this);
               el.classed('hover', false);
-              // el.select('text').remove();
+              GeographyHelper.hideFamilyName(el);
             })
             .on('click', function(d){
               console.log('Clicked on family...', d);
@@ -267,9 +266,12 @@ angular.module('paDesignerApp')
           }
         });
 
-        scope.$watch('selectedFamily', function(){
+        scope.$watch('selectedFamily', function(newVal, oldVal){
           if(scope.selectedFamily){
             console.log('Selected Family is this: ', scope.selectedFamily);
+            //render connections
+            renderConnectedFamilies(false, oldVal);
+            renderConnectedFamilies(true, newVal);
           }
         });
       }
