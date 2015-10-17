@@ -117,31 +117,48 @@ angular.module('paDesignerApp')
 
           //set radius according to size of district
           var radius = district.populationCount * 0.3;
-          families
+          var familyG = families
             .enter()
-            .append('circle')
-              .attr('class', 'family')
-              .attr('cx', 0)
-              .attr('cy', 0)
-              .transition()
-              .attr('cx', function(d, i){
-                //set distance from center relative to number of voters
-                return (radius+(d.voters * 5)) * Math.sin(i);
-              })
-              .attr('cy', function(d, i){
-                return (radius+(d.voters * 5)) * Math.cos(i);
-              })
-              .attr('r', function(d){
-                return d.voters;
-              });
+            .append('g')
+            .attr('class', 'family');
 
-          families.on('mouseover', function(d){
+          familyG
+            .transition()
+            .attr('transform', function(d, i){
+              var x = (radius+(d.voters * 5)) * Math.sin(i);
+              var y = (radius+(d.voters * 5)) * Math.cos(i);
+              return 'translate('+x+','+y+')';
+            });
+
+          familyG.append('circle')
+            .attr('cx', 0)
+            .attr('cy', 0)
+            .attr('r', function(d){
+              return d.voters;
+            });
+
+          familyG.on('mouseover', function(d){
               //TODO: show family tooltip
-              d3.select(this).classed('hover', true);
+              var el = d3.select(this);
+              el.classed('hover', true);
+              console.log('Has text?',el.select('text')[0][0]);
+              if(!el.select('text')[0][0]){
+                el.append('text')
+                  .attr('class', 'districtLabel')
+                  .style('fill', 'red')
+                  .attr('text-anchor', 'middle')
+                  .text(function(d){
+                    console.log(d);
+                    return d.fatherName;
+                  });
+              }
+
             })
             .on('mouseout', function(d){
               //TODO: hide family tooltip
-              d3.select(this).classed('hover', false)
+              var el = d3.select(this);
+              el.classed('hover', false);
+              // el.select('text').remove();
             })
             .on('click', function(d){
               console.log('Clicked on family...', d);
@@ -153,8 +170,7 @@ angular.module('paDesignerApp')
           families
             .exit()
             .transition()
-            .attr('cx', 0)
-            .attr('cy', 0)
+            .attr('transform', 'translate(0,0)')
             .remove();
         };
 
