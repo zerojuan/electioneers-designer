@@ -15,7 +15,7 @@ angular.module('paDesignerApp')
       link: function(scope,elm) {
         var svg = d3.select(elm[0])
             .select('svg');
-        var svgGroup = svg.append('g');
+        var svgGroup = svg.append('g').attr('class', 'mainGroup');
 
         var zoom = function(){
           svgGroup.attr('transform', 'translate('+d3.event.translate+')scale('+d3.event.scale+')');
@@ -115,13 +115,16 @@ angular.module('paDesignerApp')
             if(child.district.id !== family.district.id){
               console.log('rendering family...');
               var district = PopulationDB.findDistrictById(child.district.id, scope.districts);
+              console.log('From district', district.id);
               if(!district.families){
                 district.families = PopulationDB.getAllInDistrict(scope.population, child.district.id);
               }
               renderFamilies(show, district, child);
 
               //show line between this and their family
-              GeographyHelper.showConnection(family, child);
+              GeographyHelper.showConnection(show, family, child);
+            }else{
+              GeographyHelper.showConnection(show, family, child);
             }
           }
           _.forEach(family.sons, showChild);
@@ -164,6 +167,8 @@ angular.module('paDesignerApp')
             .attr('transform', function(d, i){
               var x = (radius+(d.voters * 5)) * Math.sin(i);
               var y = (radius+(d.voters * 5)) * Math.cos(i);
+              d.x = x;
+              d.y = y;
               return 'translate('+x+','+y+')';
             });
 
@@ -288,7 +293,6 @@ angular.module('paDesignerApp')
           if(scope.selectedDistrict){
             //find how many people are in this district
             scope.selectedFamily = null;
-
             var inDistrict = PopulationDB.getAllInDistrict(scope.population, scope.selectedDistrict.id);
             console.log(inDistrict);
             scope.selectedDistrict.size = inDistrict.length;
@@ -303,9 +307,11 @@ angular.module('paDesignerApp')
           if(newVal){
             console.log('Selected Family is this: ', scope.selectedFamily);
             //render connections
+            GeographyHelper.hideConnection();
             renderConnectedFamilies(false, oldVal);
             renderConnectedFamilies(true, newVal);
           }else if(oldVal){
+            GeographyHelper.hideConnection();
             renderConnectedFamilies(false, oldVal);
           }
         });

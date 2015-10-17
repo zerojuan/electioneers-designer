@@ -19,16 +19,40 @@ angular.module('paDesignerApp')
       element.select('.familyLabel').remove();
     };
 
-    this.showConnection = function(fromData, toData){
-      var frm = d3.select('#family'+fromData._id);
-      var to = d3.select('#family'+toData._id);
+    this.showConnection = function(shouldShow, fromData, toData){
+      if(!shouldShow){
+        d3.select('.familyConnection').remove();
+        return;
+      }
+      
+      var frmDistrict = d3.select('#district'+fromData.district.id).datum();
+      var toDistrict = d3.select('#district'+toData.district.id).datum();
+      var frm = d3.select('#family'+fromData._id).datum();
+      var to = d3.select('#family'+toData._id).datum();
 
-      console.log('From: ', frm, 'To: ', to);
+      console.log('Appending: ', frmDistrict, 'To: ', to);
 
-      frm.append('line')
+      var elm = d3.select('.mainGroup');
+
+      elm.append('line')
+        .attr('class', 'familyConnection')
         .attr('stroke', 'solid')
-        .attr('x', function(){
-          return frm.x;
+        .attr('x1', function(){
+          return frmDistrict.x + frm.x;
+        })
+        .attr('y1', function(){
+          return frmDistrict.y + frm.y;
+        })
+        .attr('x2', function(){
+          return toDistrict.x + to.x;
+        })
+        .attr('y2', function(){
+          return toDistrict.y + to.y;
         });
+    };
+
+    this.hideConnection = function(){
+      console.log('Hiding family connection...');
+      d3.select('.familyConnection').remove();
     }
   });
