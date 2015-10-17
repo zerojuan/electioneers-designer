@@ -18,4 +18,17 @@ angular.module('paDesignerApp')
     this.hideFamilyName = function(element){
       element.select('.familyLabel').remove();
     };
+
+    this.showConnection = function(fromData, toData){
+      var frm = d3.select('#family'+fromData._id);
+      var to = d3.select('#family'+toData._id);
+
+      console.log('From: ', frm, 'To: ', to);
+
+      frm.append('line')
+        .attr('stroke', 'solid')
+        .attr('x', function(){
+          return frm.x;
+        });
+    }
   });

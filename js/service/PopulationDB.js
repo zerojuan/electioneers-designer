@@ -2,6 +2,12 @@
 
 angular.module('paDesignerApp')
   .service('PopulationDB', function(){
+    this.findDistrictById = function(id, districts){
+      return _.find(districts, function(d){
+        return d.id === id;
+      });
+    };
+
     this.getAllInDistrict = function(population, districtId){
       var result = [];
 
