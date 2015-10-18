@@ -12,11 +12,9 @@ angular.module('paDesignerApp')
       },
       link: function(scope, elm, attr){
 
-        scope.addAction = function(){
+        scope.addAction = function(action){
           //TODO: should be a real dropdown here
-          scope.selectedFamily.actions[scope.candidate.family._id].push({
-            name: 'Gift'
-          });
+          scope.selectedFamily.actions[scope.candidate.family._id].push(action);
         };
 
         scope.removeAction = function(action){

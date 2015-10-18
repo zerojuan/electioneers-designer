@@ -14,8 +14,8 @@
       </h2>
     </div>
     <div>
-      <tabset>
-        <tab heading="Districts">
+      <uib-tabset>
+        <uib-tab heading="Districts">
           <div class="panel panel-default">
             <div class="col-xs-6" style="min-height: 400px; margin-top: 10px;">
               <district-in-design ng-repeat="district in gameData.districts" selected-district="selected.district" class="pull-left" district="district" on-select="onSelectDistrict">
@@ -32,8 +32,8 @@
               </div>
             </div>
           </div>
-        </tab>
-        <tab heading="Kapitans">
+        </uib-tab>
+        <uib-tab heading="Kapitans">
           <div class="panel panel-default">
             <div class="col-xs-6" style="min-height: 400px; margin-top: 10px;">
               <kapitan-in-design ng-repeat="kapitan in gameData.kapitans" on-select="onKapitanSelected" class="pull-left" kapitan="kapitan">
@@ -50,11 +50,11 @@
               </div>
             </div>
           </div>
-        </tab>
-        <tab heading="Formulas">
+        </uib-tab>
+        <uib-tab heading="Formulas">
           Edit formulas here
-        </tab>
-        <tab heading="Population">
+        </uib-tab>
+        <uib-tab heading="Population">
           <div class="row">
             <div class="col-md-2">
               <a class="btn btn-danger" ng-click="onGenerate()">Generate {{generator.currentGeneration}}</a>
@@ -76,8 +76,8 @@
             </div>
           </div>
 
-        </tab>
-      </tabset>
+        </uib-tab>
+      </uib-tabset>
 
     </div>
   </div>

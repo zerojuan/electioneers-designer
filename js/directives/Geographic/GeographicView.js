@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('paDesignerApp')
-  .directive('geographicView', function(PopulationDB) {
+  .directive('geographicView', function(PopulationDB, GeographyHelper) {
     return {
       templateUrl: 'js/directives/Geographic/geographicview.html',
       restrict: 'E',
@@ -15,7 +15,7 @@ angular.module('paDesignerApp')
       link: function(scope,elm) {
         var svg = d3.select(elm[0])
             .select('svg');
-        var svgGroup = svg.append('g');
+        var svgGroup = svg.append('g').attr('class', 'mainGroup');
 
         var zoom = function(){
           svgGroup.attr('transform', 'translate('+d3.event.translate+')scale('+d3.event.scale+')');
@@ -98,12 +98,49 @@ angular.module('paDesignerApp')
             node.classed('dragged', false);
           });
 
+        var renderConnectedFamilies = function(show, family){
+          if(!family){
+            return;
+          }
+
+          PopulationDB.loadChildren(family, scope.population);
+          PopulationDB.loadParents(family, scope.population);
+
+          //foreach children, show their family in that district
+          function showChild(child){
+            if(!child){
+              return;
+            }
+            console.log('Showing child...', child);
+            if(child.district.id !== family.district.id){
+              console.log('rendering family...');
+              var district = PopulationDB.findDistrictById(child.district.id, scope.districts);
+              console.log('From district', district.id);
+              if(!district.families){
+                district.families = PopulationDB.getAllInDistrict(scope.population, child.district.id);
+              }
+              renderFamilies(show, district, child);
+
+              //show line between this and their family
+              GeographyHelper.showConnection(show, family, child);
+            }else{
+              GeographyHelper.showConnection(show, family, child);
+            }
+          }
+          _.forEach(family.sons, showChild);
+          _.forEach(family.daughters, showChild);
+          //foreach parent show their family in that district
+          showChild(family.father);
+          showChild(family.mother);
+        };
+
         /**
         * Show/hide families around a district
         * show: boolean, false to hide families
         * district: District to apply to
+        * family: if present, set this specific family as selected
         */
-        var renderFamilies = function(show, district){
+        var renderFamilies = function(show, district, family){
           if(!district){
             return;
           }
@@ -117,31 +154,42 @@ angular.module('paDesignerApp')
 
           //set radius according to size of district
           var radius = district.populationCount * 0.3;
-          families
+          var familyG = families
             .enter()
-            .append('circle')
-              .attr('class', 'family')
-              .attr('cx', 0)
-              .attr('cy', 0)
-              .transition()
-              .attr('cx', function(d, i){
-                //set distance from center relative to number of voters
-                return (radius+(d.voters * 5)) * Math.sin(i);
-              })
-              .attr('cy', function(d, i){
-                return (radius+(d.voters * 5)) * Math.cos(i);
-              })
-              .attr('r', function(d){
-                return d.voters;
-              });
+            .append('g')
+            .attr('id', function(d){
+              return 'family'+d._id;
+            })
+            .attr('class', 'family');
 
-          families.on('mouseover', function(d){
+          familyG
+            .transition()
+            .attr('transform', function(d, i){
+              var x = (radius+(d.voters * 5)) * Math.sin(i);
+              var y = (radius+(d.voters * 5)) * Math.cos(i);
+              d.x = x;
+              d.y = y;
+              return 'translate('+x+','+y+')';
+            });
+
+          familyG.append('circle')
+            .attr('cx', 0)
+            .attr('cy', 0)
+            .attr('r', function(d){
+              return d.voters;
+            });
+
+          familyG.on('mouseover', function(d){
               //TODO: show family tooltip
-              d3.select(this).classed('hover', true);
+              var el = d3.select(this);
+              el.classed('hover', true);
+              GeographyHelper.showFamilyName(el);
             })
             .on('mouseout', function(d){
               //TODO: hide family tooltip
-              d3.select(this).classed('hover', false)
+              var el = d3.select(this);
+              el.classed('hover', false);
+              GeographyHelper.hideFamilyName(el);
             })
             .on('click', function(d){
               console.log('Clicked on family...', d);
@@ -153,9 +201,13 @@ angular.module('paDesignerApp')
           families
             .exit()
             .transition()
-            .attr('cx', 0)
-            .attr('cy', 0)
+            .attr('transform', 'translate(0,0)')
             .remove();
+
+          if(family){
+            var selectedF = d3.select('#family'+family._id);
+            GeographyHelper.showFamilyName(selectedF);
+          }
         };
 
         var renderGeomap = function(){
@@ -240,7 +292,7 @@ angular.module('paDesignerApp')
         scope.$watch('selectedDistrict', function(newVal, oldVal){
           if(scope.selectedDistrict){
             //find how many people are in this district
-
+            scope.selectedFamily = null;
             var inDistrict = PopulationDB.getAllInDistrict(scope.population, scope.selectedDistrict.id);
             console.log(inDistrict);
             scope.selectedDistrict.size = inDistrict.length;
@@ -251,9 +303,16 @@ angular.module('paDesignerApp')
           }
         });
 
-        scope.$watch('selectedFamily', function(){
-          if(scope.selectedFamily){
+        scope.$watch('selectedFamily', function(newVal, oldVal){
+          if(newVal){
             console.log('Selected Family is this: ', scope.selectedFamily);
+            //render connections
+            GeographyHelper.hideConnection();
+            renderConnectedFamilies(false, oldVal);
+            renderConnectedFamilies(true, newVal);
+          }else if(oldVal){
+            GeographyHelper.hideConnection();
+            renderConnectedFamilies(false, oldVal);
           }
         });
       }
