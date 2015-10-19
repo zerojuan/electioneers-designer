@@ -24,7 +24,7 @@ angular.module('paDesignerApp')
         d3.select('.familyConnection').remove();
         return;
       }
-      
+
       var frmDistrict = d3.select('#district'+fromData.district.id).datum();
       var toDistrict = d3.select('#district'+toData.district.id).datum();
       var frm = d3.select('#family'+fromData._id).datum();
@@ -54,5 +54,13 @@ angular.module('paDesignerApp')
     this.hideConnection = function(){
       console.log('Hiding family connection...');
       d3.select('.familyConnection').remove();
+    };
+
+    this.updateDistrictConnection = function(){
+      var lines = d3.selectAll('.link');
+          lines.attr('x1', function(d) {return d.source.x; })
+            .attr('y1', function(d) { return d.source.y; })
+            .attr('x2', function(d) { return d.target.x; })
+            .attr('y2', function(d) { return d.target.y; });
     }
   });

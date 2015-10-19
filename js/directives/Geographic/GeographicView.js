@@ -86,11 +86,7 @@ angular.module('paDesignerApp')
             node.attr('transform', 'translate('+d.x+','+d.y+')');
 
             //update lines
-            var lines = d3.selectAll('.link');
-                lines.attr('x1', function(d) {return d.source.x; })
-                  .attr('y1', function(d) { return d.source.y; })
-                  .attr('x2', function(d) { return d.target.x; })
-                  .attr('y2', function(d) { return d.target.y; });
+            GeographyHelper.updateDistrictConnection();
           })
           .on('dragend', function(d){
             console.log('Drag End: ', d);
@@ -247,11 +243,9 @@ angular.module('paDesignerApp')
               .attr('class', 'link')
               .style('stroke-width', function(d){
                 return d.value;
-              })
-              .attr('x1', function(d) {return d.source.x; })
-              .attr('y1', function(d) { return d.source.y; })
-              .attr('x2', function(d) { return d.target.x; })
-              .attr('y2', function(d) { return d.target.y; });
+              });
+
+          GeographyHelper.updateDistrictConnection();
 
           var node = svgGroup.selectAll('.node')
               .data(nodes)
