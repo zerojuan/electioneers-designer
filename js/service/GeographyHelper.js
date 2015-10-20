@@ -30,8 +30,6 @@ angular.module('paDesignerApp')
       var frm = d3.select('#family'+fromData._id).datum();
       var to = d3.select('#family'+toData._id).datum();
 
-      console.log('Appending: ', frmDistrict, 'To: ', to);
-
       var elm = d3.select('.mainGroup');
 
       elm.append('line')

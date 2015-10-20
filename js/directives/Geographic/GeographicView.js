@@ -125,6 +125,7 @@ angular.module('paDesignerApp')
           }
           _.forEach(family.sons, showChild);
           _.forEach(family.daughters, showChild);
+
           //foreach parent show their family in that district
           showChild(family.father);
           showChild(family.mother);
@@ -292,6 +293,9 @@ angular.module('paDesignerApp')
             scope.selectedDistrict.size = inDistrict.length;
             scope.selectedDistrict.families = inDistrict;
 
+            console.log('Old Val: ', oldVal.name);
+            console.log('New Val: ', newVal.name);
+            //TODO: BUG: selecting an open district twice doesn't show the second time
             renderFamilies(false, oldVal);
             renderFamilies(true, newVal);
           }
