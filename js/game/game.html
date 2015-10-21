@@ -33,24 +33,6 @@
             </div>
           </div>
         </uib-tab>
-        <uib-tab heading="Kapitans">
-          <div class="panel panel-default">
-            <div class="col-xs-6" style="min-height: 400px; margin-top: 10px;">
-              <kapitan-in-design ng-repeat="kapitan in gameData.kapitans" on-select="onKapitanSelected" class="pull-left" kapitan="kapitan">
-              </kapitan-in-design>
-              <div class="btn btn-danger pull-left district" ng-click="onNewKapitan()">Add Kapitan</div>
-            </div>
-            <div class="col-xs-6" style="min-height: 400px; margin-top: 10px;">
-              <div ng-hide="selected.kapitan">
-                <span class="text-muted">Select a kapitan</span>
-              </div>
-              <div ng-show="selected.kapitan">
-                <kapitan-edit kapitan="selected.kapitan" on-delete="onDeleteKapitan" kapitans="gameData.kapitans">
-                </kapitan-edit>
-              </div>
-            </div>
-          </div>
-        </uib-tab>
         <uib-tab heading="Population">
           <div class="row">
             <div class="col-md-2">
