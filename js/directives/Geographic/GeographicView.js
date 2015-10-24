@@ -115,6 +115,7 @@ angular.module('paDesignerApp')
               if(!district.families){
                 district.families = PopulationDB.getAllInDistrict(scope.population, child.district.id);
               }
+
               renderFamilies(show, district, child);
 
               //show line between this and their family
@@ -142,6 +143,8 @@ angular.module('paDesignerApp')
             return;
           }
           var id = district.id;
+
+          console.log((show ? 'Showing' : 'Hiding') + 'family...', district.name);
 
           var arr = show ? district.families : [];
 
@@ -176,13 +179,13 @@ angular.module('paDesignerApp')
               return d.voters;
             });
 
-          familyG.on('mouseover', function(d){
+          familyG.on('mouseover', function(){
               //TODO: show family tooltip
               var el = d3.select(this);
               el.classed('hover', true);
               GeographyHelper.showFamilyName(el);
             })
-            .on('mouseout', function(d){
+            .on('mouseout', function(){
               //TODO: hide family tooltip
               var el = d3.select(this);
               el.classed('hover', false);
@@ -199,6 +202,9 @@ angular.module('paDesignerApp')
             .exit()
             .transition()
             .attr('transform', 'translate(0,0)')
+            .each('end', function(){
+              console.log('It ended');
+            })
             .remove();
 
           if(family){
@@ -285,7 +291,7 @@ angular.module('paDesignerApp')
         });
 
         scope.$watch('selectedDistrict', function(newVal, oldVal){
-          if(scope.selectedDistrict){
+          if(newVal){
             //find how many people are in this district
             scope.selectedFamily = null;
             var inDistrict = PopulationDB.getAllInDistrict(scope.population, scope.selectedDistrict.id);
@@ -293,11 +299,19 @@ angular.module('paDesignerApp')
             scope.selectedDistrict.size = inDistrict.length;
             scope.selectedDistrict.families = inDistrict;
 
-            console.log('Old Val: ', oldVal.name);
+            // console.log('Old Val: ', oldVal.name);
             console.log('New Val: ', newVal.name);
             //TODO: BUG: selecting an open district twice doesn't show the second time
-            renderFamilies(false, oldVal);
-            renderFamilies(true, newVal);
+            // Hide all families
+            _.forEach(scope.districts, function(district){
+              if(district.id !== newVal.id){
+                renderFamilies(false, district);
+              }else{
+                renderFamilies(true, district);
+              }
+
+            });
+
           }
         });
 
@@ -306,11 +320,13 @@ angular.module('paDesignerApp')
             console.log('Selected Family is this: ', scope.selectedFamily);
             //render connections
             GeographyHelper.hideConnection();
+            //hide all family
             renderConnectedFamilies(false, oldVal);
+            //show connected family
             renderConnectedFamilies(true, newVal);
           }else if(oldVal){
             GeographyHelper.hideConnection();
-            renderConnectedFamilies(false, oldVal);
+            // renderConnectedFamilies(false, oldVal);
           }
         });
       }

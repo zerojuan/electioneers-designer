@@ -51,7 +51,7 @@ angular.module('paDesignerApp')
 
     this.hideConnection = function(){
       console.log('Hiding family connection...');
-      d3.select('.familyConnection').remove();
+      d3.selectAll('.familyConnection').remove();
     };
 
     this.updateDistrictConnection = function(){
