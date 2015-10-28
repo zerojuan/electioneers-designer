@@ -117,17 +117,17 @@ angular.module('paDesignerApp')
               }
 
               renderFamilies(show, district, child);
-
-              //show line between this and their family
-              GeographyHelper.showConnection(show, family, child);
-            }else{
-              GeographyHelper.showConnection(show, family, child);
             }
+
+            // show line between this and the family
+            GeographyHelper.showConnection(show, family, child);
           }
+
+          // show children
           _.forEach(family.sons, showChild);
           _.forEach(family.daughters, showChild);
 
-          //foreach parent show their family in that district
+          // show parents
           showChild(family.father);
           showChild(family.mother);
         };
