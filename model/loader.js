@@ -84,10 +84,12 @@ var GetGameData = function(path){
   var districts = JSON.parse(fs.readFileSync(defaultDir+'/districts.json', {encoding: 'utf8'}));
   var population = JSON.parse(fs.readFileSync(defaultDir+'/population.json', {encoding: 'utf8'}));
 
+  // TODO: setup actions for file saving
   return {
     kapitans: kapitans.data,
     districts: districts.data,
-    population: population.data
+    population: population.data,
+    actions: []
   };
 };
 

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('paDesignerApp')
-  .controller('GameCtrl', function(DistrictsModel, KapitansModel, GameService, LoaderService, PopulationGenerator, PopulationDB, $scope){
+  .controller('GameCtrl', function(ActionsModel, DistrictsModel, KapitansModel, GameService, LoaderService, PopulationGenerator, PopulationDB, $scope){
     $scope.selected = {};
 
     $scope.generator = {
@@ -55,6 +55,12 @@ angular.module('paDesignerApp')
       var k = KapitansModel.CreateKapitan();
       $scope.gameData.kapitans.push(k);
     };
+
+    $scope.onNewAction = function(){
+      var a = ActionsModel.CreateAction();
+      console.log('Creating a new action');
+      $scope.gameData.actions.push(a);
+    }
 
     $scope.onDeleteDistrict = function(district){
       $scope.gameData.districts = _.reject($scope.gameData.districts, function(d){
