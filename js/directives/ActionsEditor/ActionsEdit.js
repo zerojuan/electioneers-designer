@@ -7,10 +7,6 @@ angular.module('paDesignerApp')
      restrict: 'E',
      transclude: true,
      scope: {
-       district: '=',
-       districts: '=',
-       kapitans: '=',
-       onDelete: '='
      },
      link: function(scope){
        console.log('Loaded actions editor');

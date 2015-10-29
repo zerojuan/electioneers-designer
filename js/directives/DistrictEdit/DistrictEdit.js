@@ -9,7 +9,6 @@ angular.module('paDesignerApp')
      scope: {
        district: '=',
        districts: '=',
-       kapitans: '=',
        onDelete: '='
      },
      link: function (scope) {
