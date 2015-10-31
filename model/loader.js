@@ -2,11 +2,11 @@
 
 var fs = require('fs-extra');
 var _ = require('underscore');
+var async = require('async');
 var Moniker = require('moniker');
 var names = Moniker.generator([Moniker.adjective, Moniker.noun]);
 var settings = require('../settings.js');
 var District = require('./District.js');
-var Kapitan = require('./Kapitan.js');
 
 var loadData = function(path){
   return JSON.parse(fs.readFileSync(path, {encoding: 'utf8'}));
@@ -25,13 +25,9 @@ var DistrictsFromFile = function(filePath){
   return districts;
 };
 
-var KapitansFromFile = function(filePath){
+var ActionsFromFile = function(filePath){
   var data = loadData(filePath);
-  var kapitans = _.map(data.data, function(d){
-    return new Kapitan(d.id, d.name);
-  });
-
-  return kapitans;
+  return data;
 };
 
 var CreateNewSave = function(){
@@ -47,8 +43,8 @@ var CreateNewSave = function(){
   fs.mkdirSync(folderName);
 
   saveData(folderName+'/districts.json', loadData(defaultDir+'/districts.json'));
-  saveData(folderName+'/kapitans.json', loadData(defaultDir+'/kapitans.json'));
   saveData(folderName+'/population.json', loadData(defaultDir+'/population.json'));
+  saveData(folderName+'/actions.json', loadData(defaultDir+'/actions.json'));
 
   return name;
 };
@@ -76,35 +72,49 @@ var GetSavedFiles = function(){
   return ret;
 };
 
-var GetGameData = function(path){
+var GetGameData = function(path, cb){
   var defaultDir = settings.getWorkingDirectory() + '/saves/' + path;
 
-  //open kapitans
-  var kapitans = JSON.parse(fs.readFileSync(defaultDir+'/kapitans.json', {encoding: 'utf8'}));
-  var districts = JSON.parse(fs.readFileSync(defaultDir+'/districts.json', {encoding: 'utf8'}));
-  var population = JSON.parse(fs.readFileSync(defaultDir+'/population.json', {encoding: 'utf8'}));
+  //open files
+  async.series({
+    districts: function(callback){
+      fs.readFile(defaultDir+'/districts.json', {encoding: 'utf8'}, function(err, data){
+        if(err){
+          console.log('Error: ', err);
+          return callback(null, []);
+        }
+        return callback(null, JSON.parse(data));
+      });
+    }
+  },{
+    population: function(callback){
+      fs.readFile(defaultDir+'/population.json', {encoding: 'utf8'}, function(err, data){
+        if(err){
+          console.log('Error: ', err);
+          return callback(null, []);
+        }
 
-  // TODO: setup actions for file saving
-  return {
-    kapitans: kapitans.data,
-    districts: districts.data,
-    population: population.data,
-    actions: []
-  };
+        return callback(null, JSON.parse(data));
+      });
+    }
+  },{
+    actions: function(callback){
+      fs.readFile(defaultDir+'/actions.json', {encoding: 'utf8'}, function(err, data){
+        if(err){
+          console.log('Error: ', err);
+          return callback(null, []);
+        }
+
+        return callback(null, JSON.parse(data));
+      });
+    }
+  }, function(err, results){
+    return cb(results);
+  });
 };
 
 var SaveGameData = function(path, data){
   var defaultDir = settings.getWorkingDirectory() + '/saves/' + path;
-
-  //save kapitans
-  var kapitans = {
-    name: 'Kapitans',
-    data: _.map(data.kapitans, function(k){
-      var kap = new Kapitan();
-      return kap.toJson(k);
-    })
-  };
-  fs.writeFileSync(defaultDir+'/kapitans.json', JSON.stringify(kapitans, null, '\t'));
 
   //save districts
   var districts = {
@@ -124,12 +134,18 @@ var SaveGameData = function(path, data){
   };
   fs.writeFileSync(defaultDir+'/population.json', JSON.stringify(population, null, '\t'));
 
+  var actions = {
+    name: 'Actions',
+    data: data.actions
+  };
+  fs.writeFileSync(defaultDir+'/actions.json', JSON.stringify(actions, null, '\t'));
+
   return;
 };
 
 exports.DistrictsFromFile = DistrictsFromFile;
 
-exports.KapitansFromFile = KapitansFromFile;
+exports.ActionsFromFile = ActionsFromFile;
 
 exports.CreateNewSave = CreateNewSave;
 

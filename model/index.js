@@ -4,19 +4,6 @@ var fs = require('fs');
 var settings = require('../settings.js');
 var loader = require('./loader.js');
 var District = require('./District.js');
-var Kapitan = require('./Kapitan.js');
-
-var createKapitans = function(){
-  var kapitans = [
-    new Kapitan('1', 'Owlfredo').toJson(),
-    new Kapitan('2', 'Manfred').toJson(),
-    new Kapitan('3', 'Naked Molerat').toJson(),
-    new Kapitan('4', 'Master Shredder').toJson(),
-    new Kapitan('5', 'Elephant Man').toJson()
-  ];
-
-  return kapitans;
-};
 
 var createDistricts = function(){
   var districts = [
@@ -31,11 +18,18 @@ var createDistricts = function(){
 };
 
 var createPopulation = function(){
-  //TODO: should generate a default population
+  // TODO: should generate a default population
   var population = [
   ];
 
   return population;
+};
+
+var createActions = function(){
+  // TODO: should generate a default actions
+  var actions = [];
+
+  return actions;
 };
 
 exports.init = function(){
@@ -52,26 +46,7 @@ exports.init = function(){
 
     if(!fs.existsSync(defaultDir+'/saves')){
       fs.mkdirSync(defaultDir+'/saves');
-    }    
-
-    fs.open(defaultDir+'/kapitans.json', 'r+', function(err){
-      var kapitans;
-      if(err){
-        console.log('Cannot find kapitans file...');
-        kapitans = {
-          name: 'Kapitans',
-          data: createKapitans()
-        };
-        fs.writeFile(defaultDir+'/kapitans.json', JSON.stringify(kapitans, null, '\t'), function(err){
-          if(err){
-            console.log('Unable to write kapitans.json');
-          }
-        });
-      }else{
-        kapitans = loader.KapitansFromFile(defaultDir+'/kapitans.json');
-        console.log('Loaded kapitans: ' + kapitans.length);
-      }
-    });
+    }
 
     fs.open(defaultDir+'/districts.json', 'r+', function(err){
       var districts;
@@ -110,6 +85,27 @@ exports.init = function(){
         //load data
         population = loader.DistrictsFromFile(defaultDir+'/population.json');
         console.log('Loaded population: ' + population.length);
+      }
+    });
+
+    fs.open(defaultDir+'/actions.json', 'r+', function(err){
+      var actions;
+
+      if(err){
+        console.log('Cannot find actions file...');
+        actions = {
+          name: 'Actions',
+          data: createActions()
+        };
+        fs.writeFile(defaultDir+'/actions.json', JSON.stringify(actions, null, '\t'), function(err){
+          if(err){
+            console.log('Unable to write actions.json');
+          }
+        });
+      }else{
+        //load data
+        actions = loader.ActionsFromFile(defaultDir+'/actions.json');
+        console.log('Loaded actions: ' + actions.length);
       }
     });
 };
