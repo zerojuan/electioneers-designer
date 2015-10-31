@@ -4,8 +4,8 @@ angular.module('paDesignerApp')
   .service('GameService', function(LoaderService){
     var gameData;
 
-    this.GetGameData = function(game){
-      gameData = LoaderService.GetGameData(game);
+    this.GetGameData = function(game, cb){
+      gameData = LoaderService.GetGameData(game, cb);
       return gameData;
     };
 

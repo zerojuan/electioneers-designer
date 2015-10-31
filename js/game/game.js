@@ -13,20 +13,23 @@ angular.module('paDesignerApp')
 
     $scope.$watch('game', function(){
       if($scope.game){
-        var gameData = GameService.GetGameData($scope.game.name);
-        gameData.districts = _.map(gameData.districts, function(d){
-          if(!d.neighbors){
-            d.neighbors = [];
-          }
+        GameService.GetGameData($scope.game.name, function(data){
+          var gameData = data;
+          console.log(data);
+          gameData.districts = _.map(gameData.districts, function(d){
+            if(!d.neighbors){
+              d.neighbors = [];
+            }
 
-          d = new DistrictsModel.District(d);
-          d.setKap(gameData.kapitans);
+            d = new DistrictsModel.District(d);
+            d.setKap(gameData.kapitans);
 
-          return new DistrictsModel.District(d);
+            return new DistrictsModel.District(d);
+          });
+
+          $scope.gameData = gameData;
+          $scope.generator.population = gameData.population;
         });
-
-        $scope.gameData = gameData;
-        $scope.generator.population = gameData.population;
       }
     });
 

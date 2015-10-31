@@ -79,14 +79,15 @@ var GetGameData = function(path, cb){
   async.series({
     districts: function(callback){
       fs.readFile(defaultDir+'/districts.json', {encoding: 'utf8'}, function(err, data){
+        console.log('Read file...', err);
         if(err){
           console.log('Error: ', err);
           return callback(null, []);
         }
-        return callback(null, JSON.parse(data));
+        console.log('Callbacking...');
+        return callback(null, JSON.parse(data).data);
       });
-    }
-  },{
+    },
     population: function(callback){
       fs.readFile(defaultDir+'/population.json', {encoding: 'utf8'}, function(err, data){
         if(err){
@@ -94,10 +95,9 @@ var GetGameData = function(path, cb){
           return callback(null, []);
         }
 
-        return callback(null, JSON.parse(data));
+        return callback(null, JSON.parse(data).data);
       });
-    }
-  },{
+    },
     actions: function(callback){
       fs.readFile(defaultDir+'/actions.json', {encoding: 'utf8'}, function(err, data){
         if(err){
@@ -105,7 +105,7 @@ var GetGameData = function(path, cb){
           return callback(null, []);
         }
 
-        return callback(null, JSON.parse(data));
+        return callback(null, JSON.parse(data).data);
       });
     }
   }, function(err, results){
