@@ -109,6 +109,7 @@ angular.module('paDesignerApp')
     $scope.onSave = function(){
       //save game data to the file in this folder
       $scope.gameData.population = $scope.generator.population;
+      console.log('Save everything: ', $scope.gameData);
       GameService.SaveGameData($scope.game.name, $scope.gameData);
     };
 

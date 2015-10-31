@@ -121,7 +121,6 @@ var SaveGameData = function(path, data){
     name: 'Districts',
     data: _.map(data.districts, function(d){
       var dist = new District();
-      d.kapitanId = d.kap.id;
       return dist.toJson(d);
     })
   };
