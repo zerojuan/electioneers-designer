@@ -13,12 +13,13 @@ angular.element(document).ready(function(){
 	//load or create settings files here
 	model.init();
 
-	angular.element(document).on('keyup', function(event){
+	angular.element(document).on('keydown', function(event){
 		console.log('Key pressed: ', event.which);
+		console.log('Control Key pressed: ', event.metaKey);
 		if ( event.which === 192 ) { //Tilde
 	    event.preventDefault();
 			win.showDevTools();
-	  }else if(event.which === 67){ //C
+	  }else if(event.which === 67 && event.metaKey){ //C
 			win.reload();
 		}else if(event.which === 9){ //Tab
 			console.log('Toggling fullscreen?');
