@@ -36,24 +36,14 @@ angular.module('paDesignerApp')
       });
     };
 
-    this.attachMoveList = function(family, candidate){
+    this.attachMoveList = function(family, candidate, actions){
       //search moves
       if(!family.moves){
         family.moves = [];
       }
 
       if(!family.moves[candidate.family._id] || (family.moves[candidate.family._id].length < 0)){
-        family.moves[candidate.family._id] = [
-          {
-            name: 'Gift'
-          },
-          {
-            name: 'Hire'
-          },
-          {
-            name: 'Intimidate'
-          }
-        ];
+        family.moves[candidate.family._id] = actions
       }
 
       return family;

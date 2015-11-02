@@ -8,7 +8,8 @@ angular.module('paDesignerApp')
       transclude: true,
       scope: {
         selectedFamily: '=',
-        candidate: '='
+        candidate: '=',
+        actions: '='
       },
       link: function(scope, elm, attr){
 
@@ -26,7 +27,7 @@ angular.module('paDesignerApp')
         scope.$watch('selectedFamily', function(){
           if(scope.selectedFamily){
             //Move list should be contextual, depending on the current status of the
-            ElectionEngine.attachMoveList(scope.selectedFamily, scope.candidate);
+            ElectionEngine.attachMoveList(scope.selectedFamily, scope.candidate, scope.actions);
           }
         });
       }
