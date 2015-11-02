@@ -36,9 +36,9 @@
         <uib-tab heading="Actions">
           <div class="panel panel-default">
             <div class="col-xs-6" style="min-height: 400px; margin-top: 10px;">
-              <action-in-design ng-repeat="action in gameData.actions" selected-action="selected.action" action="action" on-select="onSelectedAction">
+              <div class="btn btn-danger" ng-click="onNewAction()">Add Action</div>
+              <action-in-design ng-repeat="action in gameData.actions track by $index" selected-action="selected.action" action="action" on-select="onSelectedAction">
               </action-in-design>
-              <div class="btn btn-danger pull-left" ng-click="onNewAction()">Add Action</div>
             </div>
             <div class="col-xs-6" style="min-height: 400px; margin-top: 10px;">
               <div ng-hide="selected.action">
