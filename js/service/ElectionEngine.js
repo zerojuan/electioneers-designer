@@ -43,7 +43,11 @@ angular.module('paDesignerApp')
       }
 
       if(!family.moves[candidate.family._id] || (family.moves[candidate.family._id].length < 0)){
-        family.moves[candidate.family._id] = actions
+        // select only the actions of type 'family'
+        family.moves[candidate.family._id] = _.filter(actions, function(action){
+          console.log('action: ', action);
+          return action.type.id === 'family';
+        });
       }
 
       return family;
