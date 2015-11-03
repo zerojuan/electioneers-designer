@@ -10,7 +10,16 @@ angular.module('paDesignerApp')
        action: '='
      },
      link: function(scope){
-       console.log('Loaded actions editor');
+       scope.types = [
+         {
+           id: 'district',
+           name: 'District'
+         },
+         {
+           id: 'family',
+           name: 'Family'
+         }
+       ];
      }
    };
   });
