@@ -19,7 +19,8 @@ angular.element(document).ready(function(){
 		if ( event.which === 192 ) { //Tilde
 	    event.preventDefault();
 			win.showDevTools();
-	  }else if(event.which === 67 && event.metaKey){ //C
+	  }else if((event.which === 67 && event.metaKey) ||
+		(event.which === 67 && event.ctrlKey)){ //C
 			win.reload();
 		}else if(event.which === 9){ //Tab
 			console.log('Toggling fullscreen?');
