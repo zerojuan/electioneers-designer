@@ -13,8 +13,7 @@ angular.module('paDesignerApp')
      },
      link: function (scope) {
        scope.onSelect = function(){
-         console.log('User selected this action');
-         scope.selectedAction = scope.action;
+          scope.selectedAction = scope.action;
        }
      }
    };

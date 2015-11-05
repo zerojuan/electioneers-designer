@@ -14,8 +14,17 @@ angular.module('paDesignerApp')
       link: function(scope, elm, attr){
 
         scope.addAction = function(action){
-          //TODO: should be a real dropdown here
-          scope.selectedFamily.actions[scope.candidate.family._id].push(action);
+          // should not allow duplicates
+          var actions = scope.selectedFamily.actions[scope.candidate.family._id];
+          var found = _.find(actions, function(a){
+            if(a.id === action.id){
+              return a;
+            }
+          });
+
+          if(!found){
+            actions.push(action);
+          }
         };
 
         scope.removeAction = function(action){
