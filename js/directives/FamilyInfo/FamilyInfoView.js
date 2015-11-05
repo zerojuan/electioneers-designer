@@ -33,6 +33,10 @@ angular.module('paDesignerApp')
           });
         };
 
+        scope.unSelect = function(){
+          scope.selectedFamily = null;
+        };
+
         scope.$watch('selectedFamily', function(){
           if(scope.selectedFamily){
             //Move list should be contextual, depending on the current status of the

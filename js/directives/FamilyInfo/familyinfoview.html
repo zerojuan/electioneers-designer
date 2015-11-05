@@ -1,6 +1,6 @@
 <div class="familyInfo col-xs-3"  ng-show="selectedFamily">
   <div class="row">
-      <h3>{{selectedFamily.fatherName}} {{selectedFamily.familyName}}<a class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-minus"></i></a></h3>
+      <h3>{{selectedFamily.fatherName}} {{selectedFamily.familyName}}<a class="btn btn-sm btn-danger" ng-click="unSelect()"><i class="glyphicon glyphicon-minus"></i></a></h3>
   </div>
   <div class="row">
       <div class="pulse col-xs-12">{{selectedFamily.opinion[candidate.family._id]}}</div>
