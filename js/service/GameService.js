@@ -18,8 +18,6 @@ angular.module('paDesignerApp')
         name: 'New District',
         id: Date.now(),
         population: 10,
-        kapitanId: gameData.kapitans[0].id,
-        kapitan: gameData.kapitans[0],
         neighbors: []
       };
     };
