@@ -11,9 +11,9 @@
     "icon": "icon.png"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lessc": "watch 'lessc less/bootstrap.less styles/main.css' less/",
-    "start": "watch 'lessc less/bootstrap.less styles/main.css' less/"
+    "start": "./node_modules/.bin/gulp watch",
+    "build": "./node_modules/.bin/gulp build",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "partyanimals",
@@ -28,7 +28,8 @@
     "leveldown": "^1.2.2",
     "moniker": "^0.1.2",
     "pouchdb": "^3.6.0",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "webpack": "^1.12.9"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
@@ -36,6 +37,7 @@
     "gulp-less": "^3.0.3",
     "gulp-watch": "^4.3.5",
     "nw-dev": "^1.2.3",
-    "watch": "^0.15.0"
+    "watch": "^0.15.0",
+    "webpack-dev-server": "^1.14.0"
   }
 }
