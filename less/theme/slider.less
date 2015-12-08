@@ -1,0 +1,38 @@
+/**
+ * slider
+ */
+
+.noUi-target{
+    border-radius:0;
+    border:none;
+    box-shadow:none;
+    background:@cyan;
+}
+
+.noUi-origin{
+    background:@grey-200;
+    border-radius:0;
+}
+
+.noUi-horizontal{
+    height:5px;
+}
+
+.noUi-handle{
+    
+    box-shadow:none;
+    background:@cyan;
+    border:none;
+    
+    &:before,
+    &:after{
+        content:none;
+    }
+    
+    .noUi-horizontal &{
+        height:18px;
+        width:18px;
+        border-radius:50%;
+    }
+    
+}

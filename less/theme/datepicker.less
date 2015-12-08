@@ -1,0 +1,50 @@
+/**
+ * datepicker
+ */
+
+.picker{
+    
+    &__holder{
+        outline:none;
+    }
+    
+    
+    &__day{
+        
+        &--today{
+            &:before{
+                border-top:.5em solid @blue;
+            }
+        }
+        
+        &--highlighted{
+            
+            .picker--focused &{
+                background:@blue-50;
+            }
+            
+        }
+        
+    }
+    
+    &__button{
+        
+        &--today{
+            &:before{
+                border-top:.66em solid @blue;
+            }
+        }
+        
+        &--clear{
+            &:before{
+                border-top:3px solid @red;
+            }
+        }
+        
+        &--close{
+            &:before{
+                color:@grey-500;
+            }
+        }
+    }
+}

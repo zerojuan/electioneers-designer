@@ -1,0 +1,54 @@
+/**
+ * colors
+ */
+
+.txt_colors_examples{
+    
+    margin-top:30px;
+    border-top:1px solid @grey-200;
+    padding-top:30px;
+    
+    &:first-child{
+        border-top:none;
+        padding-top:0;
+    }
+    
+    &__wrapper{
+        padding:10px 30px 40px 30px;
+    }
+    
+}
+
+.txt_color_example{
+    padding:5px 0;
+    text-align:center;
+    display:inline-block;
+    margin-right:15px;
+    font-weight:700;
+}
+
+
+
+.bg_colors_examples{
+    margin-top:40px;
+    
+    &__wrapper{
+        padding:0 30px 40px 30px;
+    }
+    
+}
+
+.bg_color_example{
+    height:65px;
+    position:relative;
+    margin-bottom:5px;
+    
+    > span{
+        background:@white-list;
+        color:@grey-700;
+        position:absolute;
+        top:0;
+        left:0;
+        padding:2px 5px;
+    }
+}

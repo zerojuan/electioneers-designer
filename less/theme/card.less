@@ -1,0 +1,105 @@
+/**
+ * card
+ */
+
+.card{
+    
+    margin-bottom:50px;
+    background:@white-list;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+    
+    &__header{
+        position:relative;
+        padding:35px 35px 0;
+        
+        &--center{
+            text-align:center;
+        }
+        
+        .btn-fab{
+            position:absolute;
+            z-index:3;
+            right:40px;
+            bottom:-28px;
+        }
+        
+        &--padding1{
+            padding:35px;
+        }
+
+    }
+    
+    &__title{
+        font-size:16px;
+        line-height:16px;
+        margin:0;
+        color:inherit;
+        font-weight:400;
+        
+        i{
+            vertical-align:middle;
+            color:@grey-400;
+            
+            &.prev,
+            &.next{
+                padding:0 20px;
+            }
+        }
+    }
+    
+    &__subtitle{
+        font-size:14px;
+        line-height:14px;
+        margin:5px 0 0 0;
+        font-weight:300;
+        color:@grey-600;
+        
+        i{
+            vertical-align:middle;
+        }
+        
+        &--icon{
+            position:relative;
+            left:-7px;
+            i{
+                padding-right:4px;
+            }
+        }
+    }
+    
+    &__menu{
+        position:absolute;
+        top:30px;
+        right:25px;
+        
+        > ul{
+            margin:0;
+        }
+        
+        a{
+            color:@grey-800;
+        }
+        
+        &--white{
+            
+            a{
+                color:@grey-100;
+            }
+            
+        }
+    }
+    
+    &__content{
+        position:relative;
+        
+        &--padding{
+            
+            &1{
+                padding:20px 35px 20px;
+            }
+            
+        }
+        
+    }
+    
+}

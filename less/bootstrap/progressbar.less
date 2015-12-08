@@ -1,0 +1,77 @@
+/**
+ * progressbar
+ */
+
+.progress{
+    
+    background-color:@grey-200;
+    box-shadow:none;
+    border-radius:0;
+    height:3px;
+    margin:auto;
+    
+    &-bar{
+        
+        box-shadow:none;
+    
+        background-color:@indigo;
+        
+        &-success{
+            background-color:@green;
+        }
+        
+        &-info{
+            background-color:@cyan;
+        }
+        
+        &-warning{
+            background-color:@yellow;
+        }
+        
+        &-danger{
+            background-color:@red;
+        }
+        
+        &-teal{
+            background-color:@teal-200;
+        }
+        
+        &-indigo{
+            background-color:@indigo-200;
+        }
+        
+        &-orange{
+            background-color:@orange-200;
+        }
+        
+        &--right{
+            float:right;
+        }
+    
+    }
+    
+    &--xsmall{
+        width:30%;
+    }
+    
+    &--small{
+        width:50%;
+    }
+    
+    &--medium{
+        width:70%;
+    }
+    
+    
+}
+
+
+// Example
+// ------------------
+.progressbars-example{
+ 
+    .progress{
+        margin-bottom:25px;
+    } 
+   
+}

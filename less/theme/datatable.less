@@ -1,0 +1,65 @@
+/**
+ * datatable
+ */
+
+.bootgrid{
+    
+    &-header{
+        
+        .actionBar{
+            padding:0;
+            text-align:left;
+            
+            .sm({
+               text-align:right; 
+            });
+        }
+        
+        .actions{
+            display:none;
+            
+            .sm({
+                float:left;
+                display:block;
+            });
+        }
+        
+        .search{
+            margin:0;
+            padding-top: 8px;
+        }
+        
+    }
+    
+    &-footer{
+        
+        .col-sm-6{
+            
+            &:first-child{
+                
+                width:100%;
+                text-align:center;
+                margin-top:20px;
+                
+                .sm({
+                   width:50%; 
+                   text-align:left;
+                   margin-top:0;
+                });
+            }
+        }
+        
+        .infoBar{
+            
+            display:none;
+            
+            .sm({
+                display:block;
+                margin-top:20px;
+                font-size:12px;
+            });
+            
+        }
+    }
+    
+}

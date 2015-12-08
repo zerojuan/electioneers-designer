@@ -1,0 +1,40 @@
+/**
+ * alerts
+ */
+
+// Mixin
+// ------------------
+.alert(@bg-color, @txt-color){
+    background:@bg-color;
+    color:@txt-color;
+    
+    strong{
+        color:@txt-color;
+    }
+}
+
+
+// Declaration
+// ------------------
+.alert{
+    
+    border-radius:0;
+    border:none;
+    
+    &-success{
+        .alert(@green-100,@green);
+    }
+    
+    &-info{
+        .alert(@blue-100,@blue);
+    }
+    
+    &-warning{
+        .alert(@amber-100,@orange);
+    }
+    
+    &-danger{
+        .alert(@red-100,@red-400);
+    }
+    
+}

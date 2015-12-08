@@ -1,0 +1,71 @@
+/**
+ * popovers
+ */
+
+.popover{
+    padding:0;
+    box-shadow:none;
+    border-radius:0;
+    border:none;
+    
+    &-title{
+        background-color:@grey-800;
+        border-radius:0;
+        color:@white-list;
+        border:none;
+        font-weight:400;
+    }
+    
+    &-content{
+        background:@grey-800;
+        color:@white-list;
+        font-weight:100;
+    }
+    
+    > .arrow{
+        .top&{
+            
+            border-top-color:@grey-800;
+            &:after{
+                border-top-color:@grey-800;
+            }
+        }
+        .right&{
+            
+            border-right-color:@grey-800;
+            &:after{
+                border-right-color:@grey-800;
+            }
+        }
+        .bottom&{
+            
+            border-bottom-color:@grey-800;
+            &:after{
+                border-bottom-color:@grey-800;
+            }
+        }
+        .left&{
+            
+            border-left-color:@grey-800;
+            &:after{
+                border-left-color:@grey-800;
+            }
+        }
+    }
+}
+
+
+// Example
+// ------------------
+.popovers-example{
+    
+    margin-bottom:60px;
+    
+    .popover{
+        position:relative;
+        display:block;
+        width:200px;
+        margin:auto;
+    }
+    
+}

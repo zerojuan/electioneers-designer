@@ -1,0 +1,61 @@
+/**
+ * spreadsheet
+ */
+
+.handsontable{
+    
+    tr{
+        
+        &:first-child{
+            
+            th{
+                border-top:1px solid @grey-200;
+            }
+            
+            th,
+            td{
+                border-top:1px solid @grey-300;
+            }
+            
+        }
+        
+    }
+    
+    th{
+        background-color:@grey-100;
+        
+        &:first-child{
+            border-left:none;
+        }
+        
+        &:last-child{
+            border-right:none;
+        }
+    }
+    
+    td{
+        &:last-child{
+            border-right:none;
+        }
+    }
+    
+    th,
+    td{
+        border-right:1px solid @grey-300;
+        border-bottom:1px solid @grey-300;
+        height:32px;
+        padding:0 10px;
+        vertical-align:middle;
+    }
+    
+    .ht_clone{
+        &_top,
+        &_left,
+        &_corner,
+        &_top_left_corner,
+        &_bottom_left_corner{
+            z-index:4;
+        }
+    }
+    
+}

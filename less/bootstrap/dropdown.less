@@ -1,0 +1,47 @@
+/**
+ * dropdown
+ */
+
+.dropdown-menu{
+    
+    margin:3px 0 0;
+    border-radius:0;
+    padding:5px 0;
+    box-shadow:none;
+    border:1px solid @grey-300;
+    
+     > li{
+        padding:0;
+        > a{
+            padding:6px 0 6px 15px;
+            transition:background-color 200ms ease-in-out, color 200ms ease-in-out;
+            
+            &:hover,
+            &:focus{
+                background:@blue-300 !important;
+                color:@white-list !important;
+            }
+        }
+        
+        &.active{
+            > a{
+                background:@blue-300;
+                color:@white-list;
+            }
+        }
+        
+        &.divider{
+            display:none;
+        }
+        
+        &.dropdown-header{
+            padding:5px 0 2px 10px;
+        }
+    }
+    
+    
+    a{
+        outline:none !important;
+    }
+    
+}

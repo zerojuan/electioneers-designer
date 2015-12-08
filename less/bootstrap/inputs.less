@@ -1,0 +1,197 @@
+/**
+ * inputs
+ */
+
+.form-control{
+    
+    
+    &:not(.bs){
+        
+        background:none;
+        border:none;
+        border-bottom:2px solid @grey-200;
+        border-radius:0;
+        box-shadow:none;
+        color:@grey-500;
+        font-weight:400;
+        padding:0 10px 2px 0;
+        height:auto;
+        resize:none;
+        
+        .placeholder({
+            color:@grey-400;
+            font-weight:300;
+            letter-spacing:1px;
+        });
+        
+        .form-group &{
+            
+            .has-success&{
+                
+                .form-control-states(@green-400);
+                
+            }
+            
+            .has-error&{
+                
+                .form-control-states(@red-400);
+                
+            }
+            
+            .has-warning&{
+                
+                .form-control-states(@orange-400);
+                
+            }
+            
+        }
+        
+        &.alt{
+            .form-control-states(@cyan-800);
+        }
+        
+        &[disabled]{
+            background:none;
+            border-bottom:2px dotted @grey-400;
+        }
+        
+        &:focus{
+            box-shadow:none !important;
+        }
+        
+        &.bootstrap-select{
+            padding:0;
+        }
+        
+    }
+    
+    
+}
+
+.input-wrapper{
+    
+    position:relative;
+    
+    &:after{
+        content: "";
+        height: 2px;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        transition:all 250ms ease-in-out;
+        transform:scale(0);
+        background:@blue;
+        
+        .focus&{
+            transform:scale(1);    
+        }
+    }
+    
+}
+
+
+// SELECT
+// -------------------------------
+.bootstrap-select{
+
+    > .dropdown-menu{
+        
+        opacity:0;
+        
+        transition:opacity 150ms ease-in-out;
+        border-radius:0;
+        padding:0;
+        box-shadow:none;
+        border:1px solid @grey-300;
+        margin:0;
+        
+        > .inner{
+            background:@white-list;
+            padding:4px 0 !important;
+            margin:0;
+            
+            > li{
+                padding:0;
+                > a{
+                    padding:6px 0 6px 15px;
+                    transition:background-color 200ms ease-in-out, color 200ms ease-in-out;
+                    
+                    &:hover,
+                    &:focus{
+                        background:@blue-300;
+                        color:@white-list;
+                    }
+                }
+                
+                &.active{
+                    > a{
+                        background:@blue-300;
+                        color:@white-list;
+                    }
+                }
+                
+                &.selected{
+                    .check-mark{
+                        margin-top:7px !important;
+                    }
+                }
+                
+                &.divider{
+                    display:none;
+                }
+                
+                &.dropdown-header{
+                    padding:5px 0 2px 10px;
+                }
+            }
+        }
+        
+        
+        a{
+            outline:none !important;
+        }
+        
+        
+        .open&{
+            opacity:1;
+        }
+    }
+
+}
+
+.custom-select{
+    
+    display:block;
+    width:100%;
+    border:none;
+    background:@white-list;
+    outline:none !important;
+    padding:2px 2px 6px 0;
+    
+    .filter-option{
+        font-weight:300;
+    }
+    
+    .bs-caret{
+        float:right;
+        
+        .caret{
+            border-top:none;
+            border-right:none;
+            border-bottom:12px solid @grey-600;
+            border-left:12px solid transparent;
+        }
+    }
+    
+}
+
+
+
+// EXAMPLE
+// -------------------------------
+.inputs_example{
+    .form-group{
+        padding:5px 0;
+    }
+}
