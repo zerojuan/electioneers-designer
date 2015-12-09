@@ -3,6 +3,51 @@ var webpack = require( 'webpack' );
 
 module.exports = {
   entry: [
-    
-  ]
-}
+    'webpack-dev-server/client?http://0.0.0.0:8080',
+    'webpack/hot/only-dev-server',
+    './src/scripts/router'
+  ],
+  devtool: 'eval',
+  debug: true,
+  output: {
+    path: path.join( __dirname, 'public' ),
+    filename: 'bundle.js'
+  },
+  resolveLoader: {
+    modulesDirectories: [ 'node_modules' ]
+  },
+
+  resolve: {
+    extensions: ['', '.js', '.cjsx', '.coffee', '.less', '.ttf', '.eot', '.woff'],
+    modulesDirectories:[
+      'node_modules',
+      'bower_components'
+    ]
+  },
+
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+    new webpack.IgnorePlugin(/vertx/), // https://github.com/webpack/webpack/issues/353
+    new webpack.ProvidePlugin({
+      '_': 'underscore'
+    }),
+
+  ],
+
+  externals:{
+    'jquery': 'var jQuery',
+    '$'     : 'var jQuery'
+  },
+
+  module: {
+    loaders: [
+      { test: /\.css$/, loaders: [ 'style', 'css' ]},
+      { test: /\.less/, loader: 'style!css!less?outputStyle=expanded' },
+      { test: /\.cjsx$/, loaders: [ 'react-hot', 'coffee', 'cjsx' ]},
+      { test: /\.(jpg|png|gif|svg)/, loader: 'file-loader' },
+      { test: /\.coffee$/, loader: 'coffee' },
+      { test: /\.(eot|ttf|woff)/, loader: 'file-loader' }
+    ]
+  }
+};
