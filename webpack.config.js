@@ -18,7 +18,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js', '.cjsx', '.coffee', '.less', '.ttf', '.eot', '.woff'],
+    extensions: ['', '.js', '.jsx', '.coffee', '.less', '.ttf', '.eot', '.woff'],
     modulesDirectories:[
       'node_modules',
       'bower_components'
@@ -44,9 +44,11 @@ module.exports = {
     loaders: [
       { test: /\.css$/, loaders: [ 'style', 'css' ]},
       { test: /\.less/, loader: 'style!css!less?outputStyle=expanded' },
-      { test: /\.cjsx$/, loaders: [ 'react-hot', 'coffee', 'cjsx' ]},
+      { test: /\.jsx$/, loaders: [ 'react-hot', 'babel-loader' ],
+        query: {
+            presets:['es2015', 'react']
+        }},
       { test: /\.(jpg|png|gif|svg)/, loader: 'file-loader' },
-      { test: /\.coffee$/, loader: 'coffee' },
       { test: /\.(eot|ttf|woff)/, loader: 'file-loader' }
     ]
   }

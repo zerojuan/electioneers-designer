@@ -59,6 +59,7 @@ gulp.task( 'webpack-dev-server', [ 'css' ], function( callback ) {
     contentBase: './public',
     hot: true,
     watchDelay: 100,
+    inline: true,
     noInfo: true
   });
   devServer.listen( 8080, '0.0.0.0', function( err ) {
