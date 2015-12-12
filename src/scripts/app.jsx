@@ -1,13 +1,18 @@
+import React from 'react';
 import { Link, RouteHandler } from 'react-router';
 
 // import '../styles/main.less';
 
-const App = React.createClass({
+export default React.createClass({
   displayName: 'App',
   render() {
     return (
       <div>
-        <RouteHandler/>
+        This is the react
+        <ul>
+          <li><Link to="/home">Home</Link></li>
+        </ul>
+        {this.props.children}
       </div>
     );
   }

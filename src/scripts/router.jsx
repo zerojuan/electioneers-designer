@@ -1,19 +1,14 @@
-import React from 'react/addons';
-import Router from 'react-router';
-import App from './app';
-import Homepage from './pages/home';
+import React from 'react';
+import { render } from 'react-dom';
+import { Router, Route } from 'react-router';
+import App from './app.jsx';
+import HomePage from './pages/home.jsx';
 
-window.React = React;
 
-Route = Router.Route;
-
-// var routes = (
-//   <Route handler= { App }>
-//     <Route name='hello' handler={HomePage} path='/' />
-//   </Route>
-// );
-var routes = <div></div>;
-
-Router.run( routes, ( Handler ) =>
-  React.render( <Handler/>, document.getElementById('app') )
-)
+render((
+  <Router>
+    <Route component={App} path='/'>
+      <Route path='home' component={HomePage}/>
+    </Route>
+  </Router>
+), document.getElementById('app'));

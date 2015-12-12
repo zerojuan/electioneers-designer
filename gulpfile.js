@@ -21,7 +21,6 @@ gulp.task( 'css', function() {
   ]).on( 'error', function( err ) {
     gutil.log( err );
   })
-  .pipe( $.size() )
   .pipe( gulp.dest( 'public/' ))
   .pipe( map( function( a, cb ) {
     if ( devServer.invalidate ) {
@@ -33,8 +32,7 @@ gulp.task( 'css', function() {
 
 gulp.task( 'copy-assets', function() {
   gulp.src( 'assets/**' )
-    .pipe( gulp.dest( 'public' ))
-    .pipe( $.size() );
+    .pipe( gulp.dest( 'public' ));
 });
 
 var devCompiler = webpack( webpackConfig );
@@ -58,7 +56,9 @@ gulp.task( 'webpack-dev-server', [ 'css' ], function( callback ) {
   devServer = new WebpackDevServer( webpack(webpackConfig), {
     contentBase: './public',
     hot: true,
-    watchDelay: 100,
+    watchOptions: {
+      aggregateTimeout: 100
+    },
     inline: true,
     noInfo: true
   });
