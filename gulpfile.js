@@ -15,19 +15,19 @@ var touch = require( 'touch' );
 var $ = require( 'gulp-load-plugins' )();
 
 gulp.task( 'css', function() {
-  gulp.src([
-    'src/styles/*.less',
-    'src/styles/*.less'
-  ]).on( 'error', function( err ) {
-    gutil.log( err );
-  })
-  .pipe( gulp.dest( 'public/' ))
-  .pipe( map( function( a, cb ) {
-    if ( devServer.invalidate ) {
-      devServer.invalidate();
-    }
-    cb();
-  }));
+  // gulp.src([
+  //   'src/styles/*.less',
+  //   'src/styles/*.less'
+  // ]).on( 'error', function( err ) {
+  //   gutil.log( err );
+  // })
+  // .pipe( gulp.dest( 'public/' ))
+  // .pipe( map( function( a, cb ) {
+  //   if ( devServer.invalidate ) {
+  //     devServer.invalidate();
+  //   }
+  //   cb();
+  // }));
 });
 
 gulp.task( 'copy-assets', function() {
@@ -60,7 +60,7 @@ gulp.task( 'webpack-dev-server', [ 'css' ], function( callback ) {
       aggregateTimeout: 100
     },
     inline: true,
-    noInfo: true
+    noInfo: false
   });
   devServer.listen( 8080, '0.0.0.0', function( err ) {
     if ( err ) {
