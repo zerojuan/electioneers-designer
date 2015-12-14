@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, RouteHandler } from 'react-router';
 
-require('../styles/main.less');
+require('../styles/_import.less');
 
 export default React.createClass({
   displayName: 'App',
