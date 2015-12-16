@@ -19,7 +19,6 @@ export default React.createClass({
                   <a href="#" className="sidebar-toggle"><i><MenuIcon/></i></a>
                 </li>
                 <li className="breadcrumnb">
-                  <Link to="/home">Home</Link>
                 </li>
               </ul>
             </div>
