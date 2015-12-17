@@ -6,6 +6,18 @@ import MenuIcon from 'react-material-icons/icons/navigation/menu';
 
 require('../styles/_import.less');
 
+import Breadcrumbs from 'react-breadcrumbs';
+
+const Breadcrumb = React.createClass({
+  render: function(){
+    return (
+      <div>
+        <Breadcrumbs routes={this.props.routes}/>
+      </div>
+    );
+  }
+});
+
 export default React.createClass({
   displayName: 'App',
   render() {
@@ -19,6 +31,7 @@ export default React.createClass({
                   <a href="#" className="sidebar-toggle"><i><MenuIcon/></i></a>
                 </li>
                 <li className="breadcrumnb">
+                  <Breadcrumb routes={this.props.routes}/>
                 </li>
               </ul>
             </div>

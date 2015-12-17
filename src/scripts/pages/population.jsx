@@ -1,16 +1,16 @@
 import React from 'react';
 
 export default React.createClass({
-  displayName: 'HomePage',
+  displayName: 'Population',
   getDefaultProps() {
     return {
-      title: 'Home Page'
+      title: 'Population'
     };
   },
   render() {
     return (
       <div>
-        <h1>What is wrong here</h1>
+        <h1>{this.props.title}</h1>
       </div>
     )
   }
