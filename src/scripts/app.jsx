@@ -35,7 +35,6 @@ export default React.createClass({
                 </li>
               </ul>
             </div>
-
           </div>
         </div>
 
