@@ -1,0 +1,86 @@
+/**
+ * todo list
+ */
+
+.widget-todo_list{
+    
+    
+    .card{
+        
+        &__header{
+            padding-bottom:20px;
+        }
+        
+    }
+    
+    
+    &__todos{
+        list-style-type:none;
+        margin:0;
+        padding:0;
+        display:table;
+        width:100%;
+    }
+    
+    &__todo{
+        
+        padding:22px 0;
+        cursor:pointer;
+        position:relative;
+        transition:all .3s ease-in-out;
+        display:table;
+        width:100%;
+        
+        > div{
+            display:table-cell;
+            vertical-align:middle;
+        }
+        
+        &_state{
+            width:15%;
+            text-align:center;
+            position:relative;
+        }
+        
+        &_info{
+            font-size:16px;
+            font-weight:300;
+            padding-right:15px;
+        }
+        
+        &.done{
+            color:@grey-400;
+            background:@grey-50;
+        }
+        
+        .check_icon{
+            
+            border-right: 2px solid @grey-500;
+            border-bottom: 2px solid @grey-500;
+            transition:all .3s ease-in-out;
+
+            .done&{
+                border-right: 2px solid @teal-200;
+                border-bottom: 2px solid @teal-200;
+                transform:rotate(405deg);
+            }
+            
+        }
+        
+        &:before{
+            transition:all .3s ease-in-out;
+            content:'';
+            position:absolute;
+            left:0;
+            top:0;
+            bottom:0;
+            width:3px;
+            
+            .done&{
+                background:@teal-200;
+            }
+        }
+        
+    }
+    
+}

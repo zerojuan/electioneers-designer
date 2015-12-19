@@ -1,0 +1,57 @@
+/**
+ * pagination
+ */
+
+.pagination{
+    
+    > li{
+        
+        > a,
+        > span{
+            border:1px solid @grey-200;
+            padding:8px 15px;
+            color:@grey-500;
+            cursor:pointer;
+            
+            &:hover,
+            &:focus{
+                background-color:@teal-300;
+                border-color:@teal-300;
+                color:@white;
+            }
+        }
+        
+    }
+    
+    > .active{
+        
+        > a,
+        > span{
+            background-color:@teal-300;
+            border-color:@teal-300;
+            color:@white-list;
+            
+            &:hover{
+                background-color:@teal-400;
+                border-color:@teal-400;
+            }
+        }
+        
+    }
+    
+    > .disabled{
+        
+        > a,
+        > span{
+            border-color:@grey-200;
+            color:@grey-500;
+            
+            &:hover,
+            &:focus{
+                border-color:@grey-200;    
+            }
+        }
+        
+    }
+    
+}

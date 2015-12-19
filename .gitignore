@@ -1,9 +1,11 @@
 node_modules
 bower_components
 build
-styles
 
 .vagrant
 .DS_Store
 
 npm-debug.log
+
+public/index.html
+public/*.less

@@ -1,0 +1,21 @@
+.placeholder(@rules){
+    
+    &::-webkit-input-placeholder,
+    &::-moz-placeholder,
+    &:-ms-input-placeholder
+    {
+        @rules();
+    }
+    
+}
+
+.form-control-states(@color){
+    
+    border-bottom:2px solid @color;
+    color:@color;
+    
+    .placeholder({
+        color:@color;
+    });
+    
+}

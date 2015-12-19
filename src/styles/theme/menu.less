@@ -1,0 +1,51 @@
+/**
+ * menu
+ */
+
+#menu{
+    
+    list-style-type:none;
+    margin:20px 0 0 0;
+    padding:0;
+    
+    li{
+        padding:0;
+    }
+    
+    ul{
+        list-style-type:none;  
+    }
+    
+
+    a{
+        color:@blue-grey-200;
+        font-weight:200;
+        display:block;
+        padding:10px 0 10px 15px;
+        text-decoration:none;
+        font-size:15px;
+        
+        i{
+            vertical-align:middle;
+            padding-right:10px;
+            position: relative;
+            top: -1px;
+            font-size:20px;
+        }
+        
+        &.active,
+        &:hover{
+            color:@white-list;
+        }
+    }
+    
+    .title{
+        margin-top:10px;
+        padding:10px 0 5px 15px;
+        text-transform:uppercase;
+        color:@grey-400;
+        font-weight:300;
+        font-size:14px;
+    }
+    
+}

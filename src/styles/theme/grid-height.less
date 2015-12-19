@@ -1,0 +1,119 @@
+/**
+ * grid height
+ */
+
+.equal_height{
+    height:100%;
+    
+    > [class^="col-"]{
+
+        .xs&{
+            display:table;
+            height:100%; 
+            
+            > div{
+                display:table-cell;
+                height:100%;
+                width:100%;
+            }
+        }
+
+        .sm&{
+            .sm({
+                display:table;
+                height:100%; 
+                
+                > div{
+                    display:table-cell;
+                    height:100%;
+                    width:100%;
+                }
+                
+            });
+        }
+        
+        .md&{
+            .md({
+                display:table;
+                height:100%; 
+                
+                > div{
+                    display:table-cell;
+                    height:100%;
+                    width:100%;
+                }
+            });
+        }
+        
+        .lg&{
+            .lg({
+                display:table;
+                height:100%; 
+                
+                > div{
+                    display:table-cell;
+                    height:100%;
+                    width:100%;
+                }
+            });
+        }
+        
+        
+    }
+}
+
+.valign-{
+
+    &top{
+        vertical-align:top;
+    }
+    
+    &middle{
+        vertical-align:middle;
+    }
+    
+    &bottom{
+        vertical-align:bottom;
+    }
+    
+}
+
+.grid-example{
+    
+    padding-top:40px;
+    
+    &:first-child{
+        padding-top:0;
+    }
+    
+    .row{
+        height:100px;
+        
+        .sm({
+            height:250px;
+        })
+    }
+    
+
+    p{
+        margin:0;
+    }
+    
+    strong{
+        display:block;
+        margin-bottom:5px;
+    }
+    
+    .equal_height{
+        
+        > div{
+            
+            > div{
+                background:@grey-100;
+                color:@grey-600;
+            }
+        }
+        
+    }
+    
+}

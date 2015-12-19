@@ -1,0 +1,145 @@
+/**
+ * table
+ */
+
+.table{
+    
+    tbody{
+        
+        > tr{
+            
+            > td{
+                font-size:13px;
+                line-height:20px;
+                padding:12px 18px;
+                border-top:1px solid @grey-300;
+            }
+            
+            &.active{
+                
+                > td{
+                    background-color:@grey-100;
+                }
+                
+            }
+            
+            &.success{
+                
+                > td{
+                    background-color:@green-100;
+                }
+            }
+            
+            &.info{
+                
+                > td{
+                    background-color:@cyan-100;
+                }
+            }
+            
+            &.warning{
+                
+                > td{
+                    background-color:@yellow-100;
+                }
+            }
+            
+            &.danger{
+                
+                > td{
+                    background-color:@red-100;
+                }
+            }
+            
+            &:nth-of-type(odd){
+                
+                .table-striped&{
+                    background-color:@grey-50;
+                }
+                
+            }
+        }
+    }
+    
+    thead{
+        
+        > tr{
+            
+            > th{
+                border-bottom:none;
+                font-weight:700;
+                font-size:12px;
+                line-height:24px;
+                padding:12px 18px;
+            }
+            
+        }
+        
+    }
+    
+    
+    &-striped{
+        
+        > tbody{
+            
+            > tr{
+                
+                > td{
+                    border:none;
+                }
+                
+            }
+            
+        }
+    }
+    
+    
+    &-bordered{
+        
+        > tbody{
+            
+            > tr{
+                
+                > td{
+                    border:1px solid @grey-300;
+                }
+                
+            }
+            
+        }
+        
+        > thead{
+            
+            > tr{
+                
+                > th{
+                    border:1px solid @grey-300;
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    &-hover{
+        
+        > tbody{
+            
+            > tr{
+                
+                transition-property: background-color;
+                transition-duration: .28s;
+                transition-timing-function: cubic-bezier(.4,0,.2,1);
+                
+                &:hover{
+                    background-color:@grey-100;
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+}

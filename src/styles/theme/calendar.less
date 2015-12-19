@@ -1,0 +1,41 @@
+/**
+ * calendar
+ */
+
+.fc{
+    
+    &-center{
+            .fc-toolbar &{
+                @media(max-width:1000px){
+                    h2{
+                        font-size:15px;
+                    }
+                }
+            }
+    }
+        
+    &-event{
+        background-color:@light-blue-300;
+        border-radius:0;
+        border:1px solid @light-blue-300;
+    }
+    
+    &-today{
+        .fc-unthemed &{
+            background:@grey-200;
+        }
+    }
+    
+    
+    button{
+        .btn-bs(@grey-50);
+        background-image:none;
+        box-shadow:none;
+        outline:none;
+        
+        &.fc-state-active{
+            background-color:@grey-200;
+        }
+    }
+    
+}

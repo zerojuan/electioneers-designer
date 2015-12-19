@@ -1,0 +1,29 @@
+.hub-toggle-visible(@rules) {
+    @media (min-width: 500px) {
+        @rules();
+    }
+}
+
+.sm(@rules) {
+    @media (min-width: 768px) {
+        @rules();
+    }
+}
+
+.md(@rules) {
+    @media (min-width: 992px) {
+        @rules();
+    }
+}
+
+.lg(@rules) {
+    @media (min-width: 1200px) {
+        @rules();
+    }
+}
+
+.xl(@rules) {
+    @media (min-width: 1600px) {
+        @rules();
+    }
+}

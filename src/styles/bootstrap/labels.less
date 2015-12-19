@@ -1,0 +1,53 @@
+/**
+ * labels
+ */
+
+// Mixin
+// ------------------
+.label(@bg-color){
+    background:@bg-color;
+}
+
+
+// Declaration
+// ------------------
+.label{
+    
+    padding:.4em .8em .4em;
+    font-size:80%;
+    font-weight:500;
+    border-radius:2px;
+    
+    &-default{
+        .label(@grey-400);
+    }
+    
+    &-success{
+        .label(@green-400);
+    }
+    
+    &-info{
+        .label(@blue-400);
+    }
+    
+    &-warning{
+        .label(@amber);
+    }
+    
+    &-danger{
+        .label(@red-400);
+    }
+    
+}
+
+// Example
+// ------------------
+.labels-example{
+    
+    .label{
+        margin-right:10px;
+        margin-bottom:20px;
+        display:inline-block;
+    }
+    
+}

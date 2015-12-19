@@ -29,6 +29,9 @@ angular.module('paDesignerApp')
       candidates.push(candidate);
     }
 
+    // Set 2nd candidate as AI
+    candidates[1].isAI = true;
+
     //-----------------------------------------------------------
 
     //Setup Population to be aware of these candidates
@@ -36,6 +39,10 @@ angular.module('paDesignerApp')
 
     var setCandidate = function(){
       $scope.currentCandidate = candidates[currentCandidateIndex];
+      if($scope.currentCandidate.isAI){
+        console.log('CALL AI CONTROLLER');
+        $scope.onNextTurn();
+      }
     };
 
     setCandidate();
