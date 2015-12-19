@@ -37,7 +37,7 @@ export default React.createClass({
             </div>
           </div>
         </div>
-
+        
         {this.props.children}
       </div>
     );
