@@ -10,7 +10,7 @@ export default React.createClass({
   render() {
     return (
       <div>
-        <h1>What is wrong here</h1>
+        <h1>{this.props.title}</h1>
       </div>
     )
   }
