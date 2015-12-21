@@ -6,24 +6,16 @@ import MenuIcon from 'react-material-icons/icons/navigation/menu';
 
 require('../styles/_import.less');
 
-import Breadcrumbs from 'react-breadcrumbs';
-
-const Breadcrumb = React.createClass({
-  render: function(){
-    return (
-      <div>
-        <Breadcrumbs routes={this.props.routes}/>
-      </div>
-    );
-  }
-});
+import Breadcrumb from './components/breadcrumb.jsx';
+import Sidebar from './components/sidebar.jsx';
 
 export default React.createClass({
   displayName: 'App',
   render() {
     return (
-      <div id="dashboard__wrapper">
+      <div id="dashboard__wrapper" className="sidebar-open">
         <div className="dashboard">
+          <Sidebar/>
           <div className="dashboard__content">
             <div className="dashboard__topbar container-fluid">
               <ul className="list-inline">
@@ -37,7 +29,7 @@ export default React.createClass({
             </div>
           </div>
         </div>
-        
+
         {this.props.children}
       </div>
     );
