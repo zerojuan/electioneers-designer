@@ -27,10 +27,13 @@ export default React.createClass({
                 </li>
               </ul>
             </div>
+            <div className="dashboard__inner">
+              {this.props.children}
+            </div>
           </div>
         </div>
 
-        {this.props.children}
+
       </div>
     );
   }

@@ -26,8 +26,13 @@ export default React.createClass({
             <li>
               <Link to="/population"><PeopleIcon className='material-icons' style={iconStyle}/>Population</Link>
             </li>
+            <li>
+              <Link to="/districts"><PeopleIcon className='material-icons' style={iconStyle}/>Districts</Link>
+            </li>
           </ul>
         </div>
+        
+
       </div>
     )
   }
