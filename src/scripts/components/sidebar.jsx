@@ -29,9 +29,12 @@ export default React.createClass({
             <li>
               <Link to="/districts"><PeopleIcon className='material-icons' style={iconStyle}/>Districts</Link>
             </li>
+            <li>
+              <Link to="/formulas"><PeopleIcon className='material-icons' style={iconStyle}/>Formulas</Link>
+            </li>
           </ul>
         </div>
-        
+
 
       </div>
     )
