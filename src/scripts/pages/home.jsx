@@ -11,6 +11,7 @@ export default React.createClass({
     return (
       <div>
         <h1>{this.props.title}</h1>
+        <div>Put your objects here</div>
       </div>
     )
   }
