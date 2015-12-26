@@ -21,13 +21,12 @@ export default React.createClass({
     } else {
       this.setState({ sidebarStatus: 'sidebar-closed' });
     }
-
   },
   render() {
     return (
       <div id="dashboard__wrapper" className={this.state.sidebarStatus}>
         <div className="dashboard">
-          <Sidebar/>
+          <Sidebar routes={this.props.routes}/>
           <div className="dashboard__content">
             <div className="dashboard__topbar container-fluid">
               <ul className="list-inline">
