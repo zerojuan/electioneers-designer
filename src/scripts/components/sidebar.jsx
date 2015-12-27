@@ -45,7 +45,7 @@ export default React.createClass({
   },
   render() {
     var active = this.props.routes[ 1 ];
-    console.log( active );
+    
     return (
       <div className="dashboard__sidebar">
         <div className="dashboard__sidebar-scroll">
@@ -66,8 +66,6 @@ export default React.createClass({
             }
           </ul>
         </div>
-
-
       </div>
     )
   }

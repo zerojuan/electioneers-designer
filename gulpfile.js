@@ -4,6 +4,7 @@ var gulp = require('gulp');
 var gutil = require( 'gulp-util' );
 var watch = require('gulp-watch');
 var less = require('gulp-less');
+var gls = require( 'gulp-live-server' );
 var webpack = require( 'webpack' );
 var WebpackDevServer = require( 'webpack-dev-server' );
 var webpackConfig = require( './webpack.config.js' );
@@ -32,6 +33,11 @@ gulp.task( 'css', function() {
 
 gulp.task( 'copy-assets', function() {
   gulp.src( 'assets/**' )
+    .pipe( gulp.dest( 'public' ));
+});
+
+gulp.task( 'copy-backend', function() {
+  gulp.src( ['server/**', '!server/package.json'] )
     .pipe( gulp.dest( 'public' ));
 });
 
@@ -72,13 +78,33 @@ gulp.task( 'webpack-dev-server', [ 'css' ], function( callback ) {
 
 });
 
+gulp.task( 'local-backend', function( callback ) {
+  //2. run script with cwd args, e.g. the harmony flag
+  var server = gls.new(['--harmony', 'server/index.js']);
+  //this will achieve `node --harmony myapp.js`
+  //you can access cwd args in `myapp.js` via `process.argv`
+  server.start();
+
+  //use gulp.watch to trigger server actions(notify, start or stop)
+  gulp.watch(['server/**/*.js'], function (file) {
+    server.notify.apply(server, [file]);
+  });
+  gulp.watch('server/index.js', server.start.bind(server)); //restart my server
+
+  // Note: try wrapping in a function if getting an error like `TypeError: Bad argument at TypeError (native) at ChildProcess.spawn`
+  gulp.watch('server/index.js', function() {
+    server.start.bind(server)()
+  });
+});
+
 gulp.task( 'default', function() {
   gulp.start( 'build' );
 });
 
-gulp.task( 'build', [ 'webpack:build', 'copy-assets' ]);
+gulp.task( 'build', [ 'webpack:build', 'copy-assets', 'copy-backend' ]);
 
-gulp.task( 'watch', [ 'css', 'copy-assets', 'webpack-dev-server' ], function(){
+gulp.task( 'watch', [ 'css', 'copy-assets', 'webpack-dev-server', 'local-backend', 'copy-backend' ], function(){
   gulp.watch( [ 'src/styles/**' ], [ 'css' ]);
   gulp.watch( [ 'assets/**' ], [ 'copy-assets' ]);
+  gulp.watch( [ 'server/**' ], [ 'copy-backend' ]);
 });

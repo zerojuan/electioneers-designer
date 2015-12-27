@@ -1,14 +1,15 @@
 {
   "name": "partyanimals-designer",
   "main": "http://0.0.0.0:8080",
+  "node-main": "index.js",
   "webkit":{
     "plugin": true
   },
   "window": {
-    "frame": true,
+    "frame": false,
     "toolbar": false,
-    "height": 800,
-    "width": 1280,
+    "height": 400,
+    "width": 800,
     "resizable": true,
     "position": "mouse"
   }
