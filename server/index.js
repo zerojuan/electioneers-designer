@@ -11,3 +11,11 @@ var server = app.listen(7171, function () {
 
   console.log('Example app listening at http://%s:%s', host, port);
 });
+
+process.on('uncaughtException', function(err) {
+    if(err.errno === 'EADDRINUSE')
+         return console.log('Error: ', err );
+    else
+         console.log(err);
+    process.exit(1);
+});
