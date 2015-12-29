@@ -9,6 +9,7 @@
   "author": "Julius the Pious",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.7.1",
     "express": "^4.13.3"
   }
 }

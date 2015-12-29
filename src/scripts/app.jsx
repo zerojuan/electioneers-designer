@@ -11,8 +11,19 @@ export default React.createClass({
   displayName: 'App',
   getInitialState: function() {
     return {
-      sidebarStatus: 'sidebar-closed'
+      sidebarStatus: 'sidebar-closed',
+      greeting: 'Connecting...'
     };
+  },
+  componentDidMount: function(){
+    var r = new XMLHttpRequest();
+    var that = this;
+    r.open("GET", "http://localhost:7171/", true);
+    r.onreadystatechange = function () {
+      if (r.readyState != 4 || r.status != 200) return;
+      that.setState( { greeting: r.responseText });
+    };
+    r.send();
   },
   toggle() {
     console.log( 'Am I toggling this?' );
@@ -35,10 +46,12 @@ export default React.createClass({
                 </li>
                 <li className="breadcrumnb">
                   <Breadcrumb routes={this.props.routes}/>
+
                 </li>
               </ul>
             </div>
             <div className="dashboard__inner">
+              {this.state.greeting}
               {this.props.children}
             </div>
           </div>
