@@ -7,6 +7,8 @@ import Breadcrumb from './components/breadcrumb.jsx';
 import Sidebar from './components/sidebar.jsx';
 import SidebarToggle from './components/sidebar-toggle.jsx';
 
+import nanoajax from 'nanoajax';
+
 export default React.createClass({
   displayName: 'App',
   getInitialState: function() {
@@ -18,12 +20,9 @@ export default React.createClass({
   componentDidMount: function(){
     var r = new XMLHttpRequest();
     var that = this;
-    r.open("GET", "http://localhost:7171/", true);
-    r.onreadystatechange = function () {
-      if (r.readyState != 4 || r.status != 200) return;
-      that.setState( { greeting: r.responseText });
-    };
-    r.send();
+    nanoajax.ajax({url:'http://localhost:7171/'}, function (code, responseText) {
+      that.setState( { greeting: responseText });
+    });
   },
   toggle() {
     console.log( 'Am I toggling this?' );
