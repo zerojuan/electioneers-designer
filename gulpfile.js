@@ -89,8 +89,7 @@ gulp.task( 'local-backend', function( callback ) {
   gulp.watch(['server/**/*.js'], function (file) {
     server.notify.apply(server, [file]);
   });
-  // gulp.watch('server/index.js', server.start.bind(server)); //restart my server
-
+  
   // Note: try wrapping in a function if getting an error like `TypeError: Bad argument at TypeError (native) at ChildProcess.spawn`
   gulp.watch(['server/**/*.js'], function() {
     server.start.bind(server)()
@@ -104,7 +103,7 @@ gulp.task( 'default', function() {
 gulp.task( 'build', [ 'webpack:build', 'copy-assets', 'copy-backend' ]);
 
 gulp.task( 'watch', [ 'css', 'copy-assets', 'webpack-dev-server', 'local-backend', 'copy-backend' ], function(){
-  gulp.watch( [ 'src/styles/**' ], [ 'css' ]);
+  gulp.watch( [ 'client/styles/**' ], [ 'css' ]);
   gulp.watch( [ 'assets/**' ], [ 'copy-assets' ]);
   gulp.watch( [ 'server/**' ], [ 'copy-backend' ]);
 });
