@@ -1,16 +1,18 @@
-var express = require('express');
-var cors = require( 'cors' );
-var app = express();
+'use strict';
+
+const express = require('express');
+const cors = require( 'cors' );
+
+const app = express();
 
 app.use( cors() );
 
-app.get('/', function (req, res) {
-  res.send('Hello World');
-});
+app.use( '/', require( './routes/index.js' ));
 
-var server = app.listen(7171, function () {
-  var host = server.address().address;
-  var port = server.address().port;
+
+const server = app.listen(7171, function () {
+  const host = server.address().address;
+  const port = server.address().port;
 
   console.log('Example app listening at http://%s:%s', host, port);
 });

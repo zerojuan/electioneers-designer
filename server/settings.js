@@ -4,7 +4,7 @@ var fs = require('fs');
 
 //load settings file
 var loadSettings = function(){
-  return JSON.parse(fs.readFileSync('data/settings.json', {encoding: 'utf8'}));
+  return JSON.parse(fs.readFileSync('./server/data/settings.json', {encoding: 'utf8'}));
 };
 
 
