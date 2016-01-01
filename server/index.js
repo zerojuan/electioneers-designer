@@ -5,7 +5,7 @@ var app = express();
 app.use( cors() );
 
 app.get('/', function (req, res) {
-  res.send('Hello World! WTF');
+  res.send('Hello World');
 });
 
 var server = app.listen(7171, function () {

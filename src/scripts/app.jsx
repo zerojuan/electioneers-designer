@@ -7,8 +7,6 @@ import Breadcrumb from './components/breadcrumb.jsx';
 import Sidebar from './components/sidebar.jsx';
 import SidebarToggle from './components/sidebar-toggle.jsx';
 
-import nanoajax from 'nanoajax';
-
 export default React.createClass({
   displayName: 'App',
   getInitialState: function() {
@@ -17,15 +15,7 @@ export default React.createClass({
       greeting: 'Connecting...'
     };
   },
-  componentDidMount: function(){
-    var r = new XMLHttpRequest();
-    var that = this;
-    nanoajax.ajax({url:'http://localhost:7171/'}, function (code, responseText) {
-      that.setState( { greeting: responseText });
-    });
-  },
   toggle() {
-    console.log( 'Am I toggling this?' );
     if( this.state.sidebarStatus === 'sidebar-closed' ) {
       this.setState({ sidebarStatus: 'sidebar-open' });
     } else {
@@ -33,6 +23,8 @@ export default React.createClass({
     }
   },
   render() {
+    let greeting = this.state.greeting;
+
     return (
       <div id="dashboard__wrapper" className={this.state.sidebarStatus}>
         <div className="dashboard">
@@ -50,7 +42,6 @@ export default React.createClass({
               </ul>
             </div>
             <div className="dashboard__inner">
-              {this.state.greeting}
               {this.props.children}
             </div>
           </div>
