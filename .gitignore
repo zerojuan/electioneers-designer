@@ -9,4 +9,7 @@ npm-debug.log
 
 public/index.html
 public/index.js
+public/settings.js
 public/*.less
+public/routes
+public/data

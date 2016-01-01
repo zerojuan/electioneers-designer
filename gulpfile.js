@@ -92,7 +92,7 @@ gulp.task( 'local-backend', function( callback ) {
   // gulp.watch('server/index.js', server.start.bind(server)); //restart my server
 
   // Note: try wrapping in a function if getting an error like `TypeError: Bad argument at TypeError (native) at ChildProcess.spawn`
-  gulp.watch('server/index.js', function() {
+  gulp.watch(['server/**/*.js'], function() {
     server.start.bind(server)()
   });
 });
