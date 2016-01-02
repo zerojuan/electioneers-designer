@@ -1,6 +1,8 @@
 import React from 'react';
 import nanoajax from 'nanoajax';
 
+import SavedFilesCard from '../components/saved-files-card.jsx';
+
 export default React.createClass({
   displayName: 'HomePage',
   getInitialState() {
@@ -25,19 +27,7 @@ export default React.createClass({
       <div>
         <h1>{this.props.title}</h1>
         <div>Count: {this.state.files.length}</div>
-        <div>
-          <ul>
-            {
-              this.state.files.map( function( item, i ){
-                return (
-                  <li key={i}>
-                    { item.name }
-                  </li>
-                )
-              })
-            }
-          </ul>
-        </div>
+        <SavedFilesCard files={this.state.files} />
       </div>
     )
   }
