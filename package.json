@@ -23,9 +23,9 @@
   "license": "ISC",
   "dependencies": {
     "history": "^1.13.1",
-    "material-ui": "^0.13.4",
+    "material-ui": "^0.14.0",
     "nanoajax": "^0.4.0",
-    "react": "^0.14.3",
+    "react": "^0.14.5",
     "react-breadcrumbs": "^1.1.9",
     "react-dom": "^0.14.3",
     "react-material-icons": "^1.0.1",
