@@ -1,8 +1,13 @@
 import React from 'react';
 import {IndexLink, Link} from 'react-router';
+
 import MenuIcon from 'react-material-icons/icons/navigation/menu';
 import HomeIcon from 'react-material-icons/icons/action/home';
 import PeopleIcon from 'react-material-icons/icons/social/people';
+
+import LeftNav from 'material-ui/lib/left-nav';
+import MenuItem from 'material-ui/lib/menus/menu-item';
+import Menu from 'material-ui/lib/menus/menu';
 
 const normalIconStyle = {
   fill: '#b0bec5'
@@ -40,33 +45,37 @@ export default React.createClass({
 
     return {
       title: 'Population',
-      links: links
+      links: links,
+      open: false
     };
+  },
+  menuTappedHandler( link ) {
+    return ( event ) => {
+      this.props.handleClose( link );
+    }
   },
   render() {
     var active = this.props.routes[ 1 ];
-    
+    var that = this;
     return (
-      <div className="dashboard__sidebar">
-        <div className="dashboard__sidebar-scroll">
-          <ul id="menu">
-            {
-              this.props.links.map( function( item, i ) {
-                var isActive = item.name === active.name;
 
-                return (
-                  <li key={i}>
-                    <item.link to={ item.route } className={ isActive ? 'active' : '' } >
-                      <item.icon className='material-icons' style={ isActive ? activeIconStyle : normalIconStyle }/>
-                      {item.name}
-                    </item.link>
-                  </li>
-                );
-              })
-            }
-          </ul>
-        </div>
-      </div>
+      <LeftNav
+        open={this.props.open}
+      >
+        {
+          this.props.links.map( function( item, i ) {
+
+            var isActive = item.name === active.name;
+            var icon = <item.icon></item.icon>;
+            var link = <item.link to={item.route}></item.link>;
+
+            return (
+                <MenuItem leftIcon={icon} primaryText={item.name} containerElement={link} key={i} onTouchTap={that.menuTappedHandler(item.route)}>
+                </MenuItem>
+            );
+          })
+        }
+      </LeftNav>
     )
   }
 });
