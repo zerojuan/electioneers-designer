@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link, RouteHandler } from 'react-router';
 
-// require('../styles/_import.less');
-//
+require('../styles/_import.less');
+
 import Breadcrumb from './components/breadcrumb.jsx';
 import Sidebar from './components/sidebar.jsx';
-// import SidebarToggle from './components/sidebar-toggle.jsx';
 
 import AppBar from 'material-ui/lib/app-bar';
 
@@ -35,6 +34,7 @@ export default React.createClass({
           onLeftIconButtonTouchTap={this.handleToggle}>
         </AppBar>
         <Sidebar routes={this.props.routes} open={this.state.open} handleClose={this.handleClose}/>
+        {this.props.children}
       </div>
     );
   }
