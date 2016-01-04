@@ -4,7 +4,7 @@ import fetch from 'isomorphic-fetch';
  * Action types
  */
 
-export const SELECT_SAVED_FILE = 'SELECT_SAVED_FILE';
+export const SELECT_FILE = 'SELECT_FILE';
 
 export const REQUEST_FILES = 'REQUEST_FILES';
 export const RECEIVE_FILES = 'RECEIVE_FILES';
@@ -53,9 +53,9 @@ function fetchFiles() {
  * Action creators
  */
 
-export function selectSavedFile( name ) {
+export function selectFile( name ) {
   return {
-    type: SELECT_SAVED_FILE,
+    type: SELECT_FILE,
     name: name
   };
 }

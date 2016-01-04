@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchFilesIfNeeded } from '../actions';
+import { fetchFilesIfNeeded, selectFile } from '../actions';
 
 import SavedFilesCard from '../components/saved-files-card.jsx';
 
@@ -13,7 +13,8 @@ let Home = React.createClass({
     files: PropTypes.arrayOf( PropTypes.shape({
       name: PropTypes.string.isRequired,
       lastModified: PropTypes.string.isRequired
-    }).isRequired).isRequired
+    }).isRequired).isRequired,
+    selectedFile: PropTypes.string.isRequired
   },
   getDefaultProps() {
     return {
@@ -21,21 +22,20 @@ let Home = React.createClass({
     };
   },
   componentDidMount: function(){
-    const { dispatch } = this.props
-    dispatch(fetchFilesIfNeeded());
-    // const that = this;
-    // nanoajax.ajax({url:'http://localhost:7171/'}, function (code, responseText) {
-    //   that.setState( { files: JSON.parse(responseText) });
-    // });
+    const { dispatch } = this.props;
+    dispatch( fetchFilesIfNeeded() );
+  },
+  handleFileSelect( value ) {
+    const { dispatch } = this.props;
+    dispatch( selectFile( value ) );
   },
   render() {
-    let { files } = this.props;
-    console.log( 'Files: ', files );
+
     return (
       <div>
         <h1>{this.props.title}</h1>
         <div>Count: {this.props.files.length}</div>
-        <SavedFilesCard files={this.props.files} />
+        <SavedFilesCard files={this.props.files} selectedFile={this.props.selectedFile} handleFileSelect={ this.handleFileSelect } />
       </div>
     )
   }
@@ -53,10 +53,13 @@ function mapStateToProps( state ) {
     items: []
   };
 
+  const selectedFile = state.selectedFile;
+
   return {
     files,
     didInvalidate,
-    isFetching
+    isFetching,
+    selectedFile
   }
 }
 

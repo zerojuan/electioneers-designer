@@ -12,23 +12,21 @@ export default React.createClass({
     }
   },
 
-  handleUpdateSelectedIndex( e, index ) {
-    this.setState( {
-      selectedIndex: index
-    });
+  handleUpdateSelectedFile( e, value ) {
+    this.props.handleFileSelect( value );
   },
   render: function(){
     return (
       <SelectableList
         valueLink={{
-          value: this.state.selectedIndex,
-          requestChange: this.handleUpdateSelectedIndex
+          value: this.props.selectedFile,
+          requestChange: this.handleUpdateSelectedFile
         }}>
         {
           this.props.files.map( function( item, i ) {
             return (
               <ListItem
-                value={ i + 1 }
+                value={ item.name }
                 key={ i }
                 primaryText={ item.name }
               >
