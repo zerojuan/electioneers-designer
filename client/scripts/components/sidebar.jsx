@@ -8,6 +8,9 @@ import PeopleIcon from 'react-material-icons/icons/social/people';
 import LeftNav from 'material-ui/lib/left-nav';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import Menu from 'material-ui/lib/menus/menu';
+import Divider from 'material-ui/lib/divider';
+import List from 'material-ui/lib/lists/list';
+import ListItem from 'material-ui/lib/lists/list-item';
 
 const normalIconStyle = {
   fill: '#b0bec5'
@@ -21,9 +24,6 @@ export default React.createClass({
   displayName: 'Sidebar',
   getDefaultProps() {
     var links = [{
-      route: '/',
-      icon: PeopleIcon
-    },{
       name: 'Population',
       route: '/population',
       icon: PeopleIcon
@@ -62,18 +62,34 @@ export default React.createClass({
     let content = <MenuItem primaryText='Well'/>
 
     if( selectedFile !== 'none' ) {
-      content = this.props.links.map( function( item, i ) {
+      content = (
+        <div>
+        <Divider></Divider>
+        <List subheader='LoadedFile'>
+          <ListItem
+            primaryText={this.props.selectedFile}
+            initiallyOpen={true}
+            containerElement={<Link to={selectedFile+'/'}/>}
+            onTouchTap={that.menuTappedHandler('/')}
+            nestedItems={
+              this.props.links.map( function( item, i ) {
+                let isActive = item.name === active.name;
+                let name = item.name || selectedFile;
+                let icon = <item.icon></item.icon>;
+                let link = <Link to={selectedFile+item.route}></Link>;
 
-        let isActive = item.name === active.name;
-        let name = item.name || selectedFile;
-        let icon = <item.icon></item.icon>;
-        let link = <Link to={selectedFile+item.route}></Link>;
+                return (
+                    <ListItem leftIcon={icon} primaryText={name} containerElement={link} key={i} insetChildren={true} onTouchTap={that.menuTappedHandler(item.route)}>
+                    </ListItem>
+                );
+              })
+            }
+          />
+        </List>
 
-        return (
-            <MenuItem leftIcon={icon} primaryText={name} containerElement={link} key={i} onTouchTap={that.menuTappedHandler(item.route)}>
-            </MenuItem>
-        );
-      })
+
+        </div>
+      )
     }
 
     return (
