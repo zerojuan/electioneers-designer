@@ -26,7 +26,6 @@
     "history": "^1.13.1",
     "isomorphic-fetch": "^2.2.0",
     "material-ui": "^0.14.0",
-    "nanoajax": "^0.4.0",
     "react": "^0.14.5",
     "react-breadcrumbs": "^1.1.9",
     "react-dom": "^0.14.3",
