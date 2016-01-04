@@ -1,7 +1,12 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute } from 'react-router';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+
 import App from './app.jsx';
+import designerApp from './reducers';
 import HomePage from './pages/home.jsx';
 import PopulationPage from './pages/population.jsx';
 import DistrictsPage from './pages/districts.jsx';
@@ -15,13 +20,17 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 // https://github.com/zilverline/react-tap-event-plugin
 injectTapEventPlugin();
 
+let store = createStore( designerApp );
+
 render((
-  <Router>
-    <Route component={App} path='/' name='Designer'>
-      <IndexRoute component={HomePage} name='Home'/>
-      <Route path='population' component={PopulationPage} name='Population'/>
-      <Route path='districts' component={DistrictsPage} name='Districts' />
-      <Route path='formulas' component={FormulasPage} name='Formulas' />
-    </Route>
-  </Router>
+  <Provider store={store}>
+    <Router>
+      <Route component={App} path='/' name='Designer'>
+        <IndexRoute component={HomePage} name='Home'/>
+        <Route path='population' component={PopulationPage} name='Population'/>
+        <Route path='districts' component={DistrictsPage} name='Districts' />
+        <Route path='formulas' component={FormulasPage} name='Formulas' />
+      </Route>
+    </Router>
+  </Provider>
 ), document.getElementById('app'));
