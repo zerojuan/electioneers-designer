@@ -1,8 +1,12 @@
+import promise from 'es6-promise';
+promise.polyfill();
+
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute } from 'react-router';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
 
 import App from './app.jsx';
@@ -20,7 +24,11 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 // https://github.com/zilverline/react-tap-event-plugin
 injectTapEventPlugin();
 
-let store = createStore( designerApp );
+const createStoreWithMiddleware = applyMiddleware(
+  thunk
+)( createStore );
+
+let store = createStoreWithMiddleware( designerApp );
 
 render((
   <Provider store={store}>

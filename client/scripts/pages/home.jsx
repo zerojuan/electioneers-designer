@@ -1,14 +1,19 @@
-import React from 'react';
-import nanoajax from 'nanoajax';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+
+import { fetchFilesIfNeeded } from '../actions';
 
 import SavedFilesCard from '../components/saved-files-card.jsx';
 
-export default React.createClass({
+let Home = React.createClass({
   displayName: 'HomePage',
-  getInitialState() {
-    return {
-      files: []
-    }
+  propTypes: {
+    isFetching: PropTypes.bool.isRequired,
+    didInvalidate: PropTypes.bool.isRequired,
+    files: PropTypes.arrayOf( PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      lastModified: PropTypes.string.isRequired
+    }).isRequired).isRequired
   },
   getDefaultProps() {
     return {
@@ -16,19 +21,43 @@ export default React.createClass({
     };
   },
   componentDidMount: function(){
-    const that = this;
-    nanoajax.ajax({url:'http://localhost:7171/'}, function (code, responseText) {
-      that.setState( { files: JSON.parse(responseText) });
-    });
+    const { dispatch } = this.props
+    dispatch(fetchFilesIfNeeded());
+    // const that = this;
+    // nanoajax.ajax({url:'http://localhost:7171/'}, function (code, responseText) {
+    //   that.setState( { files: JSON.parse(responseText) });
+    // });
   },
   render() {
-
+    let { files } = this.props;
+    console.log( 'Files: ', files );
     return (
       <div>
         <h1>{this.props.title}</h1>
-        <div>Count: {this.state.files.length}</div>
-        <SavedFilesCard files={this.state.files} />
+        <div>Count: {this.props.files.length}</div>
+        <SavedFilesCard files={this.props.files} />
       </div>
     )
   }
 })
+
+function mapStateToProps( state ) {
+  console.log( 'State: ', state );
+  const {
+    isFetching,
+    didInvalidate,
+    items: files
+  } = state.savedFiles || {
+    isFetching: false,
+    didInvalidate: false,
+    items: []
+  };
+
+  return {
+    files,
+    didInvalidate,
+    isFetching
+  }
+}
+
+export default connect( mapStateToProps )( Home );

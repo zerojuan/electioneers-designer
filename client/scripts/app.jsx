@@ -13,6 +13,8 @@ const App = React.createClass({
   displayName: 'App',
 
   propTypes: {
+    isFetching: PropTypes.bool.isRequired,
+    didInvalidate: PropTypes.bool.isRequired,
     files: PropTypes.arrayOf( PropTypes.shape({
       name: PropTypes.string.isRequired,
       lastModified: PropTypes.string.isRequired
@@ -49,10 +51,22 @@ const App = React.createClass({
 
 });
 
-function select( state ) {
+function mapStateToProps( state ) {
+  const {
+    isFetching,
+    didInvalidate,
+    items: files
+  } = state.savedFiles || {
+    isFetching: false,
+    didInvalidate: false,
+    items: []
+  };
+
   return {
-    files: state.files
+    files,
+    didInvalidate,
+    isFetching
   }
 }
 
-export default connect( select )( App );
+export default connect( mapStateToProps )( App );
