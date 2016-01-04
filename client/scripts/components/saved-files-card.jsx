@@ -1,7 +1,10 @@
 import React from 'react';
+import Time from 'react-time';
+
 import { SelectableContainerEnhance } from 'material-ui/lib/hoc/selectable-enhance';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
+
 
 var SelectableList = SelectableContainerEnhance( List );
 
@@ -28,9 +31,9 @@ export default React.createClass({
               <ListItem
                 value={ item.name }
                 key={ i }
-                primaryText={ item.name }
               >
-              Hello
+              <h4>{item.name}</h4>
+              <Time value={item.lastModified} relative></Time>
               </ListItem>
             )
           })
