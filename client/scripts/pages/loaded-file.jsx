@@ -1,18 +1,10 @@
-import React from 'react';
-
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { selectFile } from '../actions';
 
-
-const DistrictsPage = React.createClass({
-  displayName: 'Districts',
-  getDefaultProps() {
-    return {
-      title: 'Districts'
-    };
-  },
-  componentDidMount: function(){
+let LoadedFilePage = React.createClass({
+  componentDidMount() {
     const { dispatch } = this.props;
     const selectedFile = this.props.params.filename;
     dispatch( selectFile( selectedFile ) );
@@ -20,11 +12,11 @@ const DistrictsPage = React.createClass({
   render() {
     return (
       <div>
-        <h1>{this.props.title}</h1>
+        { this.props.selectedFile }
       </div>
     )
   }
-})
+});
 
 function mapStateToProps( state ) {
   const selectedFile = state.selectedFile;
@@ -34,4 +26,4 @@ function mapStateToProps( state ) {
   }
 }
 
-export default connect( mapStateToProps )( DistrictsPage );
+export default connect( mapStateToProps )( LoadedFilePage );

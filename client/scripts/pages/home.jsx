@@ -42,7 +42,6 @@ let Home = React.createClass({
 })
 
 function mapStateToProps( state ) {
-  console.log( 'State: ', state );
   const {
     isFetching,
     didInvalidate,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import {IndexLink, Link} from 'react-router';
 
 import MenuIcon from 'react-material-icons/icons/navigation/menu';
@@ -21,33 +21,34 @@ export default React.createClass({
   displayName: 'Sidebar',
   getDefaultProps() {
     var links = [{
-      name: 'Home',
-      isIndex: true,
       route: '/',
-      icon: HomeIcon,
-      link: IndexLink
-    }, {
+      icon: PeopleIcon
+    },{
       name: 'Population',
       route: '/population',
-      icon: PeopleIcon,
-      link: Link
+      icon: PeopleIcon
     }, {
       name: 'Districts',
       route: '/districts',
-      icon: PeopleIcon,
-      link: Link
+      icon: PeopleIcon
     }, {
       name: 'Formulas',
       route: '/formulas',
-      icon: PeopleIcon,
-      link: Link
+      icon: PeopleIcon
     }];
 
     return {
-      title: 'Population',
       links: links,
       open: false
     };
+  },
+  propTypes: {
+    open: PropTypes.bool.isRequired,
+    links: PropTypes.arrayOf( PropTypes.shape({
+      name: PropTypes.string,
+      route: PropTypes.string.isRequired
+    }).isRequired).isRequired,
+    selectedFile: PropTypes.string.isRequired
   },
   menuTappedHandler( link ) {
     return ( event ) => {
@@ -56,24 +57,34 @@ export default React.createClass({
   },
   render() {
     var active = this.props.routes[ 1 ];
+    let { selectedFile } = this.props;
     var that = this;
+    let content = <MenuItem primaryText='Well'/>
+
+    if( selectedFile !== 'none' ) {
+      content = this.props.links.map( function( item, i ) {
+
+        let isActive = item.name === active.name;
+        let name = item.name || selectedFile;
+        let icon = <item.icon></item.icon>;
+        let link = <Link to={selectedFile+item.route}></Link>;
+
+        return (
+            <MenuItem leftIcon={icon} primaryText={name} containerElement={link} key={i} onTouchTap={that.menuTappedHandler(item.route)}>
+            </MenuItem>
+        );
+      })
+    }
+
     return (
 
       <LeftNav
         open={this.props.open}
       >
+        <MenuItem leftIcon={<HomeIcon/>} primaryText='Home' containerElement={<IndexLink to='/'/>}
+          onTouchTap={that.menuTappedHandler('/')}/>
         {
-          this.props.links.map( function( item, i ) {
-
-            var isActive = item.name === active.name;
-            var icon = <item.icon></item.icon>;
-            var link = <item.link to={item.route}></item.link>;
-
-            return (
-                <MenuItem leftIcon={icon} primaryText={item.name} containerElement={link} key={i} onTouchTap={that.menuTappedHandler(item.route)}>
-                </MenuItem>
-            );
-          })
+          content
         }
       </LeftNav>
     )

@@ -18,7 +18,8 @@ const App = React.createClass({
     files: PropTypes.arrayOf( PropTypes.shape({
       name: PropTypes.string.isRequired,
       lastModified: PropTypes.string.isRequired
-    }).isRequired).isRequired
+    }).isRequired).isRequired,
+    selectedFile: PropTypes.string.isRequired
   },
 
   getInitialState: function() {
@@ -43,7 +44,7 @@ const App = React.createClass({
         <AppBar title="Designer"
           onLeftIconButtonTouchTap={this.handleToggle}>
         </AppBar>
-        <Sidebar routes={this.props.routes} open={this.state.open} handleClose={this.handleClose}/>
+        <Sidebar routes={this.props.routes} open={this.state.open} selectedFile={this.props.selectedFile} handleClose={this.handleClose}/>
         {this.props.children}
       </div>
     );
@@ -62,7 +63,10 @@ function mapStateToProps( state ) {
     items: []
   };
 
+  const selectedFile = state.selectedFile;
+
   return {
+    selectedFile,
     files,
     didInvalidate,
     isFetching

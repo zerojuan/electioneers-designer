@@ -32,7 +32,7 @@ export default React.createClass({
                 value={ item.name }
                 key={ i }
               >
-              <h4>{item.name}</h4>
+              <p>{item.name}</p>
               <Time value={item.lastModified} relative></Time>
               </ListItem>
             )

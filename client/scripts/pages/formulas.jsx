@@ -1,17 +1,37 @@
 import React from 'react';
 
-export default React.createClass({
+import { connect } from 'react-redux';
+
+import { selectFile } from '../actions';
+
+const FormulasPage = React.createClass({
   displayName: 'Formulas',
   getDefaultProps() {
     return {
       title: 'Formulas'
     };
   },
+  componentDidMount: function(){
+    const { dispatch } = this.props;
+    const selectedFile = this.props.params.filename;
+    dispatch( selectFile( selectedFile ) );
+  },
   render() {
     return (
       <div>
         <h1>{this.props.title}</h1>
+        <p>{this.props.selectedFile}</p>
       </div>
     )
   }
 })
+
+function mapStateToProps( state ) {
+  const selectedFile = state.selectedFile;
+
+  return {
+    selectedFile
+  }
+}
+
+export default connect( mapStateToProps )( FormulasPage );
