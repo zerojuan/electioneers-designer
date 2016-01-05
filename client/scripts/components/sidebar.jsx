@@ -63,8 +63,6 @@ export default React.createClass({
 
     if( selectedFile !== 'none' ) {
       content = (
-        <div>
-        <Divider></Divider>
         <List subheader='LoadedFile'>
           <ListItem
             primaryText={this.props.selectedFile}
@@ -86,9 +84,6 @@ export default React.createClass({
             }
           />
         </List>
-
-
-        </div>
       )
     }
 
@@ -99,6 +94,7 @@ export default React.createClass({
       >
         <MenuItem leftIcon={<HomeIcon/>} primaryText='Home' containerElement={<IndexLink to='/'/>}
           onTouchTap={that.menuTappedHandler('/')}/>
+        <Divider/>
         {
           content
         }
