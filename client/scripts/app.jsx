@@ -39,15 +39,18 @@ const App = React.createClass({
   },
 
   render() {
+    let selectedFile = this.props.selectedFile === 'none' ?
+                        'Designer' : this.props.selectedFile;
+
     return (
       <div>
-        <AppBar title='Designer'
+        <AppBar title={selectedFile}
           onLeftIconButtonTouchTap={this.handleToggle}>
         </AppBar>
         <Sidebar
           routes={this.props.routes}
           open={this.state.open}
-          selectedFile={this.props.selectedFile}
+          selectedFile={selectedFile}
           handleClose={this.handleClose}/>
         <div
           style={{
