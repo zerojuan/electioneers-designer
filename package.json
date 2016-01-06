@@ -4,12 +4,6 @@
   "description": "Designer tool for partyanimals",
   "repository": "https://github.com/zerojuan/partyanimals-designer",
   "main": "index.html",
-  "window": {
-    "fullscreen": true,
-    "frame": false,
-    "toolbar": false,
-    "icon": "icon.png"
-  },
   "scripts": {
     "start": "./node_modules/.bin/gulp watch",
     "build": "./node_modules/.bin/gulp build",

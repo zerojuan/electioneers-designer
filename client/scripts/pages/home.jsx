@@ -5,6 +5,9 @@ import { fetchFilesIfNeeded, selectFile } from '../actions';
 
 import SavedFilesCard from '../components/saved-files-card.jsx';
 
+import RaisedButton from 'material-ui/lib/raised-button';
+import Paper from 'material-ui/lib/paper';
+
 let Home = React.createClass({
   displayName: 'HomePage',
   propTypes: {
@@ -15,11 +18,6 @@ let Home = React.createClass({
       lastModified: PropTypes.string.isRequired
     }).isRequired).isRequired,
     selectedFile: PropTypes.string.isRequired
-  },
-  getDefaultProps() {
-    return {
-      title: 'Home Page'
-    };
   },
   componentDidMount: function(){
     const { dispatch } = this.props;
@@ -33,8 +31,12 @@ let Home = React.createClass({
 
     return (
       <div>
-        <h1>{this.props.title}</h1>
-        <div>Count: {this.props.files.length}</div>
+        <div style={{
+            marginTop: '20px',
+            marginBottom: '20px'
+          }}>
+          <RaisedButton label='New' primary={true}/>
+        </div>
         <SavedFilesCard files={this.props.files} selectedFile={this.props.selectedFile} handleFileSelect={ this.handleFileSelect } />
       </div>
     )

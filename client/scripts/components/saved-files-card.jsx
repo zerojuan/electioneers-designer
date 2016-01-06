@@ -4,7 +4,7 @@ import Time from 'react-time';
 import { SelectableContainerEnhance } from 'material-ui/lib/hoc/selectable-enhance';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
-
+import FlatButton from 'material-ui/lib/flat-button';
 
 var SelectableList = SelectableContainerEnhance( List );
 
@@ -24,6 +24,11 @@ export default React.createClass({
         valueLink={{
           value: this.props.selectedFile,
           requestChange: this.handleUpdateSelectedFile
+        }}
+
+        style={{
+          paddingTop: '-8px',
+          paddingBottom: '-8px'
         }}>
         {
           this.props.files.map( function( item, i ) {
@@ -31,9 +36,12 @@ export default React.createClass({
               <ListItem
                 value={ item.name }
                 key={ i }
+                primaryText={item.name}
+                secondaryText={<Time value={item.lastModified} relative></Time>}
+                rightIconButton={<FlatButton label='Delete' primary={true}/>}
               >
-              <p>{item.name}</p>
-              <Time value={item.lastModified} relative></Time>
+
+
               </ListItem>
             )
           })

@@ -45,7 +45,14 @@ const App = React.createClass({
           onLeftIconButtonTouchTap={this.handleToggle}>
         </AppBar>
         <Sidebar routes={this.props.routes} open={this.state.open} selectedFile={this.props.selectedFile} handleClose={this.handleClose}/>
-        {this.props.children}
+        <div
+          style={{
+            margin: '8px'
+          }}
+          >
+          {this.props.children}
+        </div>
+
       </div>
     );
   }
