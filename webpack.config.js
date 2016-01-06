@@ -18,14 +18,14 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new webpack.IgnorePlugin(/vertx/),
+    new webpack.IgnorePlugin( /vertx/ ),
     new webpack.ProvidePlugin({
-      "_": "underscore"
+      '_': 'underscore'
     })
   ],
 
   resolve: {
-    extensions: [ '', '.js', '.jsx', '.coffee', '.less', '.ttf', '.eot', '.woff'],
+    extensions: [ '', '.js', '.jsx', '.coffee', '.less', '.ttf', '.eot', '.woff' ],
     moduleDirectories: [
       'node_modules',
       'bower_components'
@@ -40,7 +40,7 @@ module.exports = {
     preloaders: [
       {
         test: /\.jsx?$/,
-        loaders: [ 'jscs' ]
+        loaders: [ 'eslint', 'jscs' ]
       }
     ],
     loaders: [
