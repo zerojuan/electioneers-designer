@@ -23,7 +23,7 @@ const activeIconStyle = {
 export default React.createClass({
   displayName: 'Sidebar',
   getDefaultProps() {
-    var links = [{
+    var links = [ {
       name: 'Population',
       route: '/population',
       icon: PeopleIcon
@@ -35,7 +35,7 @@ export default React.createClass({
       name: 'Formulas',
       route: '/formulas',
       icon: PeopleIcon
-    }];
+    } ];
 
     return {
       links: links,
@@ -47,44 +47,50 @@ export default React.createClass({
     links: PropTypes.arrayOf( PropTypes.shape({
       name: PropTypes.string,
       route: PropTypes.string.isRequired
-    }).isRequired).isRequired,
+    }).isRequired ).isRequired,
     selectedFile: PropTypes.string.isRequired
   },
   menuTappedHandler( link ) {
     return ( event ) => {
       this.props.handleClose( link );
-    }
+    };
   },
   render() {
     var active = this.props.routes[ 1 ];
     let { selectedFile } = this.props;
     var that = this;
-    let content = <MenuItem primaryText='Well'/>
+    let content = <MenuItem primaryText='Well'/>;
 
-    if( selectedFile !== 'none' ) {
+    if ( selectedFile !== 'none' ) {
       content = (
         <List subheader='LoadedFile'>
           <ListItem
             primaryText={this.props.selectedFile}
             initiallyOpen={true}
-            containerElement={<Link to={selectedFile+'/'}/>}
-            onTouchTap={that.menuTappedHandler('/')}
+            containerElement={<Link to={selectedFile + '/'}/>}
+            onTouchTap={that.menuTappedHandler( '/' )}
             nestedItems={
-              this.props.links.map( function( item, i ) {
+              this.props.links.map(function( item, i ) {
                 let isActive = item.name === active.name;
                 let name = item.name || selectedFile;
                 let icon = <item.icon></item.icon>;
-                let link = <Link to={selectedFile+item.route}></Link>;
+                let link = <Link to={selectedFile + item.route}></Link>;
 
                 return (
-                    <ListItem leftIcon={icon} primaryText={name} containerElement={link} key={i} insetChildren={true} onTouchTap={that.menuTappedHandler(item.route)}>
+                    <ListItem
+                      leftIcon={icon}
+                      primaryText={name}
+                      containerElement={link}
+                      key={i}
+                      insetChildren={true}
+                      onTouchTap={that.menuTappedHandler( item.route )}>
                     </ListItem>
                 );
               })
             }
           />
         </List>
-      )
+      );
     }
 
     return (
@@ -92,13 +98,16 @@ export default React.createClass({
       <LeftNav
         open={this.props.open}
       >
-        <MenuItem leftIcon={<HomeIcon/>} primaryText='Home' containerElement={<IndexLink to='/'/>}
-          onTouchTap={that.menuTappedHandler('/')}/>
+        <MenuItem
+          leftIcon={<HomeIcon/>}
+          primaryText='Home'
+          containerElement={<IndexLink to='/'/>}
+          onTouchTap={that.menuTappedHandler( '/' )}/>
         <Divider/>
         {
           content
         }
       </LeftNav>
-    )
+    );
   }
 });

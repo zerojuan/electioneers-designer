@@ -31,7 +31,7 @@ const createStoreWithMiddleware = applyMiddleware(
 
 let store = createStoreWithMiddleware( designerApp );
 
-render((
+render( (
   <Provider store={store}>
     <Router>
       <Route component={App} path='/' name='Designer'>
@@ -43,4 +43,4 @@ render((
       </Route>
     </Router>
   </Provider>
-), document.getElementById('app'));
+), document.getElementById( 'app' ) );

@@ -14,7 +14,7 @@ let LoadedFilePage = React.createClass({
       <div>
         { this.props.selectedFile }
       </div>
-    )
+    );
   }
 });
 
@@ -23,7 +23,7 @@ function mapStateToProps( state ) {
 
   return {
     selectedFile
-  }
+  };
 }
 
 export default connect( mapStateToProps )( LoadedFilePage );

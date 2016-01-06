@@ -16,10 +16,10 @@ let Home = React.createClass({
     files: PropTypes.arrayOf( PropTypes.shape({
       name: PropTypes.string.isRequired,
       lastModified: PropTypes.string.isRequired
-    }).isRequired).isRequired,
+    }).isRequired ).isRequired,
     selectedFile: PropTypes.string.isRequired
   },
-  componentDidMount: function(){
+  componentDidMount: function() {
     const { dispatch } = this.props;
     dispatch( fetchFilesIfNeeded() );
   },
@@ -37,11 +37,14 @@ let Home = React.createClass({
           }}>
           <RaisedButton label='New' primary={true}/>
         </div>
-        <SavedFilesCard files={this.props.files} selectedFile={this.props.selectedFile} handleFileSelect={ this.handleFileSelect } />
+        <SavedFilesCard
+          files={ this.props.files }
+          selectedFile={ this.props.selectedFile }
+          handleFileSelect={ this.handleFileSelect } />
       </div>
-    )
+    );
   }
-})
+});
 
 function mapStateToProps( state ) {
   const {
@@ -61,7 +64,7 @@ function mapStateToProps( state ) {
     didInvalidate,
     isFetching,
     selectedFile
-  }
+  };
 }
 
 export default connect( mapStateToProps )( Home );

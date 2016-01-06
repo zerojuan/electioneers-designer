@@ -12,13 +12,13 @@ export default React.createClass({
   getInitialState() {
     return {
       selectedIndex: 0
-    }
+    };
   },
 
   handleUpdateSelectedFile( e, value ) {
     this.props.handleFileSelect( value );
   },
-  render: function(){
+  render: function() {
     return (
       <SelectableList
         valueLink={{
@@ -31,7 +31,7 @@ export default React.createClass({
           paddingBottom: '-8px'
         }}>
         {
-          this.props.files.map( function( item, i ) {
+          this.props.files.map(function( item, i ) {
             return (
               <ListItem
                 value={ item.name }
@@ -43,7 +43,7 @@ export default React.createClass({
 
 
               </ListItem>
-            )
+            );
           })
         }
       </SelectableList>

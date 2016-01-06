@@ -6,14 +6,14 @@ function savedFiles( state = {
   didInvalidate: false,
   items: []
 }, action ) {
-  switch( action.type ) {
+  switch ( action.type ) {
     case REQUEST_FILES:
-      return Object.assign( {}, state, {
+      return Object.assign({}, state, {
         isFetching: true,
         didInvalidate: false
       });
     case RECEIVE_FILES:
-      return Object.assign( {}, state, {
+      return Object.assign({}, state, {
         isFetching: false,
         didInvalidate: false,
         items: action.files
@@ -24,9 +24,9 @@ function savedFiles( state = {
 }
 
 function selectedFile( state = 'none', action ) {
-  switch( action.type ) {
+  switch ( action.type ) {
     case SELECT_FILE:
-      return action.name
+      return action.name;
     default:
       return state;
   }

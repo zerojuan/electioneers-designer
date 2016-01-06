@@ -37,6 +37,12 @@ module.exports = {
   },
 
   module: {
+    preloaders: [
+      {
+        test: /\.jsx?$/,
+        loaders: [ 'jscs' ]
+      }
+    ],
     loaders: [
       {
         test: /\.css$/,

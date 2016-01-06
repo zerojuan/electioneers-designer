@@ -11,7 +11,7 @@ const PopulationPage = React.createClass({
       title: 'Population'
     };
   },
-  componentDidMount: function(){
+  componentDidMount: function() {
     const { dispatch } = this.props;
     const selectedFile = this.props.params.filename;
     dispatch( selectFile( selectedFile ) );
@@ -22,7 +22,7 @@ const PopulationPage = React.createClass({
         <h1>{this.props.title}</h1>
         <p>{this.props.selectedFile}</p>
       </div>
-    )
+    );
   }
 });
 
@@ -31,7 +31,7 @@ function mapStateToProps( state ) {
 
   return {
     selectedFile
-  }
+  };
 }
 
 export default connect( mapStateToProps )( PopulationPage );

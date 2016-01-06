@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteHandler } from 'react-router';
 
-require('../styles/_import.less');
+require( '../styles/_import.less' );
 
 import Breadcrumb from './components/breadcrumb.jsx';
 import Sidebar from './components/sidebar.jsx';
@@ -18,7 +18,7 @@ const App = React.createClass({
     files: PropTypes.arrayOf( PropTypes.shape({
       name: PropTypes.string.isRequired,
       lastModified: PropTypes.string.isRequired
-    }).isRequired).isRequired,
+    }).isRequired ).isRequired,
     selectedFile: PropTypes.string.isRequired
   },
 
@@ -30,7 +30,7 @@ const App = React.createClass({
 
   handleToggle() {
     console.log( 'Handle toggle. This has been toggled' );
-    this.setState( {open: !this.state.open });
+    this.setState({ open: !this.state.open });
   },
 
   handleClose( event ) {
@@ -41,10 +41,14 @@ const App = React.createClass({
   render() {
     return (
       <div>
-        <AppBar title="Designer"
+        <AppBar title='Designer'
           onLeftIconButtonTouchTap={this.handleToggle}>
         </AppBar>
-        <Sidebar routes={this.props.routes} open={this.state.open} selectedFile={this.props.selectedFile} handleClose={this.handleClose}/>
+        <Sidebar
+          routes={this.props.routes}
+          open={this.state.open}
+          selectedFile={this.props.selectedFile}
+          handleClose={this.handleClose}/>
         <div
           style={{
             margin: '8px'
@@ -77,7 +81,7 @@ function mapStateToProps( state ) {
     files,
     didInvalidate,
     isFetching
-  }
+  };
 }
 
 export default connect( mapStateToProps )( App );

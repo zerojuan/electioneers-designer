@@ -17,7 +17,7 @@ export const RECEIVE_FILES = 'RECEIVE_FILES';
 function requestFiles() {
   return {
     type: REQUEST_FILES
-  }
+  };
 }
 
 function receiveFiles( data ) {
@@ -25,15 +25,15 @@ function receiveFiles( data ) {
   return {
     type: RECEIVE_FILES,
     files: data
-  }
+  };
 }
 
 function shouldFetchFiles( state ) {
   const files = state.files;
 
-  if( !files ) {
+  if ( !files ) {
     return true;
-  } else if( files.isFetching ) {
+  } else if ( files.isFetching ) {
     return false;
   } else {
     return files.didInvalidate;
@@ -42,11 +42,11 @@ function shouldFetchFiles( state ) {
 
 function fetchFiles() {
   return dispatch => {
-    dispatch(requestFiles())
-    return fetch('http://localhost:7171/')
-      .then(response => response.json())
-      .then(json => dispatch(receiveFiles(json)))
-  }
+    dispatch( requestFiles() );
+    return fetch( 'http://localhost:7171/' )
+      .then( response => response.json() )
+      .then( json => dispatch( receiveFiles( json ) ) );
+  };
 }
 
 /*
@@ -62,8 +62,8 @@ export function selectFile( name ) {
 
 export function fetchFilesIfNeeded() {
   return ( dispatch, getState ) => {
-    if( shouldFetchFiles( getState() )) {
+    if ( shouldFetchFiles( getState() ) ) {
       return dispatch( fetchFiles() );
     }
-  }
+  };
 }
