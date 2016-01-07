@@ -3,6 +3,7 @@ import Time from 'react-time';
 
 import { SelectableContainerEnhance } from 'material-ui/lib/hoc/selectable-enhance';
 import List from 'material-ui/lib/lists/list';
+import Dialog from 'material-ui/lib/dialog';
 import ListItem from 'material-ui/lib/lists/list-item';
 import FlatButton from 'material-ui/lib/flat-button';
 
@@ -11,7 +12,8 @@ var SelectableList = SelectableContainerEnhance( List );
 export default React.createClass({
   getInitialState() {
     return {
-      selectedIndex: 0
+      selectedIndex: 0,
+      dialogOpen: false
     };
   },
 
@@ -19,13 +21,49 @@ export default React.createClass({
     this.props.handleFileSelect( value );
   },
 
-  handleFileDelete( name ) {
+  handleFileDelete() {
     const { handleFileDelete } = this.props;
-    return ( e, value ) =>
-      handleFileDelete( name );
+    this.setState({ dialogOpen: false });
+    handleFileDelete( this.state.toBeDeletedFile );
+  },
+
+  handleShowDialog( name ) {
+    return e =>
+      this.setState({
+        dialogOpen: true,
+        toBeDeletedFile: name
+      });
+  },
+
+  handleCloseDialog() {
+    this.setState({ dialogOpen: false });
   },
 
   render: function() {
+    const actions = [
+      <FlatButton
+        label='Cancel'
+        secondary={true}
+        onTouchTap={this.handleCloseDialog}
+        />,
+      <FlatButton
+        label='Delete'
+        primary={true}
+        keyboardFocused={true}
+        onTouchTap={this.handleFileDelete}
+        />
+    ];
+    const dialog = (
+      <Dialog
+        title={'Delete ' + this.state.toBeDeletedFile + '?'}
+        actions={actions}
+        modal={false}
+        open={this.state.dialogOpen}
+        onRequestClose={this.handleCloseDialog}>
+        This will permanently delete the file
+      </Dialog>
+    );
+
     return (
       <SelectableList
         valueLink={{
@@ -38,6 +76,9 @@ export default React.createClass({
           paddingBottom: '-8px'
         }}>
         {
+          dialog
+        }
+        {
           this.props.files.map(function( item, i ) {
             return (
               <ListItem
@@ -46,7 +87,7 @@ export default React.createClass({
                 primaryText={item.name}
                 secondaryText={<Time value={item.lastModified} relative></Time>}
                 rightIconButton={<FlatButton label='Delete'
-                  primary={true} onTouchTap={ this.handleFileDelete( item.name ) }/>}
+                  primary={true} onTouchTap={ this.handleShowDialog( item.name ) }/>}
               >
               </ListItem>
             );
