@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { selectFile } from '../actions';
+import { selectFile, loadFileIfNeeded } from '../actions';
 
 
 const PopulationPage = React.createClass({
@@ -14,6 +14,7 @@ const PopulationPage = React.createClass({
   componentDidMount: function() {
     const { dispatch } = this.props;
     const selectedFile = this.props.params.filename;
+    dispatch( loadFileIfNeeded( selectedFile ) );
     dispatch( selectFile( selectedFile ) );
   },
   render() {

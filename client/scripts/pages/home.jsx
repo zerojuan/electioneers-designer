@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchFilesIfNeeded, selectFile, addFile, deleteFile } from '../actions';
+import { fetchFilesIfNeeded, selectFile, addFile, deleteFile, loadFileIfNeeded } from '../actions';
 
 import SavedFilesCard from '../components/saved-files-card.jsx';
 
@@ -25,6 +25,7 @@ let Home = React.createClass({
   },
   handleFileSelect( value ) {
     const { dispatch } = this.props;
+    dispatch( loadFileIfNeeded( value ) );
     dispatch( selectFile( value ) );
   },
   handleFileAdd( value ) {

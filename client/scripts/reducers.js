@@ -6,7 +6,9 @@ import {
   REQUEST_ADD_FILE,
   RECIEVE_ADD_FILE,
   REQUEST_DELETE_FILE,
-  RECIEVE_DELETE_FILE } from './actions';
+  RECIEVE_DELETE_FILE,
+  REQUEST_LOAD_FILE,
+  RECIEVE_LOAD_FILE } from './actions';
 
 function addFile( state, action ) {
   return [
@@ -74,9 +76,29 @@ function selectedFile( state = 'none', action ) {
   }
 }
 
+function districts( state = [], action ) {
+  switch ( action.type ) {
+    case RECIEVE_LOAD_FILE:
+      return action.districts;
+    default:
+      return state;
+  }
+}
+
+function population( state = [], action ) {
+  switch ( action.type ) {
+    case RECIEVE_LOAD_FILE:
+      return action.population;
+    default:
+      return state;
+  }
+}
+
 const designerApp = combineReducers({
   savedFiles,
-  selectedFile
+  selectedFile,
+  districts,
+  population
 });
 
 export default designerApp;

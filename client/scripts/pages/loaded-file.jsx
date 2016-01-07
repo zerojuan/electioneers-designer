@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { selectFile } from '../actions';
+import { selectFile, loadFileIfNeeded } from '../actions';
 
 let LoadedFilePage = React.createClass({
   componentDidMount() {
     const { dispatch } = this.props;
     const selectedFile = this.props.params.filename;
+    dispatch( loadFileIfNeeded( selectedFile ) );
     dispatch( selectFile( selectedFile ) );
   },
   render() {

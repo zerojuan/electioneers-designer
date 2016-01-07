@@ -63,6 +63,21 @@ function recieveDeleteFile( name ) {
   };
 };
 
+function requestLoadFile( name ) {
+  return {
+    type: REQUEST_LOAD_FILE,
+    name: name
+  };
+};
+
+function recieveLoadFile( data ) {
+  return {
+    type: RECIEVE_LOAD_FILE,
+    districts: data.districts,
+    population: data.population
+  };
+};
+
 function shouldFetchFiles( state ) {
   const files = state.files;
 
@@ -75,12 +90,32 @@ function shouldFetchFiles( state ) {
   }
 }
 
+function shouldLoadFile( state, name ) {
+  const selectedFile = state.selectedFile;
+  console.log( 'This is the state: ', state );
+  // if i'm loading anything other than the already loaded file
+  if ( selectedFile !== name ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 function fetchFiles() {
   return dispatch => {
     dispatch( requestFiles() );
     return fetch( 'http://localhost:7171/' )
       .then( response => response.json() )
       .then( json => dispatch( receiveFiles( json ) ) );
+  };
+}
+
+function fetchFile( name ) {
+  return dispatch => {
+    dispatch( requestLoadFile() );
+    return fetch( 'http://localhost:7171/base/' + name )
+      .then( response => response.json() )
+      .then( json => dispatch( recieveLoadFile( json ) ) );
   };
 }
 
@@ -117,7 +152,16 @@ export function deleteFile( name ) {
   };
 }
 
-export function fetchFilesIfNeeded() {
+export function loadFileIfNeeded( name ) {
+  return ( dispatch, getState ) => {
+    console.log( 'Loading file... ', name );
+    if ( shouldLoadFile( getState(), name ) ) {
+      return dispatch( fetchFile( name ) );
+    }
+  };
+}
+
+export function fetchFilesIfNeeded( name ) {
   return ( dispatch, getState ) => {
     if ( shouldFetchFiles( getState() ) ) {
       return dispatch( fetchFiles() );

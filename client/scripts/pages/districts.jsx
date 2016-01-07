@@ -15,6 +15,7 @@ const DistrictsPage = React.createClass({
   componentDidMount: function() {
     const { dispatch } = this.props;
     const selectedFile = this.props.params.filename;
+    dispatch( loadFileIfNeeded( selectedFile ) );
     dispatch( selectFile( selectedFile ) );
   },
   render() {
