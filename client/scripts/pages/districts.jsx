@@ -2,7 +2,7 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 
-import { selectFile } from '../actions';
+import { selectFile, loadFileIfNeeded } from '../actions';
 
 
 const DistrictsPage = React.createClass({
@@ -22,16 +22,31 @@ const DistrictsPage = React.createClass({
     return (
       <div>
         <h1>{this.props.title}</h1>
+        <ul>
+          {
+            this.props.districts.map( ( district ) => {
+              return (
+                <li>
+                  {district.name}
+                </li>
+              );
+            })
+          }
+        </ul>
       </div>
     );
   }
 });
 
 function mapStateToProps( state ) {
-  const selectedFile = state.selectedFile;
+  const {
+    selectedFile,
+    districts
+  } = state;
 
   return {
-    selectedFile
+    selectedFile,
+    districts
   };
 }
 

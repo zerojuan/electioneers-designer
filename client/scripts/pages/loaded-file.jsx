@@ -13,17 +13,24 @@ let LoadedFilePage = React.createClass({
   render() {
     return (
       <div>
-        { this.props.selectedFile }
+        <h1>{ this.props.selectedFile }</h1>
+        <p>{ this.props.districts.length }</p>
+        <p>{ this.props.population.length }</p>
       </div>
     );
   }
 });
 
 function mapStateToProps( state ) {
-  const selectedFile = state.selectedFile;
+  const {
+    selectedFile,
+    districts,
+    population } = state;
 
   return {
-    selectedFile
+    selectedFile,
+    districts,
+    population
   };
 }
 

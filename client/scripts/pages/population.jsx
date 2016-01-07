@@ -21,17 +21,31 @@ const PopulationPage = React.createClass({
     return (
       <div>
         <h1>{this.props.title}</h1>
-        <p>{this.props.selectedFile}</p>
+        <ul>
+        {
+          this.props.population.map( ( family ) => {
+            return (
+              <li>
+                {family.fatherName + family.familyName}
+              </li>
+            );
+          })
+        }
+        </ul>
       </div>
     );
   }
 });
 
 function mapStateToProps( state ) {
-  const selectedFile = state.selectedFile;
+  const {
+    selectedFile,
+    population
+  } = state;
 
   return {
-    selectedFile
+    selectedFile,
+    population
   };
 }
 
