@@ -18,6 +18,13 @@ export default React.createClass({
   handleUpdateSelectedFile( e, value ) {
     this.props.handleFileSelect( value );
   },
+
+  handleFileDelete( name ) {
+    const { handleFileDelete } = this.props;
+    return ( e, value ) =>
+      handleFileDelete( name );
+  },
+
   render: function() {
     return (
       <SelectableList
@@ -38,13 +45,12 @@ export default React.createClass({
                 key={ i }
                 primaryText={item.name}
                 secondaryText={<Time value={item.lastModified} relative></Time>}
-                rightIconButton={<FlatButton label='Delete' primary={true}/>}
+                rightIconButton={<FlatButton label='Delete'
+                  primary={true} onTouchTap={ this.handleFileDelete( item.name ) }/>}
               >
-
-
               </ListItem>
             );
-          })
+          }, this )
         }
       </SelectableList>
     );

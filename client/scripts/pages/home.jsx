@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchFilesIfNeeded, selectFile } from '../actions';
+import { fetchFilesIfNeeded, selectFile, addFile, deleteFile } from '../actions';
 
 import SavedFilesCard from '../components/saved-files-card.jsx';
 
@@ -27,6 +27,14 @@ let Home = React.createClass({
     const { dispatch } = this.props;
     dispatch( selectFile( value ) );
   },
+  handleFileAdd( value ) {
+    const { dispatch } = this.props;
+    dispatch( addFile() );
+  },
+  handleFileDelete( name ) {
+    const { dispatch } = this.props;
+    dispatch( deleteFile( name ) );
+  },
   render() {
 
     return (
@@ -35,12 +43,13 @@ let Home = React.createClass({
             marginTop: '20px',
             marginBottom: '20px'
           }}>
-          <RaisedButton label='New' primary={true}/>
+          <RaisedButton label='New' primary={true} onTouchTap={ this.handleFileAdd }/>
         </div>
         <SavedFilesCard
           files={ this.props.files }
           selectedFile={ this.props.selectedFile }
-          handleFileSelect={ this.handleFileSelect } />
+          handleFileSelect={ this.handleFileSelect }
+          handleFileDelete={ this.handleFileDelete } />
       </div>
     );
   }

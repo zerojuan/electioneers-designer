@@ -7,6 +7,7 @@ import { Router, Route, IndexRoute } from 'react-router';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import createLogger from 'redux-logger';
 
 
 import App from './app.jsx';
@@ -25,8 +26,11 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 // https://github.com/zilverline/react-tap-event-plugin
 injectTapEventPlugin();
 
+const logger = createLogger();
+
 const createStoreWithMiddleware = applyMiddleware(
-  thunk
+  thunk,
+  logger
 )( createStore );
 
 let store = createStoreWithMiddleware( designerApp );

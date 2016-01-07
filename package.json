@@ -21,6 +21,7 @@
     "isomorphic-fetch": "^2.2.0",
     "material-ui": "^0.14.0",
     "moment": "^2.11.0",
+    "moniker": "^0.1.2",
     "react": "^0.14.5",
     "react-breadcrumbs": "^1.1.9",
     "react-dom": "^0.14.3",
@@ -30,6 +31,7 @@
     "react-tap-event-plugin": "^0.2.1",
     "react-time": "^4.0.0",
     "redux": "^3.0.5",
+    "redux-logger": "^2.3.1",
     "redux-thunk": "^1.0.3"
   },
   "devDependencies": {
