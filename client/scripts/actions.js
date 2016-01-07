@@ -109,7 +109,7 @@ export function addFile() {
 export function deleteFile( name ) {
   return dispatch => {
     dispatch( requestDeleteFile() );
-    return fetch( 'http://localhost:7171/' + name, {
+    return fetch( 'http://localhost:7171/base/' + name, {
         method: 'delete'
       })
       .then( response => response.json() )

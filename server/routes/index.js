@@ -40,22 +40,6 @@ router.post( '/add', function( req, res ) {
   });
 });
 
-router.get( '/:name', function( req, res ) {
-  const name = req.params.name;
-
-});
-
-router.delete( '/:name', function( req, res ) {
-  const name = req.params.name;
-  const defaultDir = settings.getWorkingDirectory() + '/saves/' + name;
-
-  fs.removeSync( defaultDir );
-
-  return res.send({
-    name: req.params.name
-  });
-});
-
 router.get( '/', function( req, res ) {
   const defaultDir = settings.getWorkingDirectory();
 

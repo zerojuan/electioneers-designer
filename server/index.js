@@ -7,7 +7,9 @@ const app = express();
 
 app.use( cors() );
 
+app.use( '/base', require( './routes/designbase.js' ) );
 app.use( '/', require( './routes/index.js' ) );
+
 
 
 const server = app.listen( 7171, function() {
