@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require( 'express' );
-const fs = require( 'fs' );
+const fs = require( 'fs-extra' );
 const _ = require( 'lodash' );
 const Moniker = require( 'moniker' );
 const names = Moniker.generator([ Moniker.adjective, Moniker.noun ]);
@@ -40,8 +40,17 @@ router.post( '/add', function( req, res ) {
   });
 });
 
+router.get( '/:name', function( req, res ) {
+  const name = req.params.name;
+
+});
+
 router.delete( '/:name', function( req, res ) {
-  console.log( req.params.name );
+  const name = req.params.name;
+  const defaultDir = settings.getWorkingDirectory() + '/saves/' + name;
+
+  fs.removeSync( defaultDir );
+
   return res.send({
     name: req.params.name
   });
