@@ -8,7 +8,7 @@ import SavedFilesCard from '../components/saved-files-card.jsx';
 import RaisedButton from 'material-ui/lib/raised-button';
 import Paper from 'material-ui/lib/paper';
 
-let Home = React.createClass({
+const Home = React.createClass({
   displayName: 'HomePage',
   propTypes: {
     isFetching: PropTypes.bool.isRequired,

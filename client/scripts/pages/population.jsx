@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { selectFile, loadFileIfNeeded } from '../actions';
@@ -10,6 +10,15 @@ const PopulationPage = React.createClass({
     return {
       title: 'Population'
     };
+  },
+  propTypes: {
+    selectedFile: PropTypes.string.isRequired,
+    population: PropTypes.arrayOf( PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      fatherName: PropTypes.string.isRequired,
+      familyName: PropTypes.string.isRequired
+    }).isRequired ).isRequired,
+    selectedFile: PropTypes.string.isRequired
   },
   componentDidMount: function() {
     const { dispatch } = this.props;
@@ -25,7 +34,7 @@ const PopulationPage = React.createClass({
         {
           this.props.population.map( ( family ) => {
             return (
-              <li>
+              <li key={family._id}>
                 {family.fatherName + family.familyName}
               </li>
             );
