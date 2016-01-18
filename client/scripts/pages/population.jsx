@@ -3,9 +3,21 @@ import { connect } from 'react-redux';
 
 import { selectFile, loadFileIfNeeded } from '../actions';
 
+import Toolbar from 'material-ui/lib/toolbar/toolbar';
+import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
+import DropdownMenu from 'material-ui/lib/DropDownMenu';
+import MenuItem from 'material-ui/lib/menus/menu-item';
+
+const LIST_VIEW = 1;
+const DOTS_VIEW = 2;
 
 const PopulationPage = React.createClass({
   displayName: 'Population',
+  getInitialState() {
+    return {
+      layoutValue: 1
+    };
+  },
   getDefaultProps() {
     return {
       title: 'Population'
@@ -26,20 +38,41 @@ const PopulationPage = React.createClass({
     dispatch( loadFileIfNeeded( selectedFile ) );
     dispatch( selectFile( selectedFile ) );
   },
+  handleLayoutChange( e, index, value ) {
+    this.setState({
+      layoutValue: value
+    });
+  },
   render() {
+    const { layoutValue } = this.state;
+    let item = null;
+
+    if ( this.state.layoutValue === LIST_VIEW ) {
+      item = this.props.population.map( ( family ) => {
+          return (
+            <li key={family._id}>
+              {family.fatherName + family.familyName}
+            </li>
+          );
+        });
+    } else {
+      item = <h1>Grid View</h1>;
+    }
+
+
     return (
       <div>
         <h1>{this.props.title}</h1>
+        <Toolbar>
+          <ToolbarGroup>
+            <DropdownMenu value={this.state.layoutValue} onChange={this.handleLayoutChange}>
+              <MenuItem value={1} primaryText='List'/>
+              <MenuItem value={2} primaryText='Dots'/>
+            </DropdownMenu>
+          </ToolbarGroup>
+        </Toolbar>
         <ul>
-        {
-          this.props.population.map( ( family ) => {
-            return (
-              <li key={family._id}>
-                {family.fatherName + family.familyName}
-              </li>
-            );
-          })
-        }
+          { item }
         </ul>
       </div>
     );
