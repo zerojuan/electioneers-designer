@@ -8,6 +8,8 @@ import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
 import DropdownMenu from 'material-ui/lib/DropDownMenu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 
+import PopulationList from '../components/population-list';
+
 const LIST_VIEW = 1;
 const DOTS_VIEW = 2;
 
@@ -48,13 +50,14 @@ const PopulationPage = React.createClass({
     let item = null;
 
     if ( this.state.layoutValue === LIST_VIEW ) {
-      item = this.props.population.map( ( family ) => {
-          return (
-            <li key={family._id}>
-              {family.fatherName + family.familyName}
-            </li>
-          );
-        });
+      // item = this.props.population.map( ( family ) => {
+      //     return (
+      //       <li key={family._id}>
+      //         {family.fatherName + family.familyName}
+      //       </li>
+      //     );
+      //   });
+      item = <PopulationList population={this.props.population}></PopulationList>;
     } else {
       item = <h1>Grid View</h1>;
     }
@@ -62,7 +65,6 @@ const PopulationPage = React.createClass({
 
     return (
       <div>
-        <h1>{this.props.title}</h1>
         <Toolbar>
           <ToolbarGroup>
             <DropdownMenu value={this.state.layoutValue} onChange={this.handleLayoutChange}>

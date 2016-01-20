@@ -39,12 +39,18 @@ const App = React.createClass({
   },
 
   render() {
-    let selectedFile = this.props.selectedFile === 'none' ?
+    const selectedFile = this.props.selectedFile === 'none' ?
                         'Designer' : this.props.selectedFile;
+    let subtitle = this.props.routes[ 1 ] ? ' > ' + this.props.routes[ 1 ].name : '';
 
+    if ( subtitle === ' > Home' ) {
+      subtitle = '';
+    }
+
+    const title = selectedFile + subtitle;
     return (
       <div>
-        <AppBar title={selectedFile}
+        <AppBar title={title}
           onLeftIconButtonTouchTap={this.handleToggle}>
         </AppBar>
         <Sidebar
