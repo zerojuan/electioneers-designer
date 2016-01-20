@@ -8,9 +8,38 @@ import TableHeaderColumn from 'material-ui/lib/table/table-header-column';
 import TableRow from 'material-ui/lib/table/table-row';
 import TableRowColumn from 'material-ui/lib/table/table-row-column';
 
+import Paginator from './paginator';
+
 export default React.createClass({
+  getInitialState() {
+    return {
+      currentPage: 0,
+      pageSize: 20
+    };
+  },
+  handleNextPage() {
+    this.setState({
+      currentPage: this.state.currentPage + 1
+    });
+  },
+  handlePrevPage() {
+    this.setState({
+      currentPage: this.state.currentPage - 1
+    });
+  },
+  handleGotoPage( page ) {
+    this.setState({
+      currentPage: page
+    });
+  },
   render() {
+    // only load the first 10
+    const { currentPage, pageSize } = this.state;
+    const start = pageSize * currentPage;
+    const end = start + pageSize;
+    let page = this.props.population.slice( start, end );
     return (
+      <div>
       <Table>
         <TableHeader>
           <TableRow>
@@ -20,7 +49,7 @@ export default React.createClass({
         </TableHeader>
         <TableBody>
           {
-            this.props.population.map( ( family ) => {
+            page.map( ( family ) => {
                 return (
                   <TableRow key={family._id}>
                     <TableRowColumn>{family.fatherName + ' ' + family.familyName}</TableRowColumn>
@@ -31,6 +60,15 @@ export default React.createClass({
           }
         </TableBody>
       </Table>
+      <Paginator
+        currentPage={this.state.currentPage}
+        totalItems={this.props.population.length}
+        onNextPage={this.handleNextPage}
+        onPrevPage={this.handlePrevPage}
+        onGotoPage={this.handleGotoPage}
+        pageSize={this.state.pageSize}>
+      </Paginator>
+      </div>
     );
   }
 });
