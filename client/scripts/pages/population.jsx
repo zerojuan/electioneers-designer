@@ -7,6 +7,8 @@ import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
 import DropdownMenu from 'material-ui/lib/DropDownMenu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
+import RaisedButton from 'material-ui/lib/raised-button';
+import Dialog from 'material-ui/lib/dialog';
 
 import PopulationList from '../components/population-list';
 
@@ -17,7 +19,8 @@ const PopulationPage = React.createClass({
   displayName: 'Population',
   getInitialState() {
     return {
-      layoutValue: 1
+      layoutValue: 1,
+      generateDialogOpen: false
     };
   },
   getDefaultProps() {
@@ -43,6 +46,16 @@ const PopulationPage = React.createClass({
   handleLayoutChange( e, index, value ) {
     this.setState({
       layoutValue: value
+    });
+  },
+  handleShowGenerateDialog( ) {
+    this.setState({
+      generateDialogOpen: true
+    });
+  },
+  handleHideGenerateDialog( ) {
+    this.setState({
+      generateDialogOpen: false
     });
   },
   render() {
@@ -71,11 +84,22 @@ const PopulationPage = React.createClass({
               <MenuItem value={1} primaryText='List'/>
               <MenuItem value={2} primaryText='Dots'/>
             </DropdownMenu>
+            <RaisedButton
+              label='Generate Family'
+              primary={ true }
+              onTouchTap={ this.handleShowGenerateDialog }>
+            </RaisedButton>
           </ToolbarGroup>
         </Toolbar>
         <ul>
           { item }
         </ul>
+        <Dialog
+          title='Generate Family'
+          modal={false}
+          open={this.state.generateDialogOpen}>
+          Is this the real life
+        </Dialog>
       </div>
     );
   }
