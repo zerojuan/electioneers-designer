@@ -8,6 +8,7 @@ import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
 import DropdownMenu from 'material-ui/lib/DropDownMenu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import RaisedButton from 'material-ui/lib/raised-button';
+import FlatButton from 'material-ui/lib/flat-button';
 import Dialog from 'material-ui/lib/dialog';
 
 import PopulationList from '../components/population-list';
@@ -62,14 +63,19 @@ const PopulationPage = React.createClass({
     const { layoutValue } = this.state;
     let item = null;
 
+    const dialogActions = [
+      <FlatButton
+        label='Cancel'
+        secondary={true}
+        onTouchTap={this.handleHideGenerateDialog} />,
+      <FlatButton
+        label='Submit'
+        primary={true}
+        keyboardFocused={true}
+        onTouchTap={this.handleHideGenerateDialog} />
+    ];
+
     if ( this.state.layoutValue === LIST_VIEW ) {
-      // item = this.props.population.map( ( family ) => {
-      //     return (
-      //       <li key={family._id}>
-      //         {family.fatherName + family.familyName}
-      //       </li>
-      //     );
-      //   });
       item = <PopulationList population={this.props.population}></PopulationList>;
     } else {
       item = <h1>Grid View</h1>;
@@ -97,6 +103,7 @@ const PopulationPage = React.createClass({
         <Dialog
           title='Generate Family'
           modal={false}
+          actions={dialogActions}
           open={this.state.generateDialogOpen}>
           Is this the real life
         </Dialog>
