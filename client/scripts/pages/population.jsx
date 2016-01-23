@@ -12,6 +12,7 @@ import FlatButton from 'material-ui/lib/flat-button';
 import Dialog from 'material-ui/lib/dialog';
 
 import PopulationList from '../components/population-list';
+import GenerateFamilyDialog from '../components/generate-family-dialog';
 
 const LIST_VIEW = 1;
 const DOTS_VIEW = 2;
@@ -63,17 +64,7 @@ const PopulationPage = React.createClass({
     const { layoutValue } = this.state;
     let item = null;
 
-    const dialogActions = [
-      <FlatButton
-        label='Cancel'
-        secondary={true}
-        onTouchTap={this.handleHideGenerateDialog} />,
-      <FlatButton
-        label='Submit'
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={this.handleHideGenerateDialog} />
-    ];
+
 
     if ( this.state.layoutValue === LIST_VIEW ) {
       item = <PopulationList population={this.props.population}></PopulationList>;
@@ -100,13 +91,9 @@ const PopulationPage = React.createClass({
         <ul>
           { item }
         </ul>
-        <Dialog
-          title='Generate Family'
-          modal={false}
-          actions={dialogActions}
-          open={this.state.generateDialogOpen}>
-          Is this the real life
-        </Dialog>
+        <GenerateFamilyDialog
+          open={this.state.generateDialogOpen}
+          onClose={this.handleHideGenerateDialog}></GenerateFamilyDialog>
       </div>
     );
   }
