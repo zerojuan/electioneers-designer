@@ -10,6 +10,14 @@ import {
   REQUEST_LOAD_FILE,
   RECIEVE_LOAD_FILE } from './actions';
 
+import {
+  BATCH_GENERATE_FAMILY
+} from './actions/population';
+
+import {
+  batchGenerateFamily
+} from './reducers/population';
+
 function addFile( state, action ) {
   return [
     ...state,
@@ -89,6 +97,8 @@ function population( state = [], action ) {
   switch ( action.type ) {
     case RECIEVE_LOAD_FILE:
       return action.population;
+    case BATCH_GENERATE_FAMILY:
+      return batchGenerateFamily( state, action );
     default:
       return state;
   }

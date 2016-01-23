@@ -14,6 +14,7 @@ export default React.createClass({
   },
   propTypes: {
     onClose: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired
   },
   handleCount( value ) {
@@ -26,6 +27,12 @@ export default React.createClass({
       wealth: value
     });
   },
+  handleSubmit( ) {
+    this.props.onSubmit({
+      count: this.state.count,
+      wealth: this.state.wealth
+    });
+  },
   render() {
     const dialogActions = [
       <FlatButton
@@ -36,7 +43,7 @@ export default React.createClass({
         label='Submit'
         primary={true}
         keyboardFocused={true}
-        onTouchTap={this.props.onClose} />
+        onTouchTap={this.handleSubmit} />
     ];
 
     return (

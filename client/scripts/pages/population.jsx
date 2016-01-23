@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { selectFile, loadFileIfNeeded } from '../actions';
 
+import { batchGenerateFamily } from '../actions/population';
+
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
 import DropdownMenu from 'material-ui/lib/DropDownMenu';
@@ -60,6 +62,12 @@ const PopulationPage = React.createClass({
       generateDialogOpen: false
     });
   },
+  handleGenerateSubmitDialog( data ) {
+    // Call the backend with this information
+    const { dispatch } = this.props;
+
+    dispatch( batchGenerateFamily( data ) );
+  },
   render() {
     const { layoutValue } = this.state;
     let item = null;
@@ -93,7 +101,8 @@ const PopulationPage = React.createClass({
         </ul>
         <GenerateFamilyDialog
           open={this.state.generateDialogOpen}
-          onClose={this.handleHideGenerateDialog}></GenerateFamilyDialog>
+          onClose={this.handleHideGenerateDialog}
+          onSubmit={this.handleGenerateSubmitDialog}></GenerateFamilyDialog>
       </div>
     );
   }
