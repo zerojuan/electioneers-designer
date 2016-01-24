@@ -1,10 +1,10 @@
 
 export function batchGenerateFamily( state, action ) {
-  console.log( 'What is this? ' );
+  
   return [
     ...state,
     {
-      _id: 'Something1',
+      _id: Date.now().toString(),
       familyName: 'Something',
       fatherName: 'Hello'
     }
