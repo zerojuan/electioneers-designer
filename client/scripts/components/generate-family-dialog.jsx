@@ -29,9 +29,10 @@ export default React.createClass({
   },
   handleSubmit( ) {
     this.props.onSubmit({
-      count: this.state.count,
-      wealth: this.state.wealth
+      count: this.state.count + 1,
+      wealth: this.state.wealth + 1
     });
+    this.props.onClose();
   },
   render() {
     const dialogActions = [
