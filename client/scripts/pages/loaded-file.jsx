@@ -14,8 +14,8 @@ let LoadedFilePage = React.createClass({
     return (
       <div>
         <h1>{ this.props.selectedFile }</h1>
-        <p>{ this.props.districts.length }</p>
-        <p>{ this.props.population.length }</p>
+        <p>Districts: { this.props.districts.length }</p>
+        <p>Population: { this.props.population.length }</p>
       </div>
     );
   }

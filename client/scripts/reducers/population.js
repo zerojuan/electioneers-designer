@@ -68,7 +68,11 @@ function generateFamily() {
   return {
     _id: guid(),
     familyName: pickRandom( Surnames ),
-    fatherName: pickRandom( MaleNames )
+    fatherName: pickRandom( MaleNames ),
+    wealth: Math.floor( Math.random() * 100 ),
+    intelligence: Math.floor( Math.random() * 100 ),
+    charm: Math.floor( Math.random() * 100 ),
+    leadership: Math.floor( Math.random() * 100 )
   };
 }
 

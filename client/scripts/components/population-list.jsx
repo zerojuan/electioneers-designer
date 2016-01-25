@@ -45,6 +45,9 @@ export default React.createClass({
           <TableRow>
             <TableHeaderColumn tooltip='Fathers Name'>Father Name</TableHeaderColumn>
             <TableHeaderColumn tooltip='Wealth'>Wealth</TableHeaderColumn>
+            <TableHeaderColumn tooltip='Intelligence'>Int</TableHeaderColumn>
+            <TableHeaderColumn tooltip='Charisma'>Charm</TableHeaderColumn>
+            <TableHeaderColumn tooltip='Leadership'>Leadership</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -53,7 +56,10 @@ export default React.createClass({
                 return (
                   <TableRow key={family._id}>
                     <TableRowColumn>{family.fatherName + ' ' + family.familyName}</TableRowColumn>
-                    <TableRowColumn>9</TableRowColumn>
+                    <TableRowColumn>{family.wealth}</TableRowColumn>
+                    <TableRowColumn>{family.intelligence}</TableRowColumn>
+                    <TableRowColumn>{family.charm}</TableRowColumn>
+                    <TableRowColumn>{family.leadership}</TableRowColumn>
                   </TableRow>
                 );
             })
