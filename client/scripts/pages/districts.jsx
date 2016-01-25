@@ -4,9 +4,20 @@ import { connect } from 'react-redux';
 
 import { selectFile, loadFileIfNeeded } from '../actions';
 
+import Toolbar from 'material-ui/lib/toolbar/toolbar';
+import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
+import DropdownMenu from 'material-ui/lib/DropDownMenu';
+import MenuItem from 'material-ui/lib/menus/menu-item';
+
+import DistrictsList from '../components/districts-list';
 
 const DistrictsPage = React.createClass({
   displayName: 'Districts',
+  getInitialState() {
+    return {
+      layoutValue: 1
+    };
+  },
   getDefaultProps() {
     return {
       title: 'Districts'
@@ -18,21 +29,23 @@ const DistrictsPage = React.createClass({
     dispatch( loadFileIfNeeded( selectedFile ) );
     dispatch( selectFile( selectedFile ) );
   },
+  handleLayoutChange( e, index, value ) {
+    this.setState({
+      layoutValue: value
+    });
+  },
   render() {
     return (
       <div>
-        <h1>{this.props.title}</h1>
-        <ul>
-          {
-            this.props.districts.map( ( district ) => {
-              return (
-                <li>
-                  {district.name}
-                </li>
-              );
-            })
-          }
-        </ul>
+        <Toolbar>
+          <ToolbarGroup>
+            <DropdownMenu value={this.state.layoutValue} onChange={this.handleLayoutChange}>
+              <MenuItem value={1} primaryText='List'/>
+              <MenuItem value={2} primaryText='Dots'/>
+            </DropdownMenu>
+          </ToolbarGroup>
+        </Toolbar>
+        <DistrictsList districts={this.props.districts}></DistrictsList>
       </div>
     );
   }
