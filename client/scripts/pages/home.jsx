@@ -60,11 +60,13 @@ function mapStateToProps( state ) {
   const {
     isFetching,
     didInvalidate,
-    items: files
+    items: files,
+    isDirty
   } = state.savedFiles || {
     isFetching: false,
     didInvalidate: false,
-    items: []
+    items: [],
+    isDirty: false
   };
 
   const selectedFile = state.selectedFile;
@@ -73,7 +75,8 @@ function mapStateToProps( state ) {
     files,
     didInvalidate,
     isFetching,
-    selectedFile
+    selectedFile,
+    isDirty
   };
 }
 

@@ -104,11 +104,23 @@ function population( state = [], action ) {
   }
 }
 
+function isDirty( state = false, action ) {
+  switch ( action.type ) {
+    case RECIEVE_LOAD_FILE:
+      return false;
+    case BATCH_GENERATE_FAMILY:
+      return true;
+    default:
+      return state;
+  }
+}
+
 const designerApp = combineReducers({
   savedFiles,
   selectedFile,
   districts,
-  population
+  population,
+  isDirty
 });
 
 export default designerApp;
