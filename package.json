@@ -16,6 +16,7 @@
   "author": "juliusthepious",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.14.2",
     "es6-promise": "^3.0.2",
     "fs-extra": "^0.26.4",
     "history": "^1.13.1",

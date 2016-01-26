@@ -9,6 +9,8 @@ export const SELECT_FILE = 'SELECT_FILE';
 export const REQUEST_FILES = 'REQUEST_FILES';
 export const RECEIVE_FILES = 'RECEIVE_FILES';
 
+export const REQUEST_SAVE_FILE = 'REQUEST_SAVE_FILE';
+
 export const REQUEST_ADD_FILE = 'REQUEST_ADD_FILES';
 export const RECIEVE_ADD_FILE = 'RECEIVE_ADD_FILES';
 
@@ -63,6 +65,13 @@ function recieveDeleteFile( name ) {
   };
 };
 
+function requestSaveFile( name ) {
+  return {
+    type: REQUEST_SAVE_FILE,
+    name: name
+  };
+};
+
 function requestLoadFile( name ) {
   return {
     type: REQUEST_LOAD_FILE,
@@ -92,7 +101,7 @@ function shouldFetchFiles( state ) {
 
 function shouldLoadFile( state, name ) {
   const selectedFile = state.selectedFile;
-  console.log( 'This is the state: ', state );
+
   // if i'm loading anything other than the already loaded file
   if ( selectedFile !== name ) {
     return true;
@@ -149,6 +158,26 @@ export function deleteFile( name ) {
       })
       .then( response => response.json() )
       .then( json => dispatch( recieveDeleteFile( json.name ) ) );
+  };
+}
+
+export function saveFile( name ) {
+  return ( dispatch, getState ) => {
+    dispatch( requestSaveFile() );
+    return fetch( 'http://localhost:7171/base/' + name, {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        districts: getState().districts,
+        population: getState().population,
+        actions: getState().actions
+      })
+    })
+    .then( response => response.json() )
+    .then( json => dispatch( recieveLoadFile( json ) ) );
   };
 }
 

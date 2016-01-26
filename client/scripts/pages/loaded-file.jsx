@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { selectFile, loadFileIfNeeded } from '../actions';
+import { selectFile, loadFileIfNeeded, saveFile } from '../actions';
+
+import FlatButton from 'material-ui/lib/flat-button';
 
 let LoadedFilePage = React.createClass({
   componentDidMount() {
@@ -10,8 +12,12 @@ let LoadedFilePage = React.createClass({
     dispatch( loadFileIfNeeded( selectedFile ) );
     dispatch( selectFile( selectedFile ) );
   },
+  handleFileSave() {
+    const { dispatch } = this.props;
+    dispatch( saveFile( this.props.selectedFile ) );
+  },
   render() {
-    let saveButton = <b>Save</b>;
+    let saveButton = <FlatButton label='Save' onTouchTap={this.handleFileSave}></FlatButton>;
     if ( !this.props.isDirty ) {
       saveButton = <b></b>;
     }

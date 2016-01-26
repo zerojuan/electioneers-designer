@@ -64,4 +64,15 @@ router.delete( '/:name', function( req, res ) {
   });
 });
 
+router.post( '/:name', function( req, res ) {
+  const name = req.params.name;
+  const defaultDir = settings.getWorkingDirectory() + '/saves/' + name;
+
+  console.log( req.body );
+
+  return res.send({
+    name: req.params.name
+  });
+});
+
 module.exports = router;
