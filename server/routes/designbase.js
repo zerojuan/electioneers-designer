@@ -68,10 +68,41 @@ router.post( '/:name', function( req, res ) {
   const name = req.params.name;
   const defaultDir = settings.getWorkingDirectory() + '/saves/' + name;
 
-  console.log( req.body );
-
-  return res.send({
-    name: req.params.name
+  // save the files here
+  async.series({
+    districts: function( callback ) {
+      // save districts
+      let districts = {
+        name: 'Districts',
+        data: req.body.districts
+      };
+      fs.writeFileSync( defaultDir + '/districts.json',
+        JSON.stringify( districts, null, '\t' ) );
+      callback();
+    },
+    population: function( callback ) {
+      // save population
+      let population = {
+        name: 'Population',
+        data: req.body.population
+      };
+      fs.writeFileSync( defaultDir + '/population.json',
+        JSON.stringify( population, null, '\t' ) );
+      callback();
+    },
+    actions: function( callback ) {
+      let actions = {
+        name: 'Actions',
+        data: req.body.actions
+      };
+      fs.writeFileSync( defaultDir + '/actions.json',
+        JSON.stringify( actions, null, '\t' ) );
+      callback();
+    }
+  }, function( err, result ) {
+    return res.send({
+      name: req.params.name
+    });
   });
 });
 

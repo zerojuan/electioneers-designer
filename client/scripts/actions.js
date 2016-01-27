@@ -10,6 +10,7 @@ export const REQUEST_FILES = 'REQUEST_FILES';
 export const RECEIVE_FILES = 'RECEIVE_FILES';
 
 export const REQUEST_SAVE_FILE = 'REQUEST_SAVE_FILE';
+export const RECIEVE_SAVE_FILE = 'RECIEVE_SAVE_FILE';
 
 export const REQUEST_ADD_FILE = 'REQUEST_ADD_FILES';
 export const RECIEVE_ADD_FILE = 'RECEIVE_ADD_FILES';
@@ -68,6 +69,13 @@ function recieveDeleteFile( name ) {
 function requestSaveFile( name ) {
   return {
     type: REQUEST_SAVE_FILE,
+    name: name
+  };
+};
+
+function recieveSaveFile( name ) {
+  return {
+    type: RECIEVE_SAVE_FILE,
     name: name
   };
 };
@@ -177,7 +185,7 @@ export function saveFile( name ) {
       })
     })
     .then( response => response.json() )
-    .then( json => dispatch( recieveLoadFile( json ) ) );
+    .then( json => dispatch( recieveSaveFile( name ) ) );
   };
 }
 
