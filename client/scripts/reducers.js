@@ -8,7 +8,9 @@ import {
   REQUEST_DELETE_FILE,
   RECIEVE_DELETE_FILE,
   REQUEST_LOAD_FILE,
-  RECIEVE_LOAD_FILE } from './actions';
+  RECIEVE_LOAD_FILE,
+  REQUEST_SAVE_FILE,
+  RECIEVE_SAVE_FILE} from './actions';
 
 import {
   BATCH_GENERATE_FAMILY
@@ -115,12 +117,22 @@ function isDirty( state = false, action ) {
   }
 }
 
+function message( state = null, action ) {
+  switch ( action.type ) {
+    case RECIEVE_SAVE_FILE:
+      return 'Saved ' + action.name;
+    default:
+      return state;
+  }
+}
+
 const designerApp = combineReducers({
   savedFiles,
   selectedFile,
   districts,
   population,
-  isDirty
+  isDirty,
+  message
 });
 
 export default designerApp;

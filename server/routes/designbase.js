@@ -70,7 +70,7 @@ router.post( '/:name', function( req, res ) {
 
   // save the files here
   async.series({
-    districts: function( callback ) {
+    districts: function( done ) {
       // save districts
       let districts = {
         name: 'Districts',
@@ -78,9 +78,9 @@ router.post( '/:name', function( req, res ) {
       };
       fs.writeFileSync( defaultDir + '/districts.json',
         JSON.stringify( districts, null, '\t' ) );
-      callback();
+      done();
     },
-    population: function( callback ) {
+    population: function( done ) {
       // save population
       let population = {
         name: 'Population',
@@ -88,16 +88,16 @@ router.post( '/:name', function( req, res ) {
       };
       fs.writeFileSync( defaultDir + '/population.json',
         JSON.stringify( population, null, '\t' ) );
-      callback();
+      done();
     },
-    actions: function( callback ) {
+    actions: function( done ) {
       let actions = {
         name: 'Actions',
         data: req.body.actions
       };
       fs.writeFileSync( defaultDir + '/actions.json',
         JSON.stringify( actions, null, '\t' ) );
-      callback();
+      done();
     }
   }, function( err, result ) {
     return res.send({

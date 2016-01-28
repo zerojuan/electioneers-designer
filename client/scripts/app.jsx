@@ -6,8 +6,10 @@ require( '../styles/_import.less' );
 
 import Breadcrumb from './components/breadcrumb.jsx';
 import Sidebar from './components/sidebar.jsx';
+import Snackbar from './components/snackbar.jsx';
 
 import AppBar from 'material-ui/lib/app-bar';
+
 
 const App = React.createClass({
   displayName: 'App',
@@ -24,18 +26,35 @@ const App = React.createClass({
 
   getInitialState: function() {
     return {
-      open: false
+      sidebarOpen: false,
+      messages: []
     };
   },
 
   handleToggle() {
-    console.log( 'Handle toggle. This has been toggled' );
-    this.setState({ open: !this.state.open });
+    this.setState({ sidebarOpen: !this.state.open });
   },
 
   handleClose( event ) {
-    console.log( 'Hendle close', event );
-    this.setState({ open: false });
+    this.setState({ sidebarOpen: false });
+  },
+
+  shiftMessage() {
+    this.setState({
+      messages: this.state.messages.shift()
+    });
+  },
+
+  componentWillReceiveProps( nextProps ) {
+    if ( nextProps.message ) {
+      console.log( 'How many messages? ' );
+      this.setState({
+        messages: [
+          ...this.messages,
+          nextProps.message
+        ]
+      });
+    }
   },
 
   render() {
@@ -55,7 +74,7 @@ const App = React.createClass({
         </AppBar>
         <Sidebar
           routes={this.props.routes}
-          open={this.state.open}
+          open={this.state.sidebarOpen}
           selectedFile={selectedFile}
           handleClose={this.handleClose}/>
         <div
@@ -65,7 +84,7 @@ const App = React.createClass({
           >
           {this.props.children}
         </div>
-
+        <Snackbar messages={this.state.messages} onHide={this.shiftMessage}/>
       </div>
     );
   }
@@ -84,12 +103,14 @@ function mapStateToProps( state ) {
   };
 
   const selectedFile = state.selectedFile;
-
+  const message = state.message;
+  console.log( 'What is the message ', state.message );
   return {
     selectedFile,
     files,
     didInvalidate,
-    isFetching
+    isFetching,
+    message
   };
 }
 
