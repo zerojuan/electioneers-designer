@@ -9,6 +9,7 @@ import Sidebar from './components/sidebar.jsx';
 import Snackbar from './components/snackbar.jsx';
 
 import AppBar from 'material-ui/lib/app-bar';
+import RaisedButton from 'material-ui/lib/raised-button';
 
 
 const App = React.createClass({
@@ -67,10 +68,13 @@ const App = React.createClass({
     }
 
     const title = selectedFile + subtitle;
+    const save = <RaisedButton label='Save'></RaisedButton>;
     return (
       <div>
         <AppBar title={title}
-          onLeftIconButtonTouchTap={this.handleToggle}>
+          onLeftIconButtonTouchTap={this.handleToggle}
+          iconElementRight={save}>
+
         </AppBar>
         <Sidebar
           routes={this.props.routes}
@@ -104,13 +108,15 @@ function mapStateToProps( state ) {
 
   const selectedFile = state.selectedFile;
   const message = state.message;
-  console.log( 'What is the message ', state.message );
+  const isDirty = state.isDirty;
+
   return {
     selectedFile,
     files,
     didInvalidate,
     isFetching,
-    message
+    message,
+    isDirty
   };
 }
 
