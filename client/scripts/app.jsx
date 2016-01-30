@@ -4,6 +4,8 @@ import { Link, RouteHandler } from 'react-router';
 
 require( '../styles/_import.less' );
 
+import { saveFile } from './actions';
+
 import Breadcrumb from './components/breadcrumb.jsx';
 import Sidebar from './components/sidebar.jsx';
 import Snackbar from './components/snackbar.jsx';
@@ -58,6 +60,11 @@ const App = React.createClass({
     }
   },
 
+  handleSaveButton() {
+    const { dispatch } = this.props;
+    dispatch( saveFile( this.props.selectedFile ) );
+  },
+
   render() {
     const selectedFile = this.props.selectedFile === 'none' ?
                         'Designer' : this.props.selectedFile;
@@ -68,12 +75,17 @@ const App = React.createClass({
     }
 
     const title = selectedFile + subtitle;
-    const save = <RaisedButton label='Save'></RaisedButton>;
+
+    let saveButton = '';
+    if ( this.props.isDirty ) {
+      saveButton = <RaisedButton label='Save' onTouchTap={this.handleSaveButton}></RaisedButton>;
+    }
+
     return (
       <div>
         <AppBar title={title}
           onLeftIconButtonTouchTap={this.handleToggle}
-          iconElementRight={save}>
+          iconElementRight={saveButton}>
 
         </AppBar>
         <Sidebar
