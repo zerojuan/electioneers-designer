@@ -1,4 +1,3 @@
-'use strict';
 
 const express = require( 'express' );
 const cors = require( 'cors' );
@@ -33,5 +32,5 @@ process.on( 'uncaughtException', function( err ) {
       console.log( err );
     }
 
-    process.exit( 1 );
+    // process.exit( 1 );
 });

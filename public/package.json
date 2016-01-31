@@ -2,6 +2,7 @@
   "name": "partyanimals-designer",
   "main": "index.html",
   "node-main": "index.js",
+  "js-flags": "--harmony",
   "webkit":{
     "plugin": true
   },

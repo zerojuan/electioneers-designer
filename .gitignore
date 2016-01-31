@@ -13,3 +13,4 @@ public/settings.js
 public/*.less
 public/routes
 public/data
+public/bundle.js

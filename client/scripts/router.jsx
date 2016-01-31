@@ -1,6 +1,8 @@
 import promise from 'es6-promise';
 promise.polyfill();
 
+import 'babel-polyfill';
+
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute } from 'react-router';

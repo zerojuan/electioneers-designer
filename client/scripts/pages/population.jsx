@@ -38,8 +38,7 @@ const PopulationPage = React.createClass({
       _id: PropTypes.string.isRequired,
       fatherName: PropTypes.string.isRequired,
       familyName: PropTypes.string.isRequired
-    }).isRequired ).isRequired,
-    selectedFile: PropTypes.string.isRequired
+    }).isRequired ).isRequired
   },
   componentDidMount: function() {
     const { dispatch } = this.props;
