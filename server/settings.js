@@ -1,11 +1,13 @@
 'use strict';
 
 var fs = require( 'fs' );
+var path = require( 'path' );
 
 // load settings file
 var loadSettings = function() {
   return JSON.parse(
-    fs.readFileSync( __dirname + '/data/settings.json', { encoding: 'utf8' })
+    fs.readFileSync( path.join( __dirname, '/data/settings.json' ),
+      { encoding: 'utf8' })
   );
 };
 
