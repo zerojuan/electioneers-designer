@@ -1,5 +1,6 @@
 {
   "name": "partyanimals-designer",
+  "version": "0.0.1",
   "main": "index.html",
   "node-main": "index.js",
   "js-flags": "--harmony",

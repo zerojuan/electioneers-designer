@@ -1,6 +1,7 @@
 node_modules
 bower_components
 build
+cache
 
 .vagrant
 .DS_Store
