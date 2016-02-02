@@ -11,7 +11,9 @@ export default React.createClass({
     d3Grid.create( el, {
       width: '100%',
       height: '300px'
-    }, this.props.population );
+    }, {
+      population: this.props.population
+    } );
   },
   componentDidUpdate() {
 
