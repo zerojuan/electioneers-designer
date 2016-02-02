@@ -14,6 +14,7 @@ import FlatButton from 'material-ui/lib/flat-button';
 import Dialog from 'material-ui/lib/dialog';
 
 import PopulationList from '../components/population-list';
+import PopulationGrid from '../components/population-grid';
 import GenerateFamilyDialog from '../components/generate-family-dialog';
 
 const LIST_VIEW = 1;
@@ -76,7 +77,7 @@ const PopulationPage = React.createClass({
     if ( this.state.layoutValue === LIST_VIEW ) {
       item = <PopulationList population={this.props.population}></PopulationList>;
     } else {
-      item = <h1>Grid View</h1>;
+      item = <PopulationGrid population={this.props.population}></PopulationGrid>;
     }
 
 
