@@ -76,7 +76,7 @@ const App = React.createClass({
 
     const title = selectedFile + subtitle;
 
-    let saveButton = '';
+    let saveButton = <div></div>;
     if ( this.props.isDirty ) {
       saveButton = <RaisedButton label='Save' onTouchTap={this.handleSaveButton}></RaisedButton>;
     }
