@@ -2,67 +2,75 @@ import d3 from 'd3';
 
 const populationGrid = {};
 
-populationGrid.create = function( el, props, state ) {
-  let svg = d3.select( el ).append( 'svg' )
-            .attr( 'class', 'grid' )
-            .attr( 'width', props.width )
-            .attr( 'height', props.height );
+class PopulationGrid{
+  constructor( handlers ) {
+    console.log( 'Starting' );
+    this.handlers = handlers;
+  }
 
-  svg.append( 'g' )
-    .attr( 'class', 'cells' );
+  create( el, props, state ) {
+    let svg = d3.select( el ).append( 'svg' )
+              .attr( 'class', 'grid' )
+              .attr( 'width', props.width )
+              .attr( 'height', props.height );
 
-  this.update( el, state );
-};
+    svg.append( 'g' )
+      .attr( 'class', 'cells' );
 
-populationGrid.update = function( el, state ) {
-  const scale = this._scales( el );
-  this._drawGraph( el, scale, state );
-};
+    this.update( el, state );
+  }
 
-populationGrid._drawGraph = ( el, scales, state ) => {
-  // draw the actual objects
-  const population = state.population;
+  update( el, state ) {
+    const scale = this._scales( el );
+    this._drawGraph( el, scale, state );
+  }
 
-  var g = d3.select( el ).selectAll( '.cells' );
+  destroy( el ) {
+    console.log( 'I Am destroyed' );
+  }
 
-  var point = g.selectAll( '.cell' )
-    .data( population, d => d._id );
+  _drawGraph( el, scales, state ) {
+    // draw the actual objects
+    const population = state.population;
+    console.log( 'population: ', population );
 
-  // ENTER
-  point.enter().append( 'circle' )
-      .attr( 'class', 'cell' );
+    var g = d3.select( el ).selectAll( '.cells' );
 
-  // ENTER & UPDATE
-  point.attr( 'cx', ( d, i ) => scales.x( i * 10 ) )
-      .attr( 'cy', ( d, i ) => scales.y( i * 5 ) )
-      .attr( 'r', d => scales.z( 3 ) );
+    var point = g.selectAll( '.cell' )
+      .data( population, d => d._id );
 
-  // EXIT
-  point.exit()
-      .remove();
-};
+    // ENTER
+    point.enter().append( 'circle' )
+        .attr( 'class', 'cell' );
 
-populationGrid._scales = ( el ) => {
-  var width = el.offsetWidth;
-  var height = el.offsetHeight;
+    // ENTER & UPDATE
+    point.attr( 'cx', ( d, i ) => scales.x( i * 10 ) )
+        .attr( 'cy', ( d, i ) => scales.y( i * 5 ) )
+        .attr( 'r', d => scales.z( 3 ) );
 
-  var x = d3.scale.linear()
-    .range([ 0, width ])
-    .domain([ 0, 100 ]);
+    // EXIT
+    point.exit()
+        .remove();
+  }
 
-  var y = d3.scale.linear()
-    .range([ height, 0 ])
-    .domain([ 0, 100 ]);
+  _scales( el ) {
+    var width = el.offsetWidth;
+    var height = el.offsetHeight;
 
-  var z = d3.scale.linear()
-    .range([ 5, 20 ])
-    .domain([ 1, 10 ]);
+    var x = d3.scale.linear()
+      .range([ 0, width ])
+      .domain([ 0, 100 ]);
 
-  return { x: x, y: y, z: z };
-};
+    var y = d3.scale.linear()
+      .range([ height, 0 ])
+      .domain([ 0, 100 ]);
 
-populationGrid.destroy = function( el ) {
+    var z = d3.scale.linear()
+      .range([ 5, 20 ])
+      .domain([ 1, 10 ]);
 
-};
+    return { x: x, y: y, z: z };
+  }
+}
 
-export default populationGrid;
+export default PopulationGrid;
