@@ -32,7 +32,7 @@ class PopulationGrid{
   _drawGraph( el, scales, state ) {
     // draw the actual objects
     const population = state.population;
-    console.log( 'population: ', population );
+    console.log( 'population: ', population.length );
 
     var g = d3.select( el ).selectAll( '.cells' );
 
@@ -40,13 +40,20 @@ class PopulationGrid{
       .data( population, d => d._id );
 
     // ENTER
-    point.enter().append( 'circle' )
+    point.enter().append( 'rect' )
         .attr( 'class', 'cell' );
 
     // ENTER & UPDATE
-    point.attr( 'cx', ( d, i ) => scales.x( i * 10 ) )
-        .attr( 'cy', ( d, i ) => scales.y( i * 5 ) )
-        .attr( 'r', d => scales.z( 3 ) );
+    point.attr( 'x', ( d, i ) => {
+      console.log( 'X: ', scales.x( ( i % 10 ) ) );
+          return scales.x( ( i % 10 ) );
+        })
+        .attr( 'y', ( d, i ) => {
+          console.log( 'Y: ', scales.y( Math.floor( i / 10 ) ) );
+          return scales.y( Math.floor( i / 10 ) );
+        })
+        .attr( 'width', 20 )
+        .attr( 'height', 20 );
 
     // EXIT
     point.exit()
@@ -59,11 +66,11 @@ class PopulationGrid{
 
     var x = d3.scale.linear()
       .range([ 0, width ])
-      .domain([ 0, 100 ]);
+      .domain([ 0, 10 ]);
 
     var y = d3.scale.linear()
-      .range([ height, 0 ])
-      .domain([ 0, 100 ]);
+      .range([ 0, height ])
+      .domain([ 0, 10 ]);
 
     var z = d3.scale.linear()
       .range([ 5, 20 ])

@@ -17,7 +17,10 @@ export default React.createClass({
     });
   },
   componentDidUpdate() {
-
+    const el = findDOMNode( this );
+    this.d3Grid.update( el,  {
+      population: this.props.population
+    });
   },
   componentWillUnmount() {
     const el = findDOMNode( this );

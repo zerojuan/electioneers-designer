@@ -24,7 +24,7 @@ const PopulationPage = React.createClass({
   displayName: 'Population',
   getInitialState() {
     return {
-      layoutValue: 1,
+      layoutValue: DOTS_VIEW,
       generateDialogOpen: false
     };
   },
