@@ -68,6 +68,10 @@ const PopulationPage = React.createClass({
 
     dispatch( batchGenerateFamily( data ) );
   },
+  handleCellSelected( family ) {
+    console.log( 'Family: ', family );
+    // note if this is pairing mode
+  },
   render() {
     const { layoutValue } = this.state;
     let item = null;
@@ -77,7 +81,10 @@ const PopulationPage = React.createClass({
     if ( this.state.layoutValue === LIST_VIEW ) {
       item = <PopulationList population={this.props.population}></PopulationList>;
     } else {
-      item = <PopulationGrid population={this.props.population}></PopulationGrid>;
+      item = <PopulationGrid
+        population={this.props.population}
+        onCellSelected={this.handleCellSelected}>
+        </PopulationGrid>;
     }
 
 

@@ -45,15 +45,16 @@ class PopulationGrid{
 
     // ENTER & UPDATE
     point.attr( 'x', ( d, i ) => {
-      console.log( 'X: ', scales.x( ( i % 10 ) ) );
           return scales.x( ( i % 10 ) );
         })
         .attr( 'y', ( d, i ) => {
-          console.log( 'Y: ', scales.y( Math.floor( i / 10 ) ) );
           return scales.y( Math.floor( i / 10 ) );
         })
         .attr( 'width', 20 )
-        .attr( 'height', 20 );
+        .attr( 'height', 20 )
+        .on( 'click', ( d ) => {
+          this.handlers.onClick( d );
+        });
 
     // EXIT
     point.exit()
