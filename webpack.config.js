@@ -6,7 +6,7 @@ module.exports = {
   debug: true,
   entry: [
     'webpack-dev-server/client?http://0.0.0.0:8080',
-    'webpack/hot/only-dev-server',
+    'webpack/hot/dev-server',
     './client/scripts/router'
   ],
 
