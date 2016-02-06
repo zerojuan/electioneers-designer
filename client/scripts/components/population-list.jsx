@@ -1,4 +1,12 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+
+import FontIcon from 'material-ui/lib/font-icon';
+import IconButton from 'material-ui/lib/icon-button';
+import FlatButton from 'material-ui/lib/flat-button';
+import PeopleIcon from 'react-material-icons/icons/social/people';
+import FloatingActionButton from 'material-ui/lib/floating-action-button';
+import EditIcon from 'material-ui/lib/svg-icons/action/perm-identity';
+
 
 import Table from 'material-ui/lib/table/table';
 import TableBody from 'material-ui/lib/table/table-body';
@@ -17,6 +25,14 @@ export default React.createClass({
       pageSize: 20
     };
   },
+  propTypes: {
+    population: PropTypes.arrayOf( PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      fatherName: PropTypes.string.isRequired,
+      familyName: PropTypes.string.isRequired
+    }).isRequired ).isRequired,
+    onEditFamily: PropTypes.func.isRequired
+  },
   handleNextPage() {
     this.setState({
       currentPage: this.state.currentPage + 1
@@ -31,6 +47,13 @@ export default React.createClass({
     this.setState({
       currentPage: page
     });
+  },
+  handleShowEditFamily( family ) {
+    return () => {
+      console.log( 'Clicked this family: ', family.fatherName );
+      // this can't be changed
+      this.props.onEditFamily( family );
+    }
   },
   render() {
     // only load the first 10
@@ -48,6 +71,7 @@ export default React.createClass({
             <TableHeaderColumn tooltip='Intelligence'>Int</TableHeaderColumn>
             <TableHeaderColumn tooltip='Charisma'>Charm</TableHeaderColumn>
             <TableHeaderColumn tooltip='Leadership'>Leadership</TableHeaderColumn>
+            <TableHeaderColumn tooltip='Actions'>Actions</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -60,6 +84,11 @@ export default React.createClass({
                     <TableRowColumn>{family.intelligence}</TableRowColumn>
                     <TableRowColumn>{family.charm}</TableRowColumn>
                     <TableRowColumn>{family.leadership}</TableRowColumn>
+                    <TableRowColumn>
+                      <FloatingActionButton mini={true} onTouchTap={this.handleShowEditFamily( family )}>
+                        <EditIcon />
+                      </FloatingActionButton>
+                    </TableRowColumn>
                   </TableRow>
                 );
             })

@@ -16,6 +16,7 @@ import Dialog from 'material-ui/lib/dialog';
 import PopulationList from '../components/population-list';
 import PopulationGrid from '../components/population-grid';
 import GenerateFamilyDialog from '../components/generate-family-dialog';
+import EditFamilyDialog from '../components/edit-family-dialog';
 
 const LIST_VIEW = 1;
 const DOTS_VIEW = 2;
@@ -25,7 +26,9 @@ const PopulationPage = React.createClass({
   getInitialState() {
     return {
       layoutValue: DOTS_VIEW,
-      generateDialogOpen: false
+      generateDialogOpen: false,
+      editFamilyOpen: false,
+      selectedFamily: null
     };
   },
   getDefaultProps() {
@@ -68,6 +71,21 @@ const PopulationPage = React.createClass({
 
     dispatch( batchGenerateFamily( data ) );
   },
+  handleHideEditFamilyDialog() {
+    this.setState({
+      editFamilyOpen: false,
+      selectedFamily: null
+    });
+  },
+  handleShowEditFamily( family ) {
+    this.setState({
+      editFamilyOpen: true,
+      selectedFamily: family
+    });
+  },
+  handleEditFamilySubmitDialog( family ) {
+    console.log( 'Should try to save this family: ', family.fatherName );
+  },
   handleCellSelected( family ) {
     console.log( 'Family: ', family );
     // note if this is pairing mode
@@ -79,7 +97,9 @@ const PopulationPage = React.createClass({
 
 
     if ( this.state.layoutValue === LIST_VIEW ) {
-      item = <PopulationList population={this.props.population}></PopulationList>;
+      item = <PopulationList
+              population={this.props.population}
+              onEditFamily={this.handleShowEditFamily}/>;
     } else {
       item = <PopulationGrid
         population={this.props.population}
@@ -109,7 +129,12 @@ const PopulationPage = React.createClass({
         <GenerateFamilyDialog
           open={this.state.generateDialogOpen}
           onClose={this.handleHideGenerateDialog}
-          onSubmit={this.handleGenerateSubmitDialog}></GenerateFamilyDialog>
+          onSubmit={this.handleGenerateSubmitDialog}/>
+        <EditFamilyDialog
+          open={this.state.editFamilyOpen}
+          onClose={this.handleHideEditFamilyDialog}
+          onSubmit={this.handleEditFamilySubmitDialog}
+          family={this.state.selectedFamily}/>
       </div>
     );
   }
