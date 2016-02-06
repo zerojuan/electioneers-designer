@@ -1,6 +1,4 @@
 import React, { PropTypes } from 'react';
-var LinkedStateMixin = require('react-addons-linked-state-mixin');
-
 
 import TextField from 'material-ui/lib/text-field';
 import Slider from 'material-ui/lib/slider';
