@@ -42,6 +42,11 @@ export default React.createClass({
       initialFamily: newFamily
     });
   },
+  handleSubmit() {
+    // return the value of the saved family
+    this.props.onSubmit( this.state.initialFamily );
+    this.props.onClose();
+  },
   render() {
     const dialogActions = [
       <FlatButton

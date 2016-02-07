@@ -13,11 +13,13 @@ import {
   RECIEVE_SAVE_FILE} from './actions';
 
 import {
-  BATCH_GENERATE_FAMILY
+  BATCH_GENERATE_FAMILY,
+  EDIT_FAMILY
 } from './actions/population';
 
 import {
-  batchGenerateFamily
+  batchGenerateFamily,
+  editFamily
 } from './reducers/population';
 
 function addFile( state, action ) {
@@ -101,6 +103,8 @@ function population( state = [], action ) {
       return action.population;
     case BATCH_GENERATE_FAMILY:
       return batchGenerateFamily( state, action );
+    case EDIT_FAMILY:
+      return editFamily( state, action );
     default:
       return state;
   }
@@ -111,6 +115,8 @@ function isDirty( state = false, action ) {
     case RECIEVE_LOAD_FILE:
       return false;
     case BATCH_GENERATE_FAMILY:
+      return true;
+    case EDIT_FAMILY:
       return true;
     default:
       return state;

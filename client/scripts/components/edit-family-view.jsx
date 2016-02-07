@@ -3,8 +3,23 @@ import React, { PropTypes } from 'react';
 import TextField from 'material-ui/lib/text-field';
 import Slider from 'material-ui/lib/slider';
 
+const LabelTextField = React.createClass({
+  render(){
+    return (
+      <div className='row'>
+        <div className='col-xs-2'>
+          <h5>{this.props.label}</h5>
+        </div>
+        <div className='col-xs-8'>
+          <TextField value={this.props.value}
+            onChange={this.props.onChange}></TextField>
+        </div>
+      </div>
+    )
+  }
+});
+
 export default React.createClass({
-  mixins: [LinkedStateMixin],
   propTypes: {
     family: PropTypes.object.isRequired,
     onPropChange: PropTypes.func.isRequired
@@ -17,24 +32,16 @@ export default React.createClass({
   render() {
     return (
       <div>
-        <div className='row'>
-          <div className='col-xs-2'>
-            <h5>Father's Name: </h5>
-          </div>
-          <div className='col-xs-8'>
-            <TextField value={this.props.family.fatherName}
-              onChange={this.handlePropChange( 'fatherName' )}></TextField>
-          </div>
-        </div>
-        <div className='row'>
-          <div className='col-xs-2'>
-            <h5>Family Name: </h5>
-          </div>
-          <div className='col-xs-8'>
-            <TextField value={this.props.family.familyName}
-              onChange={this.handlePropChange( 'familyName' )}></TextField>
-          </div>
-        </div>
+        <LabelTextField
+          label="Father's name"
+          value={this.props.family.fatherName}
+          onChange={this.handlePropChange( 'fatherName' )}
+          />
+        <LabelTextField
+          label="Family Name"
+          value={this.props.family.familyName}
+          onChange={this.handlePropChange( 'familyName' )}
+          />
       </div>
     );
   }

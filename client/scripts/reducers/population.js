@@ -88,3 +88,16 @@ export function batchGenerateFamily( state, action ) {
     ...families
   ];
 }
+
+export function editFamily( state, action ) {
+  const family = action.family;
+
+  // find item index
+  const index = state.findIndex( ( el ) => el._id === family._id );
+
+  return [
+    ...state.slice( 0, index),
+    family,
+    ...state.slice( index + 1 )
+  ];
+}

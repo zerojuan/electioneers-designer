@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { selectFile, loadFileIfNeeded } from '../actions';
 
-import { batchGenerateFamily } from '../actions/population';
+import { batchGenerateFamily, editFamily } from '../actions/population';
 
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
@@ -84,7 +84,9 @@ const PopulationPage = React.createClass({
     });
   },
   handleEditFamilySubmitDialog( family ) {
-    console.log( 'Should try to save this family: ', family.fatherName );
+    const { dispatch } = this.props;
+
+    dispatch( editFamily( family ) );
   },
   handleCellSelected( family ) {
     console.log( 'Family: ', family );
