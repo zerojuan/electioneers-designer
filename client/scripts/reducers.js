@@ -114,6 +114,8 @@ function isDirty( state = false, action ) {
   switch ( action.type ) {
     case RECIEVE_LOAD_FILE:
       return false;
+    case RECIEVE_SAVE_FILE:
+      return false;
     case BATCH_GENERATE_FAMILY:
       return true;
     case EDIT_FAMILY:

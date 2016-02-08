@@ -21,7 +21,7 @@ const LabelTextField = React.createClass({
 
 export default React.createClass({
   propTypes: {
-    family: PropTypes.object.isRequired,
+    family: PropTypes.object,
     onPropChange: PropTypes.func.isRequired
   },
   handlePropChange( propName ) {

@@ -20,7 +20,6 @@ router.get( '/:name', function( req, res ) {
   async.series({
     districts: function( callback ) {
       fs.readFile( defaultDir + '/districts.json', { encoding: 'utf8' }, function( err, data ) {
-        console.log( 'Read file...', err );
         if ( err ) {
           console.log( 'Error: ', err );
           return callback( null, []);
@@ -49,6 +48,11 @@ router.get( '/:name', function( req, res ) {
       });
     }
   }, function( err, results ) {
+    if( err ) {
+      console.log( 'Error happened', err );
+      return res.send( err );
+    }
+    console.log( 'Found files' );
     return res.send( results );
   });
 });
@@ -100,6 +104,7 @@ router.post( '/:name', function( req, res ) {
       done();
     }
   }, function( err, result ) {
+    console.log( 'Responding now....' );
     return res.send({
       name: req.params.name
     });

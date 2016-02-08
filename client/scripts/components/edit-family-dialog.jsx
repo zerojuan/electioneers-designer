@@ -12,7 +12,7 @@ export default React.createClass({
     onClose: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
-    family: PropTypes.object.isRequired
+    family: PropTypes.object
   },
   getInitialState( ) {
     return {

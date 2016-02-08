@@ -49,15 +49,15 @@ const App = React.createClass({
   },
 
   componentWillReceiveProps( nextProps ) {
-    if ( nextProps.message ) {
-      console.log( 'How many messages? ' );
-      this.setState({
-        messages: [
-          ...this.messages,
-          nextProps.message
-        ]
-      });
-    }
+    // if ( nextProps.message ) {
+    //   console.log( 'How many messages? ' );
+    //   this.setState({
+    //     messages: [
+    //       ...this.messages,
+    //       nextProps.message
+    //     ]
+    //   });
+    // }
   },
 
   handleSaveButton() {
@@ -103,6 +103,7 @@ const App = React.createClass({
         <Snackbar messages={this.state.messages} onHide={this.shiftMessage}/>
       </div>
     );
+
   }
 
 });
@@ -120,6 +121,7 @@ function mapStateToProps( state ) {
 
   const selectedFile = state.selectedFile;
   const message = state.message;
+  console.log( 'Is this the message: ', message );
   const isDirty = state.isDirty;
 
   return {

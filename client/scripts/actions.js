@@ -171,6 +171,7 @@ export function deleteFile( name ) {
 
 export function saveFile( name ) {
   return ( dispatch, getState ) => {
+    console.log( 'Going to save file' );
     dispatch( requestSaveFile() );
     return fetch( 'http://localhost:7171/base/' + name, {
       method: 'post',
@@ -185,7 +186,7 @@ export function saveFile( name ) {
       })
     })
     .then( response => response.json() )
-    .then( json => dispatch( recieveSaveFile( name ) ) );
+    .then( json => dispatch( recieveSaveFile( json.name ) ) );
   };
 }
 
