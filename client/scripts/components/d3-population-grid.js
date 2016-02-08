@@ -4,7 +4,6 @@ const populationGrid = {};
 
 class PopulationGrid{
   constructor( handlers ) {
-    console.log( 'Starting' );
     this.handlers = handlers;
   }
 
@@ -32,7 +31,8 @@ class PopulationGrid{
   _drawGraph( el, scales, state ) {
     // draw the actual objects
     const population = state.population;
-    console.log( 'population: ', population.length );
+    const selectedFamilyA = state.selectedA;
+    const selectedFamilyB = state.selectedB;
 
     var g = d3.select( el ).selectAll( '.cells' );
 
@@ -52,6 +52,14 @@ class PopulationGrid{
         })
         .attr( 'width', 20 )
         .attr( 'height', 20 )
+        .attr( 'fill', ( d ) => {
+          if( selectedFamilyA && d._id === selectedFamilyA._id ) {
+            return '#0c0';
+          } else if ( selectedFamilyB && d._id === selectedFamilyB._id ) {
+            return '#c00';
+          }
+          return '#ccc';
+        })
         .on( 'click', ( d ) => {
           this.handlers.onClick( d );
         });

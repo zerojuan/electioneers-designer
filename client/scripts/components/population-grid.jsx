@@ -19,7 +19,7 @@ export default React.createClass({
     this.d3Grid = new D3Grid( this.handlers() );
     this.d3Grid.create( el, {
       width: '100%',
-      height: '300px'
+      height: '400px'
     }, {
       population: this.props.population
     });
@@ -27,7 +27,9 @@ export default React.createClass({
   componentDidUpdate() {
     const el = findDOMNode( this );
     this.d3Grid.update( el,  {
-      population: this.props.population
+      population: this.props.population,
+      selectedA: this.props.selectedFamilyA,
+      selectedB: this.props.selectedFamilyB
     });
   },
   componentWillUnmount() {
