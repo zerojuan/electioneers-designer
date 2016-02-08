@@ -8,13 +8,7 @@ import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import EditIcon from 'material-ui/lib/svg-icons/action/perm-identity';
 
 
-import Table from 'material-ui/lib/table/table';
-import TableBody from 'material-ui/lib/table/table-body';
-import TableFooter from 'material-ui/lib/table/table-footer';
-import TableHeader from 'material-ui/lib/table/table-header';
-import TableHeaderColumn from 'material-ui/lib/table/table-header-column';
-import TableRow from 'material-ui/lib/table/table-row';
-import TableRowColumn from 'material-ui/lib/table/table-row-column';
+import td from 'material-ui/lib/table/table-row-column';
 
 import Paginator from './paginator';
 
@@ -31,7 +25,7 @@ export default React.createClass({
       fatherName: PropTypes.string.isRequired,
       familyName: PropTypes.string.isRequired
     }).isRequired ).isRequired,
-    onEditFamily: PropTypes.func.isRequired
+    onCellSelected: PropTypes.func.isRequired
   },
   handleNextPage() {
     this.setState({
@@ -50,9 +44,7 @@ export default React.createClass({
   },
   handleShowEditFamily( family ) {
     return () => {
-      console.log( 'Clicked this family: ', family.fatherName );
-      // this can't be changed
-      this.props.onEditFamily( family );
+      this.props.onCellSelected( family );
     }
   },
   render() {
@@ -63,38 +55,38 @@ export default React.createClass({
     let page = this.props.population.slice( start, end );
     return (
       <div>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHeaderColumn tooltip='Fathers Name'>Father Name</TableHeaderColumn>
-            <TableHeaderColumn tooltip='Wealth'>Wealth</TableHeaderColumn>
-            <TableHeaderColumn tooltip='Intelligence'>Int</TableHeaderColumn>
-            <TableHeaderColumn tooltip='Charisma'>Charm</TableHeaderColumn>
-            <TableHeaderColumn tooltip='Leadership'>Leadership</TableHeaderColumn>
-            <TableHeaderColumn tooltip='Actions'>Actions</TableHeaderColumn>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Wealth</th>
+            <th>Int</th>
+            <th>Char</th>
+            <th>Lead</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
           {
             page.map( ( family ) => {
                 return (
-                  <TableRow key={family._id}>
-                    <TableRowColumn>{family.fatherName + ' ' + family.familyName}</TableRowColumn>
-                    <TableRowColumn>{family.wealth}</TableRowColumn>
-                    <TableRowColumn>{family.intelligence}</TableRowColumn>
-                    <TableRowColumn>{family.charm}</TableRowColumn>
-                    <TableRowColumn>{family.leadership}</TableRowColumn>
-                    <TableRowColumn>
+                  <tr key={family._id}>
+                    <td>{family.fatherName + ' ' + family.familyName}</td>
+                    <td>{family.wealth}</td>
+                    <td>{family.intelligence}</td>
+                    <td>{family.charm}</td>
+                    <td>{family.leadership}</td>
+                    <td>
                       <FloatingActionButton mini={true} onTouchTap={this.handleShowEditFamily( family )}>
                         <EditIcon />
                       </FloatingActionButton>
-                    </TableRowColumn>
-                  </TableRow>
+                    </td>
+                  </tr>
                 );
             })
           }
-        </TableBody>
-      </Table>
+        </tbody>
+      </table>
       <Paginator
         currentPage={this.state.currentPage}
         totalItems={this.props.population.length}

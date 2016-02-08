@@ -7,6 +7,7 @@ import { batchGenerateFamily, editFamily } from '../actions/population';
 
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
+import ToolbarTitle from 'material-ui/lib/toolbar/toolbar-title';
 import DropdownMenu from 'material-ui/lib/DropDownMenu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import RaisedButton from 'material-ui/lib/raised-button';
@@ -21,11 +22,15 @@ import EditFamilyDialog from '../components/edit-family-dialog';
 const LIST_VIEW = 1;
 const DOTS_VIEW = 2;
 
+const EDIT = 1;
+const PAIR = 2;
+
 const PopulationPage = React.createClass({
   displayName: 'Population',
   getInitialState() {
     return {
       layoutValue: DOTS_VIEW,
+      actionValue: EDIT,
       generateDialogOpen: false,
       editFamilyOpen: false,
       selectedFamily: null
@@ -53,6 +58,13 @@ const PopulationPage = React.createClass({
   handleLayoutChange( e, index, value ) {
     this.setState({
       layoutValue: value
+    });
+  },
+  handleActionChange( e, index, value ) {
+    this.setState({
+      actionValue: value,
+      selectedFamilyA: null,
+      selectedFamilyB: null
     });
   },
   handleShowGenerateDialog( ) {
@@ -83,6 +95,12 @@ const PopulationPage = React.createClass({
       selectedFamily: family
     });
   },
+  handleShowPairingDialog( familyA, familyB ) {
+    
+  },
+  handleHidePairingDialog( ) {
+
+  },
   handleEditFamilySubmitDialog( family ) {
     const { dispatch } = this.props;
 
@@ -91,22 +109,49 @@ const PopulationPage = React.createClass({
   handleCellSelected( family ) {
     console.log( 'Family: ', family );
     // note if this is pairing mode
+    if ( this.state.actionValue === EDIT ) {
+      this.handleShowEditFamily( family );
+    } else {
+      // handle pairing UI
+      if ( !this.state.selectedFamilyA ) {
+        this.setState({
+          selectedFamilyA: family
+        });
+      } else {
+
+        // if it's the same as before, cancel it
+        if ( this.state.selectedFamilyA._id === family._id ) {
+          return this.setState({
+            selectedFamilyA: null
+          });
+        }
+
+        this.setState({
+          selectedFamilyB: family
+        });
+        // paired, time to show dialog
+        this.handleShowPairingDialog( this.state.selectedFamilyA,
+          this.state.selectedFamilyB );
+      }
+    }
+
   },
   render() {
     const { layoutValue } = this.state;
     let item = null;
 
-
-
     if ( this.state.layoutValue === LIST_VIEW ) {
       item = <PopulationList
               population={this.props.population}
-              onEditFamily={this.handleShowEditFamily}/>;
+              onCellSelected={this.handleCellSelected}
+              selectedFamilyA={this.state.selectedFamilyA}
+              selectedFamilyB={this.state.selectedFamilyB}/>;
     } else {
       item = <PopulationGrid
-        population={this.props.population}
-        onCellSelected={this.handleCellSelected}>
-        </PopulationGrid>;
+              population={this.props.population}
+              onCellSelected={this.handleCellSelected}
+              selectedFamilyA={this.state.selectedFamilyA}
+              selectedFamilyB={this.state.selectedFamilyB}/>;
     }
 
 
@@ -114,15 +159,23 @@ const PopulationPage = React.createClass({
       <div>
         <Toolbar>
           <ToolbarGroup>
+            <ToolbarTitle text='Layout:'></ToolbarTitle>
             <DropdownMenu value={this.state.layoutValue} onChange={this.handleLayoutChange}>
-              <MenuItem value={1} primaryText='List'/>
-              <MenuItem value={2} primaryText='Dots'/>
+              <MenuItem value={LIST_VIEW} primaryText='List'/>
+              <MenuItem value={DOTS_VIEW} primaryText='Dots'/>
             </DropdownMenu>
             <RaisedButton
               label='Generate Family'
               primary={ true }
               onTouchTap={ this.handleShowGenerateDialog }>
             </RaisedButton>
+          </ToolbarGroup>
+          <ToolbarGroup>
+            <ToolbarTitle text='Actions:'></ToolbarTitle>
+            <DropdownMenu value={this.state.actionValue} onChange={this.handleActionChange}>
+              <MenuItem value={1} primaryText='Edit'></MenuItem>
+              <MenuItem value={2} primaryText='Pair'></MenuItem>
+            </DropdownMenu>
           </ToolbarGroup>
         </Toolbar>
         <ul>
