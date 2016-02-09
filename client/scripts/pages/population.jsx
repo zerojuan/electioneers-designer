@@ -18,6 +18,7 @@ import PopulationList from '../components/population-list';
 import PopulationGrid from '../components/population-grid';
 import GenerateFamilyDialog from '../components/generate-family-dialog';
 import EditFamilyDialog from '../components/edit-family-dialog';
+import PairFamilyDialog from '../components/pair-family-dialog';
 
 const LIST_VIEW = 1;
 const DOTS_VIEW = 2;
@@ -33,6 +34,7 @@ const PopulationPage = React.createClass({
       actionValue: EDIT,
       generateDialogOpen: false,
       editFamilyOpen: false,
+      pairFamilyOpen: false,
       selectedFamily: null
     };
   },
@@ -96,15 +98,26 @@ const PopulationPage = React.createClass({
     });
   },
   handleShowPairingDialog( familyA, familyB ) {
-    
+    this.setState({
+      pairFamilyOpen: true,
+      selectedFamilyA: familyA,
+      selectedFamilyB: familyB
+    });
   },
   handleHidePairingDialog( ) {
-
+    this.setState({
+      pairFamilyOpen: false,
+      selectedFamiylA: null,
+      selectedFamilyB: null
+    })
   },
   handleEditFamilySubmitDialog( family ) {
     const { dispatch } = this.props;
 
     dispatch( editFamily( family ) );
+  },
+  handlePairFamilySubmitDialog( familyA, familyB ) {
+    console.log( 'Submitted!' );
   },
   handleCellSelected( family ) {
     console.log( 'Family: ', family );
@@ -126,12 +139,9 @@ const PopulationPage = React.createClass({
           });
         }
 
-        this.setState({
-          selectedFamilyB: family
-        });
         // paired, time to show dialog
         this.handleShowPairingDialog( this.state.selectedFamilyA,
-          this.state.selectedFamilyB );
+          family );
       }
     }
 
@@ -190,6 +200,13 @@ const PopulationPage = React.createClass({
           onClose={this.handleHideEditFamilyDialog}
           onSubmit={this.handleEditFamilySubmitDialog}
           family={this.state.selectedFamily}/>
+        <PairFamilyDialog
+          open={this.state.pairFamilyOpen}
+          onClose={this.handleHidePairingDialog}
+          onSubmit={this.handlePairFamilySubmitDialog}
+          familyA={this.state.selectedFamilyA}
+          familyB={this.state.selectedFamilyB}
+          />
       </div>
     );
   }
