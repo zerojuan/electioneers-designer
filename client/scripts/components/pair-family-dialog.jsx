@@ -17,14 +17,28 @@ export default React.createClass({
   },
   getInitialState( ) {
     return {
-      initialFamily: this.props.family
+      initialFamilyA: this.props.familyA,
+      initialFamilyB: this.props.familyB
     };
   },
-
+  componentWillReceiveProps( nextProps ) {
+    if( nextProps.familyA ) {
+      this.setState({
+        initialFamilyA: nextProps.familyA,
+        initialFamilyB: nextProps.familyB
+      });
+    }
+  },
   handleSubmit() {
     // return the value of the saved family
-    this.props.onSubmit( this.state.initialFamily );
+    this.props.onSubmit( this.state.initialFamilyA, this.state.initialFamilyB );
     this.props.onClose();
+  },
+  handleAddPair() {
+
+  },
+  handleDeletePair() {
+
   },
   render() {
     const dialogActions = [
@@ -46,8 +60,10 @@ export default React.createClass({
         actions={dialogActions}
         open={this.props.open}>
         <PairFamilyView
-          familyA={this.props.familyA}
-          familyB={this.props.familyB}
+          familyA={this.state.initialFamilyA}
+          familyB={this.state.initialFamilyB}
+          onAddPair={this.handleAddPair}
+          onDeletePair={this.handleDeletePair}
           />
       </Dialog>
     );
