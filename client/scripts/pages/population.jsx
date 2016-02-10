@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { selectFile, loadFileIfNeeded } from '../actions';
 
-import { batchGenerateFamily, editFamily } from '../actions/population';
+import { batchGenerateFamily, editFamily, pairFamily } from '../actions/population';
 
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
@@ -107,7 +107,7 @@ const PopulationPage = React.createClass({
   handleHidePairingDialog( ) {
     this.setState({
       pairFamilyOpen: false,
-      selectedFamiylA: null,
+      selectedFamilyA: null,
       selectedFamilyB: null
     })
   },
@@ -117,7 +117,9 @@ const PopulationPage = React.createClass({
     dispatch( editFamily( family ) );
   },
   handlePairFamilySubmitDialog( familyA, familyB ) {
-    console.log( 'Submitted!' );
+    const { dispatch } = this.props;
+
+    dispatch( pairFamily( familyA, familyB ) );
   },
   handleCellSelected( family ) {
     console.log( 'Family: ', family );

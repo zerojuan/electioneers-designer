@@ -14,12 +14,15 @@ import {
 
 import {
   BATCH_GENERATE_FAMILY,
-  EDIT_FAMILY
+  EDIT_FAMILY,
+  PAIR_FAMILY
 } from './actions/population';
 
 import {
   batchGenerateFamily,
-  editFamily
+  editFamily,
+  formatFamilyData,
+  pairFamily
 } from './reducers/population';
 
 function addFile( state, action ) {
@@ -100,11 +103,13 @@ function districts( state = [], action ) {
 function population( state = [], action ) {
   switch ( action.type ) {
     case RECIEVE_LOAD_FILE:
-      return action.population;
+      return formatFamilyData( state, action );
     case BATCH_GENERATE_FAMILY:
       return batchGenerateFamily( state, action );
     case EDIT_FAMILY:
       return editFamily( state, action );
+    case PAIR_FAMILY:
+      return pairFamily( state, action );
     default:
       return state;
   }

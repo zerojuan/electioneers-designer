@@ -34,8 +34,27 @@ export default React.createClass({
     this.props.onSubmit( this.state.initialFamilyA, this.state.initialFamilyB );
     this.props.onClose();
   },
-  handleAddPair() {
+  handleAddPair( connection ) {
+    const { from, to, description } = connection;
 
+    if( !from.connections ) {
+      from.connections = [];
+    }
+
+    from.connections.push( {
+      _id: to._id,
+      description: description
+    });
+
+    if ( from._id === this.state.initialFamilyA._id ) {
+      this.setState({
+        initialFamilyA: from
+      });
+    } else {
+      this.setState({
+        initialFamilyB: from
+      });
+    }
   },
   handleDeletePair() {
 

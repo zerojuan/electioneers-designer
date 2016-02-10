@@ -13,7 +13,13 @@ const FamilyPairing = React.createClass({
       <div>
         <h5>{family.fatherName} {family.familyName}</h5>
         <ul>
-
+          {
+            family.connections.map( ( connection, i ) => {
+              return (
+                <li key={i}>{connection.description}</li>
+              )
+            })
+          }
         </ul>
       </div>
     )
@@ -22,6 +28,8 @@ const FamilyPairing = React.createClass({
 
 const PairForm = React.createClass({
   propTypes: {
+    form: PropTypes.object,
+    to: PropTypes.object,
     onAdd: PropTypes.func.isRequired
   },
   getInitialState() {
@@ -31,6 +39,8 @@ const PairForm = React.createClass({
   },
   handleAdd() {
     this.props.onAdd({
+      from: this.props.from,
+      to: this.props.to,
       description: this.state.description
     });
   },
@@ -57,7 +67,11 @@ export default React.createClass({
     onAddPair: PropTypes.func.isRequired
   },
   handleAdd( connection ) {
-    console.log( 'I AM Adding...', connection );
+    // bubble up the event
+    this.props.onAddPair( connection );
+  },
+  handleDelete( connection ) {
+
   },
   render() {
 
@@ -73,10 +87,14 @@ export default React.createClass({
           family={familyA}
           />
         <PairForm
+          from={familyA}
+          to={familyB}
           onAdd={this.handleAdd}/>
         <FamilyPairing
           family={familyB}/>
         <PairForm
+          from={familyB}
+          to={familyA}
           onAdd={this.handleAdd}/>
       </div>
     );

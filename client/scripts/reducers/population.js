@@ -72,8 +72,31 @@ function generateFamily() {
     wealth: Math.floor( Math.random() * 100 ),
     intelligence: Math.floor( Math.random() * 100 ),
     charm: Math.floor( Math.random() * 100 ),
-    leadership: Math.floor( Math.random() * 100 )
+    leadership: Math.floor( Math.random() * 100 ),
+    connections: []
   };
+}
+
+function updateFamily( families, family ) {
+  // find item index
+  const index = families.findIndex( ( el ) => el._id === family._id );
+
+  return [
+    ...families.slice( 0, index),
+    family,
+    ...families.slice( index + 1 )
+  ];
+}
+
+export function formatFamilyData( state, action ) {
+  // make sure every family has the correct properties
+  return action.population.map( ( family ) => {
+    if ( !family.connections ) {
+      family.connections = [];
+    }
+
+    return family;
+  })
 }
 
 export function batchGenerateFamily( state, action ) {
@@ -93,11 +116,13 @@ export function editFamily( state, action ) {
   const family = action.family;
 
   // find item index
-  const index = state.findIndex( ( el ) => el._id === family._id );
+  return updateFamily( state, family );
+}
 
-  return [
-    ...state.slice( 0, index),
-    family,
-    ...state.slice( index + 1 )
-  ];
+export function pairFamily( state, action ) {
+  const { familyA, familyB } = action;
+
+  return updateFamily(
+    updateFamily( state, familyA ),
+    familyB );
 }
