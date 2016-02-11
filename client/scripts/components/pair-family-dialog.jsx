@@ -23,9 +23,10 @@ export default React.createClass({
   },
   componentWillReceiveProps( nextProps ) {
     if( nextProps.familyA ) {
+      // clone family values, so the parents won't know about it
       this.setState({
-        initialFamilyA: nextProps.familyA,
-        initialFamilyB: nextProps.familyB
+        initialFamilyA: _.extend({}, nextProps.familyA),
+        initialFamilyB: _.extend({}, nextProps.familyB)
       });
     }
   },
@@ -41,10 +42,11 @@ export default React.createClass({
       from.connections = [];
     }
 
-    from.connections.push( {
+    from.connections = update( from.connections, { $push: [{
       _id: to._id,
       description: description
-    });
+    }]});
+
 
     if ( from._id === this.state.initialFamilyA._id ) {
       this.setState({
