@@ -15,7 +15,7 @@ export default React.createClass({
     familyA: PropTypes.object,
     familyB: PropTypes.object
   },
-  getInitialState( ) {
+  getInitialState() {
     return {
       initialFamilyA: this.props.familyA,
       initialFamilyB: this.props.familyB
@@ -47,7 +47,6 @@ export default React.createClass({
       description: description
     }]});
 
-
     if ( from._id === this.state.initialFamilyA._id ) {
       this.setState({
         initialFamilyA: from
@@ -58,8 +57,27 @@ export default React.createClass({
       });
     }
   },
-  handleDeletePair() {
+  handleDeletePair( family, connection ) {
+    const { initialFamilyA, initialFamilyB } = this.state;
+    const connections = family.connections;
 
+    const index = connections.findIndex( ( c ) =>
+      c === connection );
+
+    family.connections = [
+      ...connections.slice( 0, index ),
+      ...connections.slice( index + 1 )
+    ];
+
+    if ( family._id === initialFamilyA._id ) {
+      this.setState({
+        initialFamilyA: family
+      });
+    } else {
+      this.setState({
+        initialFamilyB: family
+      });
+    }
   },
   render() {
     const dialogActions = [

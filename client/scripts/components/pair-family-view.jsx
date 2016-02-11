@@ -5,7 +5,13 @@ import FlatButton from 'material-ui/lib/flat-button';
 
 const FamilyPairing = React.createClass({
   propTypes: {
-    family: PropTypes.object.isRequired
+    family: PropTypes.object.isRequired,
+    onDelete: PropTypes.func.isRequired
+  },
+  handleDelete( connection ) {
+    return () => {
+      return this.props.onDelete( this.props.family, connection );
+    };
   },
   render() {
     const { family } = this.props;
@@ -16,7 +22,10 @@ const FamilyPairing = React.createClass({
           {
             family.connections.map( ( connection, i ) => {
               return (
-                <li key={i}>{connection.description}</li>
+                <li key={i}>
+                  {connection.description}
+                  <FlatButton label='x' onTouchTap={this.handleDelete( connection )}/>
+                </li>
               )
             })
           }
@@ -70,8 +79,9 @@ export default React.createClass({
     // bubble up the event
     this.props.onAddPair( connection );
   },
-  handleDelete( connection ) {
-
+  handleDelete( family, connection ) {
+    console.log( 'Let\'s delete', connection );
+    this.props.onDeletePair( family, connection );
   },
   render() {
 
@@ -85,13 +95,15 @@ export default React.createClass({
       <div>
         <FamilyPairing
           family={familyA}
+          onDelete={this.handleDelete}
           />
         <PairForm
           from={familyA}
           to={familyB}
           onAdd={this.handleAdd}/>
         <FamilyPairing
-          family={familyB}/>
+          family={familyB}
+          onDelete={this.handleDelete}/>
         <PairForm
           from={familyB}
           to={familyA}

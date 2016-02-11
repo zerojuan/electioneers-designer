@@ -125,6 +125,8 @@ function isDirty( state = false, action ) {
       return true;
     case EDIT_FAMILY:
       return true;
+    case PAIR_FAMILY:
+      return true;
     default:
       return state;
   }
