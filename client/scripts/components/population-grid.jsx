@@ -26,6 +26,7 @@ export default React.createClass({
   },
   componentDidUpdate() {
     const el = findDOMNode( this );
+    console.log( 'Component did update' );
     this.d3Grid.update( el,  {
       population: this.props.population,
       selectedA: this.props.selectedFamilyA,

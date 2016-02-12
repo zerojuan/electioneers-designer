@@ -67,6 +67,45 @@ class PopulationGrid{
     // EXIT
     point.exit()
         .remove();
+
+    // draw connections
+    // extract connections from families
+    let connections = [];
+    _.forEach( population, ( family, i ) => {
+      _.forEach( family.connections, ( connect ) => {
+        const pairIndex = population.findIndex( ( el ) => el._id === connect._id );
+        connections.push( {
+          from: i,
+          to: pairIndex,
+          connection: connect
+        });
+      });
+    });
+
+    console.log( 'How many connections: ', connections );
+    const lines = g.selectAll( '.line ')
+      .data( connections );
+
+    lines.enter().append( 'line' )
+      .attr( 'class', 'line' );
+
+    lines.attr( 'x1', ( d ) => {
+        return scales.x( d.from % 10 )
+      })
+      .attr( 'y1', ( d ) => {
+        return scales.y( Math.floor( d.from / 10 ) );
+      })
+      .attr( 'x2', ( d ) => {
+        return scales.x( d.to % 10 );
+      })
+      .attr( 'y2', ( d ) => {
+        console.log( 'What is D? ' );
+        return scales.y( Math.floor( d.to / 10 ) );
+      })
+      .attr( 'stroke-width', 2 )
+      .attr( 'stroke', '#ff0000');
+
+
   }
 
   _scales( el ) {
