@@ -40,18 +40,17 @@ class PopulationGrid{
       .data( population, d => d._id );
 
     // ENTER
-    point.enter().append( 'rect' )
+    point.enter().append( 'circle' )
         .attr( 'class', 'cell' );
 
     // ENTER & UPDATE
-    point.attr( 'x', ( d, i ) => {
-          return scales.x( ( i % 10 ) );
+    point.attr( 'cx', ( d, i ) => {
+          return scales.x( ( i % 10 ) ) + 10;
         })
-        .attr( 'y', ( d, i ) => {
-          return scales.y( Math.floor( i / 10 ) );
+        .attr( 'cy', ( d, i ) => {
+          return scales.y( Math.floor( i / 10 ) ) + 10;
         })
-        .attr( 'width', 20 )
-        .attr( 'height', 20 )
+        .attr( 'r', 10 )
         .attr( 'fill', ( d ) => {
           if( selectedFamilyA && d._id === selectedFamilyA._id ) {
             return '#0c0';
@@ -90,17 +89,17 @@ class PopulationGrid{
       .attr( 'class', 'line' );
 
     lines.attr( 'x1', ( d ) => {
-        return scales.x( d.from % 10 )
+        return scales.x( d.from % 10 ) + 10;
       })
       .attr( 'y1', ( d ) => {
-        return scales.y( Math.floor( d.from / 10 ) );
+        return scales.y( Math.floor( d.from / 10 ) ) + 10;
       })
       .attr( 'x2', ( d ) => {
-        return scales.x( d.to % 10 );
+        return scales.x( d.to % 10 ) + 10;
       })
       .attr( 'y2', ( d ) => {
         console.log( 'What is D? ' );
-        return scales.y( Math.floor( d.to / 10 ) );
+        return scales.y( Math.floor( d.to / 10 ) ) + 10;
       })
       .attr( 'stroke-width', 2 )
       .attr( 'stroke', '#ff0000');
