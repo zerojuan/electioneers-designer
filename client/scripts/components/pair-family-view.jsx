@@ -5,22 +5,35 @@ import FlatButton from 'material-ui/lib/flat-button';
 
 const FamilyPairing = React.createClass({
   propTypes: {
-    family: PropTypes.object.isRequired,
+    familyA: PropTypes.object.isRequired,
+    familyB: PropTypes.object.isRequired,
     onDelete: PropTypes.func.isRequired
   },
   handleDelete( connection ) {
     return () => {
-      return this.props.onDelete( this.props.family, connection );
+      return this.props.onDelete( this.props.familyA, connection );
     };
   },
   render() {
-    const { family } = this.props;
+    const { familyA, familyB } = this.props;
+
+    // only show connections that are relevant
+    const connections = familyA.connections.reduce( ( arr, connection ) => {
+      console.log( 'Connection: ', connection );
+      console.log( 'Family: ', familyB );
+      if ( connection._id === familyB._id ) {
+        arr.push( connection );
+      }
+
+      return arr;
+    }, []);
+
     return (
       <div>
-        <h5>{family.fatherName} {family.familyName}</h5>
+        <h5>{familyA.fatherName} {familyA.familyName}</h5>
         <ul>
           {
-            family.connections.map( ( connection, i ) => {
+            connections.map( ( connection, i ) => {
               return (
                 <li key={i}>
                   {connection.description}
@@ -76,11 +89,9 @@ export default React.createClass({
     onAddPair: PropTypes.func.isRequired
   },
   handleAdd( connection ) {
-    // bubble up the event
     this.props.onAddPair( connection );
   },
   handleDelete( family, connection ) {
-    console.log( 'Let\'s delete', connection );
     this.props.onDeletePair( family, connection );
   },
   render() {
@@ -94,7 +105,8 @@ export default React.createClass({
     return (
       <div>
         <FamilyPairing
-          family={familyA}
+          familyA={familyA}
+          familyB={familyB}
           onDelete={this.handleDelete}
           />
         <PairForm
@@ -102,7 +114,8 @@ export default React.createClass({
           to={familyB}
           onAdd={this.handleAdd}/>
         <FamilyPairing
-          family={familyB}
+          familyA={familyB}
+          familyB={familyA}
           onDelete={this.handleDelete}/>
         <PairForm
           from={familyB}

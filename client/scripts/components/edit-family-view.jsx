@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 
 import TextField from 'material-ui/lib/text-field';
 import Slider from 'material-ui/lib/slider';
+import Tabs from 'material-ui/lib/tabs/tabs';
+import Tab from 'material-ui/lib/tabs/tab';
 
 const LabelTextField = React.createClass({
   render(){
@@ -32,16 +34,27 @@ export default React.createClass({
   render() {
     return (
       <div>
-        <LabelTextField
-          label="Father's name"
-          value={this.props.family.fatherName}
-          onChange={this.handlePropChange( 'fatherName' )}
-          />
-        <LabelTextField
-          label="Family Name"
-          value={this.props.family.familyName}
-          onChange={this.handlePropChange( 'familyName' )}
-          />
+        <Tabs>
+          <Tab label="Info">
+            <LabelTextField
+              label="Father's name"
+              value={this.props.family.fatherName}
+              onChange={this.handlePropChange( 'fatherName' )}
+              />
+            <LabelTextField
+              label="Family Name"
+              value={this.props.family.familyName}
+              onChange={this.handlePropChange( 'familyName' )}
+              />
+          </Tab>
+          <Tab label="Stats">
+            This is the stats
+          </Tab>
+          <Tab label="Connections">
+            This is the connections
+          </Tab>
+        </Tabs>
+
       </div>
     );
   }
