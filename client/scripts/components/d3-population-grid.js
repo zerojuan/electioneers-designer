@@ -36,6 +36,13 @@ class PopulationGrid{
 
     var g = d3.select( el ).selectAll( '.cells' );
 
+    this._drawLines( population, g, scales );
+    this._drawCell( population, g, scales, selectedFamilyA, selectedFamilyB );
+
+
+  }
+
+  _drawCell( population, g, scales, selectedFamilyA, selectedFamilyB ) {
     var point = g.selectAll( '.cell' )
       .data( population, d => d._id );
 
@@ -66,9 +73,9 @@ class PopulationGrid{
     // EXIT
     point.exit()
         .remove();
+  }
 
-    // draw connections
-    // extract connections from families
+  _drawLines( population, g, scales ) {
     let connections = [];
     _.forEach( population, ( family, i ) => {
       _.forEach( family.connections, ( connect ) => {
@@ -81,7 +88,6 @@ class PopulationGrid{
       });
     });
 
-    console.log( 'How many connections: ', connections );
     const lines = g.selectAll( '.line ')
       .data( connections );
 
@@ -98,12 +104,10 @@ class PopulationGrid{
         return scales.x( d.to % 10 ) + 10;
       })
       .attr( 'y2', ( d ) => {
-        console.log( 'What is D? ' );
         return scales.y( Math.floor( d.to / 10 ) ) + 10;
       })
       .attr( 'stroke-width', 2 )
       .attr( 'stroke', '#ff0000');
-
 
   }
 
