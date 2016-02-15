@@ -201,7 +201,8 @@ const PopulationPage = React.createClass({
           open={this.state.editFamilyOpen}
           onClose={this.handleHideEditFamilyDialog}
           onSubmit={this.handleEditFamilySubmitDialog}
-          family={this.state.selectedFamily}/>
+          family={this.state.selectedFamily}
+          population={this.props.population}/>
         <PairFamilyDialog
           open={this.state.pairFamilyOpen}
           onClose={this.handleHidePairingDialog}

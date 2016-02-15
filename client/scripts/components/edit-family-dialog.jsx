@@ -12,7 +12,8 @@ export default React.createClass({
     onClose: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
-    family: PropTypes.object
+    family: PropTypes.object,
+    population: PropTypes.array
   },
   getInitialState( ) {
     return {
@@ -68,6 +69,7 @@ export default React.createClass({
         open={this.props.open}>
         <EditFamilyView
           family={this.state.initialFamily}
+          population={this.props.population}
           onPropChange={this.handlePropChange}
           ></EditFamilyView>
       </Dialog>

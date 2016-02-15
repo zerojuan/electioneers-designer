@@ -19,12 +19,9 @@ const FamilyPairing = React.createClass({
 
     // only show connections that are relevant
     const connections = familyA.connections.reduce( ( arr, connection ) => {
-      console.log( 'Connection: ', connection );
-      console.log( 'Family: ', familyB );
       if ( connection._id === familyB._id ) {
         arr.push( connection );
       }
-
       return arr;
     }, []);
 

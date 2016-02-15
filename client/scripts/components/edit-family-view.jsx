@@ -21,9 +21,41 @@ const LabelTextField = React.createClass({
   }
 });
 
+const PairFamilyList = React.createClass({
+  propTypes: {
+    family: PropTypes.object,
+    population: PropTypes.array
+  },
+  render(){
+    const { family, population } = this.props;
+
+    function findFamily( id ) {
+      const index = population.findIndex( ( family ) => family._id === id );
+      return population[ index ];
+    }
+
+    return (
+      <ul>
+        {
+          family.connections.map( ( connection ) => {
+            const familyB = findFamily( connection._id );
+            return (
+              <li key={connection._id}>
+                {familyB.fatherName} {familyB.familyName}
+                &nbsp; { connection.description }
+              </li>
+            )
+          })
+        }
+      </ul>
+    )
+  }
+})
+
 export default React.createClass({
   propTypes: {
     family: PropTypes.object,
+    population: PropTypes.array,
     onPropChange: PropTypes.func.isRequired
   },
   handlePropChange( propName ) {
@@ -48,10 +80,26 @@ export default React.createClass({
               />
           </Tab>
           <Tab label="Stats">
-            This is the stats
+            <LabelTextField
+              label="Leadership"
+              value={this.props.family.leadership}
+              onChange={this.handlePropChange( 'leadership' )}
+              />
+            <LabelTextField
+              label="Charm"
+              value={this.props.family.charm}
+              onChange={this.handlePropChange( 'charm' )}
+              />
+            <LabelTextField
+              label="Intelligence"
+              value={this.props.family.intelligence}
+              onChange={this.handlePropChange( 'intelligence' )}
+              />
           </Tab>
           <Tab label="Connections">
-            This is the connections
+            <PairFamilyList
+              family={this.props.family}
+              population={this.props.population} />
           </Tab>
         </Tabs>
 
