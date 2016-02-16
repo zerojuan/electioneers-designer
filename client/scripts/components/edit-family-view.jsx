@@ -41,8 +41,8 @@ const PairFamilyList = React.createClass({
             const familyB = findFamily( connection._id );
             return (
               <li key={connection._id}>
+                { connection.description } &nbsp;
                 {familyB.fatherName} {familyB.familyName}
-                &nbsp; { connection.description }
               </li>
             )
           })

@@ -91,23 +91,43 @@ class PopulationGrid{
     const lines = g.selectAll( '.line ')
       .data( connections );
 
-    lines.enter().append( 'line' )
+      //This is the accessor function we talked about above
+    var lineFunction = d3.svg.line()
+      .x(function(d) { return d.x; })
+      .y(function(d) { return d.y; })
+      .interpolate("cardinal");
+
+    lines.enter().append( 'path' )
       .attr( 'class', 'line' );
 
-    lines.attr( 'x1', ( d ) => {
-        return scales.x( d.from % 10 ) + 10;
-      })
-      .attr( 'y1', ( d ) => {
-        return scales.y( Math.floor( d.from / 10 ) ) + 10;
-      })
-      .attr( 'x2', ( d ) => {
-        return scales.x( d.to % 10 ) + 10;
-      })
-      .attr( 'y2', ( d ) => {
-        return scales.y( Math.floor( d.to / 10 ) ) + 10;
-      })
-      .attr( 'stroke-width', 2 )
-      .attr( 'stroke', '#ff0000');
+    lines.attr( 'd', ( d ) => {
+      const x1 = scales.x( d.from % 10 ) + 10;
+      const y1 = scales.y( Math.floor( d.from / 10 ) ) + 10;
+      const x2 = scales.x( d.to % 10 ) + 10;
+      const y2 = scales.y( Math.floor( d.to / 10 ) ) + 10;
+      var dx = x1 - x2,
+        dy = y1 - y2,
+        dr = Math.sqrt(dx * dx + dy * dy);
+    return "M" + x1 + "," + y1 + "A" + dr + "," + dr +
+" 0 0,1 " + x2 + "," + y2;
+
+      // return lineFunction([
+      //   {
+      //     x: scales.x( x1 ) + 10,
+      //     y: scales.y( y1 ) + 10
+      //   },
+      //   {
+      //     x: scales.x( x1  ) + 30,
+      //     y: scales.y( y2 ) + 30
+      //   },
+      //   {
+      //     x: scales.x( x2 ) + 10,
+      //     y: scales.y( y2 ) + 10
+      //   }
+      // ])
+    }).attr( 'stroke-width', 2 )
+      .attr( 'stroke', '#ff0000')
+      .attr( 'fill', 'none' );
 
   }
 
