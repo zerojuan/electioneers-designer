@@ -34,6 +34,12 @@ const PairFamilyList = React.createClass({
       return population[ index ];
     }
 
+    if ( family.connections.length === 0 ) {
+      return (
+        <em>No connections</em>
+      );
+    }
+
     return (
       <ul>
         {

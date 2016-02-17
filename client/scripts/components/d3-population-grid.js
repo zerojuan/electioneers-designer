@@ -57,7 +57,9 @@ class PopulationGrid{
         .attr( 'cy', ( d, i ) => {
           return scales.y( Math.floor( i / 10 ) ) + 10;
         })
-        .attr( 'r', 10 )
+        .attr( 'r', ( d ) => {
+          return scales.z(d.intelligence);
+        } )
         .attr( 'fill', ( d ) => {
           if( selectedFamilyA && d._id === selectedFamilyA._id ) {
             return '#0c0';
@@ -91,12 +93,6 @@ class PopulationGrid{
     const lines = g.selectAll( '.line ')
       .data( connections );
 
-      //This is the accessor function we talked about above
-    var lineFunction = d3.svg.line()
-      .x(function(d) { return d.x; })
-      .y(function(d) { return d.y; })
-      .interpolate("cardinal");
-
     lines.enter().append( 'path' )
       .attr( 'class', 'line' );
 
@@ -108,23 +104,8 @@ class PopulationGrid{
       var dx = x1 - x2,
         dy = y1 - y2,
         dr = Math.sqrt(dx * dx + dy * dy);
-    return "M" + x1 + "," + y1 + "A" + dr + "," + dr +
-" 0 0,1 " + x2 + "," + y2;
-
-      // return lineFunction([
-      //   {
-      //     x: scales.x( x1 ) + 10,
-      //     y: scales.y( y1 ) + 10
-      //   },
-      //   {
-      //     x: scales.x( x1  ) + 30,
-      //     y: scales.y( y2 ) + 30
-      //   },
-      //   {
-      //     x: scales.x( x2 ) + 10,
-      //     y: scales.y( y2 ) + 10
-      //   }
-      // ])
+      return "M" + x1 + "," + y1 + "A" + dr + "," + dr +
+        " 0 0,1 " + x2 + "," + y2;
     }).attr( 'stroke-width', 2 )
       .attr( 'stroke', '#ff0000')
       .attr( 'fill', 'none' );
@@ -136,16 +117,16 @@ class PopulationGrid{
     var height = el.offsetHeight;
 
     var x = d3.scale.linear()
-      .range([ 0, width ])
+      .range([ 20, width - 20 ])
       .domain([ 0, 10 ]);
 
     var y = d3.scale.linear()
-      .range([ 0, height ])
+      .range([ 20, height - 20 ])
       .domain([ 0, 10 ]);
 
     var z = d3.scale.linear()
       .range([ 5, 20 ])
-      .domain([ 1, 10 ]);
+      .domain([ 1, 100 ]);
 
     return { x: x, y: y, z: z };
   }
