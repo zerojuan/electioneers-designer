@@ -37,12 +37,12 @@ class PopulationGrid{
     var g = d3.select( el ).selectAll( '.cells' );
 
     this._drawLines( population, g, scales );
-    this._drawCell( population, g, scales, selectedFamilyA, selectedFamilyB );
+    this._drawCell( state, g, scales, selectedFamilyA, selectedFamilyB );
 
 
   }
 
-  _drawCell( population, g, scales, selectedFamilyA, selectedFamilyB ) {
+  _drawCell( { population, dimension }, g, scales, selectedFamilyA, selectedFamilyB ) {
     var point = g.selectAll( '.cell' )
       .data( population, d => d._id );
 
@@ -57,9 +57,6 @@ class PopulationGrid{
         .attr( 'cy', ( d, i ) => {
           return scales.y( Math.floor( i / 10 ) ) + 10;
         })
-        .attr( 'r', ( d ) => {
-          return scales.z(d.intelligence);
-        } )
         .attr( 'fill', ( d ) => {
           if( selectedFamilyA && d._id === selectedFamilyA._id ) {
             return '#0c0';
@@ -71,6 +68,10 @@ class PopulationGrid{
         .on( 'click', ( d ) => {
           this.handlers.onClick( d );
         });
+    point.transition()
+      .attr( 'r', ( d ) => {
+        return scales.z(d[ dimension ]);
+      } );
 
     // EXIT
     point.exit()

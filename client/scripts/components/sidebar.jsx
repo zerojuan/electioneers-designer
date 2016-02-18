@@ -35,6 +35,10 @@ export default React.createClass({
       name: 'Formulas',
       route: '/formulas',
       icon: PeopleIcon
+    }, {
+      name: 'Issues',
+      route: '/issues',
+      icon: PeopleIcon
     } ];
 
     return {

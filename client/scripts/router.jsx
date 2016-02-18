@@ -18,6 +18,7 @@ import HomePage from './pages/home.jsx';
 import PopulationPage from './pages/population.jsx';
 import DistrictsPage from './pages/districts.jsx';
 import FormulasPage from './pages/formulas.jsx';
+import IssuesPage from './pages/issues.jsx';
 import LoadedFilePage from './pages/loaded-file.jsx';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -45,6 +46,7 @@ render( (
         <Route path=':filename/population' component={PopulationPage} name='Population'/>
         <Route path=':filename/districts' component={DistrictsPage} name='Districts' />
         <Route path=':filename/formulas' component={FormulasPage} name='Formulas' />
+        <Route path=':filename/issues' component={IssuesPage} name='Issues' />
         <Route path=':filename/' component={LoadedFilePage} name='LoadedFile'/>
       </Route>
     </Router>
