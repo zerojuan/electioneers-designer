@@ -8,14 +8,18 @@ import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
 import DropdownMenu from 'material-ui/lib/DropDownMenu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
+import RaisedButton from 'material-ui/lib/raised-button';
 
 import DistrictsList from '../components/districts-list';
+
+import CreateDistrictDialog from '../components/create-district-dialog';
 
 const DistrictsPage = React.createClass({
   displayName: 'Districts',
   getInitialState() {
     return {
-      layoutValue: 1
+      layoutValue: 1,
+      createDialogOpen: false
     };
   },
   getDefaultProps() {
@@ -34,6 +38,19 @@ const DistrictsPage = React.createClass({
       layoutValue: value
     });
   },
+  handleShowCreateDialog() {
+    this.setState({
+      createDialogOpen: true
+    });
+  },
+  handleHideCreateDialog() {
+    this.setState({
+      createDialogOpen: false
+    });
+  },
+  handleCreateSubmitDialog() {
+    console.log( 'Submit Dialog' );
+  },
   render() {
     return (
       <div>
@@ -43,9 +60,18 @@ const DistrictsPage = React.createClass({
               <MenuItem value={1} primaryText='List'/>
               <MenuItem value={2} primaryText='Dots'/>
             </DropdownMenu>
+            <RaisedButton
+              label='Create'
+              primary={ true }
+              onTouchTap={ this.handleShowCreateDialog }>
+            </RaisedButton>
           </ToolbarGroup>
         </Toolbar>
         <DistrictsList districts={this.props.districts}></DistrictsList>
+        <CreateDistrictDialog
+          open={this.state.createDialogOpen}
+          onClose={this.handleHideCreateDialog}
+          onSubmit={this.handleCreateSubmitDialog}/>
       </div>
     );
   }
