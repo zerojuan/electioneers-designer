@@ -28,12 +28,11 @@ export default React.createClass({
 
     return (
       <Dialog
-        title="Create District"
+        title='Create District'
         modal={false}
         actions={dialogActions}
         open={this.props.open}>
-        >
-        This is the content
+        <CreateDistrictView/>
       </Dialog>
     )
   }
