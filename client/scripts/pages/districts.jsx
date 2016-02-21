@@ -11,6 +11,7 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 import RaisedButton from 'material-ui/lib/raised-button';
 
 import DistrictsList from '../components/districts-list';
+import DistrictsGeographic from '../components/districts-geographic';
 
 import CreateDistrictDialog from '../components/create-district-dialog';
 
@@ -52,13 +53,20 @@ const DistrictsPage = React.createClass({
     console.log( 'Submit Dialog' );
   },
   render() {
+    let view;
+    if ( this.state.layoutValue === 1 ) {
+      view = <DistrictsList districts={this.props.districts}></DistrictsList>;
+    } else {
+      view = <DistrictsGeographic districts={this.props.districts}></DistrictsGeographic>;
+    }
+
     return (
       <div>
         <Toolbar>
           <ToolbarGroup>
             <DropdownMenu value={this.state.layoutValue} onChange={this.handleLayoutChange}>
               <MenuItem value={1} primaryText='List'/>
-              <MenuItem value={2} primaryText='Dots'/>
+              <MenuItem value={2} primaryText='Geo'/>
             </DropdownMenu>
             <RaisedButton
               label='Create'
@@ -67,7 +75,10 @@ const DistrictsPage = React.createClass({
             </RaisedButton>
           </ToolbarGroup>
         </Toolbar>
-        <DistrictsList districts={this.props.districts}></DistrictsList>
+        {
+          view
+        }
+
         <CreateDistrictDialog
           open={this.state.createDialogOpen}
           onClose={this.handleHideCreateDialog}

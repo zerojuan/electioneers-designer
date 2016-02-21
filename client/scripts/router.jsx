@@ -1,6 +1,10 @@
 import promise from 'es6-promise';
 promise.polyfill();
 
+import 'pixi.js';
+import 'p2';
+import 'phaser';
+
 import 'babel-polyfill';
 
 import React from 'react';
