@@ -17,8 +17,15 @@ export default React.createClass({
       width: '100%',
       height: '400px'
     }, {
-      population: this.props.district,
+      districts: this.props.districts,
       dimension: 'intelligence'
+    });
+  },
+  componentDidUpdate() {
+    const el = findDOMNode( this );
+
+    this.canvas.update( el,  {
+      districts: this.props.districts
     });
   },
   render() {

@@ -19,7 +19,7 @@ const DistrictsPage = React.createClass({
   displayName: 'Districts',
   getInitialState() {
     return {
-      layoutValue: 1,
+      layoutValue: 2,
       createDialogOpen: false
     };
   },
