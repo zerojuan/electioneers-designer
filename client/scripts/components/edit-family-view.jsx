@@ -5,28 +5,14 @@ import Slider from 'material-ui/lib/slider';
 import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
 
-const LabelTextField = React.createClass({
-  render(){
-    return (
-      <div className='row'>
-        <div className='col-xs-2'>
-          <h5>{this.props.label}</h5>
-        </div>
-        <div className='col-xs-8'>
-          <TextField value={this.props.value}
-            onChange={this.props.onChange}></TextField>
-        </div>
-      </div>
-    )
-  }
-});
+import LabelTextField from './label-textfield';
 
 const PairFamilyList = React.createClass({
   propTypes: {
     family: PropTypes.object,
     population: PropTypes.array
   },
-  render(){
+  render() {
     const { family, population } = this.props;
 
     function findFamily( id ) {
@@ -50,13 +36,13 @@ const PairFamilyList = React.createClass({
                 { connection.description } &nbsp;
                 {familyB.fatherName} {familyB.familyName}
               </li>
-            )
+            );
           })
         }
       </ul>
-    )
+    );
   }
-})
+});
 
 export default React.createClass({
   propTypes: {
@@ -67,42 +53,42 @@ export default React.createClass({
   handlePropChange( propName ) {
     return ( event ) => {
       this.props.onPropChange( propName, event.target.value );
-    }
+    };
   },
   render() {
     return (
       <div>
         <Tabs>
-          <Tab label="Info">
+          <Tab label='Info'>
             <LabelTextField
               label="Father's name"
               value={this.props.family.fatherName}
               onChange={this.handlePropChange( 'fatherName' )}
               />
             <LabelTextField
-              label="Family Name"
+              label='Family Name'
               value={this.props.family.familyName}
               onChange={this.handlePropChange( 'familyName' )}
               />
           </Tab>
-          <Tab label="Stats">
+          <Tab label='Stats'>
             <LabelTextField
-              label="Leadership"
+              label='Leadership'
               value={this.props.family.leadership}
               onChange={this.handlePropChange( 'leadership' )}
               />
             <LabelTextField
-              label="Charm"
+              label='Charm'
               value={this.props.family.charm}
               onChange={this.handlePropChange( 'charm' )}
               />
             <LabelTextField
-              label="Intelligence"
+              label='Intelligence'
               value={this.props.family.intelligence}
               onChange={this.handlePropChange( 'intelligence' )}
               />
           </Tab>
-          <Tab label="Connections">
+          <Tab label='Connections'>
             <PairFamilyList
               family={this.props.family}
               population={this.props.population} />

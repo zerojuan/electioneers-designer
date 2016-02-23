@@ -14,13 +14,15 @@ import DistrictsList from '../components/districts-list';
 import DistrictsGeographic from '../components/districts-geographic';
 
 import CreateDistrictDialog from '../components/create-district-dialog';
+import EditDistrictDialog from '../components/edit-district-dialog';
 
 const DistrictsPage = React.createClass({
   displayName: 'Districts',
   getInitialState() {
     return {
       layoutValue: 2,
-      createDialogOpen: false
+      createDialogOpen: false,
+      editDialogOpen: false
     };
   },
   getDefaultProps() {
@@ -44,18 +46,31 @@ const DistrictsPage = React.createClass({
       createDialogOpen: true
     });
   },
+  handleShowEditDialog( district ) {
+    this.setState({
+      editDialogOpen: true
+    });
+  },
   handleHideCreateDialog() {
     this.setState({
       createDialogOpen: false
     });
   },
+  handleHideEditDialog() {
+    this.setState({
+      editDialogOpen: false
+    });
+  },
   handleCreateSubmitDialog() {
     console.log( 'Submit Dialog' );
+  },
+  handleEditSubmitDialog() {
+    console.log( 'Submit Edit Dialog' );
   },
   render() {
     let view;
     if ( this.state.layoutValue === 1 ) {
-      view = <DistrictsList districts={this.props.districts}></DistrictsList>;
+      view = <DistrictsList districts={this.props.districts} onShowEdit={this.handleShowEditDialog}></DistrictsList>;
     } else {
       view = <DistrictsGeographic districts={this.props.districts}></DistrictsGeographic>;
     }
@@ -83,6 +98,10 @@ const DistrictsPage = React.createClass({
           open={this.state.createDialogOpen}
           onClose={this.handleHideCreateDialog}
           onSubmit={this.handleCreateSubmitDialog}/>
+        <EditDistrictDialog
+          open={this.state.editDialogOpen}
+          onClose={this.handleHideEditDialog}
+          onSubmit={this.handleEditSubmitDialog}/>
       </div>
     );
   }
