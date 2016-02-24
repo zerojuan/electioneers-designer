@@ -45,7 +45,8 @@ export default React.createClass({
                       <TableRowColumn>{district.name}</TableRowColumn>
                       <TableRowColumn>Stuffs</TableRowColumn>
                       <TableRowColumn>
-                        <FloatingActionButton mini={true} onTouchTap={this.handleEditDistrict( district )}>
+                        <FloatingActionButton mini={true}
+                          onTouchTap={this.handleEditDistrict( district )}>
                           <EditIcon />
                         </FloatingActionButton>
                       </TableRowColumn>

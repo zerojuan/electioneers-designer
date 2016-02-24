@@ -6,6 +6,25 @@ import FlatButton from 'material-ui/lib/flat-button';
 import EditDistrictView from './edit-district-view';
 
 export default React.createClass({
+  propTypes: {
+    onClose: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    open: PropTypes.bool.isRequired,
+    district: PropTypes.object,
+    districts: PropTypes.array
+  },
+  getInitialState( ) {
+    return {
+      initialDistrict: this.props.district
+    };
+  },
+  componentWillReceiveProps( nextProps ) {
+    if ( nextProps.district ) {
+      this.setState({
+        initialDistrict: nextProps.district
+      });
+    }
+  },
   render() {
     const dialogActions = [
       <FlatButton
@@ -25,7 +44,9 @@ export default React.createClass({
         modal={false}
         actions={dialogActions}
         open={this.props.open}>
-        <EditDistrictView/>
+        <EditDistrictView
+          district={this.state.initialDistrict}
+          districts={this.props.districts}/>
       </Dialog>
     );
   }
