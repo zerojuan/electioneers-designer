@@ -19,11 +19,19 @@ import {
 } from './actions/population';
 
 import {
+  EDIT_DISTRICT
+} from './actions/district';
+
+import {
   batchGenerateFamily,
   editFamily,
   formatFamilyData,
   pairFamily
 } from './reducers/population';
+
+import {
+  editDistrict
+} from './reducers/district';
 
 function addFile( state, action ) {
   return [
@@ -95,6 +103,8 @@ function districts( state = [], action ) {
   switch ( action.type ) {
     case RECIEVE_LOAD_FILE:
       return action.districts;
+    case EDIT_DISTRICT:
+      return editDistrict( state, action );
     default:
       return state;
   }
@@ -124,6 +134,8 @@ function isDirty( state = false, action ) {
     case BATCH_GENERATE_FAMILY:
       return true;
     case EDIT_FAMILY:
+      return true;
+    case EDIT_DISTRICT:
       return true;
     case PAIR_FAMILY:
       return true;

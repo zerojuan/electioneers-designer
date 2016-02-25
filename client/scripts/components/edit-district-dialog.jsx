@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 
+import update from 'react-addons-update';
+
 import Dialog from 'material-ui/lib/dialog';
 import FlatButton from 'material-ui/lib/flat-button';
 
@@ -25,6 +27,27 @@ export default React.createClass({
       });
     }
   },
+  handlePropChange( propName, value ) {
+    let temp = {};
+    temp[ propName ] = value;
+    let district = this.state.initialDistrict;
+    if ( !district ) {
+      district = this.props.district;
+    }
+
+    var newDistrict = update( district, {
+      $merge: temp
+    });
+
+    this.setState({
+      initialDistrict: newDistrict
+    });
+  },
+  handleSubmit() {
+    // return the value of the saved family
+    this.props.onSubmit( this.state.initialDistrict );
+    this.props.onClose();
+  },
   render() {
     const dialogActions = [
       <FlatButton
@@ -46,7 +69,8 @@ export default React.createClass({
         open={this.props.open}>
         <EditDistrictView
           district={this.state.initialDistrict}
-          districts={this.props.districts}/>
+          districts={this.props.districts}
+          onPropChange={this.handlePropChange}/>
       </Dialog>
     );
   }

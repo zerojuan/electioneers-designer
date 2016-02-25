@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { selectFile, loadFileIfNeeded } from '../actions';
+import { editDistrict } from '../actions/district';
 
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
@@ -22,7 +23,8 @@ const DistrictsPage = React.createClass({
     return {
       layoutValue: 2,
       createDialogOpen: false,
-      editDialogOpen: false
+      editDialogOpen: false,
+      selectedDistrict: null
     };
   },
   getDefaultProps() {
@@ -48,7 +50,8 @@ const DistrictsPage = React.createClass({
   },
   handleShowEditDialog( district ) {
     this.setState({
-      editDialogOpen: true
+      editDialogOpen: true,
+      selectedDistrict: district
     });
   },
   handleHideCreateDialog() {
@@ -64,13 +67,16 @@ const DistrictsPage = React.createClass({
   handleCreateSubmitDialog() {
     console.log( 'Submit Dialog' );
   },
-  handleEditSubmitDialog() {
-    console.log( 'Submit Edit Dialog' );
+  handleEditSubmitDialog( district ) {
+    const { dispatch } = this.props;
+
+    dispatch( editDistrict( district ) );
   },
   render() {
     let view;
     if ( this.state.layoutValue === 1 ) {
-      view = <DistrictsList districts={this.props.districts} onShowEdit={this.handleShowEditDialog}></DistrictsList>;
+      view = <DistrictsList districts={this.props.districts}
+        onShowEdit={this.handleShowEditDialog}></DistrictsList>;
     } else {
       view = <DistrictsGeographic districts={this.props.districts}></DistrictsGeographic>;
     }
@@ -100,6 +106,8 @@ const DistrictsPage = React.createClass({
           onSubmit={this.handleCreateSubmitDialog}/>
         <EditDistrictDialog
           open={this.state.editDialogOpen}
+          district={this.state.selectedDistrict}
+          districts={this.props.districts}
           onClose={this.handleHideEditDialog}
           onSubmit={this.handleEditSubmitDialog}/>
       </div>
