@@ -19,7 +19,8 @@ import {
 } from './actions/population';
 
 import {
-  EDIT_DISTRICT
+  EDIT_DISTRICT,
+  CREATE_DISTRICT
 } from './actions/district';
 
 import {
@@ -30,7 +31,8 @@ import {
 } from './reducers/population';
 
 import {
-  editDistrict
+  editDistrict,
+  createDistrict
 } from './reducers/district';
 
 function addFile( state, action ) {
@@ -105,6 +107,8 @@ function districts( state = [], action ) {
       return action.districts;
     case EDIT_DISTRICT:
       return editDistrict( state, action );
+    case CREATE_DISTRICT:
+      return createDistrict( state, action );
     default:
       return state;
   }
@@ -136,6 +140,8 @@ function isDirty( state = false, action ) {
     case EDIT_FAMILY:
       return true;
     case EDIT_DISTRICT:
+      return true;
+    case CREATE_DISTRICT:
       return true;
     case PAIR_FAMILY:
       return true;

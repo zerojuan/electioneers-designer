@@ -7,7 +7,7 @@ export const EDIT_DISTRICT = 'EDIT_DISTRICT';
 export function createDistrict( district ) {
   return {
     type: CREATE_DISTRICT,
-    family: district
+    district: district
   };
 }
 

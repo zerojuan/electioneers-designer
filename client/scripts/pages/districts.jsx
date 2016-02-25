@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { selectFile, loadFileIfNeeded } from '../actions';
-import { editDistrict } from '../actions/district';
+import { editDistrict, createDistrict } from '../actions/district';
 
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
@@ -64,8 +64,10 @@ const DistrictsPage = React.createClass({
       editDialogOpen: false
     });
   },
-  handleCreateSubmitDialog() {
-    console.log( 'Submit Dialog' );
+  handleCreateSubmitDialog( district ) {
+    const { dispatch } = this.props;
+
+    dispatch( createDistrict( district ) );
   },
   handleEditSubmitDialog( district ) {
     const { dispatch } = this.props;

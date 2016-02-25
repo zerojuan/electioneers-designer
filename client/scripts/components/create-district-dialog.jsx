@@ -13,6 +13,31 @@ export default React.createClass({
     onSubmit: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired
   },
+  getInitialState() {
+    return {
+      initialDistrict: {
+        name: ''
+      }
+    };
+  },
+  handlePropChange( propName, value ) {
+    let temp = {};
+    temp[ propName ] = value;
+    let district = this.state.initialDistrict;
+
+    var newDistrict = update( district, {
+      $merge: temp
+    });
+
+    this.setState({
+      initialDistrict: newDistrict
+    });
+  },
+  handleSubmit() {
+    // return the value of the saved family
+    this.props.onSubmit( this.state.initialDistrict );
+    this.props.onClose();
+  },
   render() {
     const dialogActions = [
       <FlatButton
@@ -32,8 +57,10 @@ export default React.createClass({
         modal={false}
         actions={dialogActions}
         open={this.props.open}>
-        <CreateDistrictView/>
+        <CreateDistrictView
+          district={this.state.initialDistrict}
+          onPropChange={this.handlePropChange}/>
       </Dialog>
-    )
+    );
   }
 });
