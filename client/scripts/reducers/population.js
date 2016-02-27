@@ -73,7 +73,7 @@ function updateFamily( families, family ) {
   const index = families.findIndex( ( el ) => el._id === family._id );
 
   return [
-    ...families.slice( 0, index),
+    ...families.slice( 0, index ),
     family,
     ...families.slice( index + 1 )
   ];
@@ -87,7 +87,7 @@ export function formatFamilyData( state, action ) {
     }
 
     return family;
-  })
+  });
 }
 
 export function batchGenerateFamily( state, action ) {

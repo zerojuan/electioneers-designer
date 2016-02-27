@@ -14,7 +14,6 @@ function updateDistrict( districts, district ) {
 export function createDistrict( districts, action ) {
   const district = action.district;
 
-  // TODO: guid should be it's own file
   district._id = guid();
 
   return [
