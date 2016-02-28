@@ -91,7 +91,8 @@ function recieveLoadFile( data ) {
   return {
     type: RECIEVE_LOAD_FILE,
     districts: data.districts,
-    population: data.population
+    population: data.population,
+    config: data.config
   };
 };
 
@@ -182,6 +183,7 @@ export function saveFile( name ) {
       body: JSON.stringify({
         districts: getState().districts,
         population: getState().population,
+        config: getState().config,
         actions: getState().actions
       })
     })

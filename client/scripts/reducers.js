@@ -159,13 +159,23 @@ function message( state = null, action ) {
   }
 }
 
+function config( state = {}, action ) {
+  switch ( action.type ) {
+    case RECIEVE_LOAD_FILE:
+      return action.config;
+    default:
+      return state;
+  }
+}
+
 const designerApp = combineReducers({
   savedFiles,
   selectedFile,
   districts,
   population,
   isDirty,
-  message
+  message,
+  config
 });
 
 export default designerApp;

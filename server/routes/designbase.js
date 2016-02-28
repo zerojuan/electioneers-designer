@@ -9,6 +9,7 @@ const names = Moniker.generator([ Moniker.adjective, Moniker.noun ]);
 const router = express.Router();
 
 const settings = require( '../settings.js' );
+const DefaultConfig = require( '../data/default-config.json' );
 const District = require( '../models/district.js' );
 const Population = require( '../models/population.js' );
 
@@ -48,6 +49,18 @@ router.get( '/:name', function( req, res ) {
         }
 
         return callback( null, JSON.parse( data ).data );
+      });
+    },
+    config: function( callback ) {
+      // your base config should be here
+      fs.readFile( defaultDir + '/config.json', { encoding: 'utf8' }, function( err, data ) {
+        if ( err ) {
+          console.log( 'Error: ', err );
+          // supply default config
+          return callback( null, DefaultConfig );
+        }
+
+        return callback( null, JSON.parse( data ) );
       });
     }
   }, function( err, results ) {
@@ -104,6 +117,12 @@ router.post( '/:name', function( req, res ) {
       };
       fs.writeFileSync( defaultDir + '/actions.json',
         JSON.stringify( actions, null, '\t' ) );
+      done();
+    },
+    config: function( done ) {
+      let config = req.body.config;
+      fs.writeFileSync( defaultDir + '/config.json',
+        JSON.stringify( config, null, '\t' ) );
       done();
     }
   }, function( err, result ) {
