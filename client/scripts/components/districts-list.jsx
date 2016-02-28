@@ -41,7 +41,7 @@ export default React.createClass({
             {
               page.map( ( district ) => {
                   return (
-                    <TableRow key={district.id}>
+                    <TableRow key={district._id}>
                       <TableRowColumn>{district.name}</TableRowColumn>
                       <TableRowColumn>Stuffs</TableRowColumn>
                       <TableRowColumn>

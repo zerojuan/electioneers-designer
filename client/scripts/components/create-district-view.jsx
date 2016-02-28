@@ -22,6 +22,9 @@ export default React.createClass({
               onChange={this.handlePropChange( 'name' )}
               />
           </Tab>
+          <Tab label='neighbors'>
+            This is the neighbors tab
+          </Tab>
         </Tabs>
       </div>
     );

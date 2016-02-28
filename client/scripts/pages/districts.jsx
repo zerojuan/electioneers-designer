@@ -16,6 +16,7 @@ import DistrictsGeographic from '../components/districts-geographic';
 
 import CreateDistrictDialog from '../components/create-district-dialog';
 import EditDistrictDialog from '../components/edit-district-dialog';
+import EditBackgroundDialog from '../components/edit-background-dialog';
 
 const DistrictsPage = React.createClass({
   displayName: 'Districts',
@@ -23,6 +24,7 @@ const DistrictsPage = React.createClass({
     return {
       layoutValue: 2,
       createDialogOpen: false,
+      changeBackgroundOpen: false,
       editDialogOpen: false,
       selectedDistrict: null
     };
@@ -54,6 +56,11 @@ const DistrictsPage = React.createClass({
       selectedDistrict: district
     });
   },
+  handleShowChangeBackground( ) {
+    this.setState({
+      changeBackgroundOpen: true
+    });
+  },
   handleHideCreateDialog() {
     this.setState({
       createDialogOpen: false
@@ -62,6 +69,11 @@ const DistrictsPage = React.createClass({
   handleHideEditDialog() {
     this.setState({
       editDialogOpen: false
+    });
+  },
+  handleHideBackgroundDialog() {
+    this.setState({
+      changeBackgroundOpen: false
     });
   },
   handleCreateSubmitDialog( district ) {
@@ -73,6 +85,9 @@ const DistrictsPage = React.createClass({
     const { dispatch } = this.props;
 
     dispatch( editDistrict( district ) );
+  },
+  handleChangeBackgroundDialog( background ) {
+    console.log( 'This is the new background: ', background );
   },
   render() {
     let view;
@@ -96,6 +111,10 @@ const DistrictsPage = React.createClass({
               primary={ true }
               onTouchTap={ this.handleShowCreateDialog }>
             </RaisedButton>
+            <RaisedButton
+              label='Edit Background'
+              onTouchTap={ this.handleShowChangeBackground }>
+            </RaisedButton>
           </ToolbarGroup>
         </Toolbar>
         {
@@ -112,6 +131,11 @@ const DistrictsPage = React.createClass({
           districts={this.props.districts}
           onClose={this.handleHideEditDialog}
           onSubmit={this.handleEditSubmitDialog}/>
+        <EditBackgroundDialog
+          open={this.state.changeBackgroundOpen}
+          onClose={this.handleHideBackgroundDialog}
+          onSubmit={this.handleChangeBackgroundDialog}
+          />
       </div>
     );
   }
