@@ -9,6 +9,8 @@ const names = Moniker.generator([ Moniker.adjective, Moniker.noun ]);
 const router = express.Router();
 
 const settings = require( '../settings.js' );
+const District = require( '../models/district.js' );
+const Population = require( '../models/population.js' );
 
 router.get( '/:name', function( req, res ) {
   const name = req.params.name;
@@ -24,7 +26,8 @@ router.get( '/:name', function( req, res ) {
           console.log( 'Error: ', err );
           return callback( null, []);
         }
-        return callback( null, JSON.parse( data ).data );
+        var districts = JSON.parse( data ).data;
+        return callback( null, districts.map( District.convert ) );
       });
     },
     population: function( callback ) {
@@ -33,8 +36,8 @@ router.get( '/:name', function( req, res ) {
           console.log( 'Error: ', err );
           return callback( null, []);
         }
-
-        return callback( null, JSON.parse( data ).data );
+        var population = JSON.parse( data ).data;
+        return callback( null, population.map( Population.convert ) );
       });
     },
     actions: function( callback ) {
@@ -48,7 +51,7 @@ router.get( '/:name', function( req, res ) {
       });
     }
   }, function( err, results ) {
-    if( err ) {
+    if ( err ) {
       console.log( 'Error happened', err );
       return res.send( err );
     }
