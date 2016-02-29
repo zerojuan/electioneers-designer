@@ -1,6 +1,5 @@
-exports.module = {
+module.exports = {
   convert: function( district ) {
-    console.log( 'Converting....' );
     return {
       _id: district.id || district._id,
       name: district.name,

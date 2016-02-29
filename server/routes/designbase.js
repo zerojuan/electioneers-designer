@@ -2,6 +2,7 @@
 
 const express = require( 'express' );
 const fs = require( 'fs-extra' );
+const path = require( 'path' );
 const async = require( 'async' );
 const _ = require( 'lodash' );
 const Moniker = require( 'moniker' );
@@ -56,6 +57,8 @@ router.get( '/:name', function( req, res ) {
       fs.readFile( defaultDir + '/config.json', { encoding: 'utf8' }, function( err, data ) {
         if ( err ) {
           console.log( 'Error: ', err );
+          // TODO: copy gfx folder to the save folder
+          fs.copySync( path.resolve( __dirname, '../data/gfx' ), defaultDir + '/gfx' );
           // supply default config
           return callback( null, DefaultConfig );
         }
