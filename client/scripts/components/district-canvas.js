@@ -3,7 +3,6 @@ import Phaser from 'phaser';
 
 class DistrictCanvas {
   constructor( state ) {
-    console.log( 'Constructed', state.districts );
     this.districts = state.districts;
   }
 

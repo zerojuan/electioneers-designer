@@ -117,6 +117,7 @@ const DistrictsPage = React.createClass({
             </RaisedButton>
           </ToolbarGroup>
         </Toolbar>
+        <img src='http://localhost:7171/image/glorious-maid/background'/>
         {
           view
         }
