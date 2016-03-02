@@ -5,6 +5,7 @@ import DistrictCanvas from './district-canvas';
 class CanvasGeoView {
   constructor( handlers ) {
     this.handlers = handlers;
+
   }
 
   create( el, state ) {
