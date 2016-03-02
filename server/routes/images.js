@@ -9,10 +9,12 @@ const router = express.Router();
 
 const settings = require( '../settings.js' );
 
+const getDefaultDir = function( name ) {
+  return settings.getWorkingDirectory() + '/saves/' + name;
+};
+
 router.get( '/:name/background', function( req, res ) {
-  const name = req.params.name;
-  console.log( 'Trying to load: ', name );
-  var defaultDir = settings.getWorkingDirectory() + '/saves/' + name;
+  var defaultDir = getDefaultDir( req.params.name );
 
   var options = {
     root: defaultDir + '/gfx/',
@@ -29,6 +31,28 @@ router.get( '/:name/background', function( req, res ) {
       res.status( err.status ).end();
     } else {
       console.log( 'Sent:', ' rainbow-bg.png' );
+    }
+  });
+});
+
+router.get( '/:name/d/:gfxName', function( req, res ) {
+  var defaultDir = getDefaultDir( req.params.name );
+
+  var options = {
+    root: defaultDir + '/gfx/',
+    dotfiles: 'deny',
+    headers: {
+        'x-timestamp': Date.now(),
+        'x-sent': true
+    }
+  };
+
+  return res.sendFile( req.params.gfxName + '.png', options, function( err ) {
+    if ( err ) {
+      console.log( err );
+      res.status( err.status ).end();
+    } else {
+      console.log( 'Sent:', req.params.gfxName + '.png' );
     }
   });
 });

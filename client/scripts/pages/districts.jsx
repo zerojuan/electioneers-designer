@@ -95,7 +95,9 @@ const DistrictsPage = React.createClass({
       view = <DistrictsList districts={this.props.districts}
         onShowEdit={this.handleShowEditDialog}></DistrictsList>;
     } else {
-      view = <DistrictsGeographic districts={this.props.districts}></DistrictsGeographic>;
+      view = <DistrictsGeographic
+          districts={this.props.districts}
+          baseUrl={this.props.baseUrl}></DistrictsGeographic>;
     }
 
     return (
@@ -148,9 +150,12 @@ function mapStateToProps( state ) {
     districts
   } = state;
 
+  const baseUrl = 'http://localhost:7171/image/' + selectedFile;
+
   return {
     selectedFile,
-    districts
+    districts,
+    baseUrl
   };
 }
 
