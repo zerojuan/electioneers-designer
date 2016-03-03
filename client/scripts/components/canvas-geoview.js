@@ -13,13 +13,13 @@ class CanvasGeoView {
 
     this.gameState = new DistrictCanvas( state, this.baseUrl );
     this.game.state.add( 'game', this.gameState );
+    this.game.state.start( 'game' );
   }
 
   update( el, state ) {
     if ( state.baseUrl !== 'none' ) {
       console.log( state.baseUrl );
       this.gameState.baseUrl = state.baseUrl;
-      this.game.state.start( 'game' );
       this.gameState.reloadData( state );
     }
   }

@@ -12,7 +12,7 @@ export default React.createClass({
   componentDidMount() {
     const el = findDOMNode( this );
     this.canvas = new CanvasGeoView( el, this.props.baseUrl );
-
+    console.log( 'Mounting...' );
     // Create
     this.canvas.create( el, {
       width: '100%',

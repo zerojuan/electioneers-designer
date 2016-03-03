@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 
+import DistrictSprite from './district-sprite.js';
 
 class DistrictCanvas {
   constructor( state, baseUrl ) {
@@ -18,7 +19,8 @@ class DistrictCanvas {
     // background image
     this.game.add.sprite( 0, 0, 'background' );
 
-    // TODO: create a sprite group for the districts
+    // create a sprite group for the districts
+    this.districtSprites = this.game.add.group();
 
     this._drawDistricts();
   }
@@ -34,7 +36,16 @@ class DistrictCanvas {
     // TODO: draw the districts here
     // load the game sprites
     if ( this.game.add ) {
-      this.game.add.sprite( 25, 25, 'district' );
+      this.districts.forEach( ( district ) => {
+        const index = this.districtSprites.children.findIndex( ( sprite ) => {
+          return sprite.data._id === district._id;
+        });
+
+        if ( index < 0 ) {
+          const sprite = new DistrictSprite( this, district );
+          this.districtSprites.add( sprite );
+        }
+      });
     }
   }
 
