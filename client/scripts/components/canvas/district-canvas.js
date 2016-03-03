@@ -16,9 +16,11 @@ class DistrictCanvas {
   create() {
     // SETUP DISTRICT CANVAS
     // background image
-    this._drawDistricts();
     this.game.add.sprite( 0, 0, 'background' );
-    this.game.add.sprite( 25, 25, 'district' );
+
+    // TODO: create a sprite group for the districts
+
+    this._drawDistricts();
   }
 
   reloadData( state ) {
@@ -31,6 +33,9 @@ class DistrictCanvas {
   _drawDistricts() {
     // TODO: draw the districts here
     // load the game sprites
+    if ( this.game.add ) {
+      this.game.add.sprite( 25, 25, 'district' );
+    }
   }
 
   update() {

@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import DistrictCanvas from './district-canvas';
+import DistrictCanvas from './canvas/district-canvas';
 
 class CanvasGeoView {
   constructor( handlers, baseUrl ) {
@@ -10,10 +10,9 @@ class CanvasGeoView {
 
   create( el, state ) {
     this.game = new Phaser.Game( 640, 640, Phaser.AUTO, el );
-    console.log( 'What is the base URL: ', this.baseUrl );
+
     this.gameState = new DistrictCanvas( state, this.baseUrl );
     this.game.state.add( 'game', this.gameState );
-
   }
 
   update( el, state ) {
