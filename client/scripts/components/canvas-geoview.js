@@ -11,6 +11,8 @@ class CanvasGeoView {
   create( el, state ) {
     this.game = new Phaser.Game( 640, 640, Phaser.AUTO, el );
 
+    // this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+
     this.gameState = new DistrictCanvas( state, this.baseUrl );
     this.game.state.add( 'game', this.gameState );
     this.game.state.start( 'game' );
