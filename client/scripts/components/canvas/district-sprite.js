@@ -5,6 +5,9 @@ class DistrictSprite extends Phaser.Sprite {
   constructor( main, districtData ) {
     super( main.game, Math.random() * 600, Math.random() * 600, 'district' );
     this.data = districtData;
+
+    this.inputEnabled = true;
+    this.input.enableDrag( true );
   }
 
 }
