@@ -19,11 +19,21 @@ import {
 } from './actions/population';
 
 import {
+  EDIT_DISTRICT,
+  CREATE_DISTRICT
+} from './actions/district';
+
+import {
   batchGenerateFamily,
   editFamily,
   formatFamilyData,
   pairFamily
 } from './reducers/population';
+
+import {
+  editDistrict,
+  createDistrict
+} from './reducers/district';
 
 function addFile( state, action ) {
   return [
@@ -95,6 +105,10 @@ function districts( state = [], action ) {
   switch ( action.type ) {
     case RECIEVE_LOAD_FILE:
       return action.districts;
+    case EDIT_DISTRICT:
+      return editDistrict( state, action );
+    case CREATE_DISTRICT:
+      return createDistrict( state, action );
     default:
       return state;
   }
@@ -125,6 +139,10 @@ function isDirty( state = false, action ) {
       return true;
     case EDIT_FAMILY:
       return true;
+    case EDIT_DISTRICT:
+      return true;
+    case CREATE_DISTRICT:
+      return true;
     case PAIR_FAMILY:
       return true;
     default:
@@ -141,13 +159,23 @@ function message( state = null, action ) {
   }
 }
 
+function config( state = {}, action ) {
+  switch ( action.type ) {
+    case RECIEVE_LOAD_FILE:
+      return action.config;
+    default:
+      return state;
+  }
+}
+
 const designerApp = combineReducers({
   savedFiles,
   selectedFile,
   districts,
   population,
   isDirty,
-  message
+  message,
+  config
 });
 
 export default designerApp;

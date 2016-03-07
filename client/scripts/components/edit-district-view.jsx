@@ -15,15 +15,12 @@ export default React.createClass({
     return (
       <div>
         <Tabs>
-          <Tab label='info'>
+          <Tab label="info">
             <LabelTextField
-              label='Name'
+              label="Name"
               value={this.props.district.name}
               onChange={this.handlePropChange( 'name' )}
               />
-          </Tab>
-          <Tab label='neighbors'>
-            This is the neighbors tab
           </Tab>
         </Tabs>
       </div>

@@ -2,6 +2,7 @@
 
 const express = require( 'express' );
 const fs = require( 'fs-extra' );
+const path = require( 'path' );
 const async = require( 'async' );
 const _ = require( 'lodash' );
 const Moniker = require( 'moniker' );
@@ -9,6 +10,9 @@ const names = Moniker.generator([ Moniker.adjective, Moniker.noun ]);
 const router = express.Router();
 
 const settings = require( '../settings.js' );
+const DefaultConfig = require( '../data/default-config.json' );
+const District = require( '../models/district.js' );
+const Population = require( '../models/population.js' );
 
 router.get( '/:name', function( req, res ) {
   const name = req.params.name;
@@ -24,7 +28,8 @@ router.get( '/:name', function( req, res ) {
           console.log( 'Error: ', err );
           return callback( null, []);
         }
-        return callback( null, JSON.parse( data ).data );
+        var districts = JSON.parse( data ).data;
+        return callback( null, districts.map( District.convert ) );
       });
     },
     population: function( callback ) {
@@ -33,8 +38,8 @@ router.get( '/:name', function( req, res ) {
           console.log( 'Error: ', err );
           return callback( null, []);
         }
-
-        return callback( null, JSON.parse( data ).data );
+        var population = JSON.parse( data ).data;
+        return callback( null, population.map( Population.convert ) );
       });
     },
     actions: function( callback ) {
@@ -46,9 +51,23 @@ router.get( '/:name', function( req, res ) {
 
         return callback( null, JSON.parse( data ).data );
       });
+    },
+    config: function( callback ) {
+      // your base config should be here
+      fs.readFile( defaultDir + '/config.json', { encoding: 'utf8' }, function( err, data ) {
+        if ( err ) {
+          console.log( 'Error: ', err );
+          // TODO: copy gfx folder to the save folder
+          fs.copySync( path.resolve( __dirname, '../data/gfx' ), defaultDir + '/gfx' );
+          // supply default config
+          return callback( null, DefaultConfig );
+        }
+
+        return callback( null, JSON.parse( data ) );
+      });
     }
   }, function( err, results ) {
-    if( err ) {
+    if ( err ) {
       console.log( 'Error happened', err );
       return res.send( err );
     }
@@ -101,6 +120,12 @@ router.post( '/:name', function( req, res ) {
       };
       fs.writeFileSync( defaultDir + '/actions.json',
         JSON.stringify( actions, null, '\t' ) );
+      done();
+    },
+    config: function( done ) {
+      let config = req.body.config;
+      fs.writeFileSync( defaultDir + '/config.json',
+        JSON.stringify( config, null, '\t' ) );
       done();
     }
   }, function( err, result ) {

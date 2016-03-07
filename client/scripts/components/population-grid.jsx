@@ -17,7 +17,7 @@ export default React.createClass({
       }
     };
   },
-  getInitialState(){
+  getInitialState() {
     return {
       dimensionValue: 'wealth'
     };

@@ -14,6 +14,7 @@ app.use( bodyParser.json() );
 app.use( cors() );
 
 app.use( '/base', require( './routes/designbase.js' ) );
+app.use( '/image', require( './routes/images.js' ) );
 app.use( '/', require( './routes/index.js' ) );
 
 

@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { selectFile, loadFileIfNeeded } from '../actions';
+import { editDistrict, createDistrict } from '../actions/district';
 
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
@@ -11,15 +12,21 @@ import MenuItem from 'material-ui/lib/menus/menu-item';
 import RaisedButton from 'material-ui/lib/raised-button';
 
 import DistrictsList from '../components/districts-list';
+import DistrictsGeographic from '../components/districts-geographic';
 
 import CreateDistrictDialog from '../components/create-district-dialog';
+import EditDistrictDialog from '../components/edit-district-dialog';
+import EditBackgroundDialog from '../components/edit-background-dialog';
 
 const DistrictsPage = React.createClass({
   displayName: 'Districts',
   getInitialState() {
     return {
-      layoutValue: 1,
-      createDialogOpen: false
+      layoutValue: 2,
+      createDialogOpen: false,
+      changeBackgroundOpen: false,
+      editDialogOpen: false,
+      selectedDistrict: null
     };
   },
   getDefaultProps() {
@@ -43,35 +50,101 @@ const DistrictsPage = React.createClass({
       createDialogOpen: true
     });
   },
+  handleShowEditDialog( district ) {
+    this.setState({
+      editDialogOpen: true,
+      selectedDistrict: district
+    });
+  },
+  handleShowChangeBackground( ) {
+    this.setState({
+      changeBackgroundOpen: true
+    });
+  },
   handleHideCreateDialog() {
     this.setState({
       createDialogOpen: false
     });
   },
-  handleCreateSubmitDialog() {
-    console.log( 'Submit Dialog' );
+  handleHideEditDialog() {
+    this.setState({
+      editDialogOpen: false
+    });
+  },
+  handleHideBackgroundDialog() {
+    this.setState({
+      changeBackgroundOpen: false
+    });
+  },
+  handleCreateSubmitDialog( district ) {
+    const { dispatch } = this.props;
+
+    dispatch( createDistrict( district ) );
+  },
+  handleEditSubmitDialog( district ) {
+    const { dispatch } = this.props;
+
+    dispatch( editDistrict( district ) );
+  },
+  handleChangeBackgroundDialog( background ) {
+    console.log( 'This is the new background: ', background );
+  },
+  handleChangePosition( district ) {
+    const { dispatch } = this.props;
+
+    dispatch( editDistrict( district ) );
   },
   render() {
+    let view;
+    if ( this.state.layoutValue === 1 ) {
+      view = <DistrictsList districts={this.props.districts}
+        onShowEdit={this.handleShowEditDialog}></DistrictsList>;
+    } else {
+      view = <DistrictsGeographic
+          districts={this.props.districts}
+          baseUrl={this.props.baseUrl}
+          onChangePosition={this.handleChangePosition}></DistrictsGeographic>;
+    }
+
     return (
       <div>
         <Toolbar>
           <ToolbarGroup>
             <DropdownMenu value={this.state.layoutValue} onChange={this.handleLayoutChange}>
               <MenuItem value={1} primaryText='List'/>
-              <MenuItem value={2} primaryText='Dots'/>
+              <MenuItem value={2} primaryText='Geo'/>
             </DropdownMenu>
             <RaisedButton
               label='Create'
               primary={ true }
               onTouchTap={ this.handleShowCreateDialog }>
             </RaisedButton>
+            <RaisedButton
+              label='Edit Background'
+              onTouchTap={ this.handleShowChangeBackground }>
+            </RaisedButton>
           </ToolbarGroup>
         </Toolbar>
-        <DistrictsList districts={this.props.districts}></DistrictsList>
+
+        {
+          view
+        }
+
         <CreateDistrictDialog
           open={this.state.createDialogOpen}
           onClose={this.handleHideCreateDialog}
           onSubmit={this.handleCreateSubmitDialog}/>
+        <EditDistrictDialog
+          open={this.state.editDialogOpen}
+          district={this.state.selectedDistrict}
+          districts={this.props.districts}
+          onClose={this.handleHideEditDialog}
+          onSubmit={this.handleEditSubmitDialog}/>
+        <EditBackgroundDialog
+          open={this.state.changeBackgroundOpen}
+          onClose={this.handleHideBackgroundDialog}
+          onSubmit={this.handleChangeBackgroundDialog}
+          />
       </div>
     );
   }
@@ -83,9 +156,12 @@ function mapStateToProps( state ) {
     districts
   } = state;
 
+  const baseUrl = 'http://localhost:7171/image/' + selectedFile;
+
   return {
     selectedFile,
-    districts
+    districts,
+    baseUrl
   };
 }
 

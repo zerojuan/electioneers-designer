@@ -1,3 +1,4 @@
+import { guid } from './utils';
 
 const Surnames = [
   'Santos',
@@ -54,16 +55,6 @@ function pickRandom( arr ) {
     Math.floor( Math.random() * arr.length ) ];
 }
 
-function guid() {
-  function s4() {
-    return Math.floor( (1 + Math.random() ) * 0x10000 )
-      .toString( 16 )
-      .substring( 1 );
-  }
-  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-    s4() + '-' + s4() + s4() + s4();
-}
-
 function generateFamily() {
   return {
     _id: guid(),
@@ -82,7 +73,7 @@ function updateFamily( families, family ) {
   const index = families.findIndex( ( el ) => el._id === family._id );
 
   return [
-    ...families.slice( 0, index),
+    ...families.slice( 0, index ),
     family,
     ...families.slice( index + 1 )
   ];
@@ -96,7 +87,7 @@ export function formatFamilyData( state, action ) {
     }
 
     return family;
-  })
+  });
 }
 
 export function batchGenerateFamily( state, action ) {

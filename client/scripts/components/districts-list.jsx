@@ -7,13 +7,19 @@ import TableHeader from 'material-ui/lib/table/table-header';
 import TableHeaderColumn from 'material-ui/lib/table/table-header-column';
 import TableRow from 'material-ui/lib/table/table-row';
 import TableRowColumn from 'material-ui/lib/table/table-row-column';
-
+import FloatingActionButton from 'material-ui/lib/floating-action-button';
+import EditIcon from 'material-ui/lib/svg-icons/action/perm-identity';
 
 export default React.createClass({
   getInitialState() {
     return {
       currentPage: 0,
       pageSize: 10
+    };
+  },
+  handleEditDistrict( district ) {
+    return () => {
+      this.props.onShowEdit( district );
     };
   },
   render() {
@@ -35,9 +41,15 @@ export default React.createClass({
             {
               page.map( ( district ) => {
                   return (
-                    <TableRow key={district.id}>
+                    <TableRow key={district._id}>
                       <TableRowColumn>{district.name}</TableRowColumn>
                       <TableRowColumn>Stuffs</TableRowColumn>
+                      <TableRowColumn>
+                        <FloatingActionButton mini={true}
+                          onTouchTap={this.handleEditDistrict( district )}>
+                          <EditIcon />
+                        </FloatingActionButton>
+                      </TableRowColumn>
                     </TableRow>
                   );
               })
