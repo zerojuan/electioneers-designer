@@ -7,7 +7,8 @@ import CanvasGeoView from './canvas-geoview';
 export default React.createClass({
   propTypes: {
     districts: PropTypes.array,
-    baseUrl: PropTypes.string.isRequired
+    baseUrl: PropTypes.string.isRequired,
+    onChangePosition: PropTypes.func.isRequired
   },
   componentDidMount() {
     const el = findDOMNode( this );
@@ -34,8 +35,8 @@ export default React.createClass({
       baseUrl: this.props.baseUrl
     });
   },
-  handleDistrictsUpdate( districts ) {
-    console.log( 'Updated district', districts );
+  handleDistrictsUpdate( district ) {
+    this.props.onChangePosition( district );
   },
   render() {
     return (

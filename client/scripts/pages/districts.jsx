@@ -89,6 +89,11 @@ const DistrictsPage = React.createClass({
   handleChangeBackgroundDialog( background ) {
     console.log( 'This is the new background: ', background );
   },
+  handleChangePosition( district ) {
+    const { dispatch } = this.props;
+
+    dispatch( editDistrict( district ) );
+  },
   render() {
     let view;
     if ( this.state.layoutValue === 1 ) {
@@ -97,7 +102,8 @@ const DistrictsPage = React.createClass({
     } else {
       view = <DistrictsGeographic
           districts={this.props.districts}
-          baseUrl={this.props.baseUrl}></DistrictsGeographic>;
+          baseUrl={this.props.baseUrl}
+          onChangePosition={this.handleChangePosition}></DistrictsGeographic>;
     }
 
     return (

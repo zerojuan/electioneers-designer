@@ -36,15 +36,11 @@ class DistrictCanvas {
   _onDragEnd( sprite, pointer ) {
     sprite.data.position.x = sprite.x;
     sprite.data.position.y = sprite.y;
-    const districts = this.districtSprites.children.map( ( dSprite ) => {
-      return dSprite.data;
-    });
-    this.eventHandlers.onDistrictsUpdate( districts );
+    this.eventHandlers.onDistrictsUpdate( sprite.data );
   }
 
   _drawDistricts() {
-    // TODO: draw the districts here
-    // load the game sprites
+    // load the game sprites when it's ready
     if ( this.game.add ) {
       this.districts.forEach( ( district ) => {
         const index = this.districtSprites.children.findIndex( ( sprite ) => {
