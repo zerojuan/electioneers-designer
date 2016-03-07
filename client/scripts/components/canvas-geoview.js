@@ -3,9 +3,10 @@ import Phaser from 'phaser';
 import DistrictCanvas from './canvas/district-canvas';
 
 class CanvasGeoView {
-  constructor( handlers, baseUrl ) {
+  constructor( handlers, baseUrl, eventHandlers ) {
     this.handlers = handlers;
     this.baseUrl = baseUrl;
+    this.eventHandlers = eventHandlers;
   }
 
   create( el, state ) {
@@ -13,7 +14,7 @@ class CanvasGeoView {
 
     // this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
-    this.gameState = new DistrictCanvas( state, this.baseUrl );
+    this.gameState = new DistrictCanvas( state, this.baseUrl, this.eventHandlers );
     this.game.state.add( 'game', this.gameState );
     this.game.state.start( 'game' );
   }

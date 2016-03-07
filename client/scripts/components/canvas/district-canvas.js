@@ -3,9 +3,10 @@ import Phaser from 'phaser';
 import DistrictSprite from './district-sprite.js';
 
 class DistrictCanvas {
-  constructor( state, baseUrl ) {
+  constructor( state, baseUrl, eventHandlers ) {
     this.baseUrl = baseUrl;
     this.districts = state.districts;
+    this.eventHandlers = eventHandlers;
   }
 
   preload() {
@@ -32,6 +33,15 @@ class DistrictCanvas {
     //
   }
 
+  _onDragEnd( sprite, pointer ) {
+    sprite.data.position.x = sprite.x;
+    sprite.data.position.y = sprite.y;
+    const districts = this.districtSprites.children.map( ( dSprite ) => {
+      return dSprite.data;
+    });
+    this.eventHandlers.onDistrictsUpdate( districts );
+  }
+
   _drawDistricts() {
     // TODO: draw the districts here
     // load the game sprites
@@ -43,6 +53,7 @@ class DistrictCanvas {
 
         if ( index < 0 ) {
           const sprite = new DistrictSprite( this, district );
+          sprite.events.onDragStop.add( this._onDragEnd, this );
           this.districtSprites.add( sprite );
         }
       });

@@ -11,7 +11,12 @@ export default React.createClass({
   },
   componentDidMount() {
     const el = findDOMNode( this );
-    this.canvas = new CanvasGeoView( el, this.props.baseUrl );
+    this.canvas = new CanvasGeoView(
+      el,
+      this.props.baseUrl,
+      {
+        onDistrictsUpdate: this.handleDistrictsUpdate
+      });
 
     // Create
     this.canvas.create( el, {
@@ -28,6 +33,9 @@ export default React.createClass({
       districts: this.props.districts,
       baseUrl: this.props.baseUrl
     });
+  },
+  handleDistrictsUpdate( districts ) {
+    console.log( 'Updated district', districts );
   },
   render() {
     return (
