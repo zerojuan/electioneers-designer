@@ -16,6 +16,13 @@ export function createDistrict( districts, action ) {
 
   district._id = guid();
 
+  if ( !district.position ) {
+    district.position = {
+      x: 0,
+      y: 0
+    };
+  }
+
   return [
     ...districts,
     district
