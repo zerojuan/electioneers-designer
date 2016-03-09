@@ -13,6 +13,7 @@ class DistrictCanvas {
     this.game.load.crossOrigin = 'anonymous';
     this.game.load.image( 'background', this.baseUrl + '/background' );
     this.game.load.image( 'district', this.baseUrl + '/d/district-a' );
+    this.game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
   }
 
   create() {

@@ -44,7 +44,7 @@ export default React.createClass({
   },
   render() {
     return (
-      <div className='geo-wrapper' style={style}></div>
+      <div className='geo-wrapper'></div>
     );
   }
 });
