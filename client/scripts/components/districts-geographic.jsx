@@ -4,6 +4,10 @@ import { findDOMNode } from 'react-dom';
 
 import CanvasGeoView from './canvas-geoview';
 
+const style = {
+  overflow: 'scroll'
+};
+
 export default React.createClass({
   propTypes: {
     districts: PropTypes.array,
@@ -40,7 +44,7 @@ export default React.createClass({
   },
   render() {
     return (
-      <div></div>
+      <div className='geo-wrapper' style={style}></div>
     );
   }
 });

@@ -10,7 +10,7 @@ class CanvasGeoView {
   }
 
   create( el, state ) {
-    this.game = new Phaser.Game( 640, 640, Phaser.AUTO, el );
+    this.game = new Phaser.Game( 1920, 1080, Phaser.AUTO, el );
 
     // this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
