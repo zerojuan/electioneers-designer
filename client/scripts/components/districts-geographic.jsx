@@ -2,6 +2,9 @@ import React, { PropTypes } from 'react';
 
 import { findDOMNode } from 'react-dom';
 
+import DropdownMenu from 'material-ui/lib/DropDownMenu';
+import MenuItem from 'material-ui/lib/menus/menu-item';
+
 import CanvasGeoView from './canvas-geoview';
 
 const style = {
@@ -44,7 +47,7 @@ export default React.createClass({
   },
   render() {
     return (
-      <div className='geo-wrapper'></div>
+      <div></div>
     );
   }
 });

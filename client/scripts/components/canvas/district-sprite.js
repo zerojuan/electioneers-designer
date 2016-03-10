@@ -11,7 +11,15 @@ class DistrictSprite extends Phaser.Sprite {
     this.anchor.x = this.anchor.y = 0.5;
 
     this.inputEnabled = true;
-    this.input.enableDrag( true );
+    this.input.enableDrag( false );
+  }
+
+  update() {
+    if ( this.input.pointerOver() ) {
+      this.alpha = 0.5;
+    } else {
+      this.alpha = 1;
+    }
   }
 
 }
