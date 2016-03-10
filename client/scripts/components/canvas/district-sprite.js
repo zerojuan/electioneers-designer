@@ -12,10 +12,24 @@ class DistrictSprite extends Phaser.Sprite {
 
     this.inputEnabled = true;
     this.input.enableDrag( false );
+    this.events.onInputDown.add( this.clicked, this );
+
+    this._isSelected = false;
+
+  }
+
+  clicked() {
+    this._isSelected = !this._isSelected;
   }
 
   update() {
     if ( this.input.pointerOver() ) {
+      this.alpha = 0.5;
+    } else {
+      this.alpha = 1;
+    }
+
+    if ( this._isSelected ) {
       this.alpha = 0.5;
     } else {
       this.alpha = 1;
