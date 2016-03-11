@@ -18,16 +18,24 @@ class DistrictSprite extends Phaser.Sprite {
 
   }
 
+  select() {
+    this._isSelected = true;
+  }
+
+  unSelect() {
+    this._isSelected = false;
+  }
+
   clicked() {
-    this._isSelected = !this._isSelected;
+    // this._isSelected = !this._isSelected;
   }
 
   update() {
-    if ( this.input.pointerOver() ) {
-      this.alpha = 0.5;
-    } else {
-      this.alpha = 1;
-    }
+    // if ( this.input.pointerOver() ) {
+    //   this.alpha = 0.5;
+    // } else {
+    //   this.alpha = 1;
+    // }
 
     if ( this._isSelected ) {
       this.alpha = 0.5;

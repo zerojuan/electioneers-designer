@@ -7,6 +7,7 @@ class DistrictCanvas {
     this.baseUrl = baseUrl;
     this.districts = state.districts;
     this.eventHandlers = eventHandlers;
+    this.selectedSprite = null;
   }
 
   preload() {
@@ -40,6 +41,22 @@ class DistrictCanvas {
     this.eventHandlers.onDistrictsUpdate( sprite.data );
   }
 
+  _onClickedDistrict( sprite ) {
+
+    if ( sprite === this.selectedSprite ) {
+      this.selectedSprite.unSelect();
+      this.selectedSprite = null;
+      return;
+    }
+
+    if ( this.selectedSprite ) {
+      this.selectedSprite.unSelect();
+    }
+
+    sprite.select();
+    this.selectedSprite = sprite;
+  }
+
   _drawDistricts() {
     // load the game sprites when it's ready
     if ( this.game.add ) {
@@ -51,6 +68,7 @@ class DistrictCanvas {
         if ( index < 0 ) {
           const sprite = new DistrictSprite( this, district );
           sprite.events.onDragStop.add( this._onDragEnd, this );
+          sprite.events.onInputDown.add( this._onClickedDistrict, this );
           this.districtSprites.add( sprite );
         }
       });
