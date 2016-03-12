@@ -35,3 +35,21 @@ export function editDistrict( state, action ) {
   // find item index
   return updateDistrict( state, district );
 }
+
+export function pairDistrict( state, action ) {
+  const { districtA, districtB } = action;
+
+  // update district
+  if ( !districtA.connections ) {
+    districtA.connections = [];
+  }
+
+  if ( !districtB.connections ) {
+    districtB.connections = [];
+  }
+
+  districtA.connections.push( districtB._id );
+  districtB.connections.push( districtA._id );
+
+  return updateDistrict( updateDistrict( state, districtA ), districtB );
+}

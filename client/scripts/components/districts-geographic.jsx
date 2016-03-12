@@ -23,7 +23,8 @@ export default React.createClass({
       el,
       this.props.baseUrl,
       {
-        onDistrictsUpdate: this.handleDistrictsUpdate
+        onDistrictsUpdate: this.handleDistrictsUpdate,
+        onDistrictsConnect: this.handleDistrictsConnect
       });
 
     // Create
@@ -44,6 +45,9 @@ export default React.createClass({
   },
   handleDistrictsUpdate( district ) {
     this.props.onChangePosition( district );
+  },
+  handleDistrictsConnect( districtA, districtB ) {
+    this.props.onConnectDistrict( districtA, districtB );
   },
   render() {
     return (

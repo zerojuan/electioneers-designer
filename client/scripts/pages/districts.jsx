@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { selectFile, loadFileIfNeeded } from '../actions';
-import { editDistrict, createDistrict } from '../actions/district';
+import { editDistrict, createDistrict, pairDistrict } from '../actions/district';
 
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
@@ -94,6 +94,11 @@ const DistrictsPage = React.createClass({
 
     dispatch( editDistrict( district ) );
   },
+  handleConnectDistrict( districtA, districtB ) {
+    const { dispatch } = this.props;
+
+    dispatch( pairDistrict( districtA, districtB ) );
+  },
   render() {
     let view;
     if ( this.state.layoutValue === 1 ) {
@@ -103,7 +108,8 @@ const DistrictsPage = React.createClass({
       view = <DistrictsGeographic
           districts={this.props.districts}
           baseUrl={this.props.baseUrl}
-          onChangePosition={this.handleChangePosition}></DistrictsGeographic>;
+          onChangePosition={this.handleChangePosition}
+          onConnectDistrict={this.handleConnectDistrict}></DistrictsGeographic>;
     }
 
     return (

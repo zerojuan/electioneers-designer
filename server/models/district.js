@@ -7,7 +7,8 @@ module.exports = {
       position: {
         x: district.position ? district.position.x : 0,
         y: district.position ? district.position.y : 0
-      }
+      },
+      connections: district.connections
     };
   }
 };
