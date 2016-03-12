@@ -36,9 +36,19 @@ class DistrictCanvas {
   }
 
   _onDragEnd( sprite, pointer ) {
+    if ( sprite.data.position.x === sprite.x &&
+          sprite.data.position.y === sprite.y ) {
+            return;
+    }
+
     sprite.data.position.x = sprite.x;
     sprite.data.position.y = sprite.y;
+
     this.eventHandlers.onDistrictsUpdate( sprite.data );
+  }
+
+  _onDragStart( sprite ) {
+    console.log( 'Drag has started' );
   }
 
   _onClickedDistrict( sprite ) {
@@ -68,6 +78,7 @@ class DistrictCanvas {
         if ( index < 0 ) {
           const sprite = new DistrictSprite( this, district );
           sprite.events.onDragStop.add( this._onDragEnd, this );
+          sprite.events.onDragStart.add( this._onDragStart, this );
           sprite.events.onInputDown.add( this._onClickedDistrict, this );
           this.districtSprites.add( sprite );
         }
