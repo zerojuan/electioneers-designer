@@ -11,6 +11,12 @@ function updateDistrict( districts, district ) {
   ];
 }
 
+function isConnected( districtA, districtB ) {
+  return _.some( districtA.connections, ( id ) => {
+    return districtB._id === id;
+  });
+}
+
 export function createDistrict( districts, action ) {
   const district = action.district;
 
@@ -48,8 +54,16 @@ export function pairDistrict( state, action ) {
     districtB.connections = [];
   }
 
-  districtA.connections.push( districtB._id );
-  districtB.connections.push( districtA._id );
+  // implement an add if the _id aren't there
+  if ( isConnected( districtA, districtB ) ) {
+    // disconnect
+    districtA.connections = _.without( districtA.connections, districtB._id );
+    districtB.connections = _.without( districtB.connections, districtA._id );
+  } else {
+    districtA.connections.push( districtB._id );
+    districtB.connections.push( districtA._id );
+  }
+
 
   return updateDistrict( updateDistrict( state, districtA ), districtB );
 }
