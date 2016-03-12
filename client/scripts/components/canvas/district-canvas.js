@@ -25,6 +25,8 @@ class DistrictCanvas {
     // create a sprite group for the districts
     this.districtSprites = this.game.add.group();
 
+    this.connectorLine = new Phaser.Line( 0, 0, 0, 0 );
+
     this._drawDistricts();
   }
 
@@ -47,10 +49,6 @@ class DistrictCanvas {
     this.eventHandlers.onDistrictsUpdate( sprite.data );
   }
 
-  _onDragStart( sprite ) {
-    console.log( 'Drag has started' );
-  }
-
   _onClickedDistrict( sprite ) {
 
     if ( sprite === this.selectedSprite ) {
@@ -61,10 +59,16 @@ class DistrictCanvas {
 
     if ( this.selectedSprite ) {
       this.selectedSprite.unSelect();
+      // TODO: do connect logic
+
     }
 
     sprite.select();
     this.selectedSprite = sprite;
+  }
+
+  _onHoverDistrict( sprite ) {
+    this.hoveredSprite = sprite;
   }
 
   _drawDistricts() {
@@ -78,8 +82,8 @@ class DistrictCanvas {
         if ( index < 0 ) {
           const sprite = new DistrictSprite( this, district );
           sprite.events.onDragStop.add( this._onDragEnd, this );
-          sprite.events.onDragStart.add( this._onDragStart, this );
           sprite.events.onInputDown.add( this._onClickedDistrict, this );
+          sprite.events.onInputOver.add( this._onHoverDistrict, this );
           this.districtSprites.add( sprite );
         }
       });
@@ -87,6 +91,32 @@ class DistrictCanvas {
   }
 
   update() {
+    if ( this.selectedSprite ) {
+      this.connectorLine.setTo( this.selectedSprite.x, this.selectedSprite.y,
+        this.game.input.position.x, this.game.input.position.y );
+    }
+  }
+
+  render() {
+
+    if ( true ) {
+      this.debug();
+    }
+  }
+
+  debug() {
+    const game = this.game;
+
+    if ( this.selectedSprite ) {
+      let text = 'Connect ' + this.selectedSprite.data.name + ' to: ';
+      text += this.hoveredSprite ? this.hoveredSprite.data.name : '';
+      game.debug.text( text,
+        20, 20 );
+    } else {
+      game.debug.text( '', 20, 20 );
+    }
+
+    game.debug.geom( this.connectorLine );
 
   }
 };
