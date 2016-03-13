@@ -108,6 +108,7 @@ class DistrictCanvas {
     const bmd = this.bmd;
 
     bmd.clear();
+    // draw district connections
     _.forEach( this.districtSprites.children, ( dSprite ) => {
       _.forEach( dSprite.data.connections, ( id ) => {
         let dSpriteB = this._findDistrictSprite( id );
@@ -119,8 +120,18 @@ class DistrictCanvas {
         bmd.ctx.stroke();
         bmd.ctx.closePath();
       });
-
     });
+
+    // draw possible connection
+    if ( this.selectedSprite ) {
+      let { start, end } = this.connectorLine;
+      bmd.ctx.beginPath();
+      bmd.ctx.moveTo( start.x, start.y );
+      bmd.ctx.lineTo( end.x, end.y );
+      bmd.ctx.lineWidth = 2;
+      bmd.ctx.stroke();
+      bmd.ctx.closePath();
+    }
 
     bmd.render();
 
@@ -148,11 +159,11 @@ class DistrictCanvas {
   }
 
   update() {
-    this._drawConnections();
     if ( this.selectedSprite ) {
       this.connectorLine.setTo( this.selectedSprite.x, this.selectedSprite.y,
         this.game.input.position.x, this.game.input.position.y );
     }
+    this._drawConnections();
   }
 
   render() {
@@ -173,9 +184,6 @@ class DistrictCanvas {
     } else {
       game.debug.text( '', 20, 20 );
     }
-
-    game.debug.geom( this.connectorLine );
-
   }
 };
 
