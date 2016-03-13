@@ -20,7 +20,7 @@ class DistrictCanvas {
   create() {
     // SETUP DISTRICT CANVAS
     // background image
-    this.game.add.sprite( 0, 0, 'background' );
+    this.bg = this.game.add.sprite( 0, 0, 'background' );
 
     // debug line
     this.connectorLine = new Phaser.Line( 0, 0, 0, 0 );
@@ -32,6 +32,10 @@ class DistrictCanvas {
 
     // create a sprite group for the districts
     this.districtSprites = this.game.add.group();
+
+    this.game.input.mouse.capture = true;
+    this.bg.inputEnabled = true;
+    this.bg.events.onInputDown.add( this._onClickedBG, this );
 
     this._drawDistricts();
   }
@@ -53,6 +57,13 @@ class DistrictCanvas {
     sprite.data.position.y = sprite.y;
 
     this.eventHandlers.onDistrictsUpdate( sprite.data );
+  }
+
+  _onClickedBG() {
+    if ( this.selectedSprite ) {
+      this.selectedSprite.unSelect();
+      this.selectedSprite = null;
+    }
   }
 
   _onClickedDistrict( sprite ) {
@@ -78,6 +89,10 @@ class DistrictCanvas {
 
   _onHoverDistrict( sprite ) {
     this.hoveredSprite = sprite;
+  }
+
+  _onOutDistrict( ) {
+    this.hoveredSprite = null;
   }
 
   _findDistrictSprite( id ) {
@@ -125,6 +140,7 @@ class DistrictCanvas {
           sprite.events.onDragStop.add( this._onDragEnd, this );
           sprite.events.onInputDown.add( this._onClickedDistrict, this );
           sprite.events.onInputOver.add( this._onHoverDistrict, this );
+          sprite.events.onInputOut.add( this._onOutDistrict, this );
           this.districtSprites.add( sprite );
         }
       });
