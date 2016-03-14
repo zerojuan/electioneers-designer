@@ -140,7 +140,7 @@ class DistrictCanvas {
 
   _drawDistricts() {
     // load the game sprites when it's ready
-    if ( this.game.add ) {
+    if ( this.game.add && this.districts ) {
       this.districts.forEach( ( district ) => {
         const index = this.districtSprites.children.findIndex( ( sprite ) => {
           return sprite.data._id === district._id;
