@@ -24,7 +24,7 @@ const App = React.createClass({
       name: PropTypes.string.isRequired,
       lastModified: PropTypes.string.isRequired
     }).isRequired ).isRequired,
-    selectedFile: PropTypes.string.isRequired
+    selectedFile: PropTypes.string
   },
 
   getInitialState: function() {
@@ -66,7 +66,7 @@ const App = React.createClass({
   },
 
   render() {
-    const selectedFile = this.props.selectedFile === 'none' ?
+    const selectedFile = !this.props.selectedFile ?
                         'Designer' : this.props.selectedFile;
     let subtitle = this.props.routes[ 1 ] ? ' > ' + this.props.routes[ 1 ].name : '';
 

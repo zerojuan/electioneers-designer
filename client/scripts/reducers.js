@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import {
   SELECT_FILE,
+  UNSELECT_FILE,
   REQUEST_FILES,
   RECEIVE_FILES,
   REQUEST_ADD_FILE,
@@ -94,10 +95,12 @@ function savedFiles( state = {
   }
 }
 
-function selectedFile( state = 'none', action ) {
+function selectedFile( state = null, action ) {
   switch ( action.type ) {
     case SELECT_FILE:
       return action.name;
+    case UNSELECT_FILE:
+      return null;
     default:
       return state;
   }

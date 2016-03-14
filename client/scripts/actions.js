@@ -5,6 +5,7 @@ import fetch from 'isomorphic-fetch';
  */
 
 export const SELECT_FILE = 'SELECT_FILE';
+export const UNSELECT_FILE = 'UNSELECT_FILE';
 
 export const REQUEST_FILES = 'REQUEST_FILES';
 export const RECEIVE_FILES = 'RECEIVE_FILES';
@@ -145,6 +146,12 @@ export function selectFile( name ) {
   return {
     type: SELECT_FILE,
     name: name
+  };
+}
+
+export function unselectFile( ) {
+  return {
+    type: UNSELECT_FILE
   };
 }
 

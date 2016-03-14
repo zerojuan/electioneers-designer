@@ -52,7 +52,7 @@ export default React.createClass({
       name: PropTypes.string,
       route: PropTypes.string.isRequired
     }).isRequired ).isRequired,
-    selectedFile: PropTypes.string.isRequired
+    selectedFile: PropTypes.string
   },
   menuTappedHandler( link ) {
     return ( event ) => {
@@ -65,7 +65,7 @@ export default React.createClass({
     var that = this;
     let content = null;
     console.log( 'Selected File: ', selectedFile );
-    if ( selectedFile !== 'none' ) {
+    if ( selectedFile ) {
       content = (
         <List subheader='LoadedFile'>
           <ListItem
