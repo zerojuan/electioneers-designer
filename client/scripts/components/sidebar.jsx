@@ -63,8 +63,8 @@ export default React.createClass({
     var active = this.props.routes[ 1 ];
     let { selectedFile } = this.props;
     var that = this;
-    let content = <MenuItem primaryText='Well'/>;
-
+    let content = null;
+    console.log( 'Selected File: ', selectedFile );
     if ( selectedFile !== 'none' ) {
       content = (
         <List subheader='LoadedFile'>
@@ -93,14 +93,20 @@ export default React.createClass({
               })
             }
           />
-          <ListItem
-            primaryText='Graphics'
-            containerElement={<Link to={'/graphics'}/>}
-            onTouchTap={that.menuTappedHandler( '/graphics' )}
-            />
         </List>
       );
     }
+
+    content = (
+      <List>
+        { content }
+        <ListItem
+          primaryText='Graphics'
+          containerElement={<Link to={'/graphics'}/>}
+          onTouchTap={that.menuTappedHandler( '/graphics' )}
+          />
+      </List>
+    );
 
     return (
 

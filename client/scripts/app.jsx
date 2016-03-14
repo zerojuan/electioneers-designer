@@ -91,7 +91,7 @@ const App = React.createClass({
         <Sidebar
           routes={this.props.routes}
           open={this.state.sidebarOpen}
-          selectedFile={selectedFile}
+          selectedFile={this.props.selectedFile}
           handleClose={this.handleClose}/>
         <div
           style={{
