@@ -93,6 +93,11 @@ export default React.createClass({
               })
             }
           />
+          <ListItem
+            primaryText='Graphics'
+            containerElement={<Link to={'/graphics'}/>}
+            onTouchTap={that.menuTappedHandler( '/graphics' )}
+            />
         </List>
       );
     }
