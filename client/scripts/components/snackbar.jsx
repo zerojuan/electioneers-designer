@@ -31,14 +31,17 @@ export default React.createClass({
     });
   },
   render() {
-
-    return (
-      <Snackbar
+    let snackbar = null;
+    if ( this.state.activeMessage ) {
+      snackbar = <Snackbar
         open={this.state.open}
         message={this.state.activeMessage}
         autoHideDuration={3000}
         onRequestClose={this.handleRequestClose}
-      />
+      />;
+    }
+    return (
+      snackbar
     );
   }
 });
