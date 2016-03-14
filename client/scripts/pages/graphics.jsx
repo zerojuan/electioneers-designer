@@ -4,18 +4,28 @@ import { connect } from 'react-redux';
 
 import { selectFile, loadFileIfNeeded } from '../actions';
 
+import Tabs from 'material-ui/lib/tabs/tabs';
+import Tab from 'material-ui/lib/tabs/tab';
+
 const GraphicsPage = React.createClass({
   displayName: 'GraphicsPage',
   render() {
     return (
       <div>
-        <h1> This is the graphics page </h1>
-        <div>
-          <p>Backgrounds</p>
-          <p>Districts</p>
-          <p>Portraits</p>
-          <p>Logos</p>
-        </div>
+        <Tabs>
+          <Tab label='Backgrounds'>
+            <p> Backgrounds </p>
+          </Tab>
+          <Tab label='Districts'>
+            <p> Districts </p>
+          </Tab>
+          <Tab label='Portraits'>
+            <p> Portraits </p>
+          </Tab>
+          <Tab label='Logos'>
+            <p> Logos </p>
+          </Tab>
+        </Tabs>
       </div>
     );
   }
