@@ -17,7 +17,7 @@ const getDefaultDir = function() {
 
 router.get( '/', function( req, res ) {
   var defaultDir = getDefaultDir();
-
+  console.log( 'Getting graphics...' );
   // check if there is a graphics file
   fs.readFile( defaultDir + '/graphics.json', { encoding: 'utf8' }, function( err, data ) {
     if ( err ) {

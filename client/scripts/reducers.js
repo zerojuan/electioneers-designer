@@ -26,6 +26,11 @@ import {
 } from './actions/district';
 
 import {
+  REQUEST_GRAPHICS_FILE,
+  RECIEVE_GRAPHICS_FILE
+} from './actions/graphics';
+
+import {
   batchGenerateFamily,
   editFamily,
   formatFamilyData,
@@ -177,12 +182,34 @@ function config( state = {}, action ) {
   }
 }
 
+function graphics( state = {}, action ) {
+  switch ( action.type ) {
+    case RECIEVE_GRAPHICS_FILE:
+      return action.graphics;
+    default:
+      return state;
+  }
+}
+
+function graphicsLoaded( state = false, action ) {
+  switch ( action.type ) {
+    case REQUEST_GRAPHICS_FILE:
+      return false;
+    case RECIEVE_GRAPHICS_FILE:
+      return true;
+    default:
+      return state;
+  }
+}
+
 const designerApp = combineReducers({
   savedFiles,
   selectedFile,
   districts,
   population,
   isDirty,
+  graphics,
+  graphicsLoaded,
   message,
   config
 });

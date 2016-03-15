@@ -57,4 +57,26 @@ router.get( '/:name/d/:gfxName', function( req, res ) {
   });
 });
 
+router.get( '/:name', function( req, res ) {
+  var defaultDir = settings.getWorkingDirectory();
+  console.log( 'Finding image: ', req.params.name );
+  var options = {
+    root: defaultDir + '/gfx/',
+    dotfiles: 'deny',
+    headers: {
+      'x-timestamp': Date.now(),
+      'x-sent': true
+    }
+  };
+
+  return res.sendFile( req.params.name, options, function( err ) {
+    if ( err ) {
+      console.log( err );
+      res.status( err.status ).end();
+    } else {
+      console.log( 'Sent: ', req.params.name );
+    }
+  });
+});
+
 module.exports = router;
