@@ -1,0 +1,14 @@
+{
+  "backgrounds": [
+    {
+      "id": "ocean",
+      "file": "rainbow-bg.png"
+    }
+  ],
+  "districts": [
+    {
+      "id": "district-a",
+      "file": "district-a.png"
+    }
+  ]
+}

@@ -15,6 +15,7 @@ app.use( cors() );
 
 app.use( '/base', require( './routes/designbase.js' ) );
 app.use( '/image', require( './routes/images.js' ) );
+app.use( '/graphics', require( './routes/graphics.js' ) );
 app.use( '/', require( './routes/index.js' ) );
 
 
