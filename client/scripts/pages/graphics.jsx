@@ -7,6 +7,8 @@ import { selectFile, loadFileIfNeeded } from '../actions';
 import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
 
+import BackgroundView from '../components/graphics/background-view';
+
 const GraphicsPage = React.createClass({
   displayName: 'GraphicsPage',
   render() {
@@ -14,7 +16,7 @@ const GraphicsPage = React.createClass({
       <div>
         <Tabs>
           <Tab label='Backgrounds'>
-            <p> Backgrounds </p>
+            <BackgroundView />
           </Tab>
           <Tab label='Districts'>
             <p> Districts </p>
