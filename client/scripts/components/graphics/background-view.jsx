@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react';
 
 export default React.createClass({
   propTypes: {
-    backgrounds: PropTypes.array
+    backgrounds: PropTypes.array.isRequired,
+    baseUrl: PropTypes.string.isRequired
   },
   render() {
     return (
@@ -10,11 +11,10 @@ export default React.createClass({
         {
           this.props.backgrounds.map( ( background ) => {
             return (
-              <div>
+              <div key={background.id}>
                 <h1> { background.file }</h1>
-                <img src={ 'http://localhost:7171/image/' + background.file }/>
+                <img src={ this.props.baseUrl + background.file }/>
               </div>
-
             );
           })
         }

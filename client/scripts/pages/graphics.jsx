@@ -22,7 +22,9 @@ const GraphicsPage = React.createClass({
         <div>
           <Tabs>
             <Tab label='Backgrounds'>
-              <BackgroundView backgrounds={this.props.graphics.backgrounds}/>
+              <BackgroundView
+                backgrounds={this.props.graphics.backgrounds}
+                baseUrl={this.props.baseUrl}/>
             </Tab>
             <Tab label='Districts'>
               <p> Districts </p>
@@ -39,7 +41,7 @@ const GraphicsPage = React.createClass({
     } else {
        return (
          <div> Loading... </div>
-       )
+       );
     }
 
   }
@@ -49,9 +51,12 @@ function mapStateToProps( state ) {
   const graphics = state.graphics;
   const loaded = state.graphicsLoaded;
 
+  const baseUrl = 'http://localhost:7171/image/';
+
   return {
     graphics,
-    loaded
+    loaded,
+    baseUrl
   };
 }
 
