@@ -22,6 +22,8 @@ router.get( '/', function( req, res ) {
   fs.readFile( defaultDir + '/graphics.json', { encoding: 'utf8' }, function( err, data ) {
     if ( err ) {
       // return default file
+      // copy gfx folder to the save folder
+      fs.copySync( path.resolve( __dirname, '../data/gfx' ), defaultDir + '/gfx' );
       return res.send( DefaultGraphics );
     }
 

@@ -3,6 +3,10 @@
     {
       "id": "ocean",
       "file": "rainbow-bg.png"
+    },
+    {
+      "id": "shattered",
+      "file": "shatteredworlds.jpg"
     }
   ],
   "districts": [

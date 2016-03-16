@@ -14,7 +14,7 @@ const getDefaultDir = function( name ) {
 };
 
 router.get( '/:name/background', function( req, res ) {
-  var defaultDir = getDefaultDir( req.params.name );
+  var defaultDir = settings.getWorkingDirectory();
 
   var options = {
     root: defaultDir + '/gfx/',
@@ -25,18 +25,18 @@ router.get( '/:name/background', function( req, res ) {
     }
   };
 
-  return res.sendFile( 'rainbow-bg.png', options, function( err ) {
+  return res.sendFile( 'shatteredworlds.jpg', options, function( err ) {
     if ( err ) {
       console.log( err );
       res.status( err.status ).end();
     } else {
-      console.log( 'Sent:', ' rainbow-bg.png' );
+      console.log( 'Sent:', 'shatteredworlds.png' );
     }
   });
 });
 
 router.get( '/:name/d/:gfxName', function( req, res ) {
-  var defaultDir = getDefaultDir( req.params.name );
+  var defaultDir = settings.getWorkingDirectory();
 
   var options = {
     root: defaultDir + '/gfx/',
@@ -59,7 +59,7 @@ router.get( '/:name/d/:gfxName', function( req, res ) {
 
 router.get( '/:name', function( req, res ) {
   var defaultDir = settings.getWorkingDirectory();
-  console.log( 'Finding image: ', req.params.name );
+
   var options = {
     root: defaultDir + '/gfx/',
     dotfiles: 'deny',
