@@ -8,6 +8,7 @@ class DistrictCanvas {
     this.baseUrl = baseUrl;
     this.districts = state.districts;
     this.config = state.config;
+    this.graphics = state.graphics;
     this.eventHandlers = eventHandlers;
     this.selectedSprite = null;
     this._isReady = false;
@@ -16,17 +17,11 @@ class DistrictCanvas {
   preload() {
     this.game.load.crossOrigin = 'anonymous';
     console.log( 'Loading backgrounds...', this.config.background );
-    
+
     this.game.load.image( 'background',
       this.baseUrl + '/bg/' + this.config.background + '?d=' + Math.random() * 10 );
     this.game.load.image( 'district', this.baseUrl + '/d/district-a', true );
     this.game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
-    this.game.load.onLoadComplete.addOnce( this._onLoaded, this );
-    this.game.load.onFileComplete.addOnce( this._onLoaded, this );
-  }
-
-  _onLoaded( evt ) {
-    console.log( 'OnLoaded: ', evt );
   }
 
   create() {
@@ -55,10 +50,32 @@ class DistrictCanvas {
     this._isReady = true;
   }
 
+  _preloadGraphics() {
+    // load all the graphics
+    this.graphics.backgrounds.forEach( ( bg ) => {
+      this.game.load.image( 'background' + bg.id,
+        this.baseUrl + '/bg/' + bg.id + '?d=' + Math.random() * 10 );
+    });
+    this.graphics.districts.forEach( ( d ) => {
+      this.game.load.image( 'district' + d.id, this.baseUrl + '/d/' + d.id, true );
+    });
+    this.game.load.start();
+    this.game.load.onLoadComplete.addOnce( this._onLoaded, this );
+  }
+
+  _onLoaded( evt ) {
+    console.log( 'OnLoaded: ', evt );
+    // notify the background to change
+    this.bg.loadTexture( 'background' + this.config.background );
+    // notify the districts
+    this.districtSprites.callAll( 'reloadTexture', null );
+  }
+
   reloadData( state ) {
     console.log( 'UPDATING DATA >>>' );
     this.config = state.config;
     this.districts = state.districts;
+    this.graphics = state.graphics;
 
     if ( !this._isReady ) {
       // quit early when the canvas hasn't loaded yet
@@ -66,13 +83,10 @@ class DistrictCanvas {
       return;
     }
 
-    // this.preload();
-    this.game.load.image( 'background' + this.config.background,
-      this.baseUrl + '/bg/' + this.config.background + '?d=' + Math.random() * 10 );
-    this.game.load.start();
+    this._preloadGraphics();
+
     // TODO: Add a delay to refresh the graphics
     this._drawDistricts();
-    //
   }
 
   _onDragEnd( sprite, pointer ) {
@@ -92,7 +106,6 @@ class DistrictCanvas {
       this.selectedSprite.unSelect();
       this.selectedSprite = null;
     }
-    this.bg.loadTexture( 'background' + this.config.background );
   }
 
   _onClickedDistrict( sprite ) {

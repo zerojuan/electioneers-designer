@@ -18,6 +18,11 @@ class DistrictSprite extends Phaser.Sprite {
 
   }
 
+  reloadTexture() {
+    console.log( 'Reloading texture' );
+    this.loadTexture( 'district' + 'district-a' );
+  }
+
   select() {
     this._isSelected = true;
   }

@@ -27,13 +27,14 @@ export default React.createClass({
         onDistrictsUpdate: this.handleDistrictsUpdate,
         onDistrictsConnect: this.handleDistrictsConnect
       });
-    
+
     // Create
     this.canvas.create( el, {
       width: '100%',
       height: '400px',
       districts: this.props.districts,
-      config: this.props.config
+      config: this.props.config,
+      graphics: this.props.graphics
     });
   },
   componentDidUpdate() {
@@ -42,7 +43,8 @@ export default React.createClass({
     this.canvas.update( el,  {
       districts: this.props.districts,
       baseUrl: this.props.baseUrl,
-      config: this.props.config
+      config: this.props.config,
+      graphics: this.props.graphics
     });
   },
   handleDistrictsUpdate( district ) {

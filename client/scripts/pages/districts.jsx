@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { selectFile, loadFileIfNeeded } from '../actions';
 import { editDistrict, createDistrict, pairDistrict } from '../actions/district';
+import { loadGraphics } from '../actions/graphics';
 
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
@@ -39,6 +40,7 @@ const DistrictsPage = React.createClass({
     const selectedFile = this.props.params.filename;
     dispatch( loadFileIfNeeded( selectedFile ) );
     dispatch( selectFile( selectedFile ) );
+    dispatch( loadGraphics() );
   },
   handleLayoutChange( e, index, value ) {
     this.setState({
@@ -109,6 +111,7 @@ const DistrictsPage = React.createClass({
           districts={this.props.districts}
           baseUrl={this.props.baseUrl}
           config={this.props.config}
+          graphics={this.props.graphics}
           onChangePosition={this.handleChangePosition}
           onConnectDistrict={this.handleConnectDistrict}></DistrictsGeographic>;
     }
@@ -161,7 +164,8 @@ function mapStateToProps( state ) {
   const {
     selectedFile,
     districts,
-    config
+    config,
+    graphics
   } = state;
 
   const baseUrl = 'http://localhost:7171/image/' + selectedFile;
@@ -170,7 +174,8 @@ function mapStateToProps( state ) {
     selectedFile,
     districts,
     baseUrl,
-    config
+    config,
+    graphics
   };
 }
 
