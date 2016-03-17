@@ -8,13 +8,16 @@ const _ = require( 'lodash' );
 const router = express.Router();
 
 const settings = require( '../settings.js' );
+const GraphicsModel = require( '../models/graphics.js' );
 
 const getDefaultDir = function( name ) {
   return settings.getWorkingDirectory() + '/saves/' + name;
 };
 
-router.get( '/:name/background', function( req, res ) {
+router.get( '/:name/bg/:bgName', function( req, res ) {
   var defaultDir = settings.getWorkingDirectory();
+
+  var bgName = req.params.bgName;
 
   var options = {
     root: defaultDir + '/gfx/',
@@ -25,14 +28,28 @@ router.get( '/:name/background', function( req, res ) {
     }
   };
 
-  return res.sendFile( 'shatteredworlds.jpg', options, function( err ) {
-    if ( err ) {
-      console.log( err );
-      res.status( err.status ).end();
-    } else {
-      console.log( 'Sent:', 'shatteredworlds.png' );
+  GraphicsModel.loadData(function( graphicsData ) {
+    // search graphics data
+    var index = _.findIndex( graphicsData.backgrounds, function( bg ) {
+      console.log( bg.id, bgName );
+      return bg.id === bgName;
+    });
+
+    if ( index < 0 ) {
+      index = 0;
     }
+
+    return res.sendFile( graphicsData.backgrounds[ index ].file, options, function( err ) {
+      if ( err ) {
+        console.log( err );
+        res.status( err.status ).end();
+      } else {
+        console.log( 'Sent:', graphicsData.backgrounds[ index ].file );
+      }
+    });
   });
+
+
 });
 
 router.get( '/:name/d/:gfxName', function( req, res ) {

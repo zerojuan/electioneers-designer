@@ -108,6 +108,7 @@ const DistrictsPage = React.createClass({
       view = <DistrictsGeographic
           districts={this.props.districts}
           baseUrl={this.props.baseUrl}
+          config={this.props.config}
           onChangePosition={this.handleChangePosition}
           onConnectDistrict={this.handleConnectDistrict}></DistrictsGeographic>;
     }
@@ -159,7 +160,8 @@ const DistrictsPage = React.createClass({
 function mapStateToProps( state ) {
   const {
     selectedFile,
-    districts
+    districts,
+    config
   } = state;
 
   const baseUrl = 'http://localhost:7171/image/' + selectedFile;
@@ -167,7 +169,8 @@ function mapStateToProps( state ) {
   return {
     selectedFile,
     districts,
-    baseUrl
+    baseUrl,
+    config
   };
 }
 

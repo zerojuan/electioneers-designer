@@ -4,20 +4,33 @@ import DistrictSprite from './district-sprite.js';
 
 class DistrictCanvas {
   constructor( state, baseUrl, eventHandlers ) {
+    console.log( 'CONSTRUCTING CANVAS>>>' );
     this.baseUrl = baseUrl;
     this.districts = state.districts;
+    this.config = state.config;
     this.eventHandlers = eventHandlers;
     this.selectedSprite = null;
+    this._isReady = false;
   }
 
   preload() {
     this.game.load.crossOrigin = 'anonymous';
-    this.game.load.image( 'background', this.baseUrl + '/background' );
-    this.game.load.image( 'district', this.baseUrl + '/d/district-a' );
+    console.log( 'Loading backgrounds...', this.config.background );
+    
+    this.game.load.image( 'background',
+      this.baseUrl + '/bg/' + this.config.background + '?d=' + Math.random() * 10 );
+    this.game.load.image( 'district', this.baseUrl + '/d/district-a', true );
     this.game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+    this.game.load.onLoadComplete.addOnce( this._onLoaded, this );
+    this.game.load.onFileComplete.addOnce( this._onLoaded, this );
+  }
+
+  _onLoaded( evt ) {
+    console.log( 'OnLoaded: ', evt );
   }
 
   create() {
+    console.log( 'CREATING>>>' );
     // SETUP DISTRICT CANVAS
     // background image
     this.bg = this.game.add.sprite( 0, 0, 'background' );
@@ -37,13 +50,28 @@ class DistrictCanvas {
     this.bg.inputEnabled = true;
     this.bg.events.onInputDown.add( this._onClickedBG, this );
 
+    this.preload();
     this._drawDistricts();
+    this._isReady = true;
   }
 
   reloadData( state ) {
+    console.log( 'UPDATING DATA >>>' );
+    this.config = state.config;
     this.districts = state.districts;
-    this._drawDistricts();
 
+    if ( !this._isReady ) {
+      // quit early when the canvas hasn't loaded yet
+      console.log( 'HAS QUIT EARLY' );
+      return;
+    }
+
+    // this.preload();
+    this.game.load.image( 'background' + this.config.background,
+      this.baseUrl + '/bg/' + this.config.background + '?d=' + Math.random() * 10 );
+    this.game.load.start();
+    // TODO: Add a delay to refresh the graphics
+    this._drawDistricts();
     //
   }
 
@@ -64,6 +92,7 @@ class DistrictCanvas {
       this.selectedSprite.unSelect();
       this.selectedSprite = null;
     }
+    this.bg.loadTexture( 'background' + this.config.background );
   }
 
   _onClickedDistrict( sprite ) {
