@@ -8,7 +8,8 @@ module.exports = {
         x: district.position ? district.position.x : 0,
         y: district.position ? district.position.y : 0
       },
-      connections: district.connections
+      connections: district.connections,
+      image: 'district-b'
     };
   }
 };

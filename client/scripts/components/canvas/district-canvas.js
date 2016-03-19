@@ -64,7 +64,6 @@ class DistrictCanvas {
   }
 
   _onLoaded( evt ) {
-    console.log( 'OnLoaded: ', evt );
     // notify the background to change
     this.bg.loadTexture( 'background' + this.config.background );
     // notify the districts
@@ -79,7 +78,6 @@ class DistrictCanvas {
 
     if ( !this._isReady ) {
       // quit early when the canvas hasn't loaded yet
-      console.log( 'HAS QUIT EARLY' );
       return;
     }
 

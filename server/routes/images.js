@@ -64,13 +64,25 @@ router.get( '/:name/d/:gfxName', function( req, res ) {
     }
   };
 
-  return res.sendFile( req.params.gfxName + '.png', options, function( err ) {
-    if ( err ) {
-      console.log( err );
-      res.status( err.status ).end();
-    } else {
-      console.log( 'Sent:', req.params.gfxName + '.png' );
+  var gfxName = req.params.gfxName;
+
+  GraphicsModel.loadData(function( graphicsData ) {
+    var index = _.findIndex( graphicsData.districts, function( district ) {
+      return district.id === gfxName;
+    });
+
+    if ( index < 0 ) {
+      index = 0;
     }
+
+    return res.sendFile( graphicsData.districts[ index ].file, options, function( err ) {
+      if ( err ) {
+        console.log( err );
+        res.status( err.status ).end();
+      } else {
+        console.log( 'Sent:', graphicsData.districts[ index ].file );
+      }
+    });
   });
 });
 

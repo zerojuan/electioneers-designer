@@ -9,6 +9,7 @@ class DistrictSprite extends Phaser.Sprite {
     this.y = districtData.position.y || 0;
 
     this.anchor.x = this.anchor.y = 0.5;
+    this.width = 35;
 
     this.inputEnabled = true;
     this.input.enableDrag( false );
@@ -19,8 +20,7 @@ class DistrictSprite extends Phaser.Sprite {
   }
 
   reloadTexture() {
-    console.log( 'Reloading texture' );
-    this.loadTexture( 'district' + 'district-a' );
+    this.loadTexture( 'district' + this.data.image );
   }
 
   select() {

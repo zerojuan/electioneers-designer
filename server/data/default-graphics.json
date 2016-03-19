@@ -13,6 +13,10 @@
     {
       "id": "district-a",
       "file": "district-a.png"
+    },
+    {
+      "id": "district-b",
+      "file": "rem_0014.png"
     }
   ]
 }
