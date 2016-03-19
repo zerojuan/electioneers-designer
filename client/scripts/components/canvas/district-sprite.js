@@ -16,11 +16,26 @@ class DistrictSprite extends Phaser.Sprite {
     this.events.onInputDown.add( this.clicked, this );
 
     this._isSelected = false;
+    this._mySpriteKey = '';
+    // this._mySpriteKey = '' + this.data.image;
+  }
+
+  _hasEqualString( a, b ) {
 
   }
 
   reloadTexture() {
-    this.loadTexture( 'district' + this.data.image );
+    // only load texture when it changed
+    var spriteKey = this.data.image;
+    console.log( this._mySpriteKey, this.data.image );
+    if ( this._mySpriteKey !== this.data.image ) {
+      console.log( 'Has reloaded' );
+      this.loadTexture( 'district' + spriteKey );
+      this._mySpriteKey = spriteKey;
+    } else {
+      console.log( 'Did not reload' );
+    }
+
   }
 
   select() {

@@ -53,11 +53,17 @@ class DistrictCanvas {
   _preloadGraphics() {
     // load all the graphics
     this.graphics.backgrounds.forEach( ( bg ) => {
-      this.game.load.image( 'background' + bg.id,
-        this.baseUrl + '/bg/' + bg.id + '?d=' + Math.random() * 10 );
+      if ( !this.game.cache.checkImageKey( 'background' + bg.id ) ) {
+        this.game.load.image( 'background' + bg.id,
+          this.baseUrl + '/bg/' + bg.id + '?d=' + Math.random() * 10 );
+      }
     });
     this.graphics.districts.forEach( ( d ) => {
-      this.game.load.image( 'district' + d.id, this.baseUrl + '/d/' + d.id, true );
+      // try not to load it twice
+      if ( !this.game.cache.checkImageKey( 'district' + d.id ) ) {
+        this.game.load.image( 'district' + d.id, this.baseUrl + '/d/' + d.id );
+      }
+
     });
     this.game.load.start();
     this.game.load.onLoadComplete.addOnce( this._onLoaded, this );
@@ -67,7 +73,9 @@ class DistrictCanvas {
     // notify the background to change
     this.bg.loadTexture( 'background' + this.config.background );
     // notify the districts
-    this.districtSprites.callAll( 'reloadTexture', null );
+    this.districtSprites.children.forEach( ( child ) => {
+      child.reloadTexture();
+    });
   }
 
   reloadData( state ) {
