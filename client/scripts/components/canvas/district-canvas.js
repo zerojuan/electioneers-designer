@@ -210,21 +210,21 @@ class DistrictCanvas {
   }
 
   update() {
-    if ( this.game.input.activePointer.isDown ) {
-      console.log('is drag');
-      if ( this.game.origDragPoint ) {
-        // move the camera by the amount the mouse has moved since last update
-        this.game.camera.x += this.game.origDragPoint.x - this.game.input.activePointer.position.x;
-        this.game.camera.y += this.game.origDragPoint.y - this.game.input.activePointer.position.y;
-      }
-      // set new drag origin to current position
-      this.game.origDragPoint = this.game.input.activePointer.position.clone();
-    } else {
-        this.game.origDragPoint = null;
-    }
     if ( this.selectedSprite ) {
       this.connectorLine.setTo( this.selectedSprite.x, this.selectedSprite.y,
-        this.game.input.position.x, this.game.input.position.y );
+        this.game.input.worldX, this.game.input.worldY );
+    } else {
+      if ( this.game.input.activePointer.isDown ) {
+        if ( this.game.origDragPoint ) {
+          // move the camera by the amount the mouse has moved since last update
+          this.game.camera.x += this.game.origDragPoint.x - this.game.input.activePointer.position.x;
+          this.game.camera.y += this.game.origDragPoint.y - this.game.input.activePointer.position.y;
+        }
+        // set new drag origin to current position
+        this.game.origDragPoint = this.game.input.activePointer.position.clone();
+      } else {
+          this.game.origDragPoint = null;
+      }
     }
     this._drawConnections();
   }
