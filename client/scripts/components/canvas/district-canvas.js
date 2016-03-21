@@ -79,6 +79,11 @@ class DistrictCanvas {
     this.districtSprites.children.forEach( ( child ) => {
       child.reloadTexture();
     });
+
+    // resize bg
+    console.log( 'Loading image: ', this.game.cache.getImage( 'background' + this.config.background ).width );
+    const bgImage = this.game.cache.getImage( 'background' + this.config.background );
+    this.bmd.resize( bgImage.width, bgImage.height );
   }
 
   reloadData( state ) {
@@ -94,7 +99,6 @@ class DistrictCanvas {
 
     this._preloadGraphics();
 
-    // TODO: Add a delay to refresh the graphics
     this._drawDistricts();
   }
 
