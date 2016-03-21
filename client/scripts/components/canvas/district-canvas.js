@@ -21,11 +21,14 @@ class DistrictCanvas {
     this.game.load.image( 'background',
       this.baseUrl + '/bg/' + this.config.background + '?d=' + Math.random() * 10 );
     this.game.load.image( 'district', this.baseUrl + '/d/district-a', true );
-    this.game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+    // this.game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
   }
 
   create() {
     console.log( 'CREATING>>>' );
+
+    // TODO: resize the world according to background
+    this.game.world.resize( 6000, 6000 );
     // SETUP DISTRICT CANVAS
     // background image
     this.bg = this.game.add.sprite( 0, 0, 'background' );
@@ -41,10 +44,10 @@ class DistrictCanvas {
     // create a sprite group for the districts
     this.districtSprites = this.game.add.group();
 
-    this.game.input.mouse.capture = true;
+    // this.game.input.mouse.capture = true;
     this.bg.inputEnabled = true;
-    this.bg.events.onInputDown.add( this._onClickedBG, this );
 
+    this.bg.events.onInputDown.add( this._onClickedBG, this );
     this.preload();
     this._drawDistricts();
     this._isReady = true;
@@ -207,6 +210,18 @@ class DistrictCanvas {
   }
 
   update() {
+    if ( this.game.input.activePointer.isDown ) {
+      console.log('is drag');
+      if ( this.game.origDragPoint ) {
+        // move the camera by the amount the mouse has moved since last update
+        this.game.camera.x += this.game.origDragPoint.x - this.game.input.activePointer.position.x;
+        this.game.camera.y += this.game.origDragPoint.y - this.game.input.activePointer.position.y;
+      }
+      // set new drag origin to current position
+      this.game.origDragPoint = this.game.input.activePointer.position.clone();
+    } else {
+        this.game.origDragPoint = null;
+    }
     if ( this.selectedSprite ) {
       this.connectorLine.setTo( this.selectedSprite.x, this.selectedSprite.y,
         this.game.input.position.x, this.game.input.position.y );
