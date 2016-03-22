@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import Avatar from 'material-ui/lib/avatar';
-import List from 'material-ui/lib/lists/list';
-import ListItem from 'material-ui/lib/lists/list-item';
+import BackgroundList from './background-list';
 
 export default React.createClass({
   propTypes: {
@@ -12,19 +10,7 @@ export default React.createClass({
   render() {
     return (
       <div>
-        <List>
-        {
-          this.props.backgrounds.map( ( background ) => {
-            return (
-              <ListItem
-                key={background.id}
-                primaryText={background.file}
-                leftAvatar={<Avatar src={ this.props.baseUrl + background.file }/>}>
-              </ListItem>
-            );
-          })
-        }
-        </List>
+        <BackgroundList backgrounds={this.props.backgrounds} baseUrl={this.props.baseUrl}/>
       </div>
     );
   }

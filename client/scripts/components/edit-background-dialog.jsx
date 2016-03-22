@@ -11,7 +11,9 @@ export default React.createClass({
   propTypes: {
     onClose: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
-    open: PropTypes.bool.isRequired
+    open: PropTypes.bool.isRequired,
+    backgrounds: PropTypes.array.isRequired,
+    baseUrl: PropTypes.array.baseUrl
   },
   handleSubmit() {
     this.props.onClose();
@@ -35,7 +37,9 @@ export default React.createClass({
         modal={false}
         actions={dialogActions}
         open={this.props.open}>
-        <EditBackgroundView />
+        <EditBackgroundView
+          backgrounds={this.props.backgrounds}
+          baseUrl={this.props.baseUrl}/>
       </Dialog>
     );
   }

@@ -81,9 +81,9 @@ class DistrictCanvas {
     });
 
     // resize bg
-    console.log( 'Loading image: ', this.game.cache.getImage( 'background' + this.config.background ).width );
     const bgImage = this.game.cache.getImage( 'background' + this.config.background );
     this.bmd.resize( bgImage.width, bgImage.height );
+    this.game.world.resize( bgImage.width, bgImage.height );
   }
 
   reloadData( state ) {

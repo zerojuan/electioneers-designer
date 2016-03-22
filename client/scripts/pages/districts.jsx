@@ -154,6 +154,8 @@ const DistrictsPage = React.createClass({
           open={this.state.changeBackgroundOpen}
           onClose={this.handleHideBackgroundDialog}
           onSubmit={this.handleChangeBackgroundDialog}
+          backgrounds={this.props.graphics.backgrounds}
+          baseUrl={this.props.baseGraphicsUrl}
           />
       </div>
     );
@@ -169,11 +171,13 @@ function mapStateToProps( state ) {
   } = state;
 
   const baseUrl = 'http://localhost:7171/image/' + selectedFile;
+  const baseGraphicsUrl = 'http://localhost:7171/image/';
 
   return {
     selectedFile,
     districts,
     baseUrl,
+    baseGraphicsUrl,
     config,
     graphics
   };
