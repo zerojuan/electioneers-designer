@@ -13,7 +13,7 @@ export default React.createClass({
     onSubmit: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
     backgrounds: PropTypes.array.isRequired,
-    baseUrl: PropTypes.array.baseUrl
+    baseUrl: PropTypes.array.isRequired
   },
   handleSubmit() {
     this.props.onClose();

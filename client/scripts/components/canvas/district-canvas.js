@@ -97,7 +97,10 @@ class DistrictCanvas {
       return;
     }
 
-    this._preloadGraphics();
+    if ( this.graphics.backgrounds ) {
+      this._preloadGraphics();
+    }
+
 
     this._drawDistricts();
   }
@@ -221,8 +224,10 @@ class DistrictCanvas {
       if ( this.game.input.activePointer.isDown ) {
         if ( this.game.origDragPoint ) {
           // move the camera by the amount the mouse has moved since last update
-          this.game.camera.x += this.game.origDragPoint.x - this.game.input.activePointer.position.x;
-          this.game.camera.y += this.game.origDragPoint.y - this.game.input.activePointer.position.y;
+          this.game.camera.x +=
+            this.game.origDragPoint.x - this.game.input.activePointer.position.x;
+          this.game.camera.y +=
+            this.game.origDragPoint.y - this.game.input.activePointer.position.y;
         }
         // set new drag origin to current position
         this.game.origDragPoint = this.game.input.activePointer.position.clone();
