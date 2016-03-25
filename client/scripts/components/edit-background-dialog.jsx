@@ -11,12 +11,17 @@ export default React.createClass({
   propTypes: {
     onClose: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
+    selectedBg: PropTypes.string.isRequired,
     backgrounds: PropTypes.array.isRequired,
     baseUrl: PropTypes.array.isRequired
   },
   handleSubmit() {
     this.props.onClose();
+  },
+  handleChange( bgId ) {
+    this.props.onChange( bgId );
   },
   render() {
     const dialogActions = [
@@ -39,7 +44,9 @@ export default React.createClass({
         open={this.props.open}>
         <EditBackgroundView
           backgrounds={this.props.backgrounds}
-          baseUrl={this.props.baseUrl}/>
+          baseUrl={this.props.baseUrl}
+          selectedBg={this.props.selectedBg}
+          onChange={this.handleChange}/>
       </Dialog>
     );
   }

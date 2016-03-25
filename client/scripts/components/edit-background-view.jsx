@@ -11,7 +11,9 @@ export default React.createClass({
       <div>
         <BackgroundList
           backgrounds={this.props.backgrounds}
-          baseUrl={this.props.baseUrl}/>
+          baseUrl={this.props.baseUrl}
+          onChange={this.props.onChange}
+          selectedBg={this.props.selectedBg}/>
       </div>
     );
   }

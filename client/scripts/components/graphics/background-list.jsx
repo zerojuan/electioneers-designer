@@ -11,7 +11,7 @@ let SelectableList = SelectableContainerEnhance( List );
 export default React.createClass({
   getInitialState() {
     return {
-      selected: 'shattered'
+      selected: this.props.selectedBg
     };
   },
   propTypes: {
@@ -22,6 +22,7 @@ export default React.createClass({
     this.setState({
       selected: index
     });
+    this.props.onChange( index );
   },
   render() {
 

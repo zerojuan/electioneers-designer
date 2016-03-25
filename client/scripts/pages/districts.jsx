@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { selectFile, loadFileIfNeeded } from '../actions';
-import { editDistrict, createDistrict, pairDistrict } from '../actions/district';
+import { editDistrict, createDistrict, pairDistrict, changeBackground } from '../actions/district';
 import { loadGraphics } from '../actions/graphics';
 
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
@@ -88,8 +88,10 @@ const DistrictsPage = React.createClass({
 
     dispatch( editDistrict( district ) );
   },
-  handleChangeBackgroundDialog( background ) {
-    console.log( 'This is the new background: ', background );
+  handleChangeBackgroundDialog( bgId ) {
+    const { dispatch } = this.props;
+
+    dispatch( changeBackground( bgId ) );
   },
   handleChangePosition( district ) {
     const { dispatch } = this.props;
@@ -154,7 +156,9 @@ const DistrictsPage = React.createClass({
           open={this.state.changeBackgroundOpen}
           onClose={this.handleHideBackgroundDialog}
           onSubmit={this.handleChangeBackgroundDialog}
+          onChange={this.handleChangeBackgroundDialog}
           backgrounds={this.props.graphics.backgrounds}
+          selectedBg={this.props.config.background}
           baseUrl={this.props.baseGraphicsUrl}
           />
       </div>

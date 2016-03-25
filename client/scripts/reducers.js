@@ -22,7 +22,8 @@ import {
 import {
   EDIT_DISTRICT,
   CREATE_DISTRICT,
-  PAIR_DISTRICT
+  PAIR_DISTRICT,
+  CHANGE_BACKGROUND,
 } from './actions/district';
 
 import {
@@ -42,6 +43,10 @@ import {
   createDistrict,
   pairDistrict
 } from './reducers/district';
+
+import {
+  changeBackground
+} from './reducers/config';
 
 function addFile( state, action ) {
   return [
@@ -177,6 +182,8 @@ function config( state = {}, action ) {
   switch ( action.type ) {
     case RECIEVE_LOAD_FILE:
       return action.config;
+    case CHANGE_BACKGROUND:
+      return changeBackground( state, action );
     default:
       return state;
   }
