@@ -1,6 +1,8 @@
 import React from 'react';
 import Time from 'react-time';
 
+import {Link} from 'react-router';
+
 import { SelectableContainerEnhance } from 'material-ui/lib/hoc/selectable-enhance';
 import List from 'material-ui/lib/lists/list';
 import Dialog from 'material-ui/lib/dialog';
@@ -85,9 +87,12 @@ export default React.createClass({
                 value={ item.name }
                 key={ i }
                 primaryText={item.name}
+                containerElement={<Link to={item.name + '/'}/>}
                 secondaryText={<Time value={item.lastModified} relative></Time>}
-                rightIconButton={<FlatButton label='Delete'
-                  primary={true} onTouchTap={ this.handleShowDialog( item.name ) }/>}
+                rightIconButton={
+                  <FlatButton label='Delete'
+                  primary={true} onTouchTap={ this.handleShowDialog( item.name ) }
+                />}
               >
               </ListItem>
             );
