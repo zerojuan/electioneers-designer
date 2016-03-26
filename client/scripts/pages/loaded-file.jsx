@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
+import { Link } from 'react-router';
+
 import { selectFile, loadFileIfNeeded, saveFile } from '../actions';
 
 import FlatButton from 'material-ui/lib/flat-button';
@@ -25,8 +27,16 @@ let LoadedFilePage = React.createClass({
       <div>
         <h1>{ this.props.selectedFile }</h1>
         { saveButton }
-        <p>Districts: { this.props.districts.length }</p>
-        <p>Population: { this.props.population.length }</p>
+        <p>
+          <Link to={this.props.selectedFile + '/districts' }>
+            Districts: { this.props.districts.length }
+          </Link>
+        </p>
+        <p>
+          <Link to={this.props.selectedFile + '/population' }>
+            Population: { this.props.population.length }
+          </Link>
+        </p>
       </div>
     );
   }
