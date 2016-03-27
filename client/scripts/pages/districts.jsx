@@ -12,11 +12,11 @@ import DropdownMenu from 'material-ui/lib/DropDownMenu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 import RaisedButton from 'material-ui/lib/raised-button';
 
-import DistrictsList from '../components/districts-list';
-import DistrictsGeographic from '../components/districts-geographic';
+import DistrictsList from '../components/districts/districts-list';
+import DistrictsGeographic from '../components/districts/districts-geographic';
 
-import CreateDistrictDialog from '../components/create-district-dialog';
-import EditDistrictDialog from '../components/edit-district-dialog';
+import CreateDistrictDialog from '../components/districts/create-district-dialog';
+import EditDistrictDialog from '../components/districts/edit-district-dialog';
 import EditBackgroundDialog from '../components/edit-background-dialog';
 
 const DistrictsPage = React.createClass({

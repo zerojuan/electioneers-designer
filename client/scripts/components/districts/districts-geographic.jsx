@@ -5,7 +5,7 @@ import { findDOMNode } from 'react-dom';
 import DropdownMenu from 'material-ui/lib/DropDownMenu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 
-import CanvasGeoView from './canvas-geoview';
+import CanvasGeoView from '../canvas/canvas-geoview';
 
 const style = {
   overflow: 'scroll'
