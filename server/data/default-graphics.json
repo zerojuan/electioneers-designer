@@ -2,20 +2,24 @@
   "backgrounds": [
     {
       "id": "ocean",
+      "name": "Rainbow",
       "file": "rainbow-bg.png"
     },
     {
       "id": "shattered",
+      "name": "ShatteredWorlds",
       "file": "shatteredworlds.jpg"
     }
   ],
   "districts": [
     {
       "id": "district-a",
+      "name": "Simple Image",
       "file": "district-a.png"
     },
     {
       "id": "district-b",
+      "name": "Isometric",
       "file": "rem_0014.png"
     }
   ]
