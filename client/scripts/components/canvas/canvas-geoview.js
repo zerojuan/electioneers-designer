@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import DistrictCanvas from './canvas/district-canvas';
+import DistrictCanvas from './district-canvas';
 
 class CanvasGeoView {
   constructor( handlers, baseUrl, eventHandlers ) {

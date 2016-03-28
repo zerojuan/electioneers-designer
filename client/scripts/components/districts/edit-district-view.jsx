@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
 
-import LabelTextField from './label-textfield';
+import LabelTextField from '../label-textfield';
 
 export default React.createClass({
   handlePropChange( propName ) {
