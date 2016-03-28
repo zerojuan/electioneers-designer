@@ -15,7 +15,7 @@ export default React.createClass({
     };
   },
   propTypes: {
-    backgrounds: PropTypes.array.isRequired,
+    images: PropTypes.array.isRequired,
     baseUrl: PropTypes.string.isRequired
   },
   handleSelect( e, index ) {
@@ -35,13 +35,13 @@ export default React.createClass({
             requestChange: this.handleSelect
           }}>
         {
-          this.props.backgrounds.map( ( background ) => {
+          this.props.images.map( ( image ) => {
             return (
               <ListItem
-                key={background.id}
-                value={background.id}
-                primaryText={background.file}
-                leftAvatar={<Avatar src={ this.props.baseUrl + background.file }/>}>
+                key={image.id}
+                value={image.id}
+                primaryText={image.file}
+                leftAvatar={<Avatar src={ this.props.baseUrl + image.file }/>}>
               </ListItem>
             );
           })

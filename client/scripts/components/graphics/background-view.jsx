@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-import BackgroundList from './background-list';
+import ImagesList from './images-list';
 
 export default React.createClass({
   propTypes: {
@@ -10,7 +10,7 @@ export default React.createClass({
   render() {
     return (
       <div>
-        <BackgroundList backgrounds={this.props.backgrounds} baseUrl={this.props.baseUrl}/>
+        <ImagesList images={this.props.backgrounds} baseUrl={this.props.baseUrl}/>
       </div>
     );
   }
