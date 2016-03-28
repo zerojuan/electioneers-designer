@@ -7,10 +7,16 @@ export default React.createClass({
     backgrounds: PropTypes.array.isRequired,
     baseUrl: PropTypes.string.isRequired
   },
+  handleSelectItem( index ) {
+    console.log( 'Selected Item' );
+  },
   render() {
     return (
       <div>
-        <ImagesList images={this.props.backgrounds} baseUrl={this.props.baseUrl}/>
+        <ImagesList
+          images={this.props.backgrounds}
+          baseUrl={this.props.baseUrl}
+          onChange={this.handleSelectItem}/>
       </div>
     );
   }

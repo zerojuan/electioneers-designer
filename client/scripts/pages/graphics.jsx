@@ -9,6 +9,7 @@ import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
 
 import BackgroundView from '../components/graphics/background-view';
+import DistrictsView from '../components/graphics/districts-view';
 
 const GraphicsPage = React.createClass({
   displayName: 'GraphicsPage',
@@ -27,7 +28,9 @@ const GraphicsPage = React.createClass({
                 baseUrl={this.props.baseUrl}/>
             </Tab>
             <Tab label='Districts'>
-              <p> Districts </p>
+              <DistrictsView
+                districts={this.props.graphics.districts}
+                baseUrl={this.props.baseUrl}/>
             </Tab>
             <Tab label='Portraits'>
               <p> Portraits </p>

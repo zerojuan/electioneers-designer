@@ -16,7 +16,8 @@ export default React.createClass({
   },
   propTypes: {
     images: PropTypes.array.isRequired,
-    baseUrl: PropTypes.string.isRequired
+    baseUrl: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired
   },
   handleSelect( e, index ) {
     this.setState({
@@ -40,7 +41,7 @@ export default React.createClass({
               <ListItem
                 key={image.id}
                 value={image.id}
-                primaryText={image.file}
+                primaryText={image.name || image.file}
                 leftAvatar={<Avatar src={ this.props.baseUrl + image.file }/>}>
               </ListItem>
             );
