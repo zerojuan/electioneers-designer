@@ -27,6 +27,7 @@ class DistrictSprite extends Phaser.Sprite {
   reloadTexture() {
     // only load texture when it changed
     var spriteKey = this.data.image;
+    console.log( 'Reloading spriteKey...', this.data.image );
     if ( this._mySpriteKey !== this.data.image ) {
       this.loadTexture( 'district' + spriteKey );
       this._mySpriteKey = spriteKey;

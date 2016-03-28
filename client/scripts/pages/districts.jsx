@@ -145,10 +145,12 @@ const DistrictsPage = React.createClass({
         <CreateDistrictDialog
           open={this.state.createDialogOpen}
           onClose={this.handleHideCreateDialog}
+          images={this.props.graphics.districts}
           onSubmit={this.handleCreateSubmitDialog}/>
         <EditDistrictDialog
           open={this.state.editDialogOpen}
           district={this.state.selectedDistrict}
+          images={this.props.graphics.districts}
           districts={this.props.districts}
           onClose={this.handleHideEditDialog}
           onSubmit={this.handleEditSubmitDialog}/>

@@ -13,7 +13,8 @@ export default React.createClass({
     onSubmit: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
     district: PropTypes.object,
-    districts: PropTypes.array
+    districts: PropTypes.array,
+    images: PropTypes.array
   },
   getInitialState( ) {
     return {
@@ -68,6 +69,7 @@ export default React.createClass({
         actions={dialogActions}
         open={this.props.open}>
         <EditDistrictView
+          images={this.props.images}
           district={this.state.initialDistrict}
           districts={this.props.districts}
           onPropChange={this.handlePropChange}/>
