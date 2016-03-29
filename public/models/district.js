@@ -9,7 +9,7 @@ module.exports = {
         y: district.position ? district.position.y : 0
       },
       connections: district.connections,
-      image: 'district-b'
+      image: district.image || 'district-b'
     };
   }
 };

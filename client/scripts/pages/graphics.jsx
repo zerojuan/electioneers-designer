@@ -17,6 +17,9 @@ const GraphicsPage = React.createClass({
     const { dispatch } = this.props;
     dispatch( loadGraphics() );
   },
+  handleShowUploadFile( page ) {
+    console.log( 'Time to upload a file ' + page );
+  },
   render() {
     if ( this.props.loaded ) {
       return (
@@ -30,7 +33,8 @@ const GraphicsPage = React.createClass({
             <Tab label='Districts'>
               <DistrictsView
                 districts={this.props.graphics.districts}
-                baseUrl={this.props.baseUrl}/>
+                baseUrl={this.props.baseUrl}
+                onUploadModal={this.handleShowUploadFile}/>
             </Tab>
             <Tab label='Portraits'>
               <p> Portraits </p>

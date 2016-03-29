@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 
+import RaisedButton from 'material-ui/lib/raised-button';
+
 import ImagesList from './images-list';
 import ImageDetails from './image-details';
 
@@ -11,7 +13,8 @@ export default React.createClass({
   },
   propTypes: {
     districts: PropTypes.array.isRequired,
-    baseUrl: PropTypes.string.isRequired
+    baseUrl: PropTypes.string.isRequired,
+    onUploadModal: PropTypes.func.isRequired
   },
   handleSelectItem( index ) {
     // set selected based on item
@@ -21,11 +24,15 @@ export default React.createClass({
       selected: this.props.districts[ i ]
     });
   },
+  handleShowUploadImage( ) {
+    this.props.onUploadModal( 'district' );
+  },
   render() {
     return (
       <div>
         <div className='row'>
           <div className='col-xs-4'>
+            <RaisedButton label='Add' primary={true} onTouchTap={this.handleShowUploadImage}/>
             <ImagesList
               images={this.props.districts}
               baseUrl={this.props.baseUrl}
