@@ -10,15 +10,31 @@ import Tab from 'material-ui/lib/tabs/tab';
 
 import BackgroundView from '../components/graphics/background-view';
 import DistrictsView from '../components/graphics/districts-view';
+import AddGraphicsDialog from '../components/graphics/add-graphics-dialog';
 
 const GraphicsPage = React.createClass({
+  getInitialState() {
+    return {
+      addImageDialogOpen: false
+    };
+  },
   displayName: 'GraphicsPage',
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch( loadGraphics() );
   },
   handleShowUploadFile( page ) {
-    console.log( 'Time to upload a file ' + page );
+    this.setState({
+      addImageDialogOpen: true
+    });
+  },
+  handleHideUploadFile() {
+    this.setState({
+      addImageDialogOpen: false
+    });
+  },
+  handleAddImage( data ) {
+    console.log( 'Add Image Save...' );
   },
   render() {
     if ( this.props.loaded ) {
@@ -43,6 +59,10 @@ const GraphicsPage = React.createClass({
               <p> Logos </p>
             </Tab>
           </Tabs>
+          <AddGraphicsDialog
+            open={this.state.addImageDialogOpen}
+            onClose={this.handleHideUploadFile}
+            onSubmit={this.handleAddImage}/>
         </div>
       );
     } else {
