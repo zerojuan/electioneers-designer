@@ -5,6 +5,8 @@ import update from 'react-addons-update';
 import Dialog from 'material-ui/lib/dialog';
 import FlatButton from 'material-ui/lib/flat-button';
 
+import AddGraphicsView from './add-graphics-view';
+
 export default React.createClass({
   propTypes: {
     onClose: PropTypes.func.isRequired,
@@ -47,6 +49,11 @@ export default React.createClass({
     this.props.onSubmit( this.state.initialDistrict );
     this.props.onClose();
   },
+  handleFileSelect( file ) {
+    this.setState({
+      selectedFile: file
+    });
+  },
   render() {
     const dialogActions = [
       <FlatButton
@@ -66,7 +73,9 @@ export default React.createClass({
         modal={false}
         actions={dialogActions}
         open={this.props.open}>
-        This is the content
+        <AddGraphicsView
+          selectedFile={this.state.selectedFile}
+          onFileSelect={this.handleFileSelect}/>
       </Dialog>
     );
   }
