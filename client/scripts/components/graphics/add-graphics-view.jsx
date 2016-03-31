@@ -11,9 +11,6 @@ const Details = ( props ) => (
 export default React.createClass({
   onDrop( files ) {
     this.props.onFileSelect( files[ 0 ] );
-    this.setState({
-      name: files[ 0 ].name
-    });
   },
   onEditProp( event ) {
     this.props.onFilenameEdit( event.target.value );
