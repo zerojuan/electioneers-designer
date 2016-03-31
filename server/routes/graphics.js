@@ -34,4 +34,12 @@ router.post( '/', function( req, res ) {
   });
 });
 
+router.post( '/upload', function( req, res ) {
+  console.log( 'This is the req: ', req.body );
+  console.log( 'This is the file: ', req.file );
+  GraphicsModel.loadData(function( data ) {
+    return res.send( data );
+  });
+});
+
 module.exports = router;

@@ -2,8 +2,11 @@
 const express = require( 'express' );
 const cors = require( 'cors' );
 const bodyParser = require( 'body-parser' );
+const multer = require( 'multer' );
 
 const app = express();
+
+
 
 app.use( bodyParser.urlencoded({
   extended: true
@@ -11,6 +14,7 @@ app.use( bodyParser.urlencoded({
 
 app.use( bodyParser.json() );
 
+app.use( multer().single( 'file' ) );
 app.use( cors() );
 
 app.use( '/base', require( './routes/designbase.js' ) );
