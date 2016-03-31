@@ -34,7 +34,7 @@ const GraphicsPage = React.createClass({
     });
   },
   handleAddImage( data ) {
-    console.log( 'Add Image Save...' );
+    console.log( 'Add Image Save...', data );
   },
   render() {
     if ( this.props.loaded ) {

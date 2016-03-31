@@ -12,46 +12,38 @@ export default React.createClass({
     onClose: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
-    district: PropTypes.object,
-    districts: PropTypes.array,
     images: PropTypes.array
   },
-  getInitialState( ) {
+  getInitialState() {
     return {
-      initialDistrict: this.props.district
+      selectedFile: null
     };
   },
-  componentWillReceiveProps( nextProps ) {
-    if ( nextProps.district ) {
-      this.setState({
-        initialDistrict: nextProps.district
-      });
-    }
-  },
-  handlePropChange( propName, value ) {
-    let temp = {};
-    temp[ propName ] = value;
-    let district = this.state.initialDistrict;
-    if ( !district ) {
-      district = this.props.district;
-    }
-
-    var newDistrict = update( district, {
-      $merge: temp
-    });
-
-    this.setState({
-      initialDistrict: newDistrict
-    });
-  },
   handleSubmit() {
-    // return the value of the saved family
-    this.props.onSubmit( this.state.initialDistrict );
+    this.props.onSubmit({
+      file: this.state.selectedFile,
+      filename: this.state.filename
+    });
+    this.setState({
+      selectedFile: null
+    });
+    this.props.onClose();
+  },
+  handleClose() {
+    this.setState({
+      selectedFile: null
+    });
     this.props.onClose();
   },
   handleFileSelect( file ) {
     this.setState({
-      selectedFile: file
+      selectedFile: file,
+      filename: file.name
+    });
+  },
+  handleFilenameEdit( name ) {
+    this.setState({
+      filename: name
     });
   },
   render() {
@@ -59,7 +51,7 @@ export default React.createClass({
       <FlatButton
         label='Cancel'
         secondary={true}
-        onTouchTap={this.props.onClose} />,
+        onTouchTap={this.handleClose} />,
       <FlatButton
         label='Submit'
         primary={true}
@@ -75,7 +67,9 @@ export default React.createClass({
         open={this.props.open}>
         <AddGraphicsView
           selectedFile={this.state.selectedFile}
-          onFileSelect={this.handleFileSelect}/>
+          filename={this.state.filename}
+          onFileSelect={this.handleFileSelect}
+          onFilenameEdit={this.handleFilenameEdit}/>
       </Dialog>
     );
   }
