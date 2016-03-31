@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { selectFile, loadFileIfNeeded } from '../actions';
-import { loadGraphics } from '../actions/graphics';
+import { loadGraphics, uploadGraphics } from '../actions/graphics';
 
 import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
@@ -35,6 +35,9 @@ const GraphicsPage = React.createClass({
   },
   handleAddImage( data ) {
     console.log( 'Add Image Save...', data );
+    const { dispatch } = this.props;
+
+    dispatch( uploadGraphics( data ) );
   },
   render() {
     if ( this.props.loaded ) {

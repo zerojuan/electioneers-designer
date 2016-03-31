@@ -27,7 +27,6 @@ export default React.createClass({
     this.setState({
       selectedFile: null
     });
-    this.props.onClose();
   },
   handleClose() {
     this.setState({
