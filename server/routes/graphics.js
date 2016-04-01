@@ -37,8 +37,13 @@ router.post( '/', function( req, res ) {
 router.post( '/upload', function( req, res ) {
   console.log( 'This is the req: ', req.body );
   console.log( 'This is the file: ', req.file );
-  GraphicsModel.loadData(function( data ) {
-    return res.send( data );
+  GraphicsModel.saveFile( req.file, {
+    filename: req.body.filename,
+    type: req.body.type
+  }, function( err ) {
+    GraphicsModel.loadData(function( data ) {
+      return res.send( data );
+    });
   });
 });
 

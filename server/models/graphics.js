@@ -17,6 +17,10 @@ module.exports = {
 
     return cb( data );
   },
+  saveFile: function( file, metadata ) {
+    // save to directory
+    // save metadata
+  },
   loadData: function( cb ) {
     var defaultDir = getDefaultDir();
     fs.readFile( defaultDir + '/graphics.json', { encoding: 'utf8' }, function( err, data ) {
