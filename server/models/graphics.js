@@ -17,8 +17,12 @@ module.exports = {
 
     return cb( data );
   },
-  saveFile: function( file, metadata ) {
+  saveFile: function( file, metadata, cb ) {
     // save to directory
+    fs.writeFile( defaultDir + '/gfx/' + '123123.png',
+      file );
+
+    return cb( data );
     // save metadata
   },
   loadData: function( cb ) {
