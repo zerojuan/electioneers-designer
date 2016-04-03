@@ -1,9 +1,12 @@
 const fs = require( 'fs-extra' );
 const path = require( 'path' );
 const async = require( 'async' );
+const _ = require( 'lodash' );
 
 const DefaultGraphics = require( '../data/default-graphics.json' );
 const settings = require( '../settings.js' );
+
+const utils = require( '../utils.js' );
 
 const getDefaultDir = function() {
   return settings.getWorkingDirectory();
@@ -19,10 +22,24 @@ module.exports = {
   },
   saveFile: function( file, metadata, cb ) {
     // save to directory
-    fs.writeFile( defaultDir + '/gfx/' + '123123.png',
-      file );
+    var generatedFilename = utils.guid() + '.png';
 
-    return cb( data );
+    var defaultDir = getDefaultDir();
+    fs.writeFileSync( defaultDir + '/gfx/' + generatedFilename,
+      file.buffer );
+
+    // save based on metadata
+    var that = this;
+    this.loadData(function( data ) {
+      data[ metadata.type ].push({
+        id: generatedFilename,
+        name: metadata.filename,
+        file: generatedFilename
+      });
+      that.saveData( data, function( result ) {
+        return cb( result );
+      });
+    });
     // save metadata
   },
   loadData: function( cb ) {

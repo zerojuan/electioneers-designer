@@ -36,7 +36,8 @@ const GraphicsPage = React.createClass({
   handleAddImage( data ) {
     console.log( 'Add Image Save...', data );
     const { dispatch } = this.props;
-
+    // TODO: have types for different uploads
+    data.type = 'districts';
     dispatch( uploadGraphics( data ) );
   },
   render() {

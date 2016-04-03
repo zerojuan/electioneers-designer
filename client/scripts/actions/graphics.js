@@ -46,6 +46,7 @@ export function uploadGraphics( data ) {
     let body = new FormData();
     body.append( 'file', data.file, 'thefile' );
     body.append( 'name', data.filename );
+    body.append( 'type', data.type );
     return fetch( 'http://localhost:7171/graphics/upload', {
         method: 'post',
         headers: {

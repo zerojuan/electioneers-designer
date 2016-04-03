@@ -35,10 +35,8 @@ router.post( '/', function( req, res ) {
 });
 
 router.post( '/upload', function( req, res ) {
-  console.log( 'This is the req: ', req.body );
-  console.log( 'This is the file: ', req.file );
   GraphicsModel.saveFile( req.file, {
-    filename: req.body.filename,
+    filename: req.body.name,
     type: req.body.type
   }, function( err ) {
     GraphicsModel.loadData(function( data ) {
