@@ -28,7 +28,7 @@ router.get( '/:name/bg/:bgName', function( req, res ) {
     }
   };
 
-  GraphicsModel.loadData(function( graphicsData ) {
+  GraphicsModel.loadData(function( err, graphicsData ) {
     // search graphics data
     var index = _.findIndex( graphicsData.backgrounds, function( bg ) {
       console.log( bg.id, bgName );
@@ -66,7 +66,7 @@ router.get( '/:name/d/:gfxName', function( req, res ) {
 
   var gfxName = req.params.gfxName;
 
-  GraphicsModel.loadData(function( graphicsData ) {
+  GraphicsModel.loadData(function( err, graphicsData ) {
     var index = _.findIndex( graphicsData.districts, function( district ) {
       return district.id === gfxName;
     });

@@ -19,7 +19,7 @@ router.get( '/', function( req, res ) {
   var defaultDir = getDefaultDir();
   console.log( 'Getting graphics...' );
   // check if there is a graphics file
-  GraphicsModel.loadData(function( data ) {
+  GraphicsModel.loadData(function( err, data ) {
     return res.send( data );
   });
 });
@@ -29,7 +29,7 @@ router.post( '/', function( req, res ) {
 
   var graphicsConfig = req.body.graphics;
 
-  GraphicsModel.saveData( graphicsConfig, function( data ) {
+  GraphicsModel.saveData( graphicsConfig, function( err, data ) {
     return res.send( data );
   });
 });
@@ -39,7 +39,11 @@ router.post( '/upload', function( req, res ) {
     filename: req.body.name,
     type: req.body.type
   }, function( err ) {
-    GraphicsModel.loadData(function( data ) {
+    if ( err ) {
+      return res.send( err );
+    }
+
+    GraphicsModel.loadData(function( err, data ) {
       return res.send( data );
     });
   });

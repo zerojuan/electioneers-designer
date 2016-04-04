@@ -18,7 +18,7 @@ module.exports = {
     fs.writeFileSync( defaultDir + '/graphics.json',
       JSON.stringify( data, null, '\t' ) );
 
-    return cb( data );
+    return cb( null, data );
   },
   saveFile: function( file, metadata, cb ) {
     // save to directory
@@ -36,8 +36,8 @@ module.exports = {
         name: metadata.filename,
         file: generatedFilename
       });
-      that.saveData( data, function( result ) {
-        return cb( result );
+      that.saveData( data, function( err, result ) {
+        return cb( err, result );
       });
     });
     // save metadata
@@ -49,10 +49,10 @@ module.exports = {
         // return default file
         // copy gfx folder to the save folder
         fs.copySync( path.resolve( __dirname, '../data/gfx' ), defaultDir + '/gfx' );
-        return cb( DefaultGraphics );
+        return cb( null, DefaultGraphics );
       }
 
-      return cb( JSON.parse( data ) );
+      return cb( err, JSON.parse( data ) );
     });
   },
   convert: function( graphics ) {
