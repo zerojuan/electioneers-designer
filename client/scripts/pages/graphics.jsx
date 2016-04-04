@@ -23,6 +23,13 @@ const GraphicsPage = React.createClass({
     const { dispatch } = this.props;
     dispatch( loadGraphics() );
   },
+  componentWillReceiveProps( nextProp ) {
+    if ( nextProp.loaded ) {
+      this.setState({
+        addImageDialogOpen: false
+      });
+    }
+  },
   handleShowUploadFile( page ) {
     this.setState({
       addImageDialogOpen: true
