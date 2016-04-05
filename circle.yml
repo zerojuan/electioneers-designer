@@ -3,7 +3,9 @@ machine:
     version: 5.2.0
 dependencies:
   override:
-    - npm install --no-progress
+    - npm set progress=false
+    - npm install
+    - cd server && npm install
 test:
   override:
     - npm test
