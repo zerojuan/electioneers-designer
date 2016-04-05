@@ -8,4 +8,4 @@ dependencies:
     - cd server && npm install
 test:
   override:
-    - npm test
+    - npm run test-ci
