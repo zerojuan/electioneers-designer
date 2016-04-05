@@ -8,4 +8,5 @@ dependencies:
     - cd server && npm install
 test:
   override:
+    - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - npm run test-ci --silent >$CIRCLE_TEST_REPORTS/junit/tape.xml
