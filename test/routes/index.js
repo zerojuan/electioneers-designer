@@ -17,22 +17,21 @@ mockFileSystem[ settings.getWorkingDirectory() ] = {
   }
 };
 
-test( 'GET /', function( assert ) {
+test( 'GET /', function( t ) {
   mock( mockFileSystem );
   request( app )
     .get( '/' )
     .expect( 200 )
     .expect( 'Content-Type', /json/ )
     .end(function( err, res ) {
-      console.log( res.body );
-      assert.error( err, 'No error' );
-      assert.equals( res.body.length, 1, 'Has exactly one file in saved folder' );
+      t.error( err, 'No error' );
+      t.equals( res.body.length, 1, 'Has exactly one file in saved folder' );
       mock.restore();
-      assert.end();
+      t.end();
     });
 });
 
-test( 'POST /add', function( assert ) {
+test( 'POST /add', function( t ) {
   mock( mockFileSystem );
   request( app )
     .post( '/add' )
@@ -40,9 +39,9 @@ test( 'POST /add', function( assert ) {
     .expect( 'Content-Type', /json/ )
     .end(function( err, res ) {
       const result = res.body;
-      assert.ok( result.name, 'Response has a name' );
-      assert.ok( result.lastModified, 'Response has a lastModified' );
+      t.ok( result.name, 'Response has a name' );
+      t.ok( result.lastModified, 'Response has a lastModified' );
       mock.restore();
-      assert.end();
+      t.end();
     });
 });
