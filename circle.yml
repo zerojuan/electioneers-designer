@@ -1,6 +1,9 @@
 machine:
   node:
     version: 5.2.0
+dependencies:
+  override:
+    - npm install --no-progress
 test:
   override:
     - npm test

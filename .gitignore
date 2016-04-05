@@ -6,6 +6,8 @@ cache
 .vagrant
 .DS_Store
 
+.tags*
+
 npm-debug.log
 
 public/index.html
