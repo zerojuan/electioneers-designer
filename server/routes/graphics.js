@@ -30,7 +30,7 @@ router.post( '/', function( req, res ) {
   var graphicsConfig = req.body.graphics;
 
   GraphicsModel.saveData( graphicsConfig, function( err, data ) {
-    return res.send( data );
+    return res.json( data );
   });
 });
 

@@ -30,7 +30,8 @@ module.exports = {
 
     // save based on metadata
     var that = this;
-    this.loadData(function( data ) {
+    this.loadData(function( err, data ) {
+      // save metadata
       data[ metadata.type ].push({
         id: generatedFilename,
         name: metadata.filename,
@@ -40,7 +41,6 @@ module.exports = {
         return cb( err, result );
       });
     });
-    // save metadata
   },
   loadData: function( cb ) {
     var defaultDir = getDefaultDir();
