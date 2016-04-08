@@ -14,6 +14,8 @@ const getDefaultDir = function( name ) {
   return settings.getWorkingDirectory() + '/saves/' + name;
 };
 
+// Get background image by bgName
+// @params bgName example: bg-a
 router.get( '/:name/bg/:bgName', function( req, res ) {
   var defaultDir = settings.getWorkingDirectory();
 
@@ -52,6 +54,8 @@ router.get( '/:name/bg/:bgName', function( req, res ) {
 
 });
 
+// Get a district image by logical name
+// @params gfxName example: district-a
 router.get( '/:name/d/:gfxName', function( req, res ) {
   var defaultDir = settings.getWorkingDirectory();
 
@@ -86,9 +90,11 @@ router.get( '/:name/d/:gfxName', function( req, res ) {
   });
 });
 
+// Get an image by filename
+// @params name samplefile.png
 router.get( '/:name', function( req, res ) {
   var defaultDir = settings.getWorkingDirectory();
-
+  console.log( req.params.name );
   var options = {
     root: defaultDir + '/gfx/',
     dotfiles: 'deny',
