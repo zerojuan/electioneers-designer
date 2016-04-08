@@ -25,8 +25,7 @@ router.get( '/:name', function( req, res ) {
     districts: function( callback ) {
       fs.readFile( defaultDir + '/districts.json', { encoding: 'utf8' }, function( err, data ) {
         if ( err ) {
-          console.log( 'Error: ', err );
-          return callback( null, []);
+          return callback( err );
         }
         var districts = JSON.parse( data ).data;
         return callback( null, districts.map( District.convert ) );
@@ -35,8 +34,7 @@ router.get( '/:name', function( req, res ) {
     population: function( callback ) {
       fs.readFile( defaultDir + '/population.json', { encoding: 'utf8' }, function( err, data ) {
         if ( err ) {
-          console.log( 'Error: ', err );
-          return callback( null, []);
+          return callback( err );
         }
         var population = JSON.parse( data ).data;
         return callback( null, population.map( Population.convert ) );
@@ -45,8 +43,7 @@ router.get( '/:name', function( req, res ) {
     actions: function( callback ) {
       fs.readFile( defaultDir + '/actions.json', { encoding: 'utf8' }, function( err, data ) {
         if ( err ) {
-          console.log( 'Error: ', err );
-          return callback( null, []);
+          return callback( err );
         }
 
         return callback( null, JSON.parse( data ).data );
@@ -56,9 +53,8 @@ router.get( '/:name', function( req, res ) {
       // your base config should be here
       fs.readFile( defaultDir + '/config.json', { encoding: 'utf8' }, function( err, data ) {
         if ( err ) {
-          console.log( 'Error: ', err );
           // supply default config
-          return callback( null, DefaultConfig );
+          return callback( err );
         }
 
         return callback( null, JSON.parse( data ) );
@@ -66,8 +62,8 @@ router.get( '/:name', function( req, res ) {
     }
   }, function( err, results ) {
     if ( err ) {
-      console.log( 'Error happened', err );
-      return res.send( err );
+      console.log( 'Error: ', err );
+      return res.status( 404 ).send( err );
     }
     console.log( 'Found files' );
     return res.send( results );
@@ -91,6 +87,10 @@ router.post( '/:name', function( req, res ) {
 
   // save the files here
   async.series({
+    createFolder: function( done ) {
+      fs.mkdirSync( defaultDir );
+      done();
+    },
     districts: function( done ) {
       // save districts
       let districts = {
