@@ -88,8 +88,9 @@ router.post( '/:name', function( req, res ) {
   // save the files here
   async.series({
     createFolder: function( done ) {
-      fs.mkdirSync( defaultDir );
-      done();
+      fs.mkdir( defaultDir, function( err, res ) {
+        done();
+      });
     },
     districts: function( done ) {
       // save districts
