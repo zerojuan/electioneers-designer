@@ -55,7 +55,8 @@ const GraphicsPage = React.createClass({
             <Tab label='Backgrounds'>
               <BackgroundView
                 backgrounds={this.props.graphics.backgrounds}
-                baseUrl={this.props.baseUrl}/>
+                baseUrl={this.props.baseUrl}
+                onUploadModel={this.handleShowUploadFile}/>
             </Tab>
             <Tab label='Districts'>
               <DistrictsView
