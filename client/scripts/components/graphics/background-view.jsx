@@ -12,7 +12,7 @@ export default React.createClass({
   },
   getInitialState() {
     return {
-      selected: this.props.districts[ 0 ]
+      selected: this.props.backgrounds[ 0 ]
     };
   },
   handleSelectItem( index ) {

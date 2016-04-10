@@ -9,7 +9,7 @@ import 'babel-polyfill';
 
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, IndexRoute } from 'react-router';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
@@ -45,7 +45,7 @@ let store = createStoreWithMiddleware( designerApp );
 
 render( (
   <Provider store={store}>
-    <Router>
+    <Router history={hashHistory}>
       <Route component={App} path='/' name='Designer'>
         <IndexRoute component={HomePage} name='Home'/>
         <Route path=':filename/population' component={PopulationPage} name='Population'/>

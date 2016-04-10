@@ -16,8 +16,7 @@ const Home = React.createClass({
     files: PropTypes.arrayOf( PropTypes.shape({
       name: PropTypes.string.isRequired,
       lastModified: PropTypes.string.isRequired
-    }).isRequired ).isRequired,
-    selectedFile: PropTypes.string.isRequired
+    }).isRequired ).isRequired
   },
   componentDidMount: function() {
     const { dispatch } = this.props;
