@@ -81,6 +81,7 @@ router.delete( '/:name', function( req, res ) {
   });
 });
 
+// this route will overwrite previous saved folder
 router.post( '/:name', function( req, res ) {
   const name = req.params.name;
   const defaultDir = settings.getWorkingDirectory() + '/saves/' + name;

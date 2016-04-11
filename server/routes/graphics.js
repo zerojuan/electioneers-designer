@@ -34,6 +34,30 @@ router.post( '/', function( req, res ) {
   });
 });
 
+router.delete( '/', function( req, res ) {
+  var defaultDir = getDefaultDir();
+  var data = JSON.parse( req.body.data );
+  var type = req.body.type;
+
+  GraphicsModel.loadData(function( err, graphics ) {
+    // search file based on type
+    let index = _.findIndex( graphics[ type ], ( fileData ) =>
+      fileData.id === data.id );
+    graphics[ type ] = [
+      ...graphics[ type ].slice( 0, index ),
+      ...graphics[ type ].slice( index + 1 )
+    ];
+    GraphicsModel.saveData( graphics, function( err, result ) {
+      return res.json({
+        data: data,
+        type: type
+      });
+    });
+  });
+
+
+});
+
 router.post( '/upload', function( req, res ) {
   GraphicsModel.saveFile( req.file, {
     filename: req.body.name,

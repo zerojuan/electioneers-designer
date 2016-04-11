@@ -120,3 +120,29 @@ test( 'POST /graphics/upload', function( t ) {
       t.end();
     });
 });
+
+test( 'DELETE /graphics/', function( t ) {
+  mock( mockFileSystem );
+  request( app )
+    .delete( '/graphics/' )
+    .field( 'data', JSON.stringify({
+      id: 'ocean'
+    }) )
+    .field( 'type', 'backgrounds' )
+    .expect( 200 )
+    .end(function( err, res ) {
+      t.error( err, 'No error' );
+      const result = res.body;
+      t.equals( result.type, 'backgrounds', 'Should return correct type' );
+      request( app )
+        .get( '/graphics/' )
+        .expect( 200 )
+        .end(function( err, res ) {
+          t.error( err, 'No error' );
+          const result = res.body;
+          t.equals( result.backgrounds.length, 1, 'Should delete from graphics' );
+          mock.restore();
+          t.end();
+        });
+    });
+});
