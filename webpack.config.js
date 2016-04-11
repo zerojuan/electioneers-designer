@@ -25,7 +25,7 @@ module.exports = {
     // new webpack.NoErrorsPlugin(),
     new webpack.IgnorePlugin( /vertx/ ),
     new webpack.ProvidePlugin({
-      '_': 'underscore'
+      '_': 'lodash'
     })
   ],
 
