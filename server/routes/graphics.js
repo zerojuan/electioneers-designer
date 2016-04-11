@@ -36,11 +36,15 @@ router.post( '/', function( req, res ) {
 
 router.delete( '/', function( req, res ) {
   var defaultDir = getDefaultDir();
-  var data = JSON.parse( req.body.data );
+  var data = typeof req.body.data === 'string' ?
+    JSON.parse( req.body.data ) : req.body.data;
   var type = req.body.type;
+  console.log( req );
 
   GraphicsModel.loadData(function( err, graphics ) {
     // search file based on type
+    console.log( type );
+    console.log( graphics[ type ] );
     let index = _.findIndex( graphics[ type ], ( fileData ) =>
       fileData.id === data.id );
     graphics[ type ] = [
