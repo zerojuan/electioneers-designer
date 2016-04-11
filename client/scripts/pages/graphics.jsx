@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { selectFile, loadFileIfNeeded } from '../actions';
-import { loadGraphics, uploadGraphics } from '../actions/graphics';
+import { loadGraphics, uploadGraphics, deleteGraphics } from '../actions/graphics';
 
 import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
@@ -47,6 +47,10 @@ const GraphicsPage = React.createClass({
     data.type = 'districts';
     dispatch( uploadGraphics( data ) );
   },
+  handleDeleteImage( type, data ) {
+    const { dispatch } = this.props;
+    dispatch( deleteGraphics( type, data ) );
+  },
   render() {
     if ( this.props.loaded ) {
       return (
@@ -56,13 +60,15 @@ const GraphicsPage = React.createClass({
               <BackgroundView
                 backgrounds={this.props.graphics.backgrounds}
                 baseUrl={this.props.baseUrl}
-                onUploadModel={this.handleShowUploadFile}/>
+                onUploadModel={this.handleShowUploadFile}
+                onDelete={this.handleDeleteImage}/>
             </Tab>
             <Tab label='Districts'>
               <DistrictsView
                 districts={this.props.graphics.districts}
                 baseUrl={this.props.baseUrl}
-                onUploadModal={this.handleShowUploadFile}/>
+                onUploadModal={this.handleShowUploadFile}
+                onDelete={this.handleDeleteImage}/>
             </Tab>
             <Tab label='Portraits'>
               <p> Portraits </p>

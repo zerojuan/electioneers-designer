@@ -14,7 +14,8 @@ export default React.createClass({
   propTypes: {
     districts: PropTypes.array.isRequired,
     baseUrl: PropTypes.string.isRequired,
-    onUploadModal: PropTypes.func.isRequired
+    onUploadModal: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired
   },
   handleSelectItem( index ) {
     // set selected based on item
@@ -26,6 +27,9 @@ export default React.createClass({
   },
   handleShowUploadImage( ) {
     this.props.onUploadModal( 'district' );
+  },
+  handleDeleteImage() {
+    this.props.onDelete( 'districts', this.state.selected );
   },
   render() {
     return (
@@ -43,6 +47,7 @@ export default React.createClass({
               image={this.state.selected}
               baseUrl={this.props.baseUrl}
               />
+            <RaisedButton label='Delete' primary={true} onTouchTap={this.handleDeleteImage}/>
           </div>
         </div>
       </div>

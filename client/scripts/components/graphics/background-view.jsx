@@ -26,6 +26,9 @@ export default React.createClass({
   handleShowUploadImage( ) {
     this.props.onUploadModal( 'backgrounds' );
   },
+  handleDelete() {
+    this.props.onDelete( 'backgrounds', this.state.selected );
+  },
   render() {
     return (
       <div>
@@ -42,6 +45,7 @@ export default React.createClass({
               image={this.state.selected}
               baseUrl={this.props.baseUrl}
               />
+            <RaisedButton label='Delete' primary={true} onTouchTap={this.handleDelete}/>
           </div>
         </div>
       </div>

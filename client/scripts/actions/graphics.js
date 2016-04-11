@@ -3,6 +3,8 @@ import fetch from 'isomorphic-fetch';
 export const RECIEVE_GRAPHICS_FILE = 'RECIEVE_GRAPHICS_FILE';
 export const REQUEST_GRAPHICS_FILE = 'REQUEST_GRAPHICS_FILE';
 export const REQUEST_FILE_UPLOAD = 'REQUEST_FILE_UPLOAD';
+export const REQUEST_DELETE_IMAGE = 'REQUEST_DELETE_IMAGE';
+export const RECIEVE_DELETE_IMAGE = 'RECIEVE_DELETE_IMAGE';
 
 function recieveLoadFile( data ) {
   return {
@@ -23,6 +25,22 @@ function requestFileUpload() {
   };
 };
 
+function requestDeleteImage( type, data ) {
+  return {
+    type: REQUEST_DELETE_IMAGE,
+    data: data,
+    imageType: type
+  };
+}
+
+function recieveDeleteImage( data ) {
+  return {
+    type: RECIEVE_DELETE_IMAGE,
+    data: data.data,
+    imageType: data.type
+  };
+}
+
 function fetchGraphics() {
   return dispatch => {
     dispatch( requestLoadFile() );
@@ -36,6 +54,25 @@ function fetchGraphics() {
 export function loadGraphics() {
   return ( dispatch, getState ) => {
     return dispatch( fetchGraphics() );
+  };
+}
+
+export function deleteGraphics( type, data ) {
+  return dispatch => {
+    dispatch( requestDeleteImage( type, data ) );
+    return fetch( 'http://localhost:7171/graphics', {
+        method: 'delete',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          type: type,
+          data: data
+        })
+      })
+      .then( response => response.json() )
+      .then( json => dispatch( recieveDeleteImage( json ) ) );
   };
 }
 
