@@ -16,6 +16,15 @@ export default React.createClass({
       selected: this.props.backgrounds[ 0 ]
     };
   },
+  componentWillReceiveProps( nextProps ) {
+    const { backgrounds } = nextProps;
+    const i = backgrounds.findIndex( ( d ) => d.id === this.state.selected.id );
+    if ( i < 0 ) {
+      this.setState({
+        selected: this.props.backgrounds[ 0 ]
+      });
+    }
+  },
   handleSelectItem( index ) {
     // set selected based on item
     const { backgrounds } = this.props;

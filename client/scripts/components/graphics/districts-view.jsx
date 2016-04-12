@@ -17,6 +17,15 @@ export default React.createClass({
     onUploadModal: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired
   },
+  componentWillReceiveProps( nextProps ) {
+    const { districts } = nextProps;
+    const i = districts.findIndex( ( d ) => d.id === this.state.selected.id );
+    if ( i < 0 ) {
+      this.setState({
+        selected: this.props.districts[ 0 ]
+      });
+    }
+  },
   handleSelectItem( index ) {
     // set selected based on item
     const { districts } = this.props;
