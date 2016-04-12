@@ -15,7 +15,8 @@ import AddGraphicsDialog from '../components/graphics/add-graphics-dialog';
 const GraphicsPage = React.createClass({
   getInitialState() {
     return {
-      addImageDialogOpen: false
+      addImageDialogOpen: false,
+      imageType: 'backgrounds'
     };
   },
   displayName: 'GraphicsPage',
@@ -40,11 +41,15 @@ const GraphicsPage = React.createClass({
       addImageDialogOpen: false
     });
   },
+  handleTabChange( value ) {
+    this.setState({
+      imageType: value
+    });
+  },
   handleAddImage( data ) {
-    console.log( 'Add Image Save...', data );
     const { dispatch } = this.props;
-    // TODO: have types for different uploads
-    data.type = 'districts';
+
+    data.type = this.state.imageType;
     dispatch( uploadGraphics( data ) );
   },
   handleDeleteImage( type, data ) {
@@ -55,25 +60,25 @@ const GraphicsPage = React.createClass({
     if ( this.props.loaded ) {
       return (
         <div>
-          <Tabs>
-            <Tab label='Backgrounds'>
+          <Tabs onChange={this.handleTabChange}>
+            <Tab label='Backgrounds' value='backgrounds'>
               <BackgroundView
                 backgrounds={this.props.graphics.backgrounds}
                 baseUrl={this.props.baseUrl}
-                onUploadModel={this.handleShowUploadFile}
+                onUploadModal={this.handleShowUploadFile}
                 onDelete={this.handleDeleteImage}/>
             </Tab>
-            <Tab label='Districts'>
+            <Tab label='Districts' value='districts'>
               <DistrictsView
                 districts={this.props.graphics.districts}
                 baseUrl={this.props.baseUrl}
                 onUploadModal={this.handleShowUploadFile}
                 onDelete={this.handleDeleteImage}/>
             </Tab>
-            <Tab label='Portraits'>
+            <Tab label='Portraits' value='portraits'>
               <p> Portraits </p>
             </Tab>
-            <Tab label='Logos'>
+            <Tab label='Logos' value='logos'>
               <p> Logos </p>
             </Tab>
           </Tabs>

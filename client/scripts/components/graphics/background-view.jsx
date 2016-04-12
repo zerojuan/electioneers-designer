@@ -8,7 +8,8 @@ import ImageDetails from './image-details';
 export default React.createClass({
   propTypes: {
     backgrounds: PropTypes.array.isRequired,
-    baseUrl: PropTypes.string.isRequired
+    baseUrl: PropTypes.string.isRequired,
+    onUploadModal: PropTypes.func.isRequired
   },
   getInitialState() {
     return {
