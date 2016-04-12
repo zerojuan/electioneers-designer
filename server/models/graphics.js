@@ -20,6 +20,12 @@ module.exports = {
 
     return cb( null, data );
   },
+  deleteFile: function( metadata, cb ) {
+    var defaultDir = getDefaultDir();
+    var filename = metadata.file;
+    fs.unlinkSync( defaultDir + '/gfx/' + filename );
+    cb();
+  },
   saveFile: function( file, metadata, cb ) {
     // save to directory
     var generatedFilename = utils.guid() + '.png';

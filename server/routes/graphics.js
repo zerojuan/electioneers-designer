@@ -39,24 +39,26 @@ router.delete( '/', function( req, res ) {
   var data = typeof req.body.data === 'string' ?
     JSON.parse( req.body.data ) : req.body.data;
   var type = req.body.type;
-  console.log( req );
 
   GraphicsModel.loadData(function( err, graphics ) {
     // search file based on type
-    console.log( type );
-    console.log( graphics[ type ] );
     let index = _.findIndex( graphics[ type ], ( fileData ) =>
       fileData.id === data.id );
+    let metadata = graphics[ type ][ index ];
     graphics[ type ] = [
       ...graphics[ type ].slice( 0, index ),
       ...graphics[ type ].slice( index + 1 )
     ];
-    GraphicsModel.saveData( graphics, function( err, result ) {
-      return res.json({
-        data: data,
-        type: type
+    // delete actual image in gfx folder
+    GraphicsModel.deleteFile( metadata, function( err, result ) {
+      GraphicsModel.saveData( graphics, function( err, result ) {
+        return res.json({
+          data: data,
+          type: type
+        });
       });
     });
+
   });
 
 

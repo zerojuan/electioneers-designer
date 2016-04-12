@@ -20,7 +20,9 @@ mockFileSystem[ settings.getWorkingDirectory() ] = {
       'districts.json': 'thisisthevalue'
     }
   },
-  'gfx': {},
+  'gfx': {
+    'rainbow-bg.png': 'content'
+  },
   'graphics.json': JSON.stringify({
     'backgrounds': [
       {
