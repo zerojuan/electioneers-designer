@@ -123,6 +123,26 @@ test( 'POST /graphics/upload', function( t ) {
     });
 });
 
+test( 'EDIT /graphics/:id', function( t ) {
+  mock( mockFileSystem );
+  request( app )
+    .put( '/graphics/ocean' )
+    .field( 'data', JSON.stringify({
+      id: 'ocean',
+      name: 'namechanged'
+    }) )
+    .field( 'type', 'backgrounds' )
+    .expect( 200 )
+    .end(function( err, res ) {
+      t.error( err, 'No error' );
+      const result = res.body;
+      t.equals( result.type, 'backgrounds', 'Should return correct type' );
+      t.equals( result.data.name, 'namechanged', 'Should have changed the name' );
+      mock.restore();
+      t.end();
+    });
+});
+
 test( 'DELETE /graphics/', function( t ) {
   mock( mockFileSystem );
   request( app )
