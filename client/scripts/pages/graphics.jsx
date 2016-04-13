@@ -8,8 +8,7 @@ import { loadGraphics, uploadGraphics, deleteGraphics } from '../actions/graphic
 import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
 
-import BackgroundView from '../components/graphics/background-view';
-import DistrictsView from '../components/graphics/districts-view';
+import ImagesView from '../components/graphics/images-view';
 import AddGraphicsDialog from '../components/graphics/add-graphics-dialog';
 
 const GraphicsPage = React.createClass({
@@ -62,15 +61,17 @@ const GraphicsPage = React.createClass({
         <div>
           <Tabs onChange={this.handleTabChange}>
             <Tab label='Backgrounds' value='backgrounds'>
-              <BackgroundView
-                backgrounds={this.props.graphics.backgrounds}
+              <ImagesView
+                images={this.props.graphics.backgrounds}
+                type='backgrounds'
                 baseUrl={this.props.baseUrl}
                 onUploadModal={this.handleShowUploadFile}
                 onDelete={this.handleDeleteImage}/>
             </Tab>
             <Tab label='Districts' value='districts'>
-              <DistrictsView
-                districts={this.props.graphics.districts}
+              <ImagesView
+                type='districts'
+                images={this.props.graphics.districts}
                 baseUrl={this.props.baseUrl}
                 onUploadModal={this.handleShowUploadFile}
                 onDelete={this.handleDeleteImage}/>

@@ -8,37 +8,38 @@ import ImageDetails from './image-details';
 export default React.createClass({
   getInitialState() {
     return {
-      selected: this.props.districts[ 0 ]
+      selected: this.props.images[ 0 ]
     };
   },
   propTypes: {
-    districts: PropTypes.array.isRequired,
+    images: PropTypes.array.isRequired,
     baseUrl: PropTypes.string.isRequired,
     onUploadModal: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired
+    onDelete: PropTypes.func.isRequired,
+    type: PropTypes.string.isRequired
   },
   componentWillReceiveProps( nextProps ) {
-    const { districts } = nextProps;
-    const i = districts.findIndex( ( d ) => d.id === this.state.selected.id );
+    const { images } = nextProps;
+    const i = images.findIndex( ( d ) => d.id === this.state.selected.id );
     if ( i < 0 ) {
       this.setState({
-        selected: this.props.districts[ 0 ]
+        selected: this.props.images[ 0 ]
       });
     }
   },
   handleSelectItem( index ) {
     // set selected based on item
-    const { districts } = this.props;
-    const i = districts.findIndex( ( d ) => d.id === index );
+    const { images } = this.props;
+    const i = images.findIndex( ( d ) => d.id === index );
     this.setState({
-      selected: this.props.districts[ i ]
+      selected: this.props.images[ i ]
     });
   },
   handleShowUploadImage( ) {
-    this.props.onUploadModal( 'district' );
+    this.props.onUploadModal( this.props.type );
   },
   handleDeleteImage() {
-    this.props.onDelete( 'districts', this.state.selected );
+    this.props.onDelete( this.props.type, this.state.selected );
   },
   render() {
     return (
@@ -47,7 +48,7 @@ export default React.createClass({
           <div className='col-xs-4'>
             <RaisedButton label='Add' primary={true} onTouchTap={this.handleShowUploadImage}/>
             <ImagesList
-              images={this.props.districts}
+              images={this.props.images}
               baseUrl={this.props.baseUrl}
               onChange={this.handleSelectItem}/>
           </div>
