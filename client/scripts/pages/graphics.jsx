@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { selectFile, loadFileIfNeeded } from '../actions';
-import { loadGraphics, uploadGraphics, deleteGraphics } from '../actions/graphics';
+import { loadGraphics, uploadGraphics, deleteGraphics, editGraphic } from '../actions/graphics';
 
 import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
@@ -55,6 +55,10 @@ const GraphicsPage = React.createClass({
     const { dispatch } = this.props;
     dispatch( deleteGraphics( type, data ) );
   },
+  handleEditImage( type, data ) {
+    const { dispatch } = this.props;
+    dispatch( editGraphic( type, data ) );
+  },
   render() {
     if ( this.props.loaded ) {
       return (
@@ -66,7 +70,8 @@ const GraphicsPage = React.createClass({
                 type='backgrounds'
                 baseUrl={this.props.baseUrl}
                 onUploadModal={this.handleShowUploadFile}
-                onDelete={this.handleDeleteImage}/>
+                onDelete={this.handleDeleteImage}
+                onEdit={this.handleEditImage}/>
             </Tab>
             <Tab label='Districts' value='districts'>
               <ImagesView
@@ -74,7 +79,8 @@ const GraphicsPage = React.createClass({
                 images={this.props.graphics.districts}
                 baseUrl={this.props.baseUrl}
                 onUploadModal={this.handleShowUploadFile}
-                onDelete={this.handleDeleteImage}/>
+                onDelete={this.handleDeleteImage}
+                onEdit={this.handleEditImage}/>
             </Tab>
             <Tab label='Portraits' value='portraits'>
               <p> Portraits </p>

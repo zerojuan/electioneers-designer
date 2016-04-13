@@ -5,6 +5,8 @@ export const REQUEST_GRAPHICS_FILE = 'REQUEST_GRAPHICS_FILE';
 export const REQUEST_FILE_UPLOAD = 'REQUEST_FILE_UPLOAD';
 export const REQUEST_DELETE_IMAGE = 'REQUEST_DELETE_IMAGE';
 export const RECIEVE_DELETE_IMAGE = 'RECIEVE_DELETE_IMAGE';
+export const REQUEST_EDIT_IMAGE = 'REQUEST_EDIT_IMAGE';
+export const RECIEVE_EDIT_IMAGE = 'RECIEVE_EDIT_IMAGE';
 
 function recieveLoadFile( data ) {
   return {
@@ -36,6 +38,22 @@ function requestDeleteImage( type, data ) {
 function recieveDeleteImage( data ) {
   return {
     type: RECIEVE_DELETE_IMAGE,
+    data: data.data,
+    imageType: data.type
+  };
+}
+
+function requestEditImage( type, data ) {
+  return {
+    type: REQUEST_EDIT_IMAGE,
+    data: data,
+    imageType: data.type
+  };
+}
+
+function recieveEditImage( data ) {
+  return {
+    type: RECIEVE_EDIT_IMAGE,
     data: data.data,
     imageType: data.type
   };
@@ -73,6 +91,26 @@ export function deleteGraphics( type, data ) {
       })
       .then( response => response.json() )
       .then( json => dispatch( recieveDeleteImage( json ) ) );
+  };
+}
+
+
+export function editGraphic( type, data ) {
+  return dispatch => {
+    dispatch( requestEditImage( type, data ) );
+    return fetch( 'http://localhost:7171/graphics/' + data.id, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        type: type,
+        data: data
+      })
+    })
+    .then( response => response.json() )
+    .then( json => dispatch( recieveEditImage( json ) ) );
   };
 }
 

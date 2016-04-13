@@ -16,6 +16,7 @@ export default React.createClass({
     baseUrl: PropTypes.string.isRequired,
     onUploadModal: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,
     type: PropTypes.string.isRequired
   },
   componentWillReceiveProps( nextProps ) {
@@ -41,6 +42,17 @@ export default React.createClass({
   handleDeleteImage() {
     this.props.onDelete( this.props.type, this.state.selected );
   },
+  handleEditImage() {
+    console.log( this.state.selected );
+    this.props.onEdit( this.props.type, this.state.selected );
+  },
+  handleMetadataChange( value ) {
+    const selected = _.assign({}, this.state.selected );
+    selected.name = value;
+    this.setState({
+      selected: selected
+    });
+  },
   render() {
     return (
       <div>
@@ -55,8 +67,11 @@ export default React.createClass({
           <div className='col-xs-8'>
             <ImageDetails
               image={this.state.selected}
+              onChange={this.handleMetadataChange}
               baseUrl={this.props.baseUrl}
               />
+            <RaisedButton label='Save' primary={true} onTouchTap={this.handleEditImage}/>
+            &nbsp;
             <RaisedButton label='Delete' primary={true} onTouchTap={this.handleDeleteImage}/>
           </div>
         </div>

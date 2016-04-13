@@ -30,7 +30,9 @@ import {
   REQUEST_GRAPHICS_FILE,
   RECIEVE_GRAPHICS_FILE,
   REQUEST_DELETE_IMAGE,
-  RECIEVE_DELETE_IMAGE
+  RECIEVE_DELETE_IMAGE,
+  REQUEST_EDIT_IMAGE,
+  RECIEVE_EDIT_IMAGE
 } from './actions/graphics';
 
 import {
@@ -51,7 +53,8 @@ import {
 } from './reducers/config';
 
 import {
-  deleteImage
+  deleteImage,
+  editImage
 } from './reducers/graphics';
 
 function addFile( state, action ) {
@@ -201,6 +204,8 @@ function graphics( state = {}, action ) {
       return action.graphics;
     case RECIEVE_DELETE_IMAGE:
       return deleteImage( state, action );
+    case RECIEVE_EDIT_IMAGE:
+      return editImage( state, action );
     default:
       return state;
   }
