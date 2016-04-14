@@ -10,7 +10,7 @@ import EditIcon from 'material-ui/lib/svg-icons/action/perm-identity';
 
 import td from 'material-ui/lib/table/table-row-column';
 
-import Paginator from './paginator';
+import Paginator from '../paginator';
 
 export default React.createClass({
   getInitialState() {

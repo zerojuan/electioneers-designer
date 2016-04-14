@@ -5,7 +5,7 @@ import Slider from 'material-ui/lib/slider';
 import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
 
-import LabelTextField from './label-textfield';
+import LabelTextField from '../label-textfield';
 
 const PairFamilyList = React.createClass({
   propTypes: {
