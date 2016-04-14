@@ -14,11 +14,11 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import FlatButton from 'material-ui/lib/flat-button';
 import Dialog from 'material-ui/lib/dialog';
 
-import PopulationList from '../components/population-list';
-import PopulationGrid from '../components/population-grid';
-import GenerateFamilyDialog from '../components/generate-family-dialog';
-import EditFamilyDialog from '../components/edit-family-dialog';
-import PairFamilyDialog from '../components/pair-family-dialog';
+import PopulationList from '../components/population/population-list';
+import PopulationGrid from '../components/population/population-grid';
+import GenerateFamilyDialog from '../components/population/generate-family-dialog';
+import EditFamilyDialog from '../components/population/edit-family-dialog';
+import PairFamilyDialog from '../components/population/pair-family-dialog';
 
 const LIST_VIEW = 1;
 const DOTS_VIEW = 2;
@@ -49,6 +49,10 @@ const PopulationPage = React.createClass({
       _id: PropTypes.string.isRequired,
       fatherName: PropTypes.string.isRequired,
       familyName: PropTypes.string.isRequired
+    }).isRequired ).isRequired,
+    districts: PropTypes.arrayOf( PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired
     }).isRequired ).isRequired
   },
   componentDidMount: function() {
@@ -109,7 +113,7 @@ const PopulationPage = React.createClass({
       pairFamilyOpen: false,
       selectedFamilyA: null,
       selectedFamilyB: null
-    })
+    });
   },
   handleEditFamilySubmitDialog( family ) {
     const { dispatch } = this.props;
@@ -202,7 +206,8 @@ const PopulationPage = React.createClass({
           onClose={this.handleHideEditFamilyDialog}
           onSubmit={this.handleEditFamilySubmitDialog}
           family={this.state.selectedFamily}
-          population={this.props.population}/>
+          population={this.props.population}
+          districts={this.props.districts}/>
         <PairFamilyDialog
           open={this.state.pairFamilyOpen}
           onClose={this.handleHidePairingDialog}
@@ -218,12 +223,14 @@ const PopulationPage = React.createClass({
 function mapStateToProps( state ) {
   const {
     selectedFile,
-    population
+    population,
+    districts
   } = state;
 
   return {
     selectedFile,
-    population
+    population,
+    districts
   };
 }
 
