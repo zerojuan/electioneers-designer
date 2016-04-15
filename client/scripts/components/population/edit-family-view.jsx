@@ -4,6 +4,9 @@ import TextField from 'material-ui/lib/text-field';
 import Slider from 'material-ui/lib/slider';
 import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
+import DropdownMenu from 'material-ui/lib/DropDownMenu';
+import MenuItem from 'material-ui/lib/menus/menu-item';
+
 
 import LabelTextField from '../label-textfield';
 
@@ -48,12 +51,18 @@ export default React.createClass({
   propTypes: {
     family: PropTypes.object,
     population: PropTypes.array,
+    districts: PropTypes.array,
     onPropChange: PropTypes.func.isRequired
   },
   handlePropChange( propName ) {
-    return ( event ) => {
+    return ( event, value ) => {
+      console.log( event, value );
       this.props.onPropChange( propName, event.target.value );
     };
+  },
+  handleSelectChange( e, index, value ) {
+    console.log( value );
+    this.props.onPropChange( 'selectedDistrict', value );
   },
   render() {
     return (
@@ -70,6 +79,20 @@ export default React.createClass({
               value={this.props.family.familyName}
               onChange={this.handlePropChange( 'familyName' )}
               />
+            <DropdownMenu value={ this.props.family.selectedDistrict }
+                onChange={this.handleSelectChange}>
+              {
+                this.props.districts.map( ( district ) => {
+                  return (
+                    <MenuItem
+                      key={ district._id }
+                      value={ district._id }
+                      primaryText={ district.name }
+                      />
+                  );
+                })
+              }
+            </DropdownMenu>
           </Tab>
           <Tab label='Stats'>
             <LabelTextField

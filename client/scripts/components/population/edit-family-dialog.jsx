@@ -13,7 +13,8 @@ export default React.createClass({
     onSubmit: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
     family: PropTypes.object,
-    population: PropTypes.array
+    population: PropTypes.array,
+    districts: PropTypes.array
   },
   getInitialState( ) {
     return {
@@ -21,13 +22,14 @@ export default React.createClass({
     };
   },
   componentWillReceiveProps( nextProps ) {
-    if( nextProps.family ) {
+    if ( nextProps.family ) {
       this.setState({
         initialFamily: nextProps.family
       });
     }
   },
   handlePropChange( propName, value ) {
+    console.log( 'Propname: ', propName, value );
     let temp = {};
     temp[ propName ] = value;
     let family = this.state.initialFamily;
@@ -69,6 +71,7 @@ export default React.createClass({
         open={this.props.open}>
         <EditFamilyView
           family={this.state.initialFamily}
+          districts={this.props.districts}
           population={this.props.population}
           onPropChange={this.handlePropChange}
           ></EditFamilyView>
