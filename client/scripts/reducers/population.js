@@ -55,7 +55,10 @@ function pickRandom( arr ) {
     Math.floor( Math.random() * arr.length ) ];
 }
 
-function generateFamily() {
+function generateFamily( districts ) {
+  // set default district
+  const districtId = districts[ 0 ]._id;
+
   return {
     _id: guid(),
     familyName: pickRandom( Surnames ),
@@ -64,7 +67,8 @@ function generateFamily() {
     intelligence: Math.floor( Math.random() * 100 ),
     charm: Math.floor( Math.random() * 100 ),
     leadership: Math.floor( Math.random() * 100 ),
-    connections: []
+    connections: [],
+    districtId: districtId
   };
 }
 
@@ -94,7 +98,7 @@ export function batchGenerateFamily( state, action ) {
   // check for size
   var families = [];
   for ( let i = 0; i < action.count; i++ ) {
-    families.push( generateFamily() );
+    families.push( generateFamily( action.districts ) );
   }
 
   return [

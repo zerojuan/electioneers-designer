@@ -87,6 +87,8 @@ const PopulationPage = React.createClass({
     // Call the backend with this information
     const { dispatch } = this.props;
 
+    data.districts = this.props.districts;
+
     dispatch( batchGenerateFamily( data ) );
   },
   handleHideEditFamilyDialog() {

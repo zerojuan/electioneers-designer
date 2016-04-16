@@ -5,11 +5,12 @@ export const EDIT_FAMILY = 'EDIT_FAMILY';
 export const PAIR_FAMILY = 'PAIR_FAMILY';
 
 
-export function batchGenerateFamily({ count, wealth }) {
+export function batchGenerateFamily({ count, wealth, districts }) {
   return {
     type: BATCH_GENERATE_FAMILY,
     count: count,
-    wealth: wealth
+    wealth: wealth,
+    districts: districts
   };
 }
 

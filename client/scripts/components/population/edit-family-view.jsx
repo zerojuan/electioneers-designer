@@ -62,7 +62,7 @@ export default React.createClass({
   },
   handleSelectChange( e, index, value ) {
     console.log( value );
-    this.props.onPropChange( 'selectedDistrict', value );
+    this.props.onPropChange( 'districtId', value );
   },
   render() {
     return (
@@ -79,7 +79,7 @@ export default React.createClass({
               value={this.props.family.familyName}
               onChange={this.handlePropChange( 'familyName' )}
               />
-            <DropdownMenu value={ this.props.family.selectedDistrict }
+            <DropdownMenu value={ this.props.family.districtId }
                 onChange={this.handleSelectChange}>
               {
                 this.props.districts.map( ( district ) => {
