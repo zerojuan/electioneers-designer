@@ -10,6 +10,7 @@ import {
   RECIEVE_DELETE_FILE,
   REQUEST_LOAD_FILE,
   RECIEVE_LOAD_FILE,
+  REQUEST_LOAD_FILE_FAILED,
   REQUEST_SAVE_FILE,
   RECIEVE_SAVE_FILE} from './actions';
 
@@ -128,7 +129,12 @@ function selectedFile( state = null, action ) {
 function districts( state = [], action ) {
   switch ( action.type ) {
     case RECIEVE_LOAD_FILE:
+      if ( !action.districts ) {
+        return [];
+      }
       return action.districts;
+    case REQUEST_LOAD_FILE_FAILED:
+      return [];
     case EDIT_DISTRICT:
       return editDistrict( state, action );
     case CREATE_DISTRICT:
@@ -144,6 +150,8 @@ function population( state = [], action ) {
   switch ( action.type ) {
     case RECIEVE_LOAD_FILE:
       return formatFamilyData( state, action );
+    case REQUEST_LOAD_FILE_FAILED:
+      return [];
     case BATCH_GENERATE_FAMILY:
       return batchGenerateFamily( state, action );
     case EDIT_FAMILY:
@@ -191,6 +199,8 @@ function config( state = {}, action ) {
   switch ( action.type ) {
     case RECIEVE_LOAD_FILE:
       return action.config;
+    case REQUEST_LOAD_FILE_FAILED:
+      return {};
     case CHANGE_BACKGROUND:
       return changeBackground( state, action );
     default:

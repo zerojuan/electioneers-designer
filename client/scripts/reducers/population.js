@@ -85,6 +85,10 @@ function updateFamily( families, family ) {
 
 export function formatFamilyData( state, action ) {
   // make sure every family has the correct properties
+  if ( !action.population ) {
+    return [];
+  }
+
   return action.population.map( ( family ) => {
     if ( !family.connections ) {
       family.connections = [];

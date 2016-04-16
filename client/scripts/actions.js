@@ -21,6 +21,7 @@ export const RECIEVE_DELETE_FILE = 'RECIEVE_DELETE_FILES';
 
 export const REQUEST_LOAD_FILE = 'REQUEST_LOAD_FILE';
 export const RECIEVE_LOAD_FILE = 'RECIEVE_LOAD_FILE';
+export const REQUEST_LOAD_FILE_FAILED = 'REQUEST_LOAD_FILE_FAILED';
 
 /*
  * Action helpers
@@ -88,6 +89,13 @@ function requestLoadFile( name ) {
   };
 };
 
+function errorLoadFile( errResponse ) {
+  return {
+    type: REQUEST_LOAD_FILE_FAILED,
+    errResponse: errResponse
+  };
+}
+
 function recieveLoadFile( data ) {
   return {
     type: RECIEVE_LOAD_FILE,
@@ -133,8 +141,16 @@ function fetchFile( name ) {
   return dispatch => {
     dispatch( requestLoadFile() );
     return fetch( 'http://localhost:7171/base/' + name )
-      .then( response => response.json() )
-      .then( json => dispatch( recieveLoadFile( json ) ) );
+      .then( response => {
+        if ( response.status >= 400 ) {
+          let error = new Error( response.statusText );
+          error.response = response;
+          throw error;
+        }
+        return response.json();
+      })
+      .then( json => dispatch( recieveLoadFile( json ) ) )
+      .catch( error=> dispatch( errorLoadFile( error.response ) ) );
   };
 }
 
