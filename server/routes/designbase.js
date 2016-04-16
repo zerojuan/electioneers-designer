@@ -37,7 +37,7 @@ router.get( '/:name', function( req, res ) {
           return callback( err );
         }
         var population = JSON.parse( data ).data;
-        return callback( null, population.map( Population.convert ) );
+        return callback( null, population.map(  Population.convert ) );
       });
     },
     actions: function( callback ) {
@@ -66,6 +66,11 @@ router.get( '/:name', function( req, res ) {
       return res.status( 404 ).send( err );
     }
     console.log( 'Found files' );
+
+    // families without should have default districts
+    results.population = results.population.map(function( family ) {
+      return Population.fillDistrictId( family, results.districts );
+    });
     return res.send( results );
   });
 });
