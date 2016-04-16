@@ -182,11 +182,16 @@ const PopulationPage = React.createClass({
               <MenuItem value={LIST_VIEW} primaryText='List'/>
               <MenuItem value={DOTS_VIEW} primaryText='Dots'/>
             </DropdownMenu>
-            <RaisedButton
-              label='Generate Family'
-              primary={ true }
-              onTouchTap={ this.handleShowGenerateDialog }>
-            </RaisedButton>
+            { (this.props.districts.length) ?
+              <RaisedButton
+                label='Generate Family'
+                primary={ true }
+                onTouchTap={ this.handleShowGenerateDialog }>
+              </RaisedButton>
+              :
+              <span>Must create a district first</span>
+            }
+
           </ToolbarGroup>
           <ToolbarGroup>
             <ToolbarTitle text='Actions:'></ToolbarTitle>
