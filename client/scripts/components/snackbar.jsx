@@ -12,23 +12,20 @@ export default React.createClass({
   },
   componentWillReceiveProps( nextProps ) {
     // TODO: Handle multiple snackbars
-    console.log( 'Recieving props...', nextProps );
     if ( nextProps.messages.length > 0 ) {
-      console.log( 'Am I here' );
       this.setState({
         activeMessage: nextProps.messages[ 0 ],
         currentMessageIndex: 0,
         open: true
       });
     } else {
-      console.log( 'Or here' );
       this.setState({
         open: false
       });
     }
   },
   handleRequestClose() {
-    this.props.onHide();
+    this.props.onHide( this.state.activeMessage );
     this.setState({
       open: false
     });
@@ -38,7 +35,7 @@ export default React.createClass({
     if ( this.state.activeMessage ) {
       snackbar = <Snackbar
         open={this.state.open}
-        message={this.state.activeMessage}
+        message={this.state.activeMessage.message}
         autoHideDuration={3000}
         onRequestClose={this.handleRequestClose}
       />;

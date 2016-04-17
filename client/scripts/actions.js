@@ -1,5 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
+import { newMessage, readMessage } from './actions/messages.js';
+
 /*
  * Action types
  */
@@ -150,7 +152,10 @@ function fetchFile( name ) {
         return response.json();
       })
       .then( json => dispatch( recieveLoadFile( json ) ) )
-      .catch( error=> dispatch( errorLoadFile( error.response ) ) );
+      .catch( error=> {
+        dispatch( errorLoadFile( error.response ) );
+        dispatch( newMessage( 'File is probably corrupted' ) );
+      });
   };
 }
 

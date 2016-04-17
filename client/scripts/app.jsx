@@ -5,6 +5,7 @@ import { Link, RouteHandler } from 'react-router';
 require( '../styles/_import.less' );
 
 import { saveFile } from './actions';
+import { readMessage } from './actions/messages';
 
 import Breadcrumb from './components/breadcrumb.jsx';
 import Sidebar from './components/sidebar.jsx';
@@ -42,26 +43,9 @@ const App = React.createClass({
     this.setState({ sidebarOpen: false });
   },
 
-  shiftMessage() {
-    let messages = _.clone( this.state.messages );
-    console.log( 'Before>>> ' + messages );
-    messages.shift();
-    console.log( 'Shifted>>>:', messages );
-    this.setState({
-      messages: messages
-    });
-  },
-
-  componentWillReceiveProps( nextProps ) {
-    if ( nextProps.message ) {
-      console.log( 'Recieving Messages:>>> ', this.state.messages );
-      this.setState({
-        messages: [
-          ...this.state.messages,
-          nextProps.message
-        ]
-      });
-    }
+  shiftMessage( activeMessage ) {
+    const { dispatch } = this.props;
+    dispatch( readMessage( activeMessage.id ) );
   },
 
   handleSaveButton() {
@@ -104,7 +88,7 @@ const App = React.createClass({
           >
           {this.props.children}
         </div>
-        <Snackbar messages={this.state.messages} onHide={this.shiftMessage}/>
+        <Snackbar messages={this.props.messages} onHide={this.shiftMessage}/>
       </div>
     );
 
@@ -124,8 +108,7 @@ function mapStateToProps( state ) {
   };
 
   const selectedFile = state.selectedFile;
-  const message = state.message;
-  console.log( 'Is this the message: ', message );
+  const messages = state.messages;
   const isDirty = state.isDirty;
 
   return {
@@ -133,7 +116,7 @@ function mapStateToProps( state ) {
     files,
     didInvalidate,
     isFetching,
-    message,
+    messages,
     isDirty
   };
 }

@@ -37,6 +37,11 @@ import {
 } from './actions/graphics';
 
 import {
+  NEW_MESSAGE,
+  READ_MESSAGE
+} from './actions/messages';
+
+import {
   batchGenerateFamily,
   editFamily,
   formatFamilyData,
@@ -57,6 +62,11 @@ import {
   deleteImage,
   editImage
 } from './reducers/graphics';
+
+import {
+  newMessage,
+  readMessage
+} from './reducers/messages';
 
 function addFile( state, action ) {
   return [
@@ -186,12 +196,12 @@ function isDirty( state = false, action ) {
   }
 }
 
-function message( state = null, action ) {
+function messages( state = [], action ) {
   switch ( action.type ) {
-    case RECIEVE_SAVE_FILE:
-      return 'Saved ' + action.name;
-    case REQUEST_LOAD_FILE_FAILED:
-      return 'This file might be corrupted';
+    case NEW_MESSAGE:
+      return newMessage( state, action );
+    case READ_MESSAGE:
+      return readMessage( state, action );
     default:
       return state;
   }
@@ -242,7 +252,7 @@ const designerApp = combineReducers({
   isDirty,
   graphics,
   graphicsLoaded,
-  message,
+  messages,
   config
 });
 
