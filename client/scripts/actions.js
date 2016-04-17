@@ -216,7 +216,10 @@ export function saveFile( name ) {
       })
     })
     .then( response => response.json() )
-    .then( json => dispatch( recieveSaveFile( json.name ) ) );
+    .then( json => {
+      dispatch( recieveSaveFile( json.name ) );
+      dispatch( newMessage( 'Saved!' ) );
+    });
   };
 }
 
