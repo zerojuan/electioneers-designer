@@ -43,21 +43,25 @@ const App = React.createClass({
   },
 
   shiftMessage() {
+    let messages = _.clone( this.state.messages );
+    console.log( 'Before>>> ' + messages );
+    messages.shift();
+    console.log( 'Shifted>>>:', messages );
     this.setState({
-      messages: this.state.messages.shift()
+      messages: messages
     });
   },
 
   componentWillReceiveProps( nextProps ) {
-    // if ( nextProps.message ) {
-    //   console.log( 'How many messages? ' );
-    //   this.setState({
-    //     messages: [
-    //       ...this.messages,
-    //       nextProps.message
-    //     ]
-    //   });
-    // }
+    if ( nextProps.message ) {
+      console.log( 'Recieving Messages:>>> ', this.state.messages );
+      this.setState({
+        messages: [
+          ...this.state.messages,
+          nextProps.message
+        ]
+      });
+    }
   },
 
   handleSaveButton() {

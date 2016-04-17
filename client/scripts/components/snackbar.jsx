@@ -3,7 +3,7 @@ import React from 'react';
 import Snackbar from 'material-ui/lib/snackbar';
 
 export default React.createClass({
-  displayName: 'Snackbar',
+  displayName: 'MySnackbar',
   getInitialState() {
     return {
       open: false,
@@ -12,13 +12,16 @@ export default React.createClass({
   },
   componentWillReceiveProps( nextProps ) {
     // TODO: Handle multiple snackbars
+    console.log( 'Recieving props...', nextProps );
     if ( nextProps.messages.length > 0 ) {
+      console.log( 'Am I here' );
       this.setState({
         activeMessage: nextProps.messages[ 0 ],
         currentMessageIndex: 0,
         open: true
       });
     } else {
+      console.log( 'Or here' );
       this.setState({
         open: false
       });

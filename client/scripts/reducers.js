@@ -190,6 +190,8 @@ function message( state = null, action ) {
   switch ( action.type ) {
     case RECIEVE_SAVE_FILE:
       return 'Saved ' + action.name;
+    case REQUEST_LOAD_FILE_FAILED:
+      return 'This file might be corrupted';
     default:
       return state;
   }
