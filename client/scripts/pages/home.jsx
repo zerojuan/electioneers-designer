@@ -24,6 +24,7 @@ const Home = React.createClass({
   },
   handleFileSelect( value ) {
     const { dispatch } = this.props;
+
     dispatch( loadFileIfNeeded( value ) );
     dispatch( selectFile( value ) );
   },
@@ -33,6 +34,7 @@ const Home = React.createClass({
   },
   handleFileDelete( name ) {
     const { dispatch } = this.props;
+
     dispatch( deleteFile( name ) );
   },
   render() {

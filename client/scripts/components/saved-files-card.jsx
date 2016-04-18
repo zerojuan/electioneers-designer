@@ -86,8 +86,7 @@ export default React.createClass({
               <ListItem
                 value={ item.name }
                 key={ i }
-                primaryText={item.name}
-                containerElement={<Link to={item.name + '/'}/>}
+                primaryText={<Link to={item.name + '/'}>{item.name}</Link>}
                 secondaryText={<Time value={item.lastModified} relative></Time>}
                 rightIconButton={
                   <FlatButton label='Delete'
