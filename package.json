@@ -6,13 +6,13 @@
   "main": "index.html",
   "scripts": {
     "postinstall": "install-app-deps",
-    "start": "./node_modules/.bin/gulp watch",
+    "start": "npm install && electron ./app",
     "clean": "rimraf dist/",
     "clean:osx": "rimraf dist/ElectioneersDesigner-darwin-x64",
     "clean:win": "rimraf dist/win",
     "compile": "rimraf ./app/out && mkdir app/out && cp -r public/** app/out",
     "pack": "./node_modules/.bin/gulp build && npm run compile && build",
-    "dist": "build",
+    "dist": "./node_modules/.bin/gulp build && npm run compile && build",
     "test": "node test",
     "test-ci": "node test | tap-xunit"
   },
