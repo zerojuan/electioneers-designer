@@ -5,6 +5,7 @@ dependencies:
   override:
     - npm set progress=false
     - npm install
+    - npm install rimraf -g
     - cd server && npm install
 test:
   override:

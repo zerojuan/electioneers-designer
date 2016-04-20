@@ -123,14 +123,12 @@ gulp.task( 'default', function() {
 
 gulp.task( 'build', [ 'webpack:build', 'copy-assets', 'copy-backend' ],
   function() {
-  nw.on( 'log',  console.log );
-
-  // Build returns a promise
-  nw.build().then(function() {
-    console.log( 'all done!' );
-  }).catch(function( error ) {
-    console.error( error );
-  });
+  // // Build returns a promise
+  // nw.build().then(function() {
+  //   console.log( 'all done!' );
+  // }).catch(function( error ) {
+  //   console.error( error );
+  // });
 });
 
 gulp.task( 'watch',

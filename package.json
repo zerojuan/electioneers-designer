@@ -1,12 +1,18 @@
 {
-  "name": "partyanimals-designer",
+  "name": "ElectioneersDesigner",
   "version": "0.0.1",
-  "description": "Designer tool for partyanimals",
-  "repository": "https://github.com/zerojuan/partyanimals-designer",
+  "description": "Designer tool for Electioneers",
+  "repository": "https://github.com/zerojuan/electioneers-designer",
   "main": "index.html",
   "scripts": {
+    "postinstall": "install-app-deps",
     "start": "./node_modules/.bin/gulp watch",
-    "build": "./node_modules/.bin/gulp build",
+    "clean": "rimraf dist/",
+    "clean:osx": "rimraf dist/ElectioneersDesigner-darwin-x64",
+    "clean:win": "rimraf dist/win",
+    "compile": "rimraf ./app/out && mkdir app/out && cp -r public/** app/out",
+    "pack": "./node_modules/.bin/gulp build && npm run compile && build",
+    "dist": "build",
     "test": "node test",
     "test-ci": "node test | tap-xunit"
   },
@@ -16,6 +22,25 @@
   ],
   "engines": {
     "node": "5.2.0"
+  },
+  "build": {
+    "app-bundle-id": "xyz.electioneers.electioneersdesigner",
+    "app-category-type": "public.app-category.games",
+    "osx": {
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    }
   },
   "author": "juliusthepious",
   "license": "ISC",
@@ -57,6 +82,8 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-2": "^6.3.13",
     "css-loader": "^0.23.0",
+    "electron-builder": "^3.6.1",
+    "electron-prebuilt": "^0.37.6",
     "eslint": "^1.10.3",
     "eslint-plugin-react": "^3.14.0",
     "file-loader": "^0.8.5",

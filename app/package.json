@@ -1,10 +1,10 @@
 {
-  "name": "Electioneers Designer",
+  "name": "ElectioneersDesigner",
   "version": "0.0.1",
   "description": "Scenario Editor for Electioneers game",
   "author": "JuliusThePious <juliuscebreros@gmail.com>",
   "private": true,
-  "main": "./out/index.js",
+  "main": "./out/main.js",
   "dependencies": {
     "babel-polyfill": "^6.3.14",
     "body-parser": "^1.14.2",
