@@ -45,7 +45,11 @@ gulp.task( 'copy-assets', function() {
 });
 
 gulp.task( 'copy-backend', function() {
-  gulp.src([ 'server/**', '!server/package.json' ])
+  gulp.src([
+    'server/**',
+    '!server/package.json',
+    '!server/node_modules',
+    '!server/node_modules/**' ])
     .pipe( gulp.dest( 'public' ) );
 });
 
