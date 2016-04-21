@@ -7,6 +7,7 @@
   "scripts": {
     "postinstall": "install-app-deps",
     "start": "npm install && electron ./app",
+    "start:simple": "electron ./app",
     "clean": "rimraf dist/",
     "clean:osx": "rimraf dist/ElectioneersDesigner-darwin-x64",
     "clean:win": "rimraf dist/win",
@@ -17,8 +18,9 @@
     "test-ci": "node test | tap-xunit"
   },
   "keywords": [
-    "partyanimals",
-    "webkit"
+    "electioneers",
+    "webkit",
+    "designer"
   ],
   "engines": {
     "node": "5.2.0"
