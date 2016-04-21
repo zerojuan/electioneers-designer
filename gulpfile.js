@@ -15,14 +15,6 @@ var touch = require( 'touch' );
 
 var $ = require( 'gulp-load-plugins' )();
 
-var NwBuilder = require( 'nw-builder' );
-var nw = new NwBuilder({
-  // use the glob format
-  files: './public/**/**',
-  platforms: [ 'osx64' ],
-  version: '0.12.3'
-});
-
 gulp.task( 'css', function() {
   // gulp.src([
   //   'src/styles/*.less',
@@ -125,15 +117,7 @@ gulp.task( 'default', function() {
   gulp.start( 'build' );
 });
 
-gulp.task( 'build', [ 'webpack:build', 'copy-assets', 'copy-backend' ],
-  function() {
-  // // Build returns a promise
-  // nw.build().then(function() {
-  //   console.log( 'all done!' );
-  // }).catch(function( error ) {
-  //   console.error( error );
-  // });
-});
+gulp.task( 'build', [ 'webpack:build', 'copy-assets', 'copy-backend' ]);
 
 gulp.task( 'watch',
   [ 'css',
