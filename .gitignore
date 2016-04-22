@@ -13,14 +13,3 @@ build/icons
 npm-debug.log
 
 app/out
-
-public/index.html
-public/index.js
-public/settings.js
-public/utils.js
-public/*.less
-public/routes
-public/data
-public/bundle.js
-public/favicon.ico
-public/models

@@ -33,7 +33,7 @@ gulp.task( 'css', function() {
 
 gulp.task( 'copy-assets', function() {
   gulp.src( 'assets/**' )
-    .pipe( gulp.dest( 'public' ) );
+    .pipe( gulp.dest( 'app/out' ) );
 });
 
 gulp.task( 'copy-backend', function() {
@@ -42,7 +42,7 @@ gulp.task( 'copy-backend', function() {
     '!server/package.json',
     '!server/node_modules',
     '!server/node_modules/**' ])
-    .pipe( gulp.dest( 'public' ) );
+    .pipe( gulp.dest( 'app/out' ) );
 });
 
 gulp.task( 'webpack:build', function( callback ) {
@@ -74,10 +74,10 @@ gulp.task( 'webpack:build', function( callback ) {
 var devServer = {};
 gulp.task( 'webpack-dev-server', [ 'css' ], function( callback ) {
   // ensure there's a public main.css
-  touch.sync( './public/main.css', new Date() );
+  touch.sync( './app/out/main.css', new Date() );
 
   devServer = new WebpackDevServer( webpack( webpackConfig ), {
-    contentBase: './public',
+    contentBase: './app/out',
     hot: true,
     watchOptions: {
       aggregateTimeout: 100
