@@ -7,7 +7,8 @@
   "scripts": {
     "postinstall": "install-app-deps",
     "start": "npm install && electron ./app",
-    "start:simple": "electron ./app",
+    "local": "gulp watch",
+    "localelectron": "gulp copy-assets && electron ./app",
     "clean": "rimraf dist/",
     "clean:osx": "rimraf dist/ElectioneersDesigner-darwin-x64",
     "clean:win": "rimraf dist/win",
