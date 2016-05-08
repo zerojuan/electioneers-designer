@@ -14,7 +14,7 @@
     "clean:win": "rimraf dist/win",
     "compile": "rimraf ./app/out && mkdir app/out && cp -r public/** app/out",
     "pack": "./node_modules/.bin/gulp build && npm run compile && build",
-    "dist": "./node_modules/.bin/gulp build && npm run compile && build",
+    "dist": "./node_modules/.bin/gulp build && npm run compile && build --dist",
     "test": "node test",
     "test-ci": "node test | tap-xunit"
   },
