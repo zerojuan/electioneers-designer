@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 
+import _ from 'lodash';
+
 import RaisedButton from 'material-ui/lib/raised-button';
 
 import ImagesList from './images-list';

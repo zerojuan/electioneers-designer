@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import { guid } from './utils';
 
 export function newMessage( state, action ) {

@@ -1,4 +1,5 @@
 import { guid } from './utils';
+import _ from 'lodash';
 
 function updateDistrict( districts, district ) {
   // find item index

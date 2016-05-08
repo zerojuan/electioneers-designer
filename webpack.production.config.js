@@ -14,7 +14,7 @@ module.exports = {
 
   output: {
     filename: 'bundle.js',
-    path: path.join( __dirname, 'public' )
+    path: path.join( __dirname, 'app/out' )
   },
 
   plugins: [
@@ -26,6 +26,9 @@ module.exports = {
     }),
     new webpack.IgnorePlugin( /vertx/ ),
     new webpack.IgnorePlugin( /un~$/ ),
+    new webpack.ProvidePlugin({
+      '_': 'lodash'
+    }),
     new webpack.optimize.DedupePlugin()
   ],
 

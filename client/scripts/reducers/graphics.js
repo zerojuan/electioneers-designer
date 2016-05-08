@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 
 export function deleteImage( state, action ) {
   // search which item to delete

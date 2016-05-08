@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-
+import _ from 'lodash';
 import DistrictSprite from './district-sprite.js';
 
 class DistrictCanvas {
