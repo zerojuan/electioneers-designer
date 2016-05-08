@@ -11,6 +11,6 @@ if ( isDev ) {
   };
 }
 
-exports.module = {
+module.exports = {
   log: _log
 };

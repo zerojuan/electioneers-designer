@@ -22,6 +22,8 @@ const server = serverApp.listen( 7171, function() {
 });
 
 const menu = require( './menu-helper.js' );
+const autoUpdater = require( './autoupdater.js' );
+const handleStartupEvent = require( './winstartuphandler.js' );
 
 function createWindow () {
   Menu.setApplicationMenu( menu );
@@ -30,6 +32,8 @@ function createWindow () {
 
   // and load the index.html of the app.
   mainWindow.loadURL( 'file://' + __dirname + '/index.html' );
+
+  autoUpdater.listenToUpdates( mainWindow );
 
   // Emitted when the window is closed.
   mainWindow.on( 'closed', function() {
@@ -41,21 +45,23 @@ function createWindow () {
   });
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-app.on( 'ready', createWindow );
+if ( !handleStartupEvent() ) {
+  // This method will be called when Electron has finished
+  // initialization and is ready to create browser windows.
+  app.on( 'ready', createWindow );
 
-// Quit when all windows are closed.
-app.on( 'window-all-closed', function() {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  app.quit();
-});
+  // Quit when all windows are closed.
+  app.on( 'window-all-closed', function() {
+    // On OS X it is common for applications and their menu bar
+    // to stay active until the user quits explicitly with Cmd + Q
+    app.quit();
+  });
 
-app.on( 'activate', function() {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if ( mainWindow === null ) {
-    createWindow();
-  }
-});
+  app.on( 'activate', function() {
+    // On OS X it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if ( mainWindow === null ) {
+      createWindow();
+    }
+  });
+}

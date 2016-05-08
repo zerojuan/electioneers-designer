@@ -13,8 +13,7 @@ function run( args, done ) {
   }).on( 'close', done );
 }
 
-module.exports = {
-  handleStartupEvent: function() {
+module.exports = () => {
     if ( process.platform !== 'win32' ) {
       return false;
     }
@@ -34,5 +33,4 @@ module.exports = {
     } else {
       return false;
     }
-  }
 };

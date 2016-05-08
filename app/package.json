@@ -10,6 +10,8 @@
     "cors": "^2.7.1",
     "express": "^4.13.3",
     "lodash": "^3.10.1",
-    "moniker": "^0.1.2"
+    "moniker": "^0.1.2",
+    "nslog": "^3.0.0",
+    "electron-is-dev": "^0.1.0"
   }
 }
