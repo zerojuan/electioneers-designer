@@ -1,6 +1,6 @@
 {
   "name": "ElectioneersDesigner",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Designer tool for Electioneers",
   "repository": "https://github.com/zerojuan/electioneers-designer",
   "main": "index.html",
