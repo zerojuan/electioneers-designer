@@ -26,6 +26,6 @@ install:
 build_script:
   - node --version
   - npm --version
-  - npm run dist:x64
+  - npm run dist
 
 test: off
