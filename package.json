@@ -16,7 +16,7 @@
     "compile:win": "rimraf app/out && mkdir app\\out && xcopy assets app\\out",
     "pack": "./node_modules/.bin/gulp build && npm run compile && build",
     "dist": "npm run compile && ./node_modules/.bin/gulp build && build --dist",
-    "dist:win": "npm run compile:win && ./node_modules/.bin/gulp build && build --dist",
+    "dist:win": "npm run compile:win && gulp build && build --dist",
     "test": "node test",
     "test-ci": "node test | tap-xunit"
   },
