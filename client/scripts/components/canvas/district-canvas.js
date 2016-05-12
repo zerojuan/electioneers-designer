@@ -51,6 +51,11 @@ class DistrictCanvas {
     this.preload();
     this._drawDistricts();
     this._isReady = true;
+
+    // wait for the graphics data to be ready
+    setTimeout( () => {
+      this._preloadGraphics();
+    }, 500 );
   }
 
   _preloadGraphics() {
