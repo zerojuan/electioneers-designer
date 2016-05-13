@@ -18,6 +18,9 @@ class DistrictSprite extends Phaser.Sprite {
     this._isSelected = false;
     this._mySpriteKey = '';
     // this._mySpriteKey = '' + this.data.image;
+
+    this.nameLabel = new Phaser.Text( main.game, 0, 0, this.data.name );
+    this.addChild( this.nameLabel );
   }
 
   _hasEqualString( a, b ) {

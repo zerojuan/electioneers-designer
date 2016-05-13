@@ -5,13 +5,13 @@ import DistrictSprite from './district-sprite.js';
 class DistrictCanvas {
   constructor( state, baseUrl, eventHandlers ) {
     console.log( 'CONSTRUCTING CANVAS>>>' );
-    this.baseUrl = baseUrl;
-    this.districts = state.districts;
-    this.config = state.config;
-    this.graphics = state.graphics;
-    this.eventHandlers = eventHandlers;
+    this.baseUrl        = baseUrl;
+    this.districts      = state.districts;
+    this.config         = state.config;
+    this.graphics       = state.graphics;
+    this.eventHandlers  = eventHandlers;
     this.selectedSprite = null;
-    this._isReady = false;
+    this._isReady       = false;
   }
 
   preload() {
@@ -29,6 +29,7 @@ class DistrictCanvas {
 
     // TODO: resize the world according to background
     this.game.world.resize( 6000, 6000 );
+
     // SETUP DISTRICT CANVAS
     // background image
     this.bg = this.game.add.sprite( 0, 0, 'background' );
@@ -71,8 +72,8 @@ class DistrictCanvas {
       if ( !this.game.cache.checkImageKey( 'district' + d.id ) ) {
         this.game.load.image( 'district' + d.id, this.baseUrl + '/d/' + d.id );
       }
-
     });
+
     this.game.load.start();
     this.game.load.onLoadComplete.addOnce( this._onLoaded, this );
   }

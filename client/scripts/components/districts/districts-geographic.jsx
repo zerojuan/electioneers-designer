@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import { findDOMNode } from 'react-dom';
+import LoggerMixin from 'react-logger';
 
 import DropdownMenu from 'material-ui/lib/DropDownMenu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
@@ -13,11 +14,12 @@ const style = {
 
 export default React.createClass({
   propTypes: {
-    districts: PropTypes.array,
-    baseUrl: PropTypes.string.isRequired,
-    config: PropTypes.object,
+    districts:        PropTypes.array,
+    baseUrl:          PropTypes.string.isRequired,
+    config:           PropTypes.object,
     onChangePosition: PropTypes.func.isRequired
   },
+  mixins: [ LoggerMixin ],
   componentDidMount() {
     const el = findDOMNode( this );
     this.canvas = new CanvasGeoView(
@@ -28,7 +30,6 @@ export default React.createClass({
         onDistrictsConnect: this.handleDistrictsConnect
       });
 
-    // Create
     this.canvas.create( el, {
       width: '100%',
       height: '400px',
@@ -38,6 +39,7 @@ export default React.createClass({
     });
   },
   componentDidUpdate() {
+    this.log( 'Updating canvas...' );
     const el = findDOMNode( this );
 
     this.canvas.update( el,  {
