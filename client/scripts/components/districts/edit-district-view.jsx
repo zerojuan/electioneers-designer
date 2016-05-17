@@ -48,6 +48,9 @@ export default React.createClass({
               }
             </DropdownMenu>
           </Tab>
+          <Tab label='families'>
+            Families here
+          </Tab>
         </Tabs>
       </div>
     );
