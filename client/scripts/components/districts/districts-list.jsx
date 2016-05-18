@@ -22,6 +22,9 @@ export default React.createClass({
       this.props.onShowEdit( district );
     };
   },
+  handleDeleteDistrict( district ) {
+    console.log( 'Delete district' );
+  },
   render() {
     // only load the first 10
     const { currentPage, pageSize } = this.state;
@@ -47,6 +50,10 @@ export default React.createClass({
                       <TableRowColumn>
                         <FloatingActionButton mini={true}
                           onTouchTap={this.handleEditDistrict( district )}>
+                          <EditIcon />
+                        </FloatingActionButton>
+                        <FloatingActionButton mini={true}
+                          onTouchTap={this.handleDeleteDistrict( district )}>
                           <EditIcon />
                         </FloatingActionButton>
                       </TableRowColumn>

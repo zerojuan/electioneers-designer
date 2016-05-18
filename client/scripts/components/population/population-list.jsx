@@ -45,7 +45,12 @@ export default React.createClass({
   handleShowEditFamily( family ) {
     return () => {
       this.props.onCellSelected( family );
-    }
+    };
+  },
+  handleDeleteFamily( family ) {
+    return () => {
+      console.log( 'Deleting this family...', family );
+    };
   },
   render() {
     // only load the first 10
@@ -78,6 +83,10 @@ export default React.createClass({
                     <td>{family.leadership}</td>
                     <td>
                       <FloatingActionButton mini={true} onTouchTap={this.handleShowEditFamily( family )}>
+                        <EditIcon />
+                      </FloatingActionButton>
+                      <FloatingActionButton mini={true}
+                        onTouchTap={this.handleDeleteFamily( family )}>
                         <EditIcon />
                       </FloatingActionButton>
                     </td>
