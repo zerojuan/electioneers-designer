@@ -42,14 +42,9 @@ export default React.createClass({
       currentPage: page
     });
   },
-  handleShowEditFamily( family ) {
+  handleSelectFamily( family ) {
     return () => {
       this.props.onCellSelected( family );
-    };
-  },
-  handleDeleteFamily( family ) {
-    return () => {
-      console.log( 'Deleting this family...', family );
     };
   },
   render() {
@@ -82,11 +77,7 @@ export default React.createClass({
                     <td>{family.charm}</td>
                     <td>{family.leadership}</td>
                     <td>
-                      <FloatingActionButton mini={true} onTouchTap={this.handleShowEditFamily( family )}>
-                        <EditIcon />
-                      </FloatingActionButton>
-                      <FloatingActionButton mini={true}
-                        onTouchTap={this.handleDeleteFamily( family )}>
+                      <FloatingActionButton mini={true} onTouchTap={this.handleSelectFamily( family )}>
                         <EditIcon />
                       </FloatingActionButton>
                     </td>

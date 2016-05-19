@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { selectFile, loadFileIfNeeded } from '../actions';
 
-import { batchGenerateFamily, editFamily, pairFamily } from '../actions/population';
+import { batchGenerateFamily, editFamily, pairFamily, deleteFamily } from '../actions/population';
 
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
@@ -19,12 +19,14 @@ import PopulationGrid from '../components/population/population-grid';
 import GenerateFamilyDialog from '../components/population/generate-family-dialog';
 import EditFamilyDialog from '../components/population/edit-family-dialog';
 import PairFamilyDialog from '../components/population/pair-family-dialog';
+import DeleteFamilyDialog from '../components/population/delete-family-dialog';
 
 const LIST_VIEW = 1;
 const DOTS_VIEW = 2;
 
 const EDIT = 1;
 const PAIR = 2;
+const DELETE = 3;
 
 const PopulationPage = React.createClass({
   displayName: 'Population',
@@ -103,6 +105,18 @@ const PopulationPage = React.createClass({
       selectedFamily: family
     });
   },
+  handleShowDeleteFamily( family ) {
+    this.setState({
+      deleteFamilyOpen: true,
+      selectedFamily: family
+    });
+  },
+  handleHideDeleteFamilyDialog() {
+    this.setState({
+      deleteFamilyOpen: false,
+      selectedFamily: null
+    });
+  },
   handleShowPairingDialog( familyA, familyB ) {
     this.setState({
       pairFamilyOpen: true,
@@ -127,11 +141,18 @@ const PopulationPage = React.createClass({
 
     dispatch( pairFamily( familyA, familyB ) );
   },
+  handleDeleteFamilySubmitDialog( family ) {
+    const { dispatch } = this.props;
+
+    dispatch( deleteFamily( familyA, familyB ) );
+  },
   handleCellSelected( family ) {
     console.log( 'Family: ', family );
     // note if this is pairing mode
     if ( this.state.actionValue === EDIT ) {
       this.handleShowEditFamily( family );
+    } else if ( this.state.actionValue === DELETE ) {
+      this.handleShowDeleteFamily( family );
     } else {
       // handle pairing UI
       if ( !this.state.selectedFamilyA ) {
@@ -152,7 +173,6 @@ const PopulationPage = React.createClass({
           family );
       }
     }
-
   },
   render() {
     const { layoutValue } = this.state;
@@ -198,6 +218,7 @@ const PopulationPage = React.createClass({
             <DropdownMenu value={this.state.actionValue} onChange={this.handleActionChange}>
               <MenuItem value={1} primaryText='Edit'></MenuItem>
               <MenuItem value={2} primaryText='Pair'></MenuItem>
+              <MenuItem value={3} primaryText='Delete'></MenuItem>
             </DropdownMenu>
           </ToolbarGroup>
         </Toolbar>
@@ -221,6 +242,14 @@ const PopulationPage = React.createClass({
           onSubmit={this.handlePairFamilySubmitDialog}
           familyA={this.state.selectedFamilyA}
           familyB={this.state.selectedFamilyB}
+          />
+        <DeleteFamilyDialog
+          open={this.state.deleteFamilyOpen}
+          onClose={this.handleHideDeleteFamilyDialog}
+          onSubmit={this.handleDeleteFamilySubmitDialog}
+          family={this.state.selectedFamily}
+          population={this.props.population}
+          districts={this.props.districts}
           />
       </div>
     );

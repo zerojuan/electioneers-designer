@@ -3,6 +3,7 @@ import fetch from 'isomorphic-fetch';
 export const BATCH_GENERATE_FAMILY = 'BATCH_GENERATE_FAMILY';
 export const EDIT_FAMILY = 'EDIT_FAMILY';
 export const PAIR_FAMILY = 'PAIR_FAMILY';
+export const DELETE_FAMILY = 'DELETE_FAMILY';
 
 
 export function batchGenerateFamily({ count, wealth, districts }) {
@@ -26,5 +27,12 @@ export function pairFamily( familyA, familyB ) {
     type: PAIR_FAMILY,
     familyA: familyA,
     familyB: familyB
+  };
+}
+
+export function deleteFamily( family ) {
+  return {
+    type: DELETE_FAMILY,
+    family: family
   };
 }
