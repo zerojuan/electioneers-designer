@@ -5,7 +5,7 @@ import update from 'react-addons-update';
 import Dialog from 'material-ui/lib/dialog';
 import FlatButton from 'material-ui/lib/flat-button';
 
-import EditFamilyView from './delete-family-view';
+import DeleteFamilyView from './delete-family-view';
 
 export default React.createClass({
   propTypes: {
@@ -69,12 +69,12 @@ export default React.createClass({
         modal={false}
         actions={dialogActions}
         open={this.props.open}>
-        <EditFamilyView
+        <DeleteFamilyView
           family={this.state.initialFamily}
           districts={this.props.districts}
           population={this.props.population}
           onPropChange={this.handlePropChange}
-          ></EditFamilyView>
+          ></DeleteFamilyView>
       </Dialog>
     );
   }
