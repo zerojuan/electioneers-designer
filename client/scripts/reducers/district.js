@@ -18,6 +18,10 @@ function isConnected( districtA, districtB ) {
   });
 }
 
+export function deleteDistrict( districts, action ) {
+  // TODO: add delete district action
+}
+
 export function createDistrict( districts, action ) {
   const district = action.district;
 
