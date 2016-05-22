@@ -19,7 +19,14 @@ function isConnected( districtA, districtB ) {
 }
 
 export function deleteDistrict( districts, action ) {
-  // TODO: add delete district action
+  const district = action.district;
+
+  const index = districts.findIndex( ( el ) => el._id === district._id );
+
+  return [
+    ...districts.slice( 0, index ),
+    ...districts.slice( index + 1 )
+  ];
 }
 
 export function createDistrict( districts, action ) {

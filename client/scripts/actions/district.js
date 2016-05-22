@@ -37,6 +37,7 @@ export function changeBackground( bgId ) {
 }
 
 export function deleteDistrict( district ) {
+  // TODO: Check if the district should be deleted
   return {
     type: DELETE_DISTRICT,
     district: district

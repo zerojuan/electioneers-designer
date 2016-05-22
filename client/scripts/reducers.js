@@ -23,6 +23,7 @@ import {
 import {
   EDIT_DISTRICT,
   CREATE_DISTRICT,
+  DELETE_DISTRICT,
   PAIR_DISTRICT,
   CHANGE_BACKGROUND,
 } from './actions/district';
@@ -51,7 +52,8 @@ import {
 import {
   editDistrict,
   createDistrict,
-  pairDistrict
+  pairDistrict,
+  deleteDistrict
 } from './reducers/district';
 
 import {
@@ -151,6 +153,8 @@ function districts( state = [], action ) {
       return createDistrict( state, action );
     case PAIR_DISTRICT:
       return pairDistrict( state, action );
+    case DELETE_DISTRICT:
+      return deleteDistrict( state, action );
     default:
       return state;
   }

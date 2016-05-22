@@ -31,6 +31,7 @@ export function pairFamily( familyA, familyB ) {
 }
 
 export function deleteFamily( family ) {
+  // TODO: handle delete logic?
   return {
     type: DELETE_FAMILY,
     family: family
