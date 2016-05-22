@@ -23,7 +23,9 @@ export default React.createClass({
     };
   },
   handleDeleteDistrict( district ) {
-    console.log( 'Delete district' );
+    return () => {
+      this.props.onShowDelete( district );
+    };
   },
   render() {
     // only load the first 10

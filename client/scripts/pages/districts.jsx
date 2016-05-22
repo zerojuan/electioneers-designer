@@ -3,7 +3,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { selectFile, loadFileIfNeeded } from '../actions';
-import { editDistrict, createDistrict, pairDistrict, changeBackground } from '../actions/district';
+import {
+        editDistrict,
+        createDistrict,
+        pairDistrict,
+        changeBackground,
+        deleteDistrict } from '../actions/district';
 import { loadGraphics } from '../actions/graphics';
 
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
@@ -18,6 +23,7 @@ import DistrictsGeographic from '../components/districts/districts-geographic';
 import CreateDistrictDialog from '../components/districts/create-district-dialog';
 import EditDistrictDialog from '../components/districts/edit-district-dialog';
 import EditBackgroundDialog from '../components/edit-background-dialog';
+import DeleteDistrictDialog from '../components/districts/delete-district-dialog';
 
 const DistrictsPage = React.createClass({
   displayName: 'Districts',
@@ -58,6 +64,12 @@ const DistrictsPage = React.createClass({
       selectedDistrict: district
     });
   },
+  handleShowDeleteDialog( district ) {
+    this.setState({
+      deleteDialogOpen: true,
+      selectedDistrict: district
+    });
+  },
   handleShowChangeBackground( ) {
     this.setState({
       changeBackgroundOpen: true
@@ -71,6 +83,11 @@ const DistrictsPage = React.createClass({
   handleHideEditDialog() {
     this.setState({
       editDialogOpen: false
+    });
+  },
+  handleHideDeleteDialog() {
+    this.setState({
+      deleteDialogOpen: false
     });
   },
   handleHideBackgroundDialog() {
@@ -103,11 +120,17 @@ const DistrictsPage = React.createClass({
 
     dispatch( pairDistrict( districtA, districtB ) );
   },
+  handleDeleteDistrict( district ) {
+    const { dispatch } = this.props;
+
+    dispatch( deleteDistrict( district ) );
+  },
   render() {
     let view;
     if ( this.state.layoutValue === 1 ) {
       view = <DistrictsList districts={this.props.districts}
-        onShowEdit={this.handleShowEditDialog}></DistrictsList>;
+        onShowEdit={this.handleShowEditDialog}
+        onShowDelete={this.handleShowDeleteDialog}></DistrictsList>;
     } else {
       view = <DistrictsGeographic
           districts={this.props.districts}
@@ -154,6 +177,13 @@ const DistrictsPage = React.createClass({
           districts={this.props.districts}
           onClose={this.handleHideEditDialog}
           onSubmit={this.handleEditSubmitDialog}/>
+        <DeleteDistrictDialog
+          open={this.state.deleteDialogOpen}
+          district={this.state.selectedDistrict}
+          images={this.props.graphics.districts}
+          districts={this.props.districts}
+          onClose={this.handleHideDeleteDialog}
+          onSubmit={this.handleDeleteDistrict}/>
         <EditBackgroundDialog
           open={this.state.changeBackgroundOpen}
           onClose={this.handleHideBackgroundDialog}

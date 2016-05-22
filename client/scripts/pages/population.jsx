@@ -37,6 +37,7 @@ const PopulationPage = React.createClass({
       generateDialogOpen: false,
       editFamilyOpen: false,
       pairFamilyOpen: false,
+      deleteFamilyOpen: false,
       selectedFamily: null
     };
   },
