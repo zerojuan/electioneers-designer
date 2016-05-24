@@ -6,6 +6,7 @@ dependencies:
     - npm set progress=false
     - npm install
     - npm install rimraf -g
+    - npm install babel-tape-runner -g
     - cd server && npm install
 test:
   override:
