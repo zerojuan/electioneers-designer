@@ -25,6 +25,7 @@ export default React.createClass({
     this.props.onPropChange( 'image', value );
   },
   render() {
+    console.log( 'this isprops!!!', this.props );
     return (
       <div>
         <Tabs>
@@ -49,7 +50,7 @@ export default React.createClass({
             </DropdownMenu>
           </Tab>
           <Tab label='families'>
-            Families here
+            <label>Total Number: {this.props.population.length}</label>
           </Tab>
         </Tabs>
       </div>

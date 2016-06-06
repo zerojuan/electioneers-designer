@@ -74,8 +74,6 @@ gulp.task( 'webpack:build', function( callback ) {
 var devServer = {};
 gulp.task( 'webpack-dev-server', [ 'css' ], function( callback ) {
   // ensure there's a public main.css
-  touch.sync( './app/out/main.css', new Date() );
-
   devServer = new WebpackDevServer( webpack( webpackConfig ), {
     contentBase: './app/out',
     hot: true,

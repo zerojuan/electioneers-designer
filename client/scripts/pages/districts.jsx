@@ -173,6 +173,7 @@ const DistrictsPage = React.createClass({
         <EditDistrictDialog
           open={this.state.editDialogOpen}
           district={this.state.selectedDistrict}
+          population={this.props.population}
           images={this.props.graphics.districts}
           districts={this.props.districts}
           onClose={this.handleHideEditDialog}
@@ -199,9 +200,11 @@ const DistrictsPage = React.createClass({
 });
 
 function mapStateToProps( state ) {
+  console.log( 'state!!!!!!', state );
   const {
     selectedFile,
     districts,
+    population,
     config,
     graphics
   } = state;
@@ -212,6 +215,7 @@ function mapStateToProps( state ) {
   return {
     selectedFile,
     districts,
+    population,
     baseUrl,
     baseGraphicsUrl,
     config,

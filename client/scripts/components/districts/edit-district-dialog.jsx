@@ -50,6 +50,7 @@ export default React.createClass({
     this.props.onClose();
   },
   render() {
+    console.log( 'dialog district!!!!!!!!!!!!!!!!!', this.props );
     const dialogActions = [
       <FlatButton
         label='Cancel'
@@ -72,6 +73,7 @@ export default React.createClass({
           images={this.props.images}
           district={this.state.initialDistrict}
           districts={this.props.districts}
+          population={this.props.population}
           onPropChange={this.handlePropChange}/>
       </Dialog>
     );
