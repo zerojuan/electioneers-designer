@@ -4,6 +4,8 @@ import Tabs from 'material-ui/lib/tabs/tabs';
 import Tab from 'material-ui/lib/tabs/tab';
 import DropdownMenu from 'material-ui/lib/DropDownMenu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
+import List from 'material-ui/lib/lists/list';
+import ListItem from 'material-ui/lib/lists/list-item';
 
 import LabelTextField from '../label-textfield';
 
@@ -50,7 +52,9 @@ export default React.createClass({
             </DropdownMenu>
           </Tab>
           <Tab label='families'>
-            <label>Total Number: {this.props.population.length}</label>
+            <List>
+              { this.props.population.map( i => <ListItem key={ i._id } primaryText={ `${i.familyName }, ${ i.fatherName }` } /> ) }
+            </List>
           </Tab>
         </Tabs>
       </div>
