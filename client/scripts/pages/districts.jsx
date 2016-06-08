@@ -129,6 +129,7 @@ const DistrictsPage = React.createClass({
     let view;
     if ( this.state.layoutValue === 1 ) {
       view = <DistrictsList districts={this.props.districts}
+        population={this.props.population}
         onShowEdit={this.handleShowEditDialog}
         onShowDelete={this.handleShowDeleteDialog}></DistrictsList>;
     } else {
@@ -173,6 +174,7 @@ const DistrictsPage = React.createClass({
         <EditDistrictDialog
           open={this.state.editDialogOpen}
           district={this.state.selectedDistrict}
+          population={this.props.population}
           images={this.props.graphics.districts}
           districts={this.props.districts}
           onClose={this.handleHideEditDialog}
@@ -202,6 +204,7 @@ function mapStateToProps( state ) {
   const {
     selectedFile,
     districts,
+    population,
     config,
     graphics
   } = state;
@@ -212,6 +215,7 @@ function mapStateToProps( state ) {
   return {
     selectedFile,
     districts,
+    population,
     baseUrl,
     baseGraphicsUrl,
     config,
