@@ -50,7 +50,6 @@ export default React.createClass({
     this.props.onClose();
   },
   render() {
-    console.log( 'dialog district!!!!!!!!!!!!!!!!!', this.props );
     const dialogActions = [
       <FlatButton
         label='Cancel'
