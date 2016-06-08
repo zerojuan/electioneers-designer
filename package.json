@@ -17,8 +17,8 @@
     "pack": "./node_modules/.bin/gulp build && npm run compile && build",
     "dist": "npm run compile && ./node_modules/.bin/gulp build && build --dist",
     "dist:win": "npm run compile:win && gulp build && build --dist",
-    "test": "node test",
-    "test-ci": "node test | tap-xunit"
+    "test": "babel-tape-runner test/**/*.js",
+    "test-ci": "babel-tape-runner test/**/*.js | tap-xunit"
   },
   "keywords": [
     "electioneers",
@@ -26,7 +26,7 @@
     "designer"
   ],
   "engines": {
-    "node": "5.2.0"
+    "node": "6.0.0"
   },
   "build": {
     "app-bundle-id": "xyz.electioneers.electioneersdesigner",
