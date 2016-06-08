@@ -33,6 +33,7 @@ export default React.createClass({
     const start = pageSize * currentPage;
     const end = start + pageSize;
     const page = this.props.districts.slice( start, end );
+    const totalPopulation = this.props.population.length;
     return (
       <div>
         <Table>
@@ -47,7 +48,7 @@ export default React.createClass({
               page.map( ( district ) => {
                   return (
                     <TableRow key={district._id}>
-                      <TableRowColumn>{district.name}</TableRowColumn>
+                      <TableRowColumn>{district.name} - {totalPopulation}</TableRowColumn>
                       <TableRowColumn>Stuffs</TableRowColumn>
                       <TableRowColumn>
                         <FloatingActionButton mini={true}

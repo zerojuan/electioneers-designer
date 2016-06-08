@@ -72,6 +72,7 @@ export default React.createClass({
           images={this.props.images}
           district={this.state.initialDistrict}
           districts={this.props.districts}
+          population={this.props.population}
           onPropChange={this.handlePropChange}/>
       </Dialog>
     );
