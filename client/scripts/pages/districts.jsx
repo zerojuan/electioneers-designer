@@ -129,6 +129,7 @@ const DistrictsPage = React.createClass({
     let view;
     if ( this.state.layoutValue === 1 ) {
       view = <DistrictsList districts={this.props.districts}
+        population={this.props.population}
         onShowEdit={this.handleShowEditDialog}
         onShowDelete={this.handleShowDeleteDialog}></DistrictsList>;
     } else {
@@ -200,7 +201,6 @@ const DistrictsPage = React.createClass({
 });
 
 function mapStateToProps( state ) {
-  console.log( 'state!!!!!!', state );
   const {
     selectedFile,
     districts,

@@ -27,7 +27,6 @@ export default React.createClass({
     this.props.onPropChange( 'image', value );
   },
   render() {
-    console.log( 'this isprops!!!', this.props );
     return (
       <div>
         <Tabs>
