@@ -125,3 +125,9 @@ export function pairFamily( state, action ) {
     updateFamily( state, familyA ),
     familyB );
 }
+
+export function deleteFamily( family ) {
+  if( !family.connections.length ) {
+    return {};
+  }
+}
