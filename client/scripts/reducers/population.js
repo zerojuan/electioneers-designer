@@ -126,8 +126,10 @@ export function pairFamily( state, action ) {
     familyB );
 }
 
-export function deleteFamily( family ) {
-  if( !family.connections.length ) {
+export function deleteFamily( state, action ) {
+  // why is this not called???
+  console.log( 'this is state:', state, action );
+  if( !action.family.connections.length ) {
     return {};
   }
 }
