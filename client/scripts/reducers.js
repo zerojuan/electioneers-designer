@@ -17,7 +17,8 @@ import {
 import {
   BATCH_GENERATE_FAMILY,
   EDIT_FAMILY,
-  PAIR_FAMILY
+  PAIR_FAMILY,
+  DELETE_FAMILY
 } from './actions/population';
 
 import {
@@ -46,7 +47,8 @@ import {
   batchGenerateFamily,
   editFamily,
   formatFamilyData,
-  pairFamily
+  pairFamily,
+  deleteFamily
 } from './reducers/population';
 
 import {
@@ -172,6 +174,8 @@ function population( state = [], action ) {
       return editFamily( state, action );
     case PAIR_FAMILY:
       return pairFamily( state, action );
+    case DELETE_FAMILY:
+      return deleteFamily( state, action );
     default:
       return state;
   }
