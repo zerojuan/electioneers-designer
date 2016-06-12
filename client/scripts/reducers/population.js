@@ -130,6 +130,7 @@ export function deleteFamily( state, action ) {
   // why is this not called???
   console.log( 'this is state:', state, action );
   if( !action.family.connections.length ) {
-    return {};
+    let families = state.filter( i => i._id !== action.family._id );
+    return Object.assign( {}, families );
   }
 }
