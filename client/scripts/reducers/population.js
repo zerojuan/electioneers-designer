@@ -127,11 +127,9 @@ export function pairFamily( state, action ) {
 }
 
 export function deleteFamily( state, action ) {
-  // why is this not called???
-  console.log( 'this is state:', state, action );
+  // return only the families not selected for deletion
   if( !action.family.connections.length ) {
-    let families = state.filter( i => i._id !== action.family._id );
-    return families;
+    return state.filter( i => i._id !== action.family._id );
   }
 
   return state;
