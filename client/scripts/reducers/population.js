@@ -125,3 +125,12 @@ export function pairFamily( state, action ) {
     updateFamily( state, familyA ),
     familyB );
 }
+
+export function deleteFamily( state, action ) {
+  // return only the families not selected for deletion
+  if( !action.family.connections.length ) {
+    return state.filter( i => i._id !== action.family._id );
+  }
+
+  return state;
+}

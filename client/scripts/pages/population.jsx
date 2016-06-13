@@ -145,7 +145,7 @@ const PopulationPage = React.createClass({
   handleDeleteFamilySubmitDialog( family ) {
     const { dispatch } = this.props;
 
-    dispatch( deleteFamily( familyA, familyB ) );
+    dispatch( deleteFamily( family ) );
   },
   handleCellSelected( family ) {
     console.log( 'Family: ', family );
