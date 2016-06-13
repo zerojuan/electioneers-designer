@@ -131,6 +131,8 @@ export function deleteFamily( state, action ) {
   console.log( 'this is state:', state, action );
   if( !action.family.connections.length ) {
     let families = state.filter( i => i._id !== action.family._id );
-    return Object.assign( {}, families );
+    return families;
   }
+
+  return state;
 }
