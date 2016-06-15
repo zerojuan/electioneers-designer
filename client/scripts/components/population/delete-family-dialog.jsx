@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 import update from 'react-addons-update';
 
-import { saveFile } from './actions';
+import { saveFile } from '../../actions';
 
 import Dialog from 'material-ui/lib/dialog';
 import FlatButton from 'material-ui/lib/flat-button';
