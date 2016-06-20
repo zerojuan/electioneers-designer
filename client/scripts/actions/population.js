@@ -1,5 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
+import { newMessage } from './messages';
+
 export const BATCH_GENERATE_FAMILY = 'BATCH_GENERATE_FAMILY';
 export const EDIT_FAMILY = 'EDIT_FAMILY';
 export const PAIR_FAMILY = 'PAIR_FAMILY';
@@ -31,7 +33,10 @@ export function pairFamily( familyA, familyB ) {
 }
 
 export function deleteFamily( family ) {
-  // TODO: handle delete logic?
+  if ( !!family.connections.length ) {
+    return newMessage( 'Cannot delete!' );
+  }
+  
   return {
     type: DELETE_FAMILY,
     family: family

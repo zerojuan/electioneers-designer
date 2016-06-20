@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 
 import update from 'react-addons-update';
 
+import { saveFile } from '../../actions';
+
 import Dialog from 'material-ui/lib/dialog';
 import FlatButton from 'material-ui/lib/flat-button';
 
@@ -48,6 +50,9 @@ export default React.createClass({
   handleSubmit() {
     // return the value of the saved family
     this.props.onSubmit( this.state.initialFamily );
+    // save to file
+    saveFile( this.props.selectedFile );
+
     this.props.onClose();
   },
   render() {

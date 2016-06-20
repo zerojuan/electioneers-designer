@@ -195,6 +195,10 @@ function isDirty( state = false, action ) {
       return true;
     case CREATE_DISTRICT:
       return true;
+    case DELETE_DISTRICT:
+      return true;
+    case DELETE_FAMILY:
+      return true;
     case PAIR_FAMILY:
       return true;
     case PAIR_DISTRICT:
