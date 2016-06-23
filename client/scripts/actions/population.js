@@ -17,6 +17,13 @@ export function batchGenerateFamily({ count, wealth, districts }) {
   };
 }
 
+export function addFamily( family ) {
+  return {
+    type: ADD_FAMILY,
+    family: family
+  };
+}
+
 export function editFamily( family ) {
   return {
     type: EDIT_FAMILY,
@@ -36,7 +43,7 @@ export function deleteFamily( family ) {
   if ( !!family.connections.length ) {
     return newMessage( 'Cannot delete!' );
   }
-  
+
   return {
     type: DELETE_FAMILY,
     family: family
