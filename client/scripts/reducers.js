@@ -170,6 +170,8 @@ function population( state = [], action ) {
       return [];
     case BATCH_GENERATE_FAMILY:
       return batchGenerateFamily( state, action );
+    case ADD_FAMILY:
+      return addFamily( state, action );
     case EDIT_FAMILY:
       return editFamily( state, action );
     case PAIR_FAMILY:
