@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { selectFile, loadFileIfNeeded } from '../actions';
 
-import { batchGenerateFamily, editFamily, pairFamily, deleteFamily } from '../actions/population';
+import { batchGenerateFamily, addFamily, editFamily, pairFamily, deleteFamily } from '../actions/population';
 
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
@@ -131,6 +131,9 @@ const PopulationPage = React.createClass({
       selectedFamilyA: null,
       selectedFamilyB: null
     });
+  },
+  handleAddFamily( family ) {
+    addFamily( family );
   },
   handleEditFamilySubmitDialog( family ) {
     const { dispatch } = this.props;
