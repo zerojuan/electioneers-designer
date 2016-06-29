@@ -133,7 +133,7 @@ const PopulationPage = React.createClass({
     });
   },
   handleAddFamily( family ) {
-    comst { dispatch } = this.props;
+    const { dispatch } = this.props;
 
     dispatch( addFamily( family ) );
   },
