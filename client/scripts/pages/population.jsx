@@ -17,6 +17,7 @@ import Dialog from 'material-ui/lib/dialog';
 import PopulationList from '../components/population/population-list';
 import PopulationGrid from '../components/population/population-grid';
 import GenerateFamilyDialog from '../components/population/generate-family-dialog';
+import AddFamilyDialog from '../components/population/add-family-dialog';
 import EditFamilyDialog from '../components/population/edit-family-dialog';
 import PairFamilyDialog from '../components/population/pair-family-dialog';
 import DeleteFamilyDialog from '../components/population/delete-family-dialog';
@@ -235,6 +236,7 @@ const PopulationPage = React.createClass({
           open={this.state.generateDialogOpen}
           onClose={this.handleHideGenerateDialog}
           onSubmit={this.handleGenerateSubmitDialog}/>
+        <AddFamilyDialog />
         <EditFamilyDialog
           open={this.state.editFamilyOpen}
           onClose={this.handleHideEditFamilyDialog}
