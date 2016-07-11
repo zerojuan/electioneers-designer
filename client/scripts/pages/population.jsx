@@ -147,6 +147,9 @@ const PopulationPage = React.createClass({
 
     dispatch( deleteFamily( family ) );
   },
+  handleRandomizeHomes() {
+    console.log( 'Handle Randomize Homes' );
+  },
   handleCellSelected( family ) {
     console.log( 'Family: ', family );
     // note if this is pairing mode
@@ -204,11 +207,20 @@ const PopulationPage = React.createClass({
               <MenuItem value={DOTS_VIEW} primaryText='Dots'/>
             </DropdownMenu>
             { (this.props.districts.length) ?
-              <RaisedButton
-                label='Generate Family'
-                primary={ true }
-                onTouchTap={ this.handleShowGenerateDialog }>
-              </RaisedButton>
+              <div>
+                <RaisedButton
+                  label='Generate Family'
+                  primary={ true }
+                  onTouchTap={ this.handleShowGenerateDialog }>
+                </RaisedButton>
+                <RaisedButton
+                  label='Randomize Homes'
+                  primary={ true }
+                  onTouchTap={this.handleRandomizeHomes}
+                  >
+                </RaisedButton>
+              </div>
+
               :
               <span>Must create a district first</span>
             }

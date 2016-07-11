@@ -6,3 +6,4 @@ This project adheres to Semantic Versioning
 ### Fixed
 - rename save folder to ElectioneersData
 - map view not refreshing graphics on load
+- families can be deleted
