@@ -1,4 +1,5 @@
 import { guid } from './utils';
+import _ from 'lodash';
 
 const Surnames = [
   'Santos',
@@ -72,6 +73,19 @@ function generateFamily( districts ) {
   };
 }
 
+export function randomizeHomes( families, action ) {
+  const fams = JSON.parse( JSON.stringify( families ) );
+  const districts = action.districts;
+
+  for ( const fam of fams ) {
+    // randomize district
+    const districtIndex = _.random( 0, districts.length - 1 );
+    fam.districtId = districts[ districtIndex ]._id;
+  }
+
+  return fams;
+}
+
 function updateFamily( families, family ) {
   // find item index
   const index = families.findIndex( ( el ) => el._id === family._id );
@@ -128,7 +142,7 @@ export function pairFamily( state, action ) {
 
 export function deleteFamily( state, action ) {
   // return only the families not selected for deletion
-  if( !action.family.connections.length ) {
+  if ( !action.family.connections.length ) {
     return state.filter( i => i._id !== action.family._id );
   }
 

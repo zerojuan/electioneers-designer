@@ -18,7 +18,8 @@ import {
   BATCH_GENERATE_FAMILY,
   EDIT_FAMILY,
   PAIR_FAMILY,
-  DELETE_FAMILY
+  DELETE_FAMILY,
+  RANDOMIZE_HOMES
 } from './actions/population';
 
 import {
@@ -48,7 +49,8 @@ import {
   editFamily,
   formatFamilyData,
   pairFamily,
-  deleteFamily
+  deleteFamily,
+  randomizeHomes
 } from './reducers/population';
 
 import {
@@ -172,6 +174,8 @@ function population( state = [], action ) {
       return batchGenerateFamily( state, action );
     case EDIT_FAMILY:
       return editFamily( state, action );
+    case RANDOMIZE_HOMES:
+      return randomizeHomes( state, action );
     case PAIR_FAMILY:
       return pairFamily( state, action );
     case DELETE_FAMILY:
@@ -192,6 +196,8 @@ function isDirty( state = false, action ) {
     case EDIT_FAMILY:
       return true;
     case EDIT_DISTRICT:
+      return true;
+    case RANDOMIZE_HOMES:
       return true;
     case CREATE_DISTRICT:
       return true;

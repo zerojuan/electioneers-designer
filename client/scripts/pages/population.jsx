@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 
 import { selectFile, loadFileIfNeeded } from '../actions';
 
-import { batchGenerateFamily, editFamily, pairFamily, deleteFamily } from '../actions/population';
+import {
+  batchGenerateFamily,
+  editFamily,
+  pairFamily,
+  deleteFamily,
+  randomizeHomes } from '../actions/population';
 
 import Toolbar from 'material-ui/lib/toolbar/toolbar';
 import ToolbarGroup from 'material-ui/lib/toolbar/toolbar-group';
@@ -149,6 +154,9 @@ const PopulationPage = React.createClass({
   },
   handleRandomizeHomes() {
     console.log( 'Handle Randomize Homes' );
+    const { dispatch } = this.props;
+
+    dispatch( randomizeHomes( this.props.districts ) );
   },
   handleCellSelected( family ) {
     console.log( 'Family: ', family );
