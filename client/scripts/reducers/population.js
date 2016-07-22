@@ -111,6 +111,10 @@ export function batchGenerateFamily( state, action ) {
   ];
 }
 
+export function addFamily( state, action ) {
+  return state;
+}
+
 export function editFamily( state, action ) {
   const family = action.family;
 

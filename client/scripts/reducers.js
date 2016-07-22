@@ -16,6 +16,7 @@ import {
 
 import {
   BATCH_GENERATE_FAMILY,
+  ADD_FAMILY,
   EDIT_FAMILY,
   PAIR_FAMILY,
   DELETE_FAMILY
@@ -45,6 +46,7 @@ import {
 
 import {
   batchGenerateFamily,
+  addFamily,
   editFamily,
   formatFamilyData,
   pairFamily,
