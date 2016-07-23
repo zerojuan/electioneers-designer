@@ -7,18 +7,24 @@ import FlatButton from 'material-ui/lib/flat-button';
 
 export default React.createClass({
   render() {
+    const dialogActions = [
+      <FlatButton
+        label='Cancel'
+        secondary={true}
+        onTouchTap={this.props.onClose} />,
+      <FlatButton
+        label='Submit'
+        primary={true}
+        keyboardFocused={true}
+        onTouchTap={this.handleSubmit} />
+    ];
+
     return (
       <Dialog
         title='Add Family'
         modal={false}
         actions={dialogActions}
         open={this.props.open}>
-        <EditFamilyView
-          family={this.state.initialFamily}
-          districts={this.props.districts}
-          population={this.props.population}
-          onPropChange={this.handlePropChange}
-          ></EditFamilyView>
       </Dialog>
     );
   }
