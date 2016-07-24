@@ -6,6 +6,13 @@ import Dialog from 'material-ui/lib/dialog';
 import FlatButton from 'material-ui/lib/flat-button';
 
 export default React.createClass({
+  propTypes: {
+    onClose: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    open: PropTypes.bool.isRequired
+  },
+  handleSubmit() {
+  },
   render() {
     const dialogActions = [
       <FlatButton
