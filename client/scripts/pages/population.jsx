@@ -236,7 +236,10 @@ const PopulationPage = React.createClass({
           open={this.state.generateDialogOpen}
           onClose={this.handleHideGenerateDialog}
           onSubmit={this.handleGenerateSubmitDialog}/>
-        <AddFamilyDialog onSubmit={this.handleEditFamilySubmitDialog}
+        <AddFamilyDialog
+          open={this.state.addFamilyOpen}
+          onClose={this.handleHideAddFamilyDialog}
+          onSubmit={this.handleAddFamilySubmitDialog}
           family={this.state.newFamily}/>
         <EditFamilyDialog
           open={this.state.editFamilyOpen}
