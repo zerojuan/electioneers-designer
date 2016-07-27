@@ -13,12 +13,16 @@ export default React.createClass({
   },
   handleSubmit() {
   },
+  onClose() {
+  },
+  open(){
+  },
   render() {
     const dialogActions = [
       <FlatButton
         label='Cancel'
         secondary={true}
-        onTouchTap={this.props.onClose} />,
+        onTouchTap={this.onClose} />,
       <FlatButton
         label='Submit'
         primary={true}
@@ -31,7 +35,7 @@ export default React.createClass({
         title='Add Family'
         modal={false}
         actions={dialogActions}
-        open={this.props.open}>
+        open={this.open}>
       </Dialog>
     );
   }
