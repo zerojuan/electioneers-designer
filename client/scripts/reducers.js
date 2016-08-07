@@ -16,6 +16,7 @@ import {
 
 import {
   BATCH_GENERATE_FAMILY,
+  ADD_FAMILY,
   EDIT_FAMILY,
   PAIR_FAMILY,
   DELETE_FAMILY,
@@ -46,6 +47,7 @@ import {
 
 import {
   batchGenerateFamily,
+  addFamily,
   editFamily,
   formatFamilyData,
   pairFamily,
@@ -172,6 +174,8 @@ function population( state = [], action ) {
       return [];
     case BATCH_GENERATE_FAMILY:
       return batchGenerateFamily( state, action );
+    case ADD_FAMILY:
+      return addFamily( state, action );
     case EDIT_FAMILY:
       return editFamily( state, action );
     case RANDOMIZE_HOMES:

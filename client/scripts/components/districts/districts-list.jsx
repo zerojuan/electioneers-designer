@@ -17,6 +17,11 @@ export default React.createClass({
       pageSize: 10
     };
   },
+  handleAddDistrict( district ) {
+    return () => {
+      this.props.onShowAdd( district );
+    };
+  },
   handleEditDistrict( district ) {
     return () => {
       this.props.onShowEdit( district );
@@ -33,7 +38,7 @@ export default React.createClass({
     const start = pageSize * currentPage;
     const end = start + pageSize;
     const page = this.props.districts.slice( start, end );
-    const totalPopulation = this.props.population.length;
+    const totalPopulation = this.props.population;
     return (
       <div>
         <Table>
@@ -48,9 +53,13 @@ export default React.createClass({
               page.map( ( district ) => {
                   return (
                     <TableRow key={district._id}>
-                      <TableRowColumn>{district.name} - {totalPopulation}</TableRowColumn>
+                      <TableRowColumn>{district.name} - { totalPopulation.filter( ( resident ) => { return resident.districtId === district._id } ).length }</TableRowColumn>
                       <TableRowColumn>Stuffs</TableRowColumn>
                       <TableRowColumn>
+                        <FloatingActionButton mini={true}
+                          onTouchTap={this.handleAddDistrict( district )}>
+                          <EditIcon />
+                        </FloatingActionButton>
                         <FloatingActionButton mini={true}
                           onTouchTap={this.handleEditDistrict( district )}>
                           <EditIcon />
