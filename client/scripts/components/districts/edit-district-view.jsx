@@ -52,7 +52,7 @@ export default React.createClass({
           </Tab>
           <Tab label='families'>
             <List>
-              { this.props.population.map( i => <ListItem key={ i._id } primaryText={ `${i.familyName }, ${ i.fatherName }` } /> ) }
+              { this.props.population.filter( r => r.districtId === this.props.district._id ).map( i => <ListItem key={ i._id } primaryText={ `${i.familyName }, ${ i.fatherName }` } /> ) }
             </List>
           </Tab>
         </Tabs>
