@@ -19,7 +19,6 @@ class CanvasGeoView {
 
   update( el, state ) {
     if ( state.baseUrl !== 'none' ) {
-      console.log( state.baseUrl );
       this.gameState.baseUrl = state.baseUrl;
       this.gameState.reloadData( state );
     }
