@@ -5,11 +5,13 @@ jobs:
       - image: circleci/node:lts
     steps:
       - checkout
-      - run: mkdir -p $CIRCLE_TEST_REPORTS/junit/
+      - run: mkdir junit
+      - store_test_results:
+          path: junit
       - run: npm install
       - run: npm install rimraf -g
       - run: npm install babel-tape-runner -g
-      - run: npm run test-ci --silent >$CIRCLE_TEST_REPORTS/junit/tape.xml
+      - run: npm run test-ci --silent >./junit/tape.xml
   deploy:
     docker:
       - image: circleci/node:lts
