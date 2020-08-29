@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   test:
     docker:
-      - image: circleci/node@lts
+      - image: circleci/node:lts
     steps:
       - checkout
       - run: mkdir -p $CIRCLE_TEST_REPORTS/junit/
@@ -12,7 +12,7 @@ jobs:
       - run: npm run test-ci --silent >$CIRCLE_TEST_REPORTS/junit/tape.xml
   deploy:
     docker:
-      - image: circleci/node@lts
+      - image: circleci/node:lts
     steps:
       - checkout
       - run: sudo apt-get install ruby ruby-dev gcc make icnsutils graphicsmagick xz-utils
