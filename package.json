@@ -50,7 +50,7 @@
   "author": "juliusthepious",
   "license": "ISC",
   "dependencies": {
-    "async": "^1.5.1",
+    "async": "^2.6.4",
     "body-parser": "^1.14.2",
     "cors": "^2.7.1",
     "electron-is-dev": "^0.1.0",
