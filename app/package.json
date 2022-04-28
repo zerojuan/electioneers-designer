@@ -6,7 +6,7 @@
   "private": true,
   "main": "./out/main.js",
   "dependencies": {
-    "async": "^1.5.1",
+    "async": "^2.6.4",
     "cors": "^2.7.1",
     "express": "^4.13.3",
     "lodash": "^4.17.19",
